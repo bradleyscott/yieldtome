@@ -158,3 +158,6 @@ $RECYCLE.BIN/
 # node and bower files
 bower_components/
 node_modules/
+
+# floo related files
+.floo
