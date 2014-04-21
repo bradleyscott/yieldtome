@@ -10,11 +10,17 @@ using yieldtome.Objects;
 
 namespace yieldtome.API.Controllers
 {
-    [APIKeyAuthentication]
+    [Secure]
     public class VotesController : ApiController
     {
-        [Import]
         IVoteService _service = Extensibility.Container.GetExportedValue<IVoteService>();
+        
+        public VotesController() { }
+
+        public VotesController(IVoteService service)
+        {
+            _service = service;
+        }
 
         /// <summary>
         /// Retrieves all the Votes for the specified Poll

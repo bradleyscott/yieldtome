@@ -12,14 +12,13 @@ using yieldtome.Objects;
 
 namespace yieldtome.API.Controllers
 {
-    [APIKeyAuthentication]
+    [Secure]
     public class ProfilesController : ApiController
     {
         IProfileService _service = Extensibility.Container.GetExportedValue<IProfileService>();
 
         public ProfilesController() { }
 
-        [ImportingConstructor]
         public ProfilesController(IProfileService service)
         {
             _service = service;

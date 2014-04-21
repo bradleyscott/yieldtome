@@ -11,7 +11,7 @@ using yieldtome.Interfaces;
 
 namespace yieldtome.API.Controllers
 {
-    [APIKeyAuthentication]
+    [Secure]
     public class EventsController : ApiController
     {
 

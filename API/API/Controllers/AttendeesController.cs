@@ -10,11 +10,17 @@ using yieldtome.Objects;
 
 namespace yieldtome.API.Controllers
 {
-    [APIKeyAuthentication]
+    [Secure]
     public class AttendeesController : ApiController
     {
-        [Import]
         IAttendeeService _service = Extensibility.Container.GetExportedValue<IAttendeeService>();
+
+        public AttendeesController() { }
+
+        public AttendeesController(IAttendeeService service)
+        {
+            _service = service;
+        }
 
         /// <summary>
         /// Returns all Attendees attending the supplied Event

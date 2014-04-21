@@ -10,11 +10,17 @@ using yieldtome.Objects;
 
 namespace yieldtome.API.Controllers
 {
-    [APIKeyAuthentication]
+    [Secure]
     public class SpeakersListsController : ApiController
     {
-        [Import]
         ISpeakersListService _service = Extensibility.Container.GetExportedValue<ISpeakersListService>();
+        
+        public SpeakersListsController() { }
+
+        public SpeakersListsController(ISpeakersListService service)
+        {
+            _service = service;
+        }
 
         /// <summary>
         /// Returns all Speakers Lists for the specified Event

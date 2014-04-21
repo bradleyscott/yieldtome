@@ -10,11 +10,17 @@ using yieldtome.Objects;
 
 namespace yieldtome.API.Controllers
 {
-    [APIKeyAuthentication]
+    [Secure]
     public class PollsController : ApiController
     {
-        [Import]
         IPollService _service = Extensibility.Container.GetExportedValue<IPollService>();
+
+        public PollsController() { }
+
+        public PollsController(IPollService service)
+        {
+            _service = service;
+        }
 
         /// <summary>
         /// Returns all Polls associated with the supplied Event
