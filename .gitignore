@@ -163,6 +163,7 @@ node_modules/
 
 # floo related files
 .floo
+FLOOBITS_README.md
 
 #Aptana Studio files
 .project
