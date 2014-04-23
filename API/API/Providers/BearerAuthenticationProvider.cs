@@ -14,7 +14,7 @@ namespace yieldtome.API.Providers
             var claims = context.Ticket.Identity.Claims;
             if (claims.Count() == 0 || claims.Any(claim => claim.Issuer != "Facebook" && claim.Issuer != "LOCAL_AUTHORITY"))
                 context.Rejected();
-            return Task.FromResult<object>(null);
+            return Task.FromResult<object>(null); 
         }
     }
 }
