@@ -97,11 +97,13 @@ publish/
 
 # NuGet Packages Directory
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line
-#packages/
+packages/
+.nuget
 
 # Windows Azure Build Output
 csx
 *.build.csdef
+PublishProfiles/
 
 # Windows Store app package directory
 AppPackages/
@@ -161,3 +163,6 @@ node_modules/
 
 # floo related files
 .floo
+
+#Aptana Studio files
+.project
