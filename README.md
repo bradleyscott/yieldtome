@@ -46,4 +46,4 @@ What is the architecture?
 Key principles
 --------------
 
-Automated test coverage is important in this project
+Automated test coverage is important in this project.
