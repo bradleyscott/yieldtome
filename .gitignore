@@ -94,10 +94,12 @@ publish/
 
 # Publish Web Output
 *.Publish.xml
+PublishProfiles/
 
 # NuGet Packages Directory
 ## TODO: If you have NuGet Package Restore enabled, uncomment the next line
-#packages/
+packages/
+.nuget/
 
 # Windows Azure Build Output
 csx
@@ -161,6 +163,10 @@ node_modules/
 
 # floo related files
 .floo
+FLOOBITS_README.md
 
 # Modules folder
 Modules/
+
+#Aptana project files
+.project
