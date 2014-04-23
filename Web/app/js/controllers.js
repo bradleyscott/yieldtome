@@ -2,7 +2,10 @@
 
 /* Controllers */
 
-angular.module('myApp.controllers', [])
+angular.module('yieldtome.controllers', [])
+  .controller('Home', [function() {
+
+  }])
   .controller('MyCtrl1', [function() {
 
   }])

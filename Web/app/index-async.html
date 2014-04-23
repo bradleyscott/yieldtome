@@ -25,8 +25,10 @@
 
     // load all of the dependencies asynchronously.
     $script([
+      '../bower_components/jquery/dist/jquery.js',
       '../bower_components/angular/angular.js',
       '../bower_components/angular-route/angular-route.js',
+      '../bower_components/bootstrap/dist/js/bootstrap.js',
       'js/app.js',
       'js/services.js',
       'js/controllers.js',
@@ -34,21 +36,23 @@
       'js/directives.js'
     ], function() {
       // when all is done, execute bootstrap angular application
-      angular.bootstrap(document, ['myApp']);
+      angular.bootstrap(document, ['yieldtome']);
     });
   </script>
-  <title>My AngularJS App</title>
+  <title>yieldto.me</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/app.css">
+  <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
 </head>
 <body ng-cloak>
-  <ul class="menu">
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
-
   <div ng-view></div>
-
-  <div>Angular seed app: v<span app-version></span></div>
-
+  		<div  class="container body-content">
+			<hr />
+			<footer>
+				<p>
+					Copyright &copy; 2014 - Debate Systems Limited
+				</p>
+			</footer>
+		</div>
 </body>
 </html>
