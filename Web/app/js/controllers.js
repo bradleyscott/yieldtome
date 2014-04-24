@@ -3,12 +3,12 @@
 /* Controllers */
 
 angular.module('yieldtome.controllers', [])
-  .controller('Home', [function() {
 
-  }])
-  .controller('MyCtrl1', [function() {
+.controller('Home', function($scope, AuthenticationService) {
 
-  }])
-  .controller('MyCtrl2', [function() {
+	console.log("Home controller executing");
 
-  }]);
+	$scope.login = function() {
+		AuthenticationService.login();
+	};
+});

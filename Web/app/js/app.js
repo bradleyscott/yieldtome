@@ -7,11 +7,14 @@ angular.module('yieldtome', [
   'yieldtome.filters',
   'yieldtome.services',
   'yieldtome.directives',
-  'yieldtome.controllers'
-]).
-config(['$routeProvider', function($routeProvider) {
+  'yieldtome.controllers',
+  'facebook'
+])
+.config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'Home'});
-  $routeProvider.when('/view1', {templateUrl: 'partials/partial1.html', controller: 'MyCtrl1'});
-  $routeProvider.when('/view2', {templateUrl: 'partials/partial2.html', controller: 'MyCtrl2'});
   $routeProvider.otherwise({redirectTo: '/'});
-}]);
+  }])
+.config(['FacebookProvider', function(FacebookProvider) {
+     FacebookProvider.init('233412823470428');
+     }]);
+
