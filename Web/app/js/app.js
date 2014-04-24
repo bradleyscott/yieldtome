@@ -13,8 +13,8 @@ angular.module('yieldtome', [
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'Home'});
   $routeProvider.otherwise({redirectTo: '/'});
-  }])
+}])
 .config(['FacebookProvider', function(FacebookProvider) {
      FacebookProvider.init('233412823470428');
-     }]);
+}]);
 
