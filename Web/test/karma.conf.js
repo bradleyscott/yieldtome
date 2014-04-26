@@ -4,9 +4,13 @@ module.exports = function(config){
     basePath : '../',
 
     files : [
+      'bower_components/jquery/dist/jquery.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-route/angular-route.js',
+      'bower_components/bootstrap/dist/js/bootstrap.js',
       'bower_components/angular-mocks/angular-mocks.js',
+      'bower_components/angular-facebook/lib/angular-facebook.js',
+      'bower_components/angular-resource/angular-resource.js',
       'app/js/**/*.js',
       'test/unit/**/*.js'
     ],
