@@ -4,16 +4,16 @@
 
 angular.module('yieldtome.controllers', [])
 
-.controller('Home', function($scope, $location, AuthenticationService) {
+.controller('Home', function($scope, $location, $log, AuthenticationService) {
 
-	console.log("Home controller executing");
+	$log.debug("Home controller executing");
 	
 	$scope.error; // An error message that will be displayed to screen
 	$scope.info; // An info message that will be displayed to screen
 	
 	$scope.login = function() { // Get an apiToken and try to get a profile
 		
-		console.log('HomeController.login() starting');
+		$log.debug('HomeController.login() starting');
 		$scope.error = ''; // Clear any saved errors
 		
 		var tokenPromise = AuthenticationService.getApiToken();
