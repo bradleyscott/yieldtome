@@ -12,9 +12,10 @@ angular.module('yieldtome', [
 ])
 .config(['$routeProvider', function($routeProvider) {
   $routeProvider.when('/', {templateUrl: 'partials/home.html', controller: 'Home'});
+  $routeProvider.when('/createProfile', {templateUrl: 'partials/profile.html', controller: 'CreateProfile'});
   $routeProvider.otherwise({redirectTo: '/'});
 }])
-.config(['FacebookProvider', function(FacebookProvider) {
+.config(['FacebookProvider', function(FacebookProvider, ConfigService) {
      FacebookProvider.init('233412823470428');
 }]);
 

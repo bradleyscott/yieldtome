@@ -1,43 +1,38 @@
 <div>
-	<homemenu></homemenu>
-	<div class="container body-content">
-		<p></p>
-		<p></p>
-		<div class="jumbotron" id="benefits">
-			<h1>yieldto.me</h1>
-			<p class="lead">
-				Helps delegates and organisers of Model UNs manage the boring details of the conference debate from their phone, tablet, or computer. Everyone spends less time on the Rules of Procedure and more time on the debate
-			</p>
-			<button type="button" class="btn btn-primary btn-lg" ng-click="login()">
-				Get started
-			</button>
-		</div>
-		<div class="row" id="features">
-			<div class="col-md-3">
-				<h2><span class="glyphicon glyphicon-list-alt"></span> Speakers Lists</h2>
-				<p>
-					Create Speakers Lists. Have delegates add themselves to speak on them from their phone, tablet or computer. Shuffle the order and make sure you never lose track
-				</p>
-			</div>
-			<div class="col-md-3">
-				<h2><span class="glyphicon glyphicon-ok"></span> Voting</h2>
-				<p>
-					Create a Poll and ask delegates to cast their Vote. See the Votes come in in real time and see whether or not the Vote has passed or failed
-				</p>
-			</div>
-			<div class="col-md-3">
-				<h2><span class="glyphicon glyphicon-envelope"></span> Note passing</h2>
-				<p>
-					Message other delegates in real-time without needing to exchange your phone, email, or IM details
-				</p>
-			</div>
-			<div class="col-md-3">
-				<h2><span class="glyphicon glyphicon-user"></span> Profiles</h2>
-				<p>
-					Create your own yieldto.me Profile- choose who you want to share your contact details with. Or, stay behind your delegate persona. Keep in touch with everyone after the conference too
-				</p>
-			</div>
-		</div>
-	</div>
+    <homemenu></homemenu>
+    <div class="container body-content">
+        <p></p>
+        <p></p>
+        <div class="jumbotron" id="benefits">
+            <h1>yieldto.me</h1>
+            <p class="lead">
+                Helps delegates and organisers of Model UNs manage the boring details of the conference debate from their phone, tablet, or computer. Everyone spends less time on the Rules of Procedure and more time on the debate
+                <div class="alert alert-info" ng-show="info">{{info}}</div>
+                <div class="alert alert-danger" ng-show="error"><b>Doh! </b>{{error}}</div>
+            </p>
+            <button type="button" class="btn btn-primary btn-lg" ng-click="login()">Get started</button>
+        </div>
+        <div class="row" id="features">
+            <div class="col-md-3">
+                <h2>
+                    <span class="glyphicon glyphicon-list-alt"></span>Speakers Lists</h2>
+                <p>Create Speakers Lists. Have delegates add themselves to speak on them from their phone, tablet or computer. Shuffle the order and make sure you never lose track</p>
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <span class="glyphicon glyphicon-ok"></span>Voting</h2>
+                <p>Create a Poll and ask delegates to cast their Vote. See the Votes come in in real time and see whether or not the Vote has passed or failed</p>
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <span class="glyphicon glyphicon-envelope"></span>Note passing</h2>
+                <p>Message other delegates in real-time without needing to exchange your phone, email, or IM details</p>
+            </div>
+            <div class="col-md-3">
+                <h2>
+                    <span class="glyphicon glyphicon-user"></span>Profiles</h2>
+                <p>Create your own yieldto.me Profile- choose who you want to share your contact details with. Or, stay behind your delegate persona. Keep in touch with everyone after the conference too</p>
+            </div>
+        </div>
+    </div>
 </div>
-
