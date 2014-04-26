@@ -41,9 +41,3 @@ What is the architecture?
  3. **Prosody XMPP server**
 
  Is used by the RESTful API to enables the note-passing functionality 
-
-
-Key principles
---------------
-
-Automated test coverage is important in this project.
