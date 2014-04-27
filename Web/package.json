@@ -1,10 +1,10 @@
 {
-  "name": "angular-seed",
-  "private": true,
+  "name": "yieldtome-web",
+  "description": "An Angular-js application allowing users to participate in Model UN conferences",
   "version": "0.0.0",
-  "description": "A starter project for AngularJS",
-  "repository": "https://github.com/angular/angular-seed",
+  "homepage": "https://github.com/bradleyscott/yieldtome",
   "license": "MIT",
+  "private": true,
   "devDependencies": {
     "karma": "~0.10",
     "protractor": "~0.17.0",
