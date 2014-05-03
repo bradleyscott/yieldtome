@@ -4,7 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('CreateProfile', function($scope, $location, $log, AuthenticationService, FacebookService, ProfileService) {
+.controller('CreateProfile', ['$scpope', '$location', '$log', 'AuthenticationService', 'FacebookService', 'ProfileService',
+    function($scope, $location, $log, AuthenticationService, FacebookService, ProfileService) {
     
     $log.debug("CreateProfile controller executing");
 
@@ -52,4 +53,4 @@ angular.module('yieldtome.controllers')
         });
     })();
 
-});
+}]);

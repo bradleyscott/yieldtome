@@ -4,7 +4,8 @@
 
 angular.module('yieldtome.services')
 
-.service('FacebookService', function($q, $log, Facebook) {
+.service('FacebookService', ['$q', '$log', 'Facebook',
+    function($q, $log, Facebook) {
 
     this.getFacebookToken = function() {
 
@@ -65,4 +66,4 @@ angular.module('yieldtome.services')
 
         return deferred.promise;
     };
-});
+}]);

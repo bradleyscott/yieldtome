@@ -4,7 +4,8 @@
 
 angular.module('yieldtome.controllers', [])
 
-.controller('Home', function($scope, $location, $log, AuthenticationService) {
+.controller('Home', ['$scope', '$location', '$log', 'AuthenticationService',
+	function($scope, $location, $log, AuthenticationService) {
 
 	$log.debug("Home controller executing");
 	
@@ -48,4 +49,4 @@ angular.module('yieldtome.controllers', [])
 			return;
 		});
 	};
-});
+}]);

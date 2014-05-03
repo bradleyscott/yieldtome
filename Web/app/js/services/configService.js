@@ -4,7 +4,7 @@
 
 angular.module('yieldtome.services', ['ngResource'])
 
-.service('ConfigService', function($http) {
+.service('ConfigService', ['$http', function($http) {
 	
 	this.apiUrl = 'http://localhost:61353/';
-});
+}]);

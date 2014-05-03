@@ -11,6 +11,8 @@ module.exports = function(config){
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-facebook/lib/angular-facebook.js',
       'bower_components/angular-resource/angular-resource.js',
+      'app/js/controllers/homeController.js',
+      'app/js/services/configService.js',
       'app/js/**/*.js',
       'test/unit/**/*.js'
     ],

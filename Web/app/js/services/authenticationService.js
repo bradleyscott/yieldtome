@@ -4,7 +4,8 @@
 
 angular.module('yieldtome.services')
 
-.service('AuthenticationService', function(FacebookService, ConfigService, ProfileService, $resource, $http, $q, $log) {
+.service('AuthenticationService', ['FacebookService', 'ConfigService', 'ProfileService', '$resource', '$http', '$q', '$log',
+    function(FacebookService, ConfigService, ProfileService, $resource, $http, $q, $log) {
 
     var _apiToken, _authenticatedProfile;
     this.apiToken = _apiToken;
@@ -101,4 +102,4 @@ angular.module('yieldtome.services')
 
         return deferred.promise;
     };
-});
+}]);

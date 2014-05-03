@@ -4,7 +4,8 @@
 
 angular.module('yieldtome.services')
 
-.service('ProfileService', function(ConfigService, $q, $http, $log) {
+.service('ProfileService', ['ConfigService', '$q', '$http', '$log',
+    function(ConfigService, $q, $http, $log) {
 
     this.createProfile = function(profile)
     {
@@ -79,4 +80,4 @@ angular.module('yieldtome.services')
         return deferred.promise;
     };
 
-});
+}]);
