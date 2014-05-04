@@ -4,7 +4,7 @@
 
 describe('The FacebookService', function() {
 
-    var $q, Facebook, FacebookService;
+    var $q, $scope, Facebook, FacebookService;
 
     beforeEach(function() {
         module('yieldtome.services', function($provide) {
@@ -46,4 +46,5 @@ describe('The FacebookService', function() {
     });
 
     // getUserInfo
+
 });

@@ -3,16 +3,25 @@
 /* jasmine specs for directives go here */
 
 describe('directives', function() {
-  beforeEach(module('yieldtome.directives'));
 
-  describe('homemenu', function() {
-    it('should render the Home page menu', function() {
-      inject(function($compile, $rootScope) {
-        var element = $compile('<homemenu></homemenu>')($rootScope);
-        expect(element.html().length).toBeGreaterThan(20);
-        console.log("Home Menu HTML: " + element.html());
-        console.log("HTML char count: " + element.html().length);
-      });
+    var $compile, $scope;
+
+    beforeEach(module('yieldtome.directives'));
+    beforeEach(angular.mock.module('yieldtome.templates'));
+
+    beforeEach(inject(function(_$compile_, _$rootScope_) {
+        $compile = _$compile_;
+        $scope = _$rootScope_.$new();
+    }));
+
+    describe('The homemenu directive', function() {
+        it('should render the Home page menu', function() {
+            inject(function($compile, $rootScope) {
+                var element = $compile('<homemenu></homemenu>')($scope);
+                $scope.$digest();
+
+                expect(element.html().length).toBeGreaterThan(20);
+            });
+        });
     });
-  });
 });
