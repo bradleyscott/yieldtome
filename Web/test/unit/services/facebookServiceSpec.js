@@ -37,8 +37,8 @@ describe('The FacebookService', function() {
 
             var loginStatusPromise = FacebookService.getFacebookToken();
             loginStatusPromise.then(function(token) {
+                expect(false).toBeTruthy(); // If this test passes, there is something going wrong!
                 expect(token).not.toBeNull(); // The token should be ValidToken
-                expect(false).toBeTruthy(); // test for execution
                 expect(token).toBe('ValidToken');
             });
         });
@@ -46,6 +46,4 @@ describe('The FacebookService', function() {
     });
 
     // getUserInfo
-
-
 });
