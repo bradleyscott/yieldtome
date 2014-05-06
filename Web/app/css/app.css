@@ -25,7 +25,9 @@
 .css-form input.ng-invalid {
     border: 1px solid #a94442;
 }
-.css-form .validation
-{
-  color: #a94442
+.css-form .validation {
+    color: #a94442
+}
+body {
+    padding-top: 50px;
 }

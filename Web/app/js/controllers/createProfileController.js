@@ -49,6 +49,7 @@ angular.module('yieldtome.controllers')
             $scope.profile = profile;
         })
         .catch (function(error) {
+        	$log.warn(error);
             $scope.error = "Something wen't wrong trying to get your Facebook Profile information";
         });
     })();

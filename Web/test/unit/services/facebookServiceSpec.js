@@ -35,6 +35,7 @@ describe('The FacebookService', function() {
                 });
             Facebook.getLoginStatus.andReturn(getLoginStatusResponse.promise);
 
+            // I can't figure out how to do the equivalent of a $scope.$digest here. 
             var loginStatusPromise = FacebookService.getFacebookToken();
             loginStatusPromise.then(function(token) {
                 expect(false).toBeTruthy(); // If this test passes, there is something going wrong!
