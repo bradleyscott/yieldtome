@@ -12,9 +12,10 @@ describe('The FacebookService', function() {
             $provide.value('Facebook', Facebook);
         });
 
-        inject(function(_$q_, _FacebookService_) {
+        inject(function(_$q_, _$rootScope_, _FacebookService_) {
             $q = _$q_;
             FacebookService = _FacebookService_;
+            $scope = _$rootScope_.$new();
         });
     });
 
@@ -34,9 +35,10 @@ describe('The FacebookService', function() {
                     }
                 });
             Facebook.getLoginStatus.andReturn(getLoginStatusResponse.promise);
-
-            // I can't figure out how to do the equivalent of a $scope.$digest here. 
+ 
             var loginStatusPromise = FacebookService.getFacebookToken();
+            $scope.$digest();
+
             loginStatusPromise.then(function(token) {
                 expect(false).toBeTruthy(); // If this test passes, there is something going wrong!
                 expect(token).not.toBeNull(); // The token should be ValidToken
