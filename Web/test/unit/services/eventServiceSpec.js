@@ -1,6 +1,4 @@
-// 'use strict';
-
-// /* jasmine specs for services go here */
+'use strict';
 
 describe('The EventService', function() {
 
@@ -8,7 +6,7 @@ describe('The EventService', function() {
 
     beforeEach(function() {
         module('yieldtome.services');
- 
+        
         inject(function(_$q_, _$httpBackend_, _EventService_, _ConfigService_) {
             $q = _$q_;
             EventService = _EventService_;
@@ -62,7 +60,7 @@ describe('The EventService', function() {
             });           
         });
 
-        it("Events should be ordered by soonest first", function() {
+        it("that should return Events ordered by soonest first", function() {
             var eventPromise = EventService.getEvents(); 
             eventPromise.then(function(events) {
                 var date1 = events[0].StartDate;
@@ -73,7 +71,7 @@ describe('The EventService', function() {
             }); 
         });
 
-        it("or display an error if something catastrophic happens", function() {
+        it("that should display an error if something catastrophic happens", function() {
             var url = ConfigService.apiUrl + 'Events';
             $httpBackend.expectGET(url).respond(500, 'EpicFail'); // Mock an error
 
@@ -81,7 +79,7 @@ describe('The EventService', function() {
             eventPromise.then().catch(function(error)
             {
                 expect(error.toBe('EpicFail'));
-            })
+            });
         });
 
     });

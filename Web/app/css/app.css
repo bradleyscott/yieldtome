@@ -1,4 +1,6 @@
 /* app css stylesheet */
+ 
+/* Menu styles */
  .menu {
     list-style: none;
     border-bottom: 0.1em solid black;
@@ -22,12 +24,14 @@
     content:"";
     padding: 0;
 }
+body {
+    padding-top: 50px;
+}
+
+/* Form validation styles */
 .css-form input.ng-invalid {
     border: 1px solid #a94442;
 }
 .css-form .validation {
     color: #a94442
-}
-body {
-    padding-top: 50px;
 }

@@ -32,7 +32,7 @@ describe('The Home controller', function() {
         AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call returns an error
 
         $scope.login(); // Hit the login function
-        $scope.$digest(); 
+        $scope.$digest();
 
         expect($scope.error).not.toBeNull(); // Check the $scope.error value
         expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
@@ -44,13 +44,13 @@ describe('The Home controller', function() {
         AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call return null
 
         $scope.login(); // Hit the login function
-        $scope.$digest(); 
+        $scope.$digest();
 
         expect($scope.error).not.toBeNull(); // Check the $scope.error value
         expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
     });
 
-    it('should redirect to the eventList page if there is an existing Profile', function() {
+    it('should redirect to the events page if there is an existing Profile', function() {
         var getApiTokenResponse = $q.defer();
         getApiTokenResponse.resolve('ValidToken');
         AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Return a valid Token
@@ -60,9 +60,9 @@ describe('The Home controller', function() {
         AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a valid Profile
 
         $scope.login(); // Hit the login function
-        $scope.$digest(); 
+        $scope.$digest();
 
-        expect($location.path).toHaveBeenCalledWith("/eventList") // Check redirection to eventList
+        expect($location.path).toHaveBeenCalledWith("/events") // Check redirection to eventList
     });
 
     it('should redirect to the createProfile page if there is no existing Profile', function() {
@@ -75,7 +75,7 @@ describe('The Home controller', function() {
         AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a null Profile
 
         $scope.login(); // Hit the login function
-        $scope.$digest(); 
+        $scope.$digest();
 
         expect($location.path).toHaveBeenCalledWith("/createProfile") // Check redirection to createProfile
     });

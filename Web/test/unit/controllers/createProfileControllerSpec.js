@@ -96,7 +96,7 @@ describe('The CreateProfile controller', function() {
             FacebookService.getUserInfo.andReturn(getUserInfoResponse.promise); // Return a valid profile
         });
 
-        it("that should redirect to the eventList page if the profile creation succeeds", function() {
+        it("that should redirect to the events page if the profile creation succeeds", function() {
 
             // Set up Mock behaviour to support Controler initialization
             var createProfileResponse = $q.defer();
@@ -117,10 +117,10 @@ describe('The CreateProfile controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/eventList") // Check redirection to eventList
+            expect($location.path).toHaveBeenCalledWith("/events") // Check redirection to eventList
         });
 
-        it("or display an error if something catastrophic happens", function() {
+        it("that displays an error if something catastrophic happens", function() {
 
             // Set up Mock behaviour to support Controler initialization
             var createProfileResponse = $q.defer();
