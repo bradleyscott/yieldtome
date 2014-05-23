@@ -10,9 +10,15 @@ angular.module('yieldtome.directives', [])
             templateUrl: 'partials/homeMenu.html'
         };
     })
-    .directive('emptymenu', function() {
+    .directive('eventsmenu', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/emptyMenu.html'
+            templateUrl: 'partials/eventsMenu.html'
+        };
+    })
+    .directive('attendeelist', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/attendeeList.html'
         };
     });

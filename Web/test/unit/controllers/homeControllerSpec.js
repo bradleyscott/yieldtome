@@ -26,57 +26,60 @@ describe('The Home controller', function() {
         });
     });
 
-    it("should display an error if there was a huge fail when talking to Facebook", function() {
-        var getApiTokenResponse = $q.defer();
-        getApiTokenResponse.reject('HugeFail');
-        AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call returns an error
+    describe('has a login function', function() {
 
-        $scope.login(); // Hit the login function
-        $scope.$digest();
+        it("that should display an error if there was a huge fail when talking to Facebook", function() {
+            var getApiTokenResponse = $q.defer();
+            getApiTokenResponse.reject('HugeFail');
+            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call returns an error
 
-        expect($scope.error).not.toBeNull(); // Check the $scope.error value
-        expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
-    });
+            $scope.login(); // Hit the login function
+            $scope.$digest();
 
-    it("should display an error if the user doesn't authenticate with Facebook or grant permissions", function() {
-        var getApiTokenResponse = $q.defer();
-        getApiTokenResponse.resolve(null);
-        AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call return null
+            expect($scope.error).not.toBeNull(); // Check the $scope.error value
+            expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
+        });
 
-        $scope.login(); // Hit the login function
-        $scope.$digest();
+        it("that should display an error if the user doesn't authenticate with Facebook or grant permissions", function() {
+            var getApiTokenResponse = $q.defer();
+            getApiTokenResponse.resolve(null);
+            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call return null
 
-        expect($scope.error).not.toBeNull(); // Check the $scope.error value
-        expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
-    });
+            $scope.login(); // Hit the login function
+            $scope.$digest();
 
-    it('should redirect to the events page if there is an existing Profile', function() {
-        var getApiTokenResponse = $q.defer();
-        getApiTokenResponse.resolve('ValidToken');
-        AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Return a valid Token
+            expect($scope.error).not.toBeNull(); // Check the $scope.error value
+            expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
+        });
 
-        var getAuthenticatedProfileResponse = $q.defer();
-        getAuthenticatedProfileResponse.resolve('ValidProfile');
-        AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a valid Profile
+        it('that should redirect to the events page if there is an existing Profile', function() {
+            var getApiTokenResponse = $q.defer();
+            getApiTokenResponse.resolve('ValidToken');
+            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Return a valid Token
 
-        $scope.login(); // Hit the login function
-        $scope.$digest();
+            var getAuthenticatedProfileResponse = $q.defer();
+            getAuthenticatedProfileResponse.resolve('ValidProfile');
+            AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a valid Profile
 
-        expect($location.path).toHaveBeenCalledWith("/events") // Check redirection to eventList
-    });
+            $scope.login(); // Hit the login function
+            $scope.$digest();
 
-    it('should redirect to the createProfile page if there is no existing Profile', function() {
-        var getApiTokenResponse = $q.defer();
-        getApiTokenResponse.resolve('ValidToken');
-        AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Return a valid Token
+            expect($location.path).toHaveBeenCalledWith("/events") // Check redirection to eventList
+        });
 
-        var getAuthenticatedProfileResponse = $q.defer();
-        getAuthenticatedProfileResponse.resolve(null);
-        AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a null Profile
+        it('that should redirect to the createProfile page if there is no existing Profile', function() {
+            var getApiTokenResponse = $q.defer();
+            getApiTokenResponse.resolve('ValidToken');
+            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Return a valid Token
 
-        $scope.login(); // Hit the login function
-        $scope.$digest();
+            var getAuthenticatedProfileResponse = $q.defer();
+            getAuthenticatedProfileResponse.resolve(null);
+            AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a null Profile
 
-        expect($location.path).toHaveBeenCalledWith("/createProfile") // Check redirection to createProfile
+            $scope.login(); // Hit the login function
+            $scope.$digest();
+
+            expect($location.path).toHaveBeenCalledWith("/createProfile") // Check redirection to createProfile
+        });
     });
 });

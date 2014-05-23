@@ -14,8 +14,6 @@ angular.module('yieldtome.services')
             var url = ConfigService.apiUrl + 'Events';
             $log.debug('Request Url: ' + url);
 
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $window.sessionStorage.token; // Add default http header
-
             $http.get(url).success(function(data) {
                 $log.debug('Successfully retrieved ' + data.length + ' Events');
                 deferred.resolve(data);

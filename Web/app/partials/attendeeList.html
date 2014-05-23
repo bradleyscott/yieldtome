@@ -1,0 +1,17 @@
+<div class="form-group ">
+    <div class="input-group">
+        <span class="input-group-addon">
+            <span class="glyphicon glyphicon-search"></span>
+        </span>
+        <input type="text" class="form-control" ng-model="queryAttendees" placeholder="Find people..." />
+    </div>
+</div>
+<a href="" class="list-group-item" ng-repeat="attendee in attendees | filter:queryAttendees">
+    <div class="media" class="list-group-item">
+        <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}">
+        <div class="media-body">
+            <h4 class="media-heading">{{attendee.Name}}</h4>
+            {{attendee.Profile.Name}}
+        </div>
+    </div>
+</a>

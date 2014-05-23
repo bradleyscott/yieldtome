@@ -13,7 +13,7 @@ describe('The FacebookService', function() {
         inject(function(_$q_, _$rootScope_, _FacebookService_) {
             $q = _$q_;
             FacebookService = _FacebookService_;
-            $scope = _$rootScope_.$new();
+            $scope = _$rootScope_;
         });
     });
 
@@ -33,6 +33,7 @@ describe('The FacebookService', function() {
             Facebook.getLoginStatus.andReturn(getLoginStatusResponse);
 
             var loginStatusPromise = FacebookService.getFacebookToken();
+            
             $scope.$digest();
 
             loginStatusPromise.then(function(token) {

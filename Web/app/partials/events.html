@@ -1,8 +1,8 @@
 <div>
-    <emptymenu></emptymenu>
+    <eventsmenu></eventsmenu>
     <div class="container body-content">
         <div ng-hide="selectedEvent">
-            <h2>Events</h2>
+            <h2>Upcoming Events</h2>
             <div class="alert alert-info" ng-show="info">{{info}}</div>
             <div class="alert alert-danger" ng-show="error"><b>Doh! </b>{{error}}</div>
             <div class="list-group">
@@ -18,7 +18,7 @@
                     <h4 class="list-group-item-heading">{{event.Name}}</h4>
                     <p class="list-group-item-text">
                         <div><b>{{event.DateDescription}}</b>
-                        </div><div>></div>
+                        </div>
                         <div ng-show="event.Description">{{event.Description}}</div>
                     </p>
                 </a>
@@ -36,24 +36,10 @@
             </p>
             <br>
             <h3>People already attending</h3>
-            <div class="list-group">
-                <div class="form-group ">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </span>
-                        <input type="text" class="form-control" ng-model="queryAttendees" placeholder="Find people..." />
-                    </div>
+            <div class="well well-sm">
+                <div class="list-group">
+                    <attendeeList></attendeeList>
                 </div>
-                <a href="" class="list-group-item" ng-repeat="attendee in attendees | filter:queryAttendees">
-                    <div class="media" class="list-group-item">
-                        <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}">
-                        <div class="media-body">
-                            <h4 class="media-heading">{{attendee.Name}}</h4>
-                            {{attendee.Profile.Name}}
-                        </div>
-                    </div>
-                </a>
             </div>
         </div>
     </div>

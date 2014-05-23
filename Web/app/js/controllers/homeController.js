@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers', [])
 
-.controller('Home', ['$scope', '$location', '$log', 'AuthenticationService',
-    function($scope, $location, $log, AuthenticationService) {
+.controller('Home', ['$scope', '$location', '$log', '$window', 'AuthenticationService',
+    function($scope, $location, $log, $window, AuthenticationService) {
 
         $log.debug("Home controller executing");
 
@@ -26,24 +26,23 @@ angular.module('yieldtome.controllers', [])
                         return;
                     }
                 })
-                .
-            catch (function(error) {
+            .catch (function(error) {
                 $scope.error = "We weren't able to login you in. Did you authorize our Facebook request?";
                 return;
             })
-                .then(AuthenticationService.getAuthenticatedProfile)
-                .then(function(profile) {
+            .then(AuthenticationService.getAuthenticatedProfile)
+            .then(function(profile) {
 
-                    if (profile === null) // There is no Profile
-                    {
-                        $location.path('/createProfile'); // Redirect to create a Profile
-                    } else // Redirect to Event List page
-                    {
-                        $location.path('/events');
-                    }
-                })
-                .
-            catch (function(error) {
+                if (profile === null) // There is no Profile
+                {
+                    $location.path('/createProfile'); // Redirect to create a Profile
+                } else // Redirect to Event List page
+                {
+                    $window.sessionStorage.profile = JSON.stringify(profile); // Save the profile to session
+                    $location.path('/events');
+                }
+            })
+            .catch (function(error) {
                 $scope.error = "Something bad happened. We don't understand what";
                 return;
             });

@@ -7,6 +7,40 @@ angular.module('yieldtome.services')
 .service('ProfileService', ['ConfigService', '$q', '$http', '$log',
     function(ConfigService, $q, $http, $log) {
 
+        this.editProfile = function(profile)
+        {
+            $log.debug('Attempting to edit Profile');
+            var deferred = $q.defer();
+
+            if (profile == null) {
+                var error = 'A Profile object is needed';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            } else if (profile.FacebookID == null || profile.Name == null) {
+                var error = 'Both FacebookID and Name are mandatory fields on a Profile';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+
+            $log.debug('Attempting to edit Profile with ProfileID: ' + profile.ProfileID);
+
+            var url = ConfigService.apiUrl + 'Profiles';
+            $log.debug('Request Url: ' + url);
+
+            $http.put(url, profile).success(function(data) {
+                $log.debug('Successfully edited Profile with ProfileID: ' + data.ProfileID);
+                deferred.resolve(data);
+            }).error(function(status) { // Otherwise, some unknown error occured
+                var error = 'Problem editing this Profile. ' + status;
+                $log.warn(error);
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        };
+
         this.createProfile = function(profile) {
             $log.debug('Attempting to create a new Profile');
             var deferred = $q.defer();
@@ -45,7 +79,7 @@ angular.module('yieldtome.services')
             $log.debug('Attempting to get the Profile associated with FacebookID: ' + facebookID);
             var deferred = $q.defer();
 
-            if (facebookID.length == 0 || facebookID == null) {
+            if (facebookID == null || facebookID.length == 0) {
                 var error = 'Facebook ID must be provided';
                 $log.warn(error);
                 deferred.reject(error);

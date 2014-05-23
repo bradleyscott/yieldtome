@@ -1,21 +1,21 @@
 'use strict';
 
-/* Controllers */
-
 angular.module('yieldtome.controllers')
 
-.controller('CreateProfile', ['$scope', '$location', '$log', 'AuthenticationService', 'FacebookService', 'ProfileService',
-    function($scope, $location, $log, AuthenticationService, FacebookService, ProfileService) {
+.controller('CreateProfile', ['$scope', '$location', '$log', '$window', 'AuthenticationService', 'FacebookService', 'ProfileService',
+    function($scope, $location, $log, $window, AuthenticationService, FacebookService, ProfileService) {
 
         $log.debug("CreateProfile controller executing");
 
         $scope.title = 'Create Profile';
+        $scope.alternatebutton = 'Cancel';
         $scope.error; // An error message that will be displayed to screen
         $scope.info; // An info message that will be displayed to screen
         $scope.profile;
 
         $scope.$back = function() {
-            window.history.back();
+            history.back();
+            $window.history.back();
         };
 
         $scope.save = function() // Create a new Profile
@@ -26,10 +26,10 @@ angular.module('yieldtome.controllers')
             promise.then(function(profile) // It all went well
                 {
                     AuthenticationService.getAuthenticatedProfile(); // Sets the currently Authenticated profile in the AuthenticateService
+                    $window.sessionStorage.profile = profile; // Saves the profile in session
                     $location.path('/events'); // Redirect to the Events list page
                 })
-                .
-            catch (function(error) { // The service crapped out
+            .catch (function(error) { // The service crapped out
                 $scope.error = "Something wen't wrong trying to create your Profile";
             });
         };
@@ -49,8 +49,7 @@ angular.module('yieldtome.controllers')
                 };
                 $scope.profile = profile;
             })
-                .
-            catch (function(error) {
+            .catch (function(error) {
                 $log.warn(error);
                 $scope.error = "Something wen't wrong trying to get your Facebook Profile information";
             });

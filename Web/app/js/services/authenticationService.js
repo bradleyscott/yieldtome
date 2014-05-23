@@ -54,7 +54,6 @@ angular.module('yieldtome.services')
                 {
                     _apiToken = token; // Save the API token
                     $window.sessionStorage.token = token.access_token; // Save this token
-                    $http.defaults.headers.common.Authorization = 'Bearer ' + token.access_token; // Add default http header    
                     deferred.resolve(_apiToken); // Return the apiToken, even though it's saved                 
                 })
                 .

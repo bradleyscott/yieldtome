@@ -1,4 +1,4 @@
-'use strict';
+//'use strict';
 
 describe('The EventService', function() {
 
@@ -6,11 +6,12 @@ describe('The EventService', function() {
 
     beforeEach(function() {
         module('yieldtome.services');
+        module('yieldtome.controllers');
         
         inject(function(_$q_, _$httpBackend_, _EventService_, _ConfigService_) {
             $q = _$q_;
-            EventService = _EventService_;
             $httpBackend = _$httpBackend_;
+            EventService = _EventService_;
             ConfigService = _ConfigService_;
         });
    
@@ -19,6 +20,7 @@ describe('The EventService', function() {
     describe('has a getEvents function', function() {
 
         beforeEach(function() {
+
             var url = ConfigService.apiUrl + 'Events';
 
             $httpBackend.expectGET(url). // Mock a valid response
@@ -45,7 +47,7 @@ describe('The EventService', function() {
                         "DateDescription": "Today",
                         "DisplayDate": "20 Apr to 22 Oct 2014"
                     }
-                ]);   
+                ]); 
         });
 
         it("that exists", function() {
@@ -54,10 +56,13 @@ describe('The EventService', function() {
 
         it("that should return Events", function() {
             var eventPromise = EventService.getEvents(); 
+
             eventPromise.then(function(events) {
+                expect(false).toBeTruthy(); // This should fail
                 expect(events).not.toBeNull();
                 expect(events.length).toBe(2);
-            });           
+            });
+                       
         });
 
         it("that should return Events ordered by soonest first", function() {
