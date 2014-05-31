@@ -53,7 +53,7 @@ namespace yieldtome.API.Controllers
         /// <param name="description">More information about the Event. Optional.</param>
         /// <returns>The new Event</returns>
         /// <example>POST Events</example>
-        public HttpResponseMessage PostEvent(string name, DateTime startDate, DateTime endDate, int creatorID, Dictionary<string, string> properties, string description = null)
+        public HttpResponseMessage PostEvent(string name, DateTime startDate, DateTime endDate, int creatorID, string description = null)
         {
             Event newEvent;
             try { newEvent = _service.CreateEvent(name, startDate, endDate, creatorID, description); }
@@ -62,7 +62,7 @@ namespace yieldtome.API.Controllers
 
             // Return Uri pointing to new object
             HttpResponseMessage response = Request.CreateResponse<Event>(HttpStatusCode.Created, newEvent);
-            string uri = Url.Link("Events", new { eventID = newEvent.EventID });
+            string uri = Url.Link("DefaultApi", new { eventID = newEvent.EventID });
             response.Headers.Location = new Uri(uri);
 
             return response;
