@@ -14,7 +14,6 @@ angular.module('yieldtome.controllers')
         $scope.profile;
 
         $scope.$back = function() {
-            history.back();
             $window.history.back();
         };
 
@@ -30,7 +29,7 @@ angular.module('yieldtome.controllers')
                     $location.path('/events'); // Redirect to the Events list page
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to create your Profile";
+                $scope.error = "Something wen't wrong trying to create your Profile. " + error;
             });
         };
 

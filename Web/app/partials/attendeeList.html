@@ -6,7 +6,7 @@
         <input type="text" class="form-control" ng-model="queryAttendees" placeholder="Find people..." />
     </div>
 </div>
-<a href="" class="list-group-item" ng-repeat="attendee in attendees | filter:queryAttendees">
+<a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-repeat="attendee in attendees | filter:queryAttendees">
     <div class="media" class="list-group-item">
         <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}">
         <div class="media-body">

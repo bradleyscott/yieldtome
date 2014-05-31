@@ -10,10 +10,10 @@ angular.module('yieldtome.directives', [])
             templateUrl: 'partials/homeMenu.html'
         };
     })
-    .directive('eventsmenu', function() {
+    .directive('menu', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/eventsMenu.html'
+            templateUrl: 'partials/menu.html'
         };
     })
     .directive('attendeelist', function() {

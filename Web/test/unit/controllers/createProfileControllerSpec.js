@@ -142,7 +142,7 @@ describe('The CreateProfile controller', function() {
             $scope.$digest();
 
             expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something wen't wrong trying to create your Profile");
+            expect($scope.error).toBe("Something wen't wrong trying to create your Profile. EpicFail");
         });
     });
 });

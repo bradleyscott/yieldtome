@@ -7,6 +7,43 @@ angular.module('yieldtome.services')
 .service('ProfileService', ['ConfigService', '$q', '$http', '$log',
     function(ConfigService, $q, $http, $log) {
 
+        this.getProfile = function(profileID) {
+
+            $log.debug('Attempting to get the Profile associated with ProfileID: ' + profileID);
+            var deferred = $q.defer();
+
+            if (profileID == null || profileID == 0) {
+                var error = 'Profile ID must be provided';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+
+            var url = ConfigService.apiUrl + 'Profiles/' + profileID;
+            $log.debug('Request Url: ' + url);
+
+            $http.get(url).success(function(data) {
+
+                if (data == "null") // No profile yet exists associated with this Profile ID
+                {
+                    var error = 'No profile associated with ProfileID: ' + profileID;
+                    $log.debug(error);
+                    deferred.resolve(null);
+                } else // Otherwise, there is a Profile associated with this Facesbook ID
+                {
+                    $log.debug('yieldto.me profile: ' + data.ProfileID);
+                    deferred.resolve(data);
+                }
+
+            }).error(function(status) { // Otherwise, some unknown error occured
+                var error = status.Message;
+                $log.warn(error);
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        };
+        
         this.editProfile = function(profile)
         {
             $log.debug('Attempting to edit Profile');
@@ -33,7 +70,7 @@ angular.module('yieldtome.services')
                 $log.debug('Successfully edited Profile with ProfileID: ' + data.ProfileID);
                 deferred.resolve(data);
             }).error(function(status) { // Otherwise, some unknown error occured
-                var error = 'Problem editing this Profile. ' + status;
+                var error = status.Message;
                 $log.warn(error);
                 deferred.reject(error);
             });
@@ -66,7 +103,7 @@ angular.module('yieldtome.services')
                 $log.debug('New Profile created with ProfileID: ' + data.ProfileID);
                 deferred.resolve(data);
             }).error(function(status) { // Otherwise, some unknown error occured
-                var error = 'Problem creating this Profile. ' + status;
+                var error = status.Message;
                 $log.warn(error);
                 deferred.reject(error);
             });
@@ -103,7 +140,7 @@ angular.module('yieldtome.services')
                 }
 
             }).error(function(status) { // Otherwise, some unknown error occured
-                var error = 'Problem getting Profile. ' + status;
+                var error = status.Message;
                 $log.warn(error);
                 deferred.reject(error);
             });

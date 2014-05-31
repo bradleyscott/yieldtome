@@ -1,17 +1,26 @@
 <div>
-    <eventsmenu></eventsmenu>
+    <menu></menu>
     <div class="container body-content">
+        <div class="alert alert-info" ng-show="info">{{info}}</div>
+        <div class="alert alert-danger" ng-show="error"><b>Doh! </b>{{error}}</div>
         <div ng-hide="selectedEvent">
             <h2>Upcoming Events</h2>
-            <div class="alert alert-info" ng-show="info">{{info}}</div>
-            <div class="alert alert-danger" ng-show="error"><b>Doh! </b>{{error}}</div>
             <div class="list-group">
-                <div class="form-group ">
-                    <div class="input-group">
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-search"></span>
-                        </span>
-                        <input type="text" class="form-control" ng-model="query" placeholder="Find an Event..." />
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input type="text" class="form-control" ng-model="query" placeholder="Find an Event..." />
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="button" class="btn btn-primary pull-right" ng-click="new()">
+                                <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
+                            </button>
+                        </div>
                     </div>
                 </div>
                 <a href="" ng-click="selectEvent(event)" class="list-group-item" ng-repeat="event in events | filter:query">
@@ -31,15 +40,16 @@
             </h2>
             <p ng-show="selectedEvent.Description">{{selectedEvent.Description}}</p>
             <p>
-                <button type="button" class="btn btn-primary btn-lg">I am attending</button>
+                <button type="button" ng-click="attend()" class="btn btn-primary btn-lg">I am attending</button>
                 <button type="button" ng-click="selectEvent()" class="btn btn-default btn-lg">Nah, not this one</button>
             </p>
-            <br>
-            <h3>People already attending</h3>
-            <div class="well well-sm">
-                <div class="list-group">
-                    <attendeeList></attendeeList>
-                </div>
+            <div ng-show="attendees.length > 0">
+                <h3>People already attending</h3>
+                <div class="well well-sm">
+                    <div class="list-group">
+                        <attendeeList></attendeeList>
+                    </div>
+                </div>            
             </div>
         </div>
     </div>

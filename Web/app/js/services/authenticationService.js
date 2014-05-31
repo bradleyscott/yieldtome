@@ -95,7 +95,7 @@ angular.module('yieldtome.services')
                 }
 
             }).error(function(status) {
-                var error = 'Problem getting token from API. ' + status;
+                var error = 'Problem getting token from API. ' + status.Message;
                 $log.warn(error);
                 deferred.reject(error);
             });

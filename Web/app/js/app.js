@@ -1,6 +1,5 @@
 'use strict';
 
-
 // Declare app level module which depends on filters, and services
 angular.module('yieldtome', [
     'ngRoute',
@@ -10,6 +9,7 @@ angular.module('yieldtome', [
     'yieldtome.controllers',
     'facebook'
 ])
+
 // Configure routes
 .config(['$routeProvider',
     function($routeProvider) {
@@ -25,9 +25,25 @@ angular.module('yieldtome', [
             templateUrl: 'partials/profile.html',
             controller: 'EditProfile'
         });
+        $routeProvider.when('/viewProfile/:profileID', {
+            templateUrl: 'partials/profile.html',
+            controller: 'ViewProfile'
+        });
         $routeProvider.when('/events', {
             templateUrl: 'partials/events.html',
             controller: 'Events'
+        });
+        $routeProvider.when('/createEvent', {
+            templateUrl: 'partials/event.html',
+            controller: 'CreateEvent'
+        });
+        $routeProvider.when('/attend', {
+            templateUrl: 'partials/attend.html',
+            controller: 'Attend'
+        });
+        $routeProvider.when('/eventMenu', {
+            templateUrl: 'partials/eventMenu.html',
+            controller: ''
         });
         $routeProvider.otherwise({
             redirectTo: '/'

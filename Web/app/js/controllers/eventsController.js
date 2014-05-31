@@ -11,7 +11,7 @@ angular.module('yieldtome.controllers')
 
         $scope.error; // An error message that will be displayed to screen
         $scope.info; // An info message that will be displayed to screen
-        $scope.profile;  // The authenticated Profile, if it exists
+        $scope.profile; // The authenticated Profile, if it exists
         $scope.events; // List of Events
         $scope.selectedEvent; // The Event the user selected
         $scope.attendees; // Attendees for the selected Event
@@ -20,7 +20,20 @@ angular.module('yieldtome.controllers')
             window.history.back();
         };
 
+        $scope.attend = function() {
+            $log.debug('User clicked the Attend button');
+            $window.sessionStorage.event = JSON.stringify($scope.selectedEvent); // Save the selectedEvent to session
+            $location.path('/attend');
+        };
+
+        $scope.new = function() {
+            $log.debug('User clicked the New Event button');
+            $location.path('/createEvent');
+        };
+
         $scope.selectEvent = function(selectedEvent) {
+            $scope.info = ""; // Clear any info messages
+            $scope.error = ""; // Clear any error messages
 
             // Set the seleted Event
             if (selectedEvent) {
@@ -37,12 +50,25 @@ angular.module('yieldtome.controllers')
             var promise = AttendeeService.getAttendees($scope.selectedEvent);
 
             promise.then(function(attendees) {
-                $scope.attendees = attendees;
+                $scope.attendees = attendees; // Display attendees to screen
+
+                // If this profile is already attending, redirect them to the eventsMenu
+                for (var i = 0; i < $scope.attendees.length; i++) {
+                    if ($scope.attendees[i].Profile.ProfileID == $scope.profile.ProfileID) {
+                        $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
+                        $log.debug('Redirecting to eventsMenu page');
+                        $scope.info = "You are attending this Event. Logging you in...";
+                        $window.sessionStorage.event = JSON.stringify($scope.selectedEvent); // Save the selectedEvent to session
+                        $location.path('/eventMenu');
+                    }
+                }
             })
-            .catch (function(error) {
+                .
+            catch (function(error) {
                 $log.warn(error);
                 $scope.error = "Something wen't wrong trying to get the list of Attendees";
             });
+
         };
 
         // Get Events from EventService
@@ -50,9 +76,9 @@ angular.module('yieldtome.controllers')
             $log.debug('Retrieving Events to create model');
 
             // Allocate the saved Profile to the controller
-            if($window.sessionStorage.profile != "undefined")
-            { $scope.profile = JSON.parse($window.sessionStorage.profile); }
-
+            if ($window.sessionStorage.profile != "undefined") {
+                $scope.profile = JSON.parse($window.sessionStorage.profile);
+            }
             var promise = EventService.getEvents();
 
             promise.then(function(events) {

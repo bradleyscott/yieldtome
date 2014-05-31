@@ -29,7 +29,7 @@ angular.module('yieldtome.services')
                 deferred.resolve(data);
             })
                 .error(function(status) { // Otherwise, some unknown error occured
-                    var error = 'Problem getting Attendees. ' + status;
+                    var error = 'Problem getting Attendees. ' + status.Message;
                     $log.warn(error);
                     deferred.reject(error);
                 });
