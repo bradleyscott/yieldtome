@@ -35,7 +35,7 @@ namespace yieldtome.API
             {
                 Provider = new ApplicationOAuthProvider(PublicClientId, UserManagerFactory),
                 AccessTokenExpireTimeSpan = TimeSpan.FromDays(14),
-                AllowInsecureHttp = true
+                AllowInsecureHttp = true,
             };
 
             OAuthBearerOptions = new OAuthBearerAuthenticationOptions();
@@ -56,6 +56,9 @@ namespace yieldtome.API
             // and to use a cookie to temporarily store information about a user logging in with a third party login provider
             app.UseCookieAuthentication(new CookieAuthenticationOptions());
             app.UseExternalSignInCookie(DefaultAuthenticationTypes.ExternalCookie);
+            
+            // Enable CORS requests
+            //app.UseCors(Microsoft.Owin.Cors.CorsOptions.AllowAll);
 
             // Enable the application to use bearer tokens to authenticate users
             app.UseOAuthBearerTokens(OAuthOptions);
