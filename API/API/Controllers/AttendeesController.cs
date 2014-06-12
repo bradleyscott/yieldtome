@@ -84,7 +84,7 @@ namespace yieldtome.API.Controllers
 
             // Return Uri pointing to new object
             HttpResponseMessage response = Request.CreateResponse<Attendee>(HttpStatusCode.Created, newAttendee);
-            string uri = Url.Link("Events", new { eventID = newAttendee.AttendeeID });
+            string uri = Url.Link("DefaultApi", new { eventID = newAttendee.AttendeeID });
             response.Headers.Location = new Uri(uri);
 
             return response;
