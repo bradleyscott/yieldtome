@@ -38,6 +38,7 @@ namespace yieldtome.API.Data.Services
                 events = dbEvents.Select(x => CreateEventObject(x)).ToList();
             }
 
+            events = events.OrderBy(x => x.StartDate).ToList();
             Logging.LogWriter.Write(String.Format("Retrieved {0} Events", events.Count));
             return events;
         }
