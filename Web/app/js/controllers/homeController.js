@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers', [])
 
-.controller('Home', ['$scope', '$location', '$log', '$window', 'AuthenticationService',
-    function($scope, $location, $log, $window, AuthenticationService) {
+.controller('Home', ['$scope', '$location', '$log', 'SessionService', 'AuthenticationService',
+    function($scope, $location, $log, SessionService, AuthenticationService) {
 
         $log.debug("Home controller executing");
 
@@ -38,7 +38,7 @@ angular.module('yieldtome.controllers', [])
                     $location.path('/createProfile'); // Redirect to create a Profile
                 } else // Redirect to Event List page
                 {
-                    $window.sessionStorage.profile = JSON.stringify(profile); // Save the profile to session
+                    SessionService.set('profile', profile); // Save the profile to session
                     $location.path('/events');
                 }
             })

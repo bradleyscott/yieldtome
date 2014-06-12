@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('CreateProfile', ['$scope', '$location', '$log', '$window', 'AuthenticationService', 'FacebookService', 'ProfileService',
-    function($scope, $location, $log, $window, AuthenticationService, FacebookService, ProfileService) {
+.controller('CreateProfile', ['$scope', '$location', '$log', '$window', 'SessionService', 'AuthenticationService', 'FacebookService', 'ProfileService',
+    function($scope, $location, $log, $window, SessionService, AuthenticationService, FacebookService, ProfileService) {
 
         $log.debug("CreateProfile controller executing");
 
@@ -25,7 +25,7 @@ angular.module('yieldtome.controllers')
             promise.then(function(profile) // It all went well
                 {
                     AuthenticationService.getAuthenticatedProfile(); // Sets the currently Authenticated profile in the AuthenticateService
-                    $window.sessionStorage.profile = profile; // Saves the profile in session
+                    SessionService.set('profile', profile); // Saves the profile in session
                     $location.path('/events'); // Redirect to the Events list page
                 })
             .catch (function(error) { // The service crapped out

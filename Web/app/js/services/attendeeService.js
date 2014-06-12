@@ -4,8 +4,52 @@
 
 angular.module('yieldtome.services')
 
-.service('AttendeeService', ['$q', '$log', '$http', '$window', 'ConfigService',
-    function($q, $log, $http, $window, ConfigService) {
+.service('AttendeeService', ['$q', '$log', '$http', 'SessionService', 'ConfigService',
+    function($q, $log, $http, SessionService, ConfigService) {
+
+        this.attendEvent = function(event, name, profile)
+        {
+            $log.debug('Attempting to add Attendee to Event');
+            var deferred = $q.defer();
+
+            if (event == null || event.EventID == null) // Event is not provided
+            {
+                var error = 'An Event with an EventID is required';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+            if (profile == null || profile.ProfileID == null) // Profile is not provided
+            {
+                var error = 'A Profile with a ProfileID is required';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+            if (name == null || name == "") // Name is not provided
+            {
+                var error = 'An Attendee name required';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }        
+
+            // POST Attendees?eventID={eventID}&name={name}&profileID={profileID}
+            var url = ConfigService.apiUrl + 'Attendees?eventID=' + event.EventID + '&name=' + name + '&profileID=' + profile.ProfileID;
+            $log.debug('Request Url: ' + url);
+
+            $http.post(url).success(function(attendee) {
+                $log.debug('Successfully attending Event as Attendee with AttendeeID: ' + attendee.AttendeeID);
+                deferred.resolve(attendee);
+            })
+                .error(function(status) { // Otherwise, some unknown error occured
+                    var error = 'Problem Attending Event. ' + status.Message;
+                    $log.warn(error);
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        };
 
         this.getAttendees = function(event) {
             $log.debug('Attempting to get Attendees');
@@ -22,7 +66,7 @@ angular.module('yieldtome.services')
             var url = ConfigService.apiUrl + 'Events/' + event.EventID + '/Attendees';
             $log.debug('Request Url: ' + url);
 
-            $http.defaults.headers.common.Authorization = 'Bearer ' + $window.sessionStorage.token; // Add default http header
+            $http.defaults.headers.common.Authorization = 'Bearer ' + SessionService.get('token'); // Add default http header
 
             $http.get(url).success(function(data) {
                 $log.debug('Successfully retrieved ' + data.length + ' Attendees');

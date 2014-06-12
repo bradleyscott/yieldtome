@@ -25,10 +25,13 @@
                 </div>
                 <a href="" ng-click="selectEvent(event)" class="list-group-item" ng-repeat="event in events | filter:query">
                     <h4 class="list-group-item-heading">{{event.Name}}</h4>
+                    <div class="btn-group pull-right" ng-show="event.CreatorID == profile.ProfileID">
+                        <button type="button" ng-click="edit(event, $event)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> </button>
+                    </div>
                     <p class="list-group-item-text">
                         <div><b>{{event.DateDescription}}</b>
                         </div>
-                        <div ng-show="event.Description">{{event.Description}}</div>
+                        <div ng-show="event.Description">{{ event.Description | truncate:120 }}</div>
                     </p>
                 </a>
             </div>
@@ -40,8 +43,8 @@
             </h2>
             <p ng-show="selectedEvent.Description">{{selectedEvent.Description}}</p>
             <p>
-                <button type="button" ng-click="attend()" class="btn btn-primary btn-lg">I am attending</button>
-                <button type="button" ng-click="selectEvent()" class="btn btn-default btn-lg">Nah, not this one</button>
+                <button type="button" ng-click="attend()" class="btn btn-primary btn-lg">Attending</button>
+                <button type="button" ng-click="selectEvent()" class="btn btn-default btn-lg">Not this one</button>
             </p>
             <div ng-show="attendees.length > 0">
                 <h3>People already attending</h3>

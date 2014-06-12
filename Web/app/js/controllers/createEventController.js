@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('CreateEvent', ['$scope', '$location', '$log', '$window', '$filter', 'EventService',
-    function($scope, $location, $log, $window, $filter, EventService) {
+.controller('CreateEvent', ['$scope', '$location', '$log', '$filter', '$window', 'SessionService', 'EventService',
+    function($scope, $location, $log, $filter, $window, SessionService, EventService) {
 
         $log.debug("CreateEvent controller executing");
 
@@ -28,7 +28,7 @@ angular.module('yieldtome.controllers')
 
         $scope.$watch("endDateAsString", function(value) {
             $log.debug('End Date value changed to: ' + value);
-           $scope.event.EndDate = new Date(value);
+            $scope.event.EndDate = new Date(value);
         });
 
         $scope.save = function() // Create a new Profile
@@ -38,11 +38,10 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(event) // It all went well
                 {
-                    $window.sessionStorage.event = JSON.stringify(event); // Saves the Event in session
-                    $location.path('/eventMenu'); // Redirect to the Event menu page
+                    SessionService.set('event', event); // Saves the Event in session
+                    $location.path('/landing'); // Redirect to the Event menu page
                 })
-                .
-            catch (function(error) { // The service crapped out
+            .catch (function(error) { // The service crapped out
                 $scope.error = "Something wen't wrong trying to create your Event. " + error;
             });
         };
@@ -51,9 +50,7 @@ angular.module('yieldtome.controllers')
             $log.debug('Create an Event model with default values');
 
             // Allocate the saved Profile to the controller
-            if ($window.sessionStorage.profile != "undefined") {
-                $scope.profile = JSON.parse($window.sessionStorage.profile);
-            }
+            $scope.profile = SessionService.get('profile');
 
             var today = new Date();
             var event = {
@@ -68,11 +65,6 @@ angular.module('yieldtome.controllers')
             $scope.endDateAsString = $filter('date')(event.EndDate, 'yyyy-MM-dd');
 
             $scope.event = event;
-
-            // Allocate the saved Profile to the controller
-            if($window.sessionStorage.profile != "undefined")
-            { $scope.profile = JSON.parse($window.sessionStorage.profile); }
-
         })();
 
     }

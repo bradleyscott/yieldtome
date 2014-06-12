@@ -2,25 +2,25 @@
 
 describe('The CreateEvent controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $window, $filter, EventService;
+    var $scope, $location, $q, $controller, $log, $filter, SessionService, EventService;
 
     beforeEach(function() {
         module('yieldtome.services');
         module('yieldtome.controllers');
 
-        inject(function($rootScope, _$log_, _$controller_, _$q_, _$window_, _$filter_) {
+        inject(function($rootScope, _$log_, _$controller_, _$q_, _$filter_, _SessionService_) {
             $scope = $rootScope.$new();
             $q = _$q_;
             $controller = _$controller_;
             $log = _$log_;
-            $window = _$window_;
             $filter = _$filter_;
+            SessionService = _SessionService_;
 
             // Create Mocks 
             EventService = jasmine.createSpyObj('EventService', ['createEvent']);
             $location = jasmine.createSpyObj('$location', ['path']);
 
-            $window.sessionStorage.profile = JSON.stringify({
+            SessionService.set('profile', {
                     "ProfileID": 1,
                     "Name": "Bradley Scott",
                     "ProfilePictureUri": "http://graph.facebook.com/553740394/picture",
@@ -38,15 +38,15 @@ describe('The CreateEvent controller', function() {
                     "IsPhonePublic": false,
                     "IsTwitterPublic": false,
                     "IsLinkedInPublic": true
-                }); // Set empty authenticatedProfile
+                }); // Set authenticatedProfile
 
             // Initialise the controller
             $controller('CreateEvent', {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
-                $window: $window,
                 $filter: $filter,
+                SessionService: SessionService,
                 EventService: EventService
             });
         });
@@ -100,7 +100,7 @@ describe('The CreateEvent controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/eventMenu") // Check redirection
+            expect($location.path).toHaveBeenCalledWith("/landing"); // Check redirection
         });
 
         it("that displays an error if something catastrophic happens", function() {

@@ -16,6 +16,12 @@ angular.module('yieldtome.directives', [])
             templateUrl: 'partials/menu.html'
         };
     })
+    .directive('navmenu', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/navMenu.html'
+        };
+    })
     .directive('attendeelist', function() {
         return {
             restrict: 'E',

@@ -37,13 +37,17 @@ angular.module('yieldtome', [
             templateUrl: 'partials/event.html',
             controller: 'CreateEvent'
         });
+        $routeProvider.when('/editEvent/:eventID', {
+            templateUrl: 'partials/event.html',
+            controller: 'EditEvent'
+        });
         $routeProvider.when('/attend', {
             templateUrl: 'partials/attend.html',
             controller: 'Attend'
         });
-        $routeProvider.when('/eventMenu', {
-            templateUrl: 'partials/eventMenu.html',
-            controller: ''
+        $routeProvider.when('/landing', {
+            templateUrl: 'partials/landing.html',
+            controller: 'Landing'
         });
         $routeProvider.otherwise({
             redirectTo: '/'
@@ -59,12 +63,12 @@ angular.module('yieldtome', [
 ])
 
 // Handle unauthenticated responses
-.factory('httpResponseInterceptor', ['$q', '$location', '$window',
-    function($q, $location, $window) {
+.factory('httpResponseInterceptor', ['$q', '$location', 'SessionService',
+    function($q, $location, SessionService) {
         return {
             // Always add Authorization header to requests
             request: function(config) {
-                config.headers.Authorization = 'Bearer ' + $window.sessionStorage.token;
+                config.headers.Authorization = 'Bearer ' + SessionService.get('token');
                 return config;
             },
             // Do nothing

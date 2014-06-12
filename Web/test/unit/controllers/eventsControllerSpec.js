@@ -2,22 +2,22 @@
 
 describe('The Events controller', function() {
 
-    var $controller, $log, $scope, $location, $q, $window, EventService, AttendeeService;
+    var $controller, $log, $scope, $location, $q, SessionService, EventService, AttendeeService;
 
     beforeEach(function() {
         module('yieldtome.services');
         module('yieldtome.controllers');
 
-        inject(function($rootScope, _$log_, _$controller_, _$q_, _$window_, _$location_) {
+        inject(function($rootScope, _$log_, _$controller_, _$q_, _$location_) {
             $scope = $rootScope.$new();
             $q = _$q_;
             $controller = _$controller_;
             $log = _$log_;
-            $window = _$window_;
             $location = _$location_;
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
+            SessionService = jasmine.createSpyObj('SessionService', ['get', 'set']);
             EventService = jasmine.createSpyObj('EventService', ['getEvents']);
             AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendees']);
 
@@ -56,10 +56,12 @@ describe('The Events controller', function() {
             EventService.getEvents.andReturn(getEventsResponse.promise);
 
             // Initialise the controller
+            // $scope, $location, $log, SessionService, EventService, AttendeeService
             $controller('Events', {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                SessionService: SessionService,
                 EventService: EventService,
                 AttendeeService: AttendeeService
             });
@@ -77,10 +79,12 @@ describe('The Events controller', function() {
             EventService.getEvents.andReturn(getEventsResponse.promise);
 
             // Initialise the controller
+            // $scope, $location, $log, SessionService, EventService, AttendeeService
             $controller('Events', {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                SessionService: SessionService,
                 EventService: EventService,
                 AttendeeService: AttendeeService
             });
@@ -123,7 +127,7 @@ describe('The Events controller', function() {
             EventService.getEvents.andReturn(getEventsResponse.promise);
 
             // Set the authenticated Profile 
-            $window.sessionStorage.profile = JSON.stringify({
+            SessionService.get.andReturn({
                 "ProfileID": 2,
                 "Name": "New Profile 635323921079431766",
                 "ProfilePictureUri": "http://graph.facebook.com/635323921079431766/picture",
@@ -144,11 +148,12 @@ describe('The Events controller', function() {
             });
 
             // Initialise the controller
+            // $scope, $location, $log, SessionService, EventService, AttendeeService
             $controller('Events', {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
-                $window: $window,
+                SessionService: SessionService,
                 EventService: EventService,
                 AttendeeService: AttendeeService
             });
@@ -238,7 +243,7 @@ describe('The Events controller', function() {
             expect($scope.attendees).toBe(attendees);
         });
 
-        it("should redirect to the Menu page if the authenticated Profile is attending", function() {
+        it("should redirect to the Landing page if the authenticated Profile is attending", function() {
 
             var attendees = [{
                 "AttendeeID": 8,
@@ -278,7 +283,7 @@ describe('The Events controller', function() {
             $scope.selectEvent(selectedEvent);
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/eventMenu") // Check redirection to eventMenu
+            expect($location.path).toHaveBeenCalledWith("/landing") // Check redirection
         });
 
         it("should display an error if there was a huge fail when trying to get the Attendees", function() {
@@ -318,7 +323,8 @@ describe('The Events controller', function() {
         });
     });
 
-    describe('when the user clicks the New button', function() {
+
+    describe('when the user clicks a button', function() {
 
         beforeEach(function() {
 
@@ -350,7 +356,7 @@ describe('The Events controller', function() {
             EventService.getEvents.andReturn(getEventsResponse.promise);
 
             // Set the authenticated Profile 
-            $window.sessionStorage.profile = JSON.stringify({
+            SessionService.get.andReturn({
                 "ProfileID": 2,
                 "Name": "New Profile 635323921079431766",
                 "ProfilePictureUri": "http://graph.facebook.com/635323921079431766/picture",
@@ -371,89 +377,30 @@ describe('The Events controller', function() {
             });
 
             // Initialise the controller
+            // $scope, $location, $log, SessionService, EventService, AttendeeService
             $controller('Events', {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
-                $window: $window,
+                SessionService: SessionService,
                 EventService: EventService,
                 AttendeeService: AttendeeService
             });
 
         });
 
-        it("it should rediect to createEvent", function() {
-            $scope.new();
-            expect($location.path).toHaveBeenCalledWith("/createEvent"); // Check redirection
-        });
-    });
+        describe('named New', function() {
 
-    describe('when the user clicks the Attend button', function() {
-
-        beforeEach(function() {
-
-            // Mock getEvents response
-            var getEventsResponse = $q.defer();
-            getEventsResponse.resolve(
-                [{
-                    "EventID": 1,
-                    "Name": "New Event",
-                    "Hashtag": "newevent",
-                    "StartDate": "2014-04-20T08:54:11.75",
-                    "EndDate": "2014-10-22T08:54:11.75",
-                    "CreatorID": 1,
-                    "Description": "Description",
-                    "DateDescription": "Today",
-                    "DisplayDate": "20 Apr to 22 Oct 2014"
-                }, {
-                    "EventID": 2,
-                    "Name": "Another New Event",
-                    "Hashtag": "anotherevent",
-                    "StartDate": "2014-04-20T08:54:11.953",
-                    "EndDate": "2014-10-22T08:54:11.953",
-                    "CreatorID": 1,
-                    "Description": "Description",
-                    "DateDescription": "Today",
-                    "DisplayDate": "20 Apr to 22 Oct 2014"
-                }]
-            );
-            EventService.getEvents.andReturn(getEventsResponse.promise);
-
-            // Set the authenticated Profile 
-            $window.sessionStorage.profile = JSON.stringify({
-                "ProfileID": 2,
-                "Name": "New Profile 635323921079431766",
-                "ProfilePictureUri": "http://graph.facebook.com/635323921079431766/picture",
-                "FacebookID": "635323921079431766",
-                "FacebookProfileUri": "http://www.facebook.com/635323921079431766",
-                "Email": "bradley@yieldto.me",
-                "EmailToUri": "mailto://bradley@yieldto.me",
-                "Phone": "555 125-3459",
-                "Twitter": "tweettome",
-                "TwitterProfileUri": "http://twitter.com/tweettome",
-                "LinkedIn": "linktome",
-                "LinkedinProfileUri": "http://www.linkedin.com/in/linktome",
-                "IsFacebookPublic": true,
-                "IsEmailPublic": true,
-                "IsPhonePublic": false,
-                "IsTwitterPublic": false,
-                "IsLinkedInPublic": true
+            it("it should rediect to createEvent", function() {
+                $scope.new();
+                expect($location.path).toHaveBeenCalledWith("/createEvent"); // Check redirection
             });
-
-            // Initialise the controller
-            $controller('Events', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                EventService: EventService,
-                AttendeeService: AttendeeService
-            });
-
         });
 
-        it("it should rediect to attend", function() {
-            var event = {
+        describe('that is the Event list item', function() {
+
+            it("it should rediect to attend", function() {
+                var event = {
                     "EventID": 1,
                     "Name": "New Event",
                     "Hashtag": "newevent",
@@ -465,12 +412,34 @@ describe('The Events controller', function() {
                     "DisplayDate": "20 Apr to 22 Oct 2014"
                 };
 
-            $scope.selectedEvent = event;
-            $scope.attend();
+                $scope.selectedEvent = event;
+                $scope.attend();
 
-            expect($location.path).toHaveBeenCalledWith("/attend"); // Check redirection
-            expect($window.sessionStorage.event).toBe(JSON.stringify(event)); // Check save of event to session
+                expect($location.path).toHaveBeenCalledWith("/attend"); // Check redirection
+                expect(SessionService.set).toHaveBeenCalledWith('event', event); // Check save of event to session
+            });
+        });
+
+        describe('with an Edit icon', function() {
+
+            it("it should rediect to editEvent", function() {
+                var event = {
+                    "EventID": 1,
+                    "Name": "New Event",
+                    "Hashtag": "newevent",
+                    "StartDate": "2014-04-20T08:54:11.75",
+                    "EndDate": "2014-10-22T08:54:11.75",
+                    "CreatorID": 1,
+                    "Description": "Description",
+                    "DateDescription": "Today",
+                    "DisplayDate": "20 Apr to 22 Oct 2014"
+                };
+
+                var $event = jasmine.createSpyObj('$event', ['stopPropagation', 'preventDefault']);
+                $scope.edit(event, $event);
+
+                expect($location.path).toHaveBeenCalledWith("/editEvent/1"); // Check redirection
+            });
         });
     });
-
 });

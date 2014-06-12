@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('EditProfile', ['$scope', '$location', '$log', '$window', 'ProfileService',
-    function($scope, $location, $log, $window, ProfileService) {
+.controller('EditProfile', ['$scope', '$location', '$log', '$window', 'SessionService', 'ProfileService',
+    function($scope, $location, $log, $window, SessionService, ProfileService) {
 
         $log.debug("EditProfile controller executing");
 
@@ -24,8 +24,8 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(profile) // It all went well
                 {
-                    $window.sessionStorage.profile = JSON.stringify(profile); // Saves the profile in session
-                    $scope.info = 'Your Profile updates just got saved'; // Redirect to the previous page
+                    SessionService.set('profile', profile); // Saves the profile in session
+                    $scope.info = 'Your Profile updates just got saved';
                 })
             .catch (function(error) { // The service crapped out
                 $scope.error = "Something wen't wrong trying to edit your Profile";
@@ -36,8 +36,7 @@ angular.module('yieldtome.controllers')
         (function() {
 
             // Allocate the saved Profile to the controller
-            if($window.sessionStorage.profile != "undefined")
-            { $scope.profile = JSON.parse($window.sessionStorage.profile); }
+            $scope.profile = SessionService.get('profile');
 
         })();
 

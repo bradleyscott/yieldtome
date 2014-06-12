@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Events', ['$scope', '$location', '$log', '$window', 'EventService', 'AttendeeService',
-    function($scope, $location, $log, $window, EventService, AttendeeService) {
+.controller('Events', ['$scope', '$location', '$log', 'SessionService', 'EventService', 'AttendeeService',
+    function($scope, $location, $log, SessionService, EventService, AttendeeService) {
 
         $log.debug("Events controller executing");
 
@@ -20,9 +20,21 @@ angular.module('yieldtome.controllers')
             window.history.back();
         };
 
+        $scope.edit = function(event, $event) {
+            // Prevent bubbling to showItem.
+            // On recent browsers, only $event.stopPropagation() is needed
+            if ($event.stopPropagation) $event.stopPropagation();
+            if ($event.preventDefault) $event.preventDefault();
+            $event.cancelBubble = true;
+            $event.returnValue = false;
+
+            $log.debug('User clicked the Edit button for EventID: ' + event.EventID);
+            $location.path('/editEvent/' + event.EventID);
+        };
+
         $scope.attend = function() {
             $log.debug('User clicked the Attend button');
-            $window.sessionStorage.event = JSON.stringify($scope.selectedEvent); // Save the selectedEvent to session
+            SessionService.set('event', $scope.selectedEvent); // Save the selectedEvent to session
             $location.path('/attend');
         };
 
@@ -52,19 +64,19 @@ angular.module('yieldtome.controllers')
             promise.then(function(attendees) {
                 $scope.attendees = attendees; // Display attendees to screen
 
-                // If this profile is already attending, redirect them to the eventsMenu
+                // If this profile is already attending, redirect them to the landing page
                 for (var i = 0; i < $scope.attendees.length; i++) {
                     if ($scope.attendees[i].Profile.ProfileID == $scope.profile.ProfileID) {
                         $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
-                        $log.debug('Redirecting to eventsMenu page');
+                        $log.debug('Redirecting to landing page');
                         $scope.info = "You are attending this Event. Logging you in...";
-                        $window.sessionStorage.event = JSON.stringify($scope.selectedEvent); // Save the selectedEvent to session
-                        $location.path('/eventMenu');
+                        SessionService.set('event', $scope.selectedEvent); // Save the selectedEvent to session
+                        SessionService.set('attendee', $scope.attendees[i]); // Save the Attendee to session
+                        $location.path('/landing');
                     }
                 }
             })
-                .
-            catch (function(error) {
+            .catch (function(error) {
                 $log.warn(error);
                 $scope.error = "Something wen't wrong trying to get the list of Attendees";
             });
@@ -76,9 +88,7 @@ angular.module('yieldtome.controllers')
             $log.debug('Retrieving Events to create model');
 
             // Allocate the saved Profile to the controller
-            if ($window.sessionStorage.profile != "undefined") {
-                $scope.profile = JSON.parse($window.sessionStorage.profile);
-            }
+            $scope.profile = SessionService.get('profile');
             var promise = EventService.getEvents();
 
             promise.then(function(events) {

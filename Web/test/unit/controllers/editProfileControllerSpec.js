@@ -21,14 +21,7 @@ describe('The EditProfile controller', function() {
 
     describe('should have a save() function', function() {
 
-        it("that should display a confirmation to screen if Profile edits succeed", function() {
-
-            // Set up Mock behaviour to support Controler initialization
-            var editProfileResponse = $q.defer();
-            editProfileResponse.resolve();
-
-            ProfileService.editProfile.andReturn(editProfileResponse.promise); // Return a valid profile
-
+        beforeEach(function() {
             // Initialise the controller
             $controller('EditProfile', {
                 $scope: $scope,
@@ -36,6 +29,15 @@ describe('The EditProfile controller', function() {
                 $log: $log,
                 ProfileService: ProfileService
             });
+        });
+    
+        it("that should display a confirmation to screen if Profile edits succeed", function() {
+
+            // Set up Mock behaviour to support Controler initialization
+            var editProfileResponse = $q.defer();
+            editProfileResponse.resolve();
+
+            ProfileService.editProfile.andReturn(editProfileResponse.promise); // Return a valid profile
 
             $scope.save();
             $scope.$digest();
@@ -50,14 +52,6 @@ describe('The EditProfile controller', function() {
             editProfileResponse.reject('EpicFail');
 
             ProfileService.editProfile.andReturn(editProfileResponse.promise); // Return an error
-
-            // Initialise the controller
-            $controller('EditProfile', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                ProfileService: ProfileService
-            });
 
             $scope.save();
             $scope.$digest();

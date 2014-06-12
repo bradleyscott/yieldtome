@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.services')
 
-.service('AuthenticationService', ['FacebookService', 'ConfigService', 'ProfileService', '$resource', '$http', '$q', '$log', '$window',
-    function(FacebookService, ConfigService, ProfileService, $resource, $http, $q, $log, $window) {
+.service('AuthenticationService', ['SessionService', 'FacebookService', 'ConfigService', 'ProfileService', '$http', '$q', '$log', 
+    function(SessionService, FacebookService, ConfigService, ProfileService, $http, $q, $log) {
 
         var _apiToken, _authenticatedProfile;
         this.apiToken = _apiToken;
@@ -31,8 +31,7 @@ angular.module('yieldtome.services')
                     _authenticatedProfile = profile;
                     deferred.resolve(profile);
                 })
-                .
-            catch (function(error) // Handle unknown errors 
+            .catch (function(error) // Handle unknown errors 
                 {
                     $log.warn(error);
                     deferred.reject(error);
@@ -48,16 +47,14 @@ angular.module('yieldtome.services')
 
             var fbPromise = FacebookService.getFacebookToken(); // Get Facebook token
 
-            fbPromise
-                .then(this.getApiTokenFromFacebookToken) // Then get yieldtome API token from Facebook token
+            fbPromise.then(this.getApiTokenFromFacebookToken) // Then get yieldtome API token from Facebook token
             .then(function(token) // Then persist this token
                 {
                     _apiToken = token; // Save the API token
-                    $window.sessionStorage.token = token.access_token; // Save this token
+                    SessionService.set('token', token.access_token); // Save this token
                     deferred.resolve(_apiToken); // Return the apiToken, even though it's saved                 
                 })
-                .
-            catch (function(error) // And, handle any problems
+            .catch (function(error) // And, handle any problems
                 {
                     $log.warn(error);
                     deferred.reject(error);

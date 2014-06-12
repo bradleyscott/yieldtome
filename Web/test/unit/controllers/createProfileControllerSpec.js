@@ -2,17 +2,18 @@
 
 describe('The CreateProfile controller', function() {
 
-    var $scope, $location, $q, $controller, $log, AuthenticationService, FacebookService, ProfileService;
+    var $scope, $location, $q, $controller, $log, SessionService, AuthenticationService, FacebookService, ProfileService;
 
     beforeEach(function() {
         module('yieldtome.services');
         module('yieldtome.controllers');
 
-        inject(function($rootScope, _$log_, _$controller_, _$q_) {
+        inject(function($rootScope, _$log_, _$controller_, _$q_, _SessionService_) {
             $scope = $rootScope.$new();
             $q = _$q_;
             $controller = _$controller_;
             $log = _$log_;
+            SessionService = _SessionService_;
 
             // Create Mocks 
             AuthenticationService = jasmine.createSpyObj('AuthenticationService', ['getAuthenticatedProfile']);
@@ -37,11 +38,13 @@ describe('The CreateProfile controller', function() {
 
             FacebookService.getUserInfo.andReturn(getUserInfoResponse.promise); // Return a valid profile
 
+            // $scope, $location, $log, $window, SessionService, AuthenticationService, FacebookService, ProfileService
             // Initialise the controller
             $controller('CreateProfile', {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                SessionService: SessionService,
                 AuthenticationService: AuthenticationService,
                 FacebookService: FacebookService,
                 ProfileService: ProfileService
@@ -69,6 +72,7 @@ describe('The CreateProfile controller', function() {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                SessionService: SessionService,
                 AuthenticationService: AuthenticationService,
                 FacebookService: FacebookService,
                 ProfileService: ProfileService
@@ -109,6 +113,7 @@ describe('The CreateProfile controller', function() {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                SessionService: SessionService,
                 AuthenticationService: AuthenticationService,
                 FacebookService: FacebookService,
                 ProfileService: ProfileService
@@ -133,6 +138,7 @@ describe('The CreateProfile controller', function() {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                SessionService: SessionService,                
                 AuthenticationService: AuthenticationService,
                 FacebookService: FacebookService,
                 ProfileService: ProfileService

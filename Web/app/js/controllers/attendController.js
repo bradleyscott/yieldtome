@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Attend', ['$scope', '$location', '$log', '$window',
-    function($scope, $location, $log, $window) {
+.controller('Attend', ['$scope', '$location', '$log', '$window', 'SessionService', 'AttendeeService',
+    function($scope, $location, $log, $window, SessionService, AttendeeService) {
 
         $log.debug("Attend controller executing");
 
@@ -17,18 +17,31 @@ angular.module('yieldtome.controllers')
             $window.history.back();
         };
 
+        $scope.save = function()
+        {
+            $log.debug('AttendController.save() starting');
+            var promise = AttendeeService.attendEvent($scope.event, $scope.name, $scope.profile);
+
+            promise.then(function(attendee) // It all went well
+                {
+                    SessionService.set('attendee', attendee); // Saves the Attendee record in session
+                    $scope.info = 'You are now attending ' + $scope.event.Name; 
+                    $location.path('/landing'); // Redirect
+                })
+            .catch (function(error) { // The service crapped out
+                $scope.error = "Something wen't wrong trying to attend this Event. " + error.Message;
+            });
+        };
+
         // Controller initialization
         (function() {
 
-            // Allocate the saved Profile and Event to the controller
-            if ($window.sessionStorage.profile != "undefined" && $window.sessionStorage.event != "undefined") {
-                $scope.profile = JSON.parse($window.sessionStorage.profile);
-                $scope.event = JSON.parse($window.sessionStorage.event);
-            }
-            else {
+            $scope.profile = SessionService.get('profile');
+            $scope.event = SessionService.get('event');
+
+            if ($scope.profile == "undefined" || $scope.event == "undefined") {
                 $scope.error = "We don't have enough information to have you attend this event";
             }
-
         })();
 
     }
