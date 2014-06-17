@@ -16,7 +16,7 @@ angular.module('yieldtome.services')
             $log.debug('Retrieving from session- ' + key);
             var value = $window.sessionStorage[key];
 
-            if(value != "undefined")
+            if(value != undefined && value != "undefined")
                 { value = JSON.parse(value); }
 
             $log.debug(key + ':' + value);          

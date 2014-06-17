@@ -8,19 +8,17 @@ describe('The Events controller', function() {
         module('yieldtome.services');
         module('yieldtome.controllers');
 
-        inject(function($rootScope, _$log_, _$controller_, _$q_, _$location_) {
+        inject(function($rootScope, _$log_, _$controller_, _$q_) {
             $scope = $rootScope.$new();
             $q = _$q_;
             $controller = _$controller_;
             $log = _$log_;
-            $location = _$location_;
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
             SessionService = jasmine.createSpyObj('SessionService', ['get', 'set']);
             EventService = jasmine.createSpyObj('EventService', ['getEvents']);
             AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendees']);
-
         });
     });
 

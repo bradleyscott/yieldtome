@@ -132,14 +132,10 @@ angular.module('yieldtome.services')
             $log.debug('Attempting to create the Event: ' + event.Name);
 
             // POST Events?name={name}&startDate={startDate}&endDate={endDate}&creatorID={creatorID}&description={description}
-            var url = ConfigService.apiUrl + 'Events?name='
-                                            + event.Name
-                                            + '&startDate='
-                                            + event.StartDate.toJSON()
-                                            + '&endDate='
-                                            + event.EndDate.toJSON()
-                                            + '&creatorID='
-                                            + event.CreatorID;
+            var url = ConfigService.apiUrl + 'Events?name=' + event.Name +
+                                            '&startDate=' + event.StartDate.toJSON() +
+                                            '&endDate=' + event.EndDate.toJSON() +
+                                            '&creatorID=' + event.CreatorID;
 
             if(event.Description != null)
                 { url = url + '&description=' + event.Description; }

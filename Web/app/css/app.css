@@ -35,3 +35,6 @@ body {
 .css-form .validation {
     color: #a94442
 }
+
+/* angular-ui fix */
+.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }

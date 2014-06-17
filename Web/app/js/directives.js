@@ -7,19 +7,19 @@ angular.module('yieldtome.directives', [])
     .directive('homemenu', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/homeMenu.html'
+            templateUrl: 'partials/menus/homeMenu.html'
         };
     })
     .directive('menu', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/menu.html'
+            templateUrl: 'partials/menus/menu.html'
         };
     })
     .directive('navmenu', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/navMenu.html'
+            templateUrl: 'partials/menus/navMenu.html'
         };
     })
     .directive('attendeelist', function() {

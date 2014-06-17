@@ -26,6 +26,8 @@ describe('The Attend controller', function() {
     describe('when it initializes', function() {
 
         it("should display an error if the Profile or Event aren't in session", function() {
+            SessionService.set('profile', undefined);
+            SessionService.set('event', undefined);
 
             // Initialise the controller
             $controller('Attend', {

@@ -7,7 +7,8 @@ angular.module('yieldtome', [
     'yieldtome.services',
     'yieldtome.directives',
     'yieldtome.controllers',
-    'facebook'
+    'facebook',
+    'ui.bootstrap'
 ])
 
 // Configure routes
@@ -18,36 +19,48 @@ angular.module('yieldtome', [
             controller: 'Home'
         });
         $routeProvider.when('/createProfile', {
-            templateUrl: 'partials/profile.html',
+            templateUrl: 'partials/profile/profile.html',
             controller: 'CreateProfile'
         });
         $routeProvider.when('/editProfile', {
-            templateUrl: 'partials/profile.html',
+            templateUrl: 'partials/profile/profile.html',
             controller: 'EditProfile'
         });
         $routeProvider.when('/viewProfile/:profileID', {
-            templateUrl: 'partials/profile.html',
+            templateUrl: 'partials/profile/profile.html',
             controller: 'ViewProfile'
         });
         $routeProvider.when('/events', {
-            templateUrl: 'partials/events.html',
+            templateUrl: 'partials/event/events.html',
             controller: 'Events'
         });
         $routeProvider.when('/createEvent', {
-            templateUrl: 'partials/event.html',
+            templateUrl: 'partials/event/event.html',
             controller: 'CreateEvent'
         });
         $routeProvider.when('/editEvent/:eventID', {
-            templateUrl: 'partials/event.html',
+            templateUrl: 'partials/event/event.html',
             controller: 'EditEvent'
         });
         $routeProvider.when('/attend', {
-            templateUrl: 'partials/attend.html',
+            templateUrl: 'partials/event/attend.html',
             controller: 'Attend'
         });
         $routeProvider.when('/landing', {
-            templateUrl: 'partials/landing.html',
+            templateUrl: 'partials/event/landing.html',
             controller: 'Landing'
+        });
+        $routeProvider.when('/speakersLists', {
+            templateUrl: 'partials/speakersList/speakersLists.html',
+            controller: 'SpeakersLists'
+        });
+        $routeProvider.when('/createSpeakersList', {
+            templateUrl: 'partials/speakersList/editSpeakersList.html',
+            controller: 'CreateSpeakersList'
+        });
+        $routeProvider.when('/speakers/:speakersListID', {
+            templateUrl: 'partials/speakersList/speakers.html',
+            controller: 'Speakers'
         });
         $routeProvider.otherwise({
             redirectTo: '/'
@@ -63,12 +76,17 @@ angular.module('yieldtome', [
 ])
 
 // Handle unauthenticated responses
-.factory('httpResponseInterceptor', ['$q', '$location', 'SessionService',
-    function($q, $location, SessionService) {
+.factory('httpResponseInterceptor', ['$q', '$log', '$location', 'SessionService',
+    function($q, $log, $location, SessionService) {
         return {
             // Always add Authorization header to requests
             request: function(config) {
-                config.headers.Authorization = 'Bearer ' + SessionService.get('token');
+
+                $log.debug('Intercepting Http request to inject Auth tokens');
+                var token = SessionService.get('token');
+                if(token !== undefined)
+                    { config.headers.Authorization = 'Bearer ' + token; }
+                
                 return config;
             },
             // Do nothing
@@ -78,6 +96,7 @@ angular.module('yieldtome', [
             // Redirect to home screen on failure
             responseError: function(rejection) {
                 if (rejection.status === 401) {
+                    $log.debug('Unauthenticated (401) response received from API');
                     $location.path('/'); // .search('returnTo', $location.path());
                 }
                 return $q.reject(rejection);

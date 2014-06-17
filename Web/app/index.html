@@ -28,6 +28,7 @@
     <script src="../bower_components/angular/angular.js"></script>
     <script src="../bower_components/angular-route/angular-route.js"></script>
     <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
     <script src="../bower_components/angular-facebook/lib/angular-facebook.js"></script>
     <script src="../bower_components/angular-resource/angular-resource.js"></script>
 
@@ -42,17 +43,27 @@
     <script src="js/services/profileService.js"></script>
     <script src="js/services/eventService.js"></script>
     <script src="js/services/attendeeService.js"></script>
+    <script src="js/services/speakersListService.js"></script>
 
     <!-- Load all Controllers -->
     <script src="js/controllers/homeController.js"></script>
-    <script src="js/controllers/createProfileController.js"></script>
-    <script src="js/controllers/editProfileController.js"></script>
-    <script src="js/controllers/viewProfileController.js"></script>
-    <script src="js/controllers/eventsController.js"></script>
-    <script src="js/controllers/createEventController.js"></script>
-    <script src="js/controllers/editEventController.js"></script>
-    <script src="js/controllers/attendController.js"></script>
-    <script src="js/controllers/landingController.js"></script>
+
+    <!-- Load Event Controllers -->
+    <script src="js/controllers/event/eventsController.js"></script>
+    <script src="js/controllers/event/createEventController.js"></script>
+    <script src="js/controllers/event/editEventController.js"></script>
+    <script src="js/controllers/event/attendController.js"></script>
+    <script src="js/controllers/event/landingController.js"></script>
+
+    <!-- Load Profile Controllers -->
+    <script src="js/controllers/profile/createProfileController.js"></script>
+    <script src="js/controllers/profile/editProfileController.js"></script>
+    <script src="js/controllers/profile/viewProfileController.js"></script>
+    
+    <!-- Load SpeakersLIst Controllers -->
+    <script src="js/controllers/speakersList/speakersListsController.js"></script>
+    <script src="js/controllers/speakersList/createSpeakersListController.js"></script>
+    <script src="js/controllers/speakersList/speakersController.js"></script>
 
     <script src="js/filters.js"></script>
     <script src="js/directives.js"></script>

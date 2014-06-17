@@ -1,0 +1,35 @@
+<div>
+    <navmenu></navmenu>
+    <div class="container body-content">
+        <div class="alert alert-info" ng-show="info">{{info}}</div>
+        <div class="alert alert-danger" ng-show="error"><b>Doh! </b>{{error}}</div>
+        <div>
+            <h2>{{list.Name}}
+                </br>
+                <small>{{event.Name}}</small>
+            </h2>
+            <ul class="nav nav-tabs">
+              <li class="active"><a href="#"><span class="glyphicon glyphicon-th-large"></span></a></li>
+              <li><a href="#"><span class="glyphicon glyphicon-align-justify"></span></a></li>
+            </ul>
+            <div class="row">
+              <div class="col-sm-4" style="margin:10px">
+                <carousel interval="4000">
+                  <slide ng-repeat="speaker in speakers">
+                    <img ng-src="{{speaker.Attendee.Profile.ProfilePictureUri}}?type=large" style="margin:auto;">
+                    <div class="carousel-caption">
+                      <h4>#{{$index + 1}} - {{speaker.Attendee.Name}}
+                          </br>
+                          <small>{{speaker.Attendee.Profile.Name}}</small>
+                      </h4>
+                      <p>Speaking {{speaker.Position}}</p>
+                      <b></b>
+                    </div>
+                  </slide>
+                </carousel>
+              </div>
+              <div class="col-sm-8 hidden-sm hidden-xs">This is the list</div>
+            </div>
+        </div>
+    </div>
+</div>
