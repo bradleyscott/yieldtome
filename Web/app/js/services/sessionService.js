@@ -13,13 +13,13 @@ angular.module('yieldtome.services')
 
         this.get = function(key)
         {
-            $log.debug('Retrieving from session- ' + key);
+            // $log.debug('Retrieving from session- ' + key);
             var value = $window.sessionStorage[key];
 
             if(value != undefined && value != "undefined")
                 { value = JSON.parse(value); }
 
-            $log.debug(key + ':' + value);          
+            // $log.debug(key + ':' + value);          
             return value;
         };
     }

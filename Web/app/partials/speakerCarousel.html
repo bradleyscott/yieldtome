@@ -1,0 +1,24 @@
+<div align="center">
+    <carousel interval="4000" style="max-width:800px">
+        <slide ng-repeat="speaker in speakers">
+            <img ng-src="{{speaker.Attendee.Profile.ProfilePictureUri}}?width=800&height=800" style="margin:auto;">
+            <div class="carousel-caption">
+                <h4>#{{$index + 1}} - {{speaker.Attendee.Name}}
+                    </br>
+                    <small>{{speaker.Attendee.Profile.Name}}</small>
+                </h4>
+                <p>Speaking {{speaker.Position}}</p>
+                <p>
+                    <div class="btn-group">
+                        <button type="button" ng-show="$index == 0" ng-click="" class="btn btn-default">
+                            <span class="glyphicon glyphicon-comment"></span> Speak
+                        </button>
+                        <button type="button" ng-click="" class="btn btn-default">
+                            <span class="glyphicon glyphicon-remove"></span> Remove
+                        </button>
+                    </div>
+                </p>
+            </div>
+        </slide>
+    </carousel>
+</div>

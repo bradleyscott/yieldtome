@@ -7,7 +7,7 @@
     </div>
 </div>
 <a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-repeat="attendee in attendees | filter:queryAttendees">
-    <div class="media" class="list-group-item">
+    <div class="media">
         <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}">
         <div class="media-body">
             <h4 class="media-heading">{{attendee.Name}}</h4>

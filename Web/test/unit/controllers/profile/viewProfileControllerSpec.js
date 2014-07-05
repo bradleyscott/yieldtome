@@ -20,7 +20,7 @@ describe('The ViewProfile controller', function() {
         });
     });
 
-    it("that should get the Profile provided in the url and display it to screen", function() {
+    it("should get the Profile provided in the url and display it to screen", function() {
 
         // Set the profileID in the url 
         $routeParams = { profileID: 1 };
@@ -46,7 +46,7 @@ describe('The ViewProfile controller', function() {
         expect($scope.profile).toBe('AwesomeProfile');
     });
 
-    it("that should display an error to screen if something catastrophic happens", function() {
+    it("should display an error to screen if something catastrophic happens", function() {
 
         // Set the profileID in the url 
         $routeParams = { profileID: 1 };

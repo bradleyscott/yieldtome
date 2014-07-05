@@ -7,6 +7,34 @@ angular.module('yieldtome.services')
 .service('SpeakersListService', ['$q', '$log', '$http', 'ConfigService',
     function($q, $log, $http, ConfigService) {
 
+        this.speakerHasSpoken = function(speaker) {
+            $log.debug('Attempting to mark Speaker as spoken');
+            var deferred = $q.defer();
+
+            if (speaker == null) // Speakers is not provided
+            {
+                var error = 'A Speaker is required';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+
+            var url = ConfigService.apiUrl + 'Speakers/' + speaker.SpeakerID;
+            $log.debug('Request Url: ' + url);
+
+            $http.put(url).success(function(data) {
+                $log.debug('Speaker has spoken successfully. New list has ' + data.length + ' Speakers');
+                deferred.resolve(data);
+            })
+                .error(function(status) { // Otherwise, some unknown error occured
+                    var error = status.Message;
+                    $log.warn(error);
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        };
+
         this.getSpeakers = function(list) {
             $log.debug('Attempting to get Speakers');
             var deferred = $q.defer();

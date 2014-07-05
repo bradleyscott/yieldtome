@@ -1,5 +1,5 @@
 <div>
-    <navmenu></navmenu>
+    <ytm-nav-menu></ytm-nav-menu>
     <div class="container body-content">
         <div class="alert alert-info" ng-show="info">{{info}}</div>
         <div class="alert alert-danger" ng-show="error"><b>Doh! </b>{{error}}</div>
@@ -8,28 +8,25 @@
                 </br>
                 <small>{{event.Name}}</small>
             </h2>
-            <ul class="nav nav-tabs">
-              <li class="active"><a href="#"><span class="glyphicon glyphicon-th-large"></span></a></li>
-              <li><a href="#"><span class="glyphicon glyphicon-align-justify"></span></a></li>
+            <!-- Nav Pills -->
+            <ul class="nav nav-pills">
+                <li ng-hide="isCarouselVisible">
+                    <a ng-click="toggleCarousel()">
+                        <span class="glyphicon glyphicon-th-large"></span> Tiles</a>
+                </li>
+                <li ng-show="isCarouselVisible">
+                    <a ng-click="toggleCarousel()">
+                        <span class="glyphicon glyphicon-align-justify"></span> List</a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="glyphicon glyphicon-bullhorn"></span> Speak</a>
+                </li>
             </ul>
-            <div class="row">
-              <div class="col-sm-4" style="margin:10px">
-                <carousel interval="4000">
-                  <slide ng-repeat="speaker in speakers">
-                    <img ng-src="{{speaker.Attendee.Profile.ProfilePictureUri}}?type=large" style="margin:auto;">
-                    <div class="carousel-caption">
-                      <h4>#{{$index + 1}} - {{speaker.Attendee.Name}}
-                          </br>
-                          <small>{{speaker.Attendee.Profile.Name}}</small>
-                      </h4>
-                      <p>Speaking {{speaker.Position}}</p>
-                      <b></b>
-                    </div>
-                  </slide>
-                </carousel>
-              </div>
-              <div class="col-sm-8 hidden-sm hidden-xs">This is the list</div>
-            </div>
-        </div>
+            </br>
+            <!-- Carousel -->
+            <ytm-speaker-carousel speakers="speakers" ng-show="isCarouselVisible"></ytm-speaker-carousel>
+            <!-- List -->
+            <ytm-speaker-list speakers="speakers" ng-hide="isCarouselVisible"></ytm-speaker-list>
     </div>
 </div>

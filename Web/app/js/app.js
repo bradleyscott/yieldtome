@@ -3,13 +3,15 @@
 // Declare app level module which depends on filters, and services
 angular.module('yieldtome', [
     'ngRoute',
+    'ngTouch',
     'yieldtome.filters',
     'yieldtome.services',
     'yieldtome.directives',
     'yieldtome.controllers',
+    'ui.bootstrap',
     'facebook',
-    'ui.bootstrap'
-])
+    'ui.sortable'
+    ])
 
 // Configure routes
 .config(['$routeProvider',
@@ -82,7 +84,7 @@ angular.module('yieldtome', [
             // Always add Authorization header to requests
             request: function(config) {
 
-                $log.debug('Intercepting Http request to inject Auth tokens');
+                // $log.debug('Intercepting Http request to inject Auth tokens');
                 var token = SessionService.get('token');
                 if(token !== undefined)
                     { config.headers.Authorization = 'Bearer ' + token; }
@@ -97,7 +99,7 @@ angular.module('yieldtome', [
             responseError: function(rejection) {
                 if (rejection.status === 401) {
                     $log.debug('Unauthenticated (401) response received from API');
-                    $location.path('/'); // .search('returnTo', $location.path());
+                    $location.path('/');
                 }
                 return $q.reject(rejection);
             }

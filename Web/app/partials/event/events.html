@@ -1,10 +1,10 @@
 <div>
-    <menu></menu>
+    <ytm-menu></ytm-menu>
     <div class="container body-content">
         <div class="alert alert-info" ng-show="info">{{info}}</div>
         <div class="alert alert-danger" ng-show="error"><b>Doh! </b>{{error}}</div>
         <div ng-hide="selectedEvent">
-            <h2>Upcoming Events</h2>
+            <h2>Find an Event</h2>
             <div class="list-group">
                 <div class="form-group">
                     <div class="row">
@@ -50,7 +50,7 @@
                 <h3>People already attending</h3>
                 <div class="well well-sm">
                     <div class="list-group">
-                        <attendeeList></attendeeList>
+                        <ytm-attendee-list attendees="attendees"></ytm-attendee-list>
                     </div>
                 </div>            
             </div>

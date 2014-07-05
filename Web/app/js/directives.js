@@ -4,27 +4,48 @@
 
 
 angular.module('yieldtome.directives', [])
-    .directive('homemenu', function() {
+    .directive('ytmHomeMenu', function() {
         return {
             restrict: 'E',
             templateUrl: 'partials/menus/homeMenu.html'
         };
     })
-    .directive('menu', function() {
+    .directive('ytmMenu', function() {
         return {
             restrict: 'E',
             templateUrl: 'partials/menus/menu.html'
         };
     })
-    .directive('navmenu', function() {
+    .directive('ytmNavMenu', function() {
         return {
             restrict: 'E',
             templateUrl: 'partials/menus/navMenu.html'
         };
     })
-    .directive('attendeelist', function() {
+    .directive('ytmAttendeeList', function() {
         return {
             restrict: 'E',
+            scope: {
+                attendees: '='
+            },
             templateUrl: 'partials/attendeeList.html'
+        };
+    })
+    .directive('ytmSpeakerCarousel', function() {
+        return {
+            restrict: 'E',
+            scope: {
+                speakers: '='
+            },
+            templateUrl: 'partials/speakerCarousel.html'
+        };
+    })
+    .directive('ytmSpeakerList', function() {
+        return {
+            restrict: 'E',
+            scope: {
+                speakers: '='
+            },
+            templateUrl: 'partials/speakerList.html'
         };
     });
