@@ -73,7 +73,7 @@ namespace yieldtome.API.Controllers
 
             // Return Uri pointing to new object
             HttpResponseMessage response = Request.CreateResponse<Speaker>(HttpStatusCode.Created, newSpeaker);
-            string uri = Url.Link("Speakers", new { id = newSpeaker.SpeakerID });
+            string uri = Url.Link("DefaultApi", new { id = newSpeaker.SpeakerID });
             response.Headers.Location = new Uri(uri);
 
             return response;
