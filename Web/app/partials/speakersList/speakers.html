@@ -1,0 +1,32 @@
+<div>
+    <ytm-nav-menu></ytm-nav-menu>
+    <div class="container body-content">
+        <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
+        <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
+        <div>
+            <h2>{{list.Name}}
+                </br>
+                <small>{{event.Name}}</small>
+            </h2>
+            <!-- Nav Pills -->
+            <ul class="nav nav-pills">
+                <li ng-hide="isCarouselVisible">
+                    <a ng-click="toggleCarousel()">
+                        <span class="glyphicon glyphicon-th-large"></span> Tiles</a>
+                </li>
+                <li ng-show="isCarouselVisible">
+                    <a ng-click="toggleCarousel()">
+                        <span class="glyphicon glyphicon-align-justify"></span> List</a>
+                </li>
+                <li>
+                    <a href="">
+                        <span class="glyphicon glyphicon-bullhorn"></span> Speak</a>
+                </li>
+            </ul>
+            </br>
+            <!-- Carousel -->
+            <ytm-speaker-carousel ng-show="isCarouselVisible"></ytm-speaker-carousel>
+            <!-- List -->
+			<ytm-speaker-list ng-hide="isCarouselVisible"></ytm-speaker-list>
+    </div>
+</div>

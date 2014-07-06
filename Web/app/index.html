@@ -1,0 +1,76 @@
+﻿<!doctype html>
+<html lang="en" ng-app="yieldtome">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yieldto.me</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
+</head>
+
+<body>
+    <div ng-view></div>
+    <div class="container body-content">
+        <hr />
+        <footer>
+            <p>
+                Copyright &copy; 2014 - Debate Systems Ltd
+            </p>
+        </footer>
+    </div>
+    <!-- In production use:
+        <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+        -->
+
+    <!-- Load dependencies -->
+    <script src="../bower_components/jquery/dist/jquery.js"></script>
+    <script src="../bower_components/jquery-ui/ui/jquery-ui.js"></script>
+    <script src="../bower_components/jquery-ui-touch-punch/jquery.ui.touch-punch.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script src="../bower_components/angular-resource/angular-resource.js"></script>
+    <script src="../bower_components/angular-route/angular-route.js"></script>
+    <script src="../bower_components/angular-touch/angular-touch.js"></script>
+    <script src="../bower_components/angular-facebook/lib/angular-facebook.js"></script>
+    <script src="../bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="../bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+    <script src="../bower_components/angular-ui-sortable/sortable.js"></script>
+
+    <!-- Load yieldto.me App -->
+    <script src="js/app.js"></script>
+
+    <!-- Load all Services -->
+    <script src="js/services/configService.js"></script>
+    <script src="js/services/sessionService.js"></script>
+    <script src="js/services/facebookService.js"></script>
+    <script src="js/services/authenticationService.js"></script>
+    <script src="js/services/profileService.js"></script>
+    <script src="js/services/eventService.js"></script>
+    <script src="js/services/attendeeService.js"></script>
+    <script src="js/services/speakersListService.js"></script>
+
+    <!-- Load all Controllers -->
+    <script src="js/controllers/homeController.js"></script>
+
+    <!-- Load Event Controllers -->
+    <script src="js/controllers/event/eventsController.js"></script>
+    <script src="js/controllers/event/createEventController.js"></script>
+    <script src="js/controllers/event/editEventController.js"></script>
+    <script src="js/controllers/event/attendController.js"></script>
+    <script src="js/controllers/event/landingController.js"></script>
+
+    <!-- Load Profile Controllers -->
+    <script src="js/controllers/profile/createProfileController.js"></script>
+    <script src="js/controllers/profile/editProfileController.js"></script>
+    <script src="js/controllers/profile/viewProfileController.js"></script>
+    
+    <!-- Load SpeakersLIst Controllers -->
+    <script src="js/controllers/speakersList/speakersListsController.js"></script>
+    <script src="js/controllers/speakersList/createSpeakersListController.js"></script>
+    <script src="js/controllers/speakersList/speakersController.js"></script>
+
+    <script src="js/filters.js"></script>
+    <script src="js/directives.js"></script>
+</body>
+
+</html>

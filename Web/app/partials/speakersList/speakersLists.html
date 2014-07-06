@@ -1,0 +1,43 @@
+<div>
+    <ytm-nav-menu></ytm-nav-menu>
+    <div class="container body-content">
+        <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
+        <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
+        <div>
+            <h2>Speakers Lists
+                </br>
+                <small>{{event.Name}}</small>
+            </h2>
+            <div class="list-group">
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-9">
+                            <div class="input-group">
+                                <span class="input-group-addon">
+                                    <span class="glyphicon glyphicon-search"></span>
+                                </span>
+                                <input type="text" class="form-control" ng-model="query" placeholder="Find a Speakers list..." />
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <button type="button" class="btn btn-primary pull-right" ng-click="new()">
+                                <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <a href="#/speakers/{{list.SpeakersListID}}" class="list-group-item" ng-repeat="list in lists | filter:query">
+                    <h4 class="list-group-item-heading">{{list.Name}}</h4>
+                    <div style="background-color:lightgreen; height:5px" ng-show="list.Status == 'Open'"></div>
+                    <div style="background-color:red; height:5px" ng-show="list.Status == 'Closed'"></div>
+                    <p class="list-group-item-text">
+                        <div ng-show="list.NumberOfSpeakers > 1">
+                            <span class="badge">{{list.NumberOfSpeakers}}</span> speakers</div>
+                        <div ng-hide="list.NumberOfSpeakers == 0">
+                            <span class="badge">{{list.NextSpeaker.Attendee.Name}}</span> is speaking next</div>
+                    </p>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
