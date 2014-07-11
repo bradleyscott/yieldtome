@@ -40,6 +40,11 @@ angular.module('yieldtome.services')
             return deferred.promise;
         };
 
+        this.logOut = function() {
+            $log.debug('Logging user out');
+            SessionService.set('token', null);
+        };
+
         this.getApiToken = function() {
 
             $log.debug('Attempting to get yieldto.me token');

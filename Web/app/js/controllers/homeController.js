@@ -4,13 +4,22 @@
 
 angular.module('yieldtome.controllers', [])
 
-.controller('Home', ['$scope', '$location', '$log', 'SessionService', 'AuthenticationService',
-    function($scope, $location, $log, SessionService, AuthenticationService) {
+.controller('Home', ['$scope', '$location', '$log', '$routeParams', 'SessionService', 'AuthenticationService',
+    function($scope, $location, $log, $routeParams, SessionService, AuthenticationService) {
 
         $log.debug("Home controller executing");
 
         $scope.error; // An error message that will be displayed to screen
         $scope.info; // An info message that will be displayed to screen
+
+        // Controller initialize
+        (function() {
+
+            if($routeParams.logout == true) {
+                AuthenticationService.logOut(); // Log hte user out  
+                $scope.info = "You have been logged out";   
+            }         
+        })();
 
         $scope.login = function() { // Get an apiToken and try to get a profile
 

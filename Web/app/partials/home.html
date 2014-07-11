@@ -1,14 +1,14 @@
 <div>
     <ytm-home-menu></ytm-home-menu>
     <div class="container body-content">
+        <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
+        <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
         <p></p>
         <p></p>
         <div class="jumbotron" id="benefits">
             <h1>yieldto.me</h1>
             <p class="lead">
                 Helps delegates and organisers of Model UNs manage the boring details of the conference debate from their phone, tablet, or computer. Everyone spends less time on the Rules of Procedure and more time on the debate
-                <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-                <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
             </p>
             <button type="button" class="btn btn-primary btn-lg" ng-click="login()">Get started</button>
         </div>
