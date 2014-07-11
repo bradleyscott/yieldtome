@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('EditEvent', ['$scope', '$location', '$log', '$window', '$routeParams', '$filter', 'SessionService', 'EventService',
-    function($scope, $location, $log, $window, $routeParams, $filter, SessionService, EventService) {
+.controller('EditEvent', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', '$filter', 'SessionService', 'EventService',
+    function($scope, $location, $log, $window, $modal, $routeParams, $filter, SessionService, EventService) {
 
         $log.debug("EditEvent controller executing");
 
@@ -16,9 +16,32 @@ angular.module('yieldtome.controllers')
         $scope.endDateAsString; // Post formatted date for binding
         $scope.profile;
         $scope.isDeleteEnabled = true; // Enables the Delete button
+        $scope.deleteConfirm; // Delete confirmation dialog promise
 
         $scope.$back = function() {
             $window.history.back();
+        };
+
+        $scope.showDelete = function() {
+            $scope.deleteConfirm = $modal.open({ 
+                templateUrl: 'partials/event/deleteEvent.html',
+                scope: $scope
+            }); 
+
+            $scope.deleteConfirm.result.then(function() {
+                $scope.delete();
+            },
+            function(){
+                $log.debug('User cancelled Event delete');
+            });
+        };
+
+        $scope.confirmDelete = function() {
+            $scope.deleteConfirm.close();
+        };
+
+        $scope.cancelDelete = function() {
+            $scope.deleteConfirm.dismiss();
         };
 
         $scope.delete = function() {
@@ -35,9 +58,6 @@ angular.module('yieldtome.controllers')
             .catch (function(error) { // The service crapped out
                 $scope.error = "Something wen't wrong trying to delete your Event. " + error;
             });
-
-            // Dirty hack to close the modal properly
-            $('.modal-backdrop').remove();
         };
 
         $scope.save = function() // Edit Profile
