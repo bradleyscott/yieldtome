@@ -34,12 +34,18 @@ angular.module('yieldtome.directives', [])
     .directive('ytmSpeakerCarousel', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/speakerCarousel.html'
+            templateUrl: 'partials/speakersList/speakerCarousel.html'
+        };
+    })
+    .directive('ytmEditableSpeakerList', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/speakersList/editableSpeakerList.html'
         };
     })
     .directive('ytmSpeakerList', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/speakerList.html'
+            templateUrl: 'partials/speakersList/speakerList.html'
         };
     });

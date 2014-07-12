@@ -29,8 +29,8 @@
                 <div class="well" ng-show="lists.length == 0">There is not yet any Speakers lists</div>
                 <a href="#/speakers/{{list.SpeakersListID}}" class="list-group-item" ng-repeat="list in lists | filter:query">
                     <h4 class="list-group-item-heading">{{list.Name}}</h4>
-                    <div style="background-color:lightgreen; height:5px" ng-show="list.Status == 'Open'"></div>
-                    <div style="background-color:red; height:5px" ng-show="list.Status == 'Closed'"></div>
+                    <div style="background-color:lightgreen; height:5px; margin-bottom:5px" ng-show="list.Status == 'Open'"></div>
+                    <div style="background-color:red; height:5px; margin-bottom:5px" ng-show="list.Status == 'Closed'"></div>
                     <p class="list-group-item-text">
                         <div ng-show="list.NumberOfSpeakers > 1">
                             <span class="badge">{{list.NumberOfSpeakers}}</span> speakers</div>

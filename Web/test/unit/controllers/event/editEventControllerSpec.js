@@ -2,23 +2,25 @@
 
 describe('The EditEvent controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $window, $routeParams, $filter, EventService;
+    var $scope, $location, $q, $controller, $log, $window, $modal, $routeParams, $filter, EventService, SessionService;
 
     beforeEach(function() {
         module('yieldtome.services');
         module('yieldtome.controllers');
 
-        inject(function($rootScope, _$log_, _$filter_, _$controller_, _$q_, _$window_) {
+        inject(function($rootScope, _$log_, _$filter_, _$controller_, _$q_, _$window_, _SessionService_) {
             $scope = $rootScope.$new();
             $q = _$q_;
             $controller = _$controller_;
             $log = _$log_;
             $filter = _$filter_;
             $window = _$window_;
+            SessionService = _SessionService_;
 
             // Create Mocks 
             EventService = jasmine.createSpyObj('EventService', ['getEvent', 'editEvent', 'deleteEvent']);
             $location = jasmine.createSpyObj('$location', ['path']);
+            $modal = jasmine.createSpyObj('$modal', ['open']);
 
             $window.sessionStorage.profile = JSON.stringify({
                     "ProfileID": 1,
@@ -42,6 +44,23 @@ describe('The EditEvent controller', function() {
         });
     });
 
+     function initializeController(){
+
+        // $scope, $location, $log, $window, $modal, $routeParams, $filter, SessionService, EventService
+        // Initialise the controller
+        $controller('EditEvent', {
+            $scope: $scope,
+            $location: $location,
+            $log: $log,
+            $window: $window,
+            $modal: $modal,
+            $routeParams: $routeParams,
+            $filter: $filter,
+            EventService: EventService,
+            SessionService: SessionService
+        }); 
+    }
+
     describe('when initializing', function() {
 
         it("it should retrieve the Event ID from the URL and display the relevent Event", function() {
@@ -54,18 +73,7 @@ describe('The EditEvent controller', function() {
 
             EventService.getEvent.andReturn(getEventResponse.promise); // Return a valid event
 
-            // $scope, $location, $log, $window, $routeParams, $filter, EventService
-            // Initialise the controller
-            $controller('EditEvent', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                $routeParams: $routeParams,
-                $filter: $filter,
-                EventService: EventService
-            });
-
+            initializeController();
             $scope.$digest();
 
             expect($scope.event).toBe('AwesomeEvent');
@@ -82,17 +90,7 @@ describe('The EditEvent controller', function() {
 
             EventService.getEvent.andReturn(getEventResponse.promise); // Return invalid event
 
-            // Initialise the controller
-            $controller('EditEvent', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                $routeParams: $routeParams,
-                $filter: $filter,
-                EventService: EventService
-            });
-
+            initializeController();
             $scope.$digest();
 
             expect($scope.error).toBe("Something wen't wrong trying to get this Event");
@@ -111,16 +109,7 @@ describe('The EditEvent controller', function() {
 
             EventService.getEvent.andReturn(getEventResponse.promise); // Return a valid event
 
-            // Initialise the controller
-            $controller('EditEvent', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                $routeParams: $routeParams,
-                $filter: $filter,
-                EventService: EventService
-            });
+            initializeController();
         });
     
         it("that should display a confirmation to screen if Event edits succeed", function() {
@@ -171,6 +160,7 @@ describe('The EditEvent controller', function() {
                 $location: $location,
                 $log: $log,
                 $window: $window,
+                $modal: $modal,
                 $routeParams: $routeParams,
                 $filter: $filter,
                 EventService: EventService
@@ -188,7 +178,7 @@ describe('The EditEvent controller', function() {
             $scope.delete();
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/events") // Check redirection to eventList
+            expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection to eventList
         });
 
         it("that displays an error if something catastrophic happens", function() {

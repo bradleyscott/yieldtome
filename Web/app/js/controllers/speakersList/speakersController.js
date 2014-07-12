@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', 'SessionService', 'SpeakersListService',
-    function($scope, $location, $log, $window, $routeParams, SessionService, SpeakersListService) {
+.controller('Speakers', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'SessionService', 'SpeakersListService',
+    function($scope, $location, $log, $window, $modal, $routeParams, SessionService, SpeakersListService) {
 
         $log.debug("Speakers controller executing");
 
@@ -16,14 +16,125 @@ angular.module('yieldtome.controllers')
         $scope.attendee; // Attendee record for this Profile
         $scope.list; // The Speakers List
         $scope.speakers; // The Speakers for the list
-        $scope.isCarouselVisible = true;  // Determines whether the Carousel or List is visible
-
+        $scope.speakingSlot; // The Speaker record for this Attendee
+        $scope.isCarouselVisible = false;  // Determines whether the Carousel or List is visible
+        
         $scope.$back = function() {
             $window.history.back();
         };
 
         $scope.toggleCarousel = function() {
             $scope.isCarouselVisible = !$scope.isCarouselVisible;
+        };
+
+        // Opens the delete list event modal
+        $scope.showDeleteList = function() {
+            $scope.deleteConfirm = $modal.open({ 
+                templateUrl: 'partials/speakersList/deleteList.html',
+                scope: $scope
+            }); 
+
+            $scope.deleteConfirm.result.then(function() { // Respond if user clicks delete
+                $scope.deleteList();
+            },
+            function(){ // Respond if user cancels the delete
+                $log.debug('User cancelled SpeakersList delete');
+            });
+        };
+
+        // Is called when the delete button is clicked on the modal
+        $scope.confirmDelete = function() {
+            $scope.deleteConfirm.close();
+        };
+
+        // Is called when the cancel or 'x' buttons are clicked on the modal 
+        $scope.cancelDelete = function() {
+            $scope.deleteConfirm.dismiss();
+        };
+
+        // Delete the Speakers list
+        $scope.deleteList = function()
+        {
+            $log.debug('SpeakersController.deleteList() executing');
+            var promise = SpeakersListService.deleteList($scope.list);
+
+            promise.then(function(data) {
+                $scope.info = "Speakers List deleted";
+                $log.debug('Speakers List deleted after deleteList()');
+                $location.path('/speakersLists');
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something wen't wrong trying to delete this Speakers List";
+            });                
+        };
+
+        // Adds to the Speakers list
+        $scope.add = function(position) {
+            $log.debug('SpeakersController.add() executing');
+
+            var promise = SpeakersListService.createSpeaker($scope.list, $scope.attendee, position);
+
+            promise.then(function(speaker) {
+                $scope.info = "You have been added to the Speakers List";
+                $scope.getSpeakers();
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something wen't wrong trying to add you to the Speakers List";
+            });                
+        };
+
+        // Opens the Speakers list to more speakers
+        $scope.openList = function() {
+            $log.debug('SpeakersController.openList() executing');
+
+            $scope.list.Status = 'Open';
+            var promise = SpeakersListService.updateList($scope.list);
+
+            promise.then(function(list) {
+                $scope.list = list;
+                $scope.info = "Speakers List has been opened to new Speakers";
+                $log.debug('$scope.list updated after openList()');
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something wen't wrong trying to open the Speakers list to new Speakers";
+            });                
+        };
+
+        // Closes the Speakers list to more speakers
+        $scope.closeList = function() {
+            $log.debug('SpeakersController.closeList() executing');
+
+            $scope.list.Status = 'Closed';
+            var promise = SpeakersListService.updateList($scope.list);
+
+            promise.then(function(list) {
+                $scope.list = list;
+                $scope.info = "Speakers List has been closed to new Speakers";
+                $log.debug('$scope.list updated after closeList()');
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something wen't wrong trying to close the Speakers list to new Speakers";
+            });                
+        };
+
+        // Clears all the Speakers from the Speakers list
+        $scope.removeAllSpeakers = function() {
+            $log.debug('SpeakersController.removeAllSpeakers() executing');
+            var promise = SpeakersListService.deleteAllSpeakers($scope.list);
+
+            promise.then(function(speakers) {
+                $scope.speakers = speakers;
+                $scope.info = "Speakers have all been removed";
+                $log.debug('$scope.speakers updated after removeAllSpeakers()');
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something wen't wrong trying to remove the Speakers from this Speakers list";
+            });                
         };
 
         // Remove a speaker from the list
@@ -52,8 +163,6 @@ angular.module('yieldtome.controllers')
                 $scope.speakers = speakers;
                 $scope.info = "Speakers list re-ordered";
                 $log.debug('$scope.speakers updated after reorderSpeakers()');
-                
-                $('.carousel').carousel('next'); // ugly hack to get carousel working again after update
             })            
             .catch (function(error) {
                 $log.warn(error);
@@ -77,6 +186,7 @@ angular.module('yieldtome.controllers')
             });                
         };
 
+        // Retrieves the Speakers on the list
         $scope.getSpeakers = function() {
             $log.debug('SpeakersController.getSpeakers() executing');
             var promise = SpeakersListService.getSpeakers($scope.list);
@@ -117,6 +227,14 @@ angular.module('yieldtome.controllers')
         // Watch and log $scope.speakers changes
         $scope.$watch("speakers", function(speakers) {
             $log.debug('Speakers changed in scope');
+
+            // See if this Attendee is a speaker
+            $scope.speakingSlot = null;
+            angular.forEach($scope.speakers, function(value, key){
+                if(value.Attendee.AttendeeID == $scope.attendee.AttendeeID) {
+                    $scope.speakingSlot = value;
+                }
+            });
         });
 
         // Speakers order is changed through a drag and drop

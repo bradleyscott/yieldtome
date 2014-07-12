@@ -22,24 +22,27 @@ angular.module('yieldtome.controllers')
             $window.history.back();
         };
 
+        // Opens the delete event modal
         $scope.showDelete = function() {
             $scope.deleteConfirm = $modal.open({ 
                 templateUrl: 'partials/event/deleteEvent.html',
                 scope: $scope
             }); 
 
-            $scope.deleteConfirm.result.then(function() {
+            $scope.deleteConfirm.result.then(function() { // Respond if user clicks delete
                 $scope.delete();
             },
-            function(){
+            function(){ // Respond if user cancels the delete
                 $log.debug('User cancelled Event delete');
             });
         };
 
+        // Is called when the delete button is clicked on the modal
         $scope.confirmDelete = function() {
             $scope.deleteConfirm.close();
         };
 
+        // Is called when the cancel or 'x' buttons are clicked on the modal 
         $scope.cancelDelete = function() {
             $scope.deleteConfirm.dismiss();
         };

@@ -10,6 +10,8 @@
             </h2>
             <!-- Nav Pills -->
             <ul class="nav nav-pills">
+            <!-- Toggles between the Carousel and View -->
+            <!--                 
                 <li ng-hide="isCarouselVisible">
                     <a ng-click="toggleCarousel()">
                         <span class="glyphicon glyphicon-th-large"></span> Tiles</a>
@@ -18,15 +20,43 @@
                     <a ng-click="toggleCarousel()">
                         <span class="glyphicon glyphicon-align-justify"></span> List</a>
                 </li>
-                <li>
-                    <a href="">
-                        <span class="glyphicon glyphicon-bullhorn"></span> Speak</a>
+                --> 
+                <!-- Speakers list status -->
+                <li ng-show="list.Status == 'Open'"><h4><span class="label label-success">Open</span></h4></li>               
+                <li ng-show="list.Status == 'Closed'"><h4><span class="label label-danger">Closed</span></h4></li>
+                <!-- Add myself as a Speaker -->
+                <li class="dropdown" ng-show="list.Status == 'Open'" ng-hide="speakingSlot">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-bullhorn"></span> Speak <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-click="add('For')"><a>Speak For</a></li>
+                        <li ng-click="add('Against')"><a>Speak Against</a></li>
+                        <li ng-click="add('None')"><a>Neutral</a></li>
+                    </ul>
+                </li>
+                <!-- Remove myself as a Speaker -->
+                <li ng-show="speakingSlot" ng-click="remove(speakingSlot)">
+                    <a ng-click=""><span class="glyphicon glyphicon-remove-circle"></span> Remove myself</a>
+                </li>
+                <!-- Speakers list settings drop down -->
+                <li class="dropdown" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+                    <a class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon glyphicon-cog"></span> <span class="caret"></span></a>
+                    <ul class="dropdown-menu" role="menu">
+                        <li ng-show="list.Status == 'Open'" ng-click="closeList()"><a>Close list to new Speakers</a></li>
+                        <li ng-show="list.Status == 'Closed'" ng-click="openList()"><a>Open list to new Speakers</a></li>
+                        <li ng-click="removeAllSpeakers()"><a>Remove all Speakers</a></li>
+                        <li class="divider"></li>
+                        <li ng-click="showDeleteList()"><a>Delete this Speakers list</a></li>
+                    </ul>
                 </li>
             </ul>
-            </br>
+            <div class="well" ng-show="speakers.length == 0">There is not yet any Speakers on this Speakers list</div>
             <!-- Carousel -->
-            <ytm-speaker-carousel ng-show="isCarouselVisible"></ytm-speaker-carousel>
+<!--             <ytm-speaker-carousel ng-show="isCarouselVisible"></ytm-speaker-carousel> -->
             <!-- List -->
-			<ytm-speaker-list ng-hide="isCarouselVisible"></ytm-speaker-list>
+            <ytm-speaker-list ng-hide="isCarouselVisible || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-speaker-list>
+            <ytm-editable-speaker-list ng-hide="isCarouselVisible" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-editable-speaker-list>
+        </div>
     </div>
 </div>

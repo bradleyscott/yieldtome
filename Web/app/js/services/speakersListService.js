@@ -7,6 +7,134 @@ angular.module('yieldtome.services')
 .service('SpeakersListService', ['$q', '$log', '$http', 'ConfigService',
     function($q, $log, $http, ConfigService) {
 
+        this.deleteList = function(list) {
+            $log.debug('Attempting to delete Speakers List');
+            var deferred = $q.defer();
+
+            if (list == null) // Speakers is not provided
+            {
+                var error = 'A Speakers List is required';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+
+            // DELETE SpeakersLists?speakersListID={speakersListID}
+            var url = ConfigService.apiUrl + 'SpeakersLists?speakersListID=' + list.SpeakersListID;
+            $log.debug('Request Url: ' + url);
+
+            $http.delete(url).success(function(data) {
+                $log.debug('Speakers List deleted successfully. New list has ' + data.length + ' Speakers');
+                deferred.resolve(data);
+            })
+            .error(function(status) { // Otherwise, some unknown error occured
+                var error = status.Message;
+                $log.warn(error);
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        };
+
+        this.createSpeaker = function(list, attendee, position) {
+            $log.debug('Attempting to create a new Speaker');
+            var deferred = $q.defer();
+
+            if (attendee == null || attendee.AttendeeID == null) {
+                var error = 'An Attendee object with an AttendeeID is needed';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            } else if (list == null || list.SpeakersListID == null) {
+                var error = 'A SpeakersList object with a SpeakersLIstID is needed';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+
+            $log.debug('Attempting to create the SpeakersList: ' + list.Name);
+
+            // POST Speakers?speakersListID={speakersListID}&attendeeID={attendeeID}&position={position}
+            var url = ConfigService.apiUrl + 'Speakers?speakersListID=' + list.SpeakersListID +
+                                            '&attendeeID=' + attendee.AttendeeID +
+                                            '&position=' + position;
+
+            $log.debug('Request Url: ' + url);
+
+            $http.post(url).success(function(data) {
+                $log.debug('New Speaker created with SpeakerID: ' + data.SpeakerID);
+                deferred.resolve(data);
+            }).error(function(status) { // Otherwise, some unknown error occured
+                var error = status.Message;
+                $log.warn(error);
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        };
+
+        this.updateList = function(list) {
+            $log.debug('Attempting to update Speakers List');
+            var deferred = $q.defer();
+
+            if (list == null) {
+                var error = 'A SpeakersList object is needed';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            } else if (list.Name == null || list.CreatorID == null) {
+                var error = 'Both Name and CreatorID are mandatory fields on a Speakers List';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+
+            $log.debug('Attempting to update the SpeakersList: ' + list.Name);
+
+            var url = ConfigService.apiUrl + 'SpeakersLists/';
+
+            $log.debug('Request Url: ' + url);
+
+            $http.put(url, list).success(function(data) {
+                $log.debug('Updated SpeakersList with SpeakersListID: ' + data.SpeakersListID);
+                deferred.resolve(data);
+            }).error(function(status) { // Otherwise, some unknown error occured
+                var error = status.Message;
+                $log.warn(error);
+                deferred.reject(error);
+            });
+
+            return deferred.promise;
+        };
+
+        this.deleteAllSpeakers = function(list) {
+            $log.debug('Attempting to clear all the Speakers in the SpeakersList');
+            var deferred = $q.defer();
+
+            if (list == null) // SpeakersList is not provided
+            {
+                var error = 'A SpeakersList is required';
+                $log.warn(error);
+                deferred.reject(error);
+                return deferred.promise;
+            }
+
+            var url = ConfigService.apiUrl + 'SpeakersLists/' + list.SpeakersListID + '/Speakers';
+            $log.debug('Request Url: ' + url);
+
+            $http.delete(url).success(function(data) {
+                $log.debug('Successfully deleted Speakers. There are now ' + data.length + ' Speakers');
+                deferred.resolve(data);
+            })
+                .error(function(status) { // Otherwise, some unknown error occured
+                    var error = status.Message;
+                    $log.warn(error);
+                    deferred.reject(error);
+                });
+
+            return deferred.promise;
+        };
+
     	this.deleteSpeaker = function(speaker) {
             $log.debug('Attempting to delete Speaker');
             var deferred = $q.defer();

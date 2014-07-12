@@ -2,31 +2,56 @@
 
 describe('The Home controller', function() {
 
-    var $scope, $location, $q, AuthenticationService;
+    var $scope, $location, $routeParams, $q, $log, $controller, AuthenticationService;
 
     beforeEach(function() {
         module('yieldtome.services');
         module('yieldtome.controllers');
 
-        inject(function($rootScope, $log, $controller, _$q_) {
+        inject(function($rootScope, _$log_, _$controller_, _$q_) {
             $scope = $rootScope.$new();
             $q = _$q_;
+            $log = _$log_;
+            $controller = _$controller_;
 
             // Create Mocks 
-            AuthenticationService = jasmine.createSpyObj('AuthenticationService', ['getApiToken', 'getAuthenticatedProfile']);
+            AuthenticationService = jasmine.createSpyObj('AuthenticationService', ['getApiToken', 'getAuthenticatedProfile', 'logOut']);
             $location = jasmine.createSpyObj('$location', ['path']);
+        });
+    });
+
+        describe('when initialising', function() {
+
+        it("should log the user out if the logout routeparam exists", function() {
+            $routeParams = { logout: true };
+   
+            // Initialise the controller
+            $controller('Home', {
+                $scope: $scope,
+                $location: $location,
+                $routeParams: $routeParams,
+                $log: $log,
+                AuthenticationService: AuthenticationService
+            });
+
+            expect(AuthenticationService.logOut.calls.length == 1);
+        });
+    });
+
+    describe('has a login function', function() {
+
+        beforeEach(function(){
+            $routeParams = {};
 
             // Initialise the controller
             $controller('Home', {
                 $scope: $scope,
                 $location: $location,
+                $routeParams: $routeParams,
                 $log: $log,
                 AuthenticationService: AuthenticationService
             });
         });
-    });
-
-    describe('has a login function', function() {
 
         it("that should display an error if there was a huge fail when talking to Facebook", function() {
             var getApiTokenResponse = $q.defer();
@@ -64,7 +89,7 @@ describe('The Home controller', function() {
             $scope.login(); // Hit the login function
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/events") // Check redirection to eventList
+            expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection to eventList
         });
 
         it('that should redirect to the createProfile page if there is no existing Profile', function() {
@@ -79,7 +104,7 @@ describe('The Home controller', function() {
             $scope.login(); // Hit the login function
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/createProfile") // Check redirection to createProfile
+            expect($location.path).toHaveBeenCalledWith("/createProfile"); // Check redirection to createProfile
         });
     });
 });
