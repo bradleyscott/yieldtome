@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" ng-app="yieldtome">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>yieldto.me</title>
+    <link rel="stylesheet" href="css/app.css" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" />
+</head>
+
+<body>
+    <div ng-view></div>
+    <div class="container body-content">
+        <hr />
+        <footer>
+            <p>
+                Copyright &copy; 2014 - Debate Systems Ltd
+            </p>
+        </footer>
+    </div>
+
+    <!-- Load dependencies -->
+
+    <script src="js/jquery.min.js"></script>
+    <script src="js/jquery-ui.min.js"></script>
+    <script src="js/jquery.ui.touch-punch.min.js"></script>
+    <script src="js/angular.min.js"></script>
+    <script src="js/angular-resource.min.js"></script>
+    <script src="js/angular-route.min.js"></script>
+    <script src="js/angular-touch.min.js"></script>
+    <script src="js/angular-facebook.js"></script>
+    <script src="js/ui-bootstrap-tpls.min.js"></script>
+    <script src="js/sortable.min.js"></script>
+
+    <!-- Load yieldto.me App -->
+    <script src="js/yieldtome.min.js"></script>
+</body>
+
+</html>
