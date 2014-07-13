@@ -2,7 +2,37 @@
 
 describe('The Speakers controller', function() {
 
-    var $controller, $log, $scope, $location, $q, SessionService, SpeakersListService;
+    var $controller, $log, $scope, $location, $modal, $q, SessionService, SpeakersListService;
+
+    var speaker = {
+                "SpeakerID": 28,
+                "Position": "For",
+                "Attendee": {
+                    "AttendeeID": 1,
+                    "Name": "Starting Attendee",
+                    "Profile": {
+                        "ProfileID": 1,
+                        "Name": "Bradley Scott",
+                        "ProfilePictureUri": "http://graph.facebook.com/553740394/picture",
+                        "FacebookID": "553740394",
+                        "FacebookProfileUri": "http://www.facebook.com/553740394",
+                        "Email": "bradley@yieldto.me",
+                        "EmailToUri": "mailto://bradley@yieldto.me",
+                        "Phone": "555 125-3459",
+                        "Twitter": "tweetme",
+                        "TwitterProfileUri": "http://twitter.com/tweetme",
+                        "LinkedIn": "linkedin",
+                        "LinkedinProfileUri": "http://www.linkedin.com/in/linkedin",
+                        "IsFacebookPublic": true,
+                        "IsEmailPublic": true,
+                        "IsPhonePublic": false,
+                        "IsTwitterPublic": false,
+                        "IsLinkedInPublic": true
+                    }
+                }
+            };
+
+    var speakers = [speaker];
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -18,53 +48,52 @@ describe('The Speakers controller', function() {
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
-            SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList', 'getSpeakers', 'speakerHasSpoken', 'deleteSpeaker', 'reorderSpeakers']);
-        });
-
-        beforeEach(function() {
-            // Save required variables in session
-            SessionService.set('profile', 'ValidProfile');
-            SessionService.set('event', 'ValidEvent');
-            SessionService.set('attendee', 'ValidAttendee');
+            SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList', 'getSpeakers', 'speakerHasSpoken', 'deleteSpeaker', 'reorderSpeakers', 'deleteAllSpeakers', 'updateList', 'createSpeaker', 'deleteList']);
+            $modal = jasmine.createSpyObj('$modal', ['open']);
         });
     });
+
+    function initializeController() {
+        // Set the speakersListID in the url 
+        var $routeParams = {
+            speakersListID: 1
+        };
+
+        // Save required variables in session
+        SessionService.set('profile', 'ValidProfile');
+        SessionService.set('event', 'ValidEvent');
+        SessionService.set('attendee', { AttendeeID: 1 });
+
+        // Initialise the controller
+        // $scope, $location, $log, $window, $modal, $routeParams, SessionService, SpeakersListService
+        $controller('Speakers', {
+            $scope: $scope,
+            $location: $location,
+            $log: $log,
+            $modal: $modal,
+            $routeParams: $routeParams,
+            SessionService: SessionService,
+            SpeakersListService: SpeakersListService
+        });
+    }
 
     describe('when it initiaties', function() {
 
         it("should display an error if there was a problem trying to get the Speakers list", function() {
-
-            // Set the speakersListID in the url 
-            var $routeParams = {
-                speakersListID: 1
-            };
 
             // Set up Mock behaviour to support Controler initialization
             var getListResponse = $q.defer();
             getListResponse.reject('EpicFail');
             SpeakersListService.getList.andReturn(getListResponse.promise);
 
-            // Initialise the controller
-            //  $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('Speakers', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $routeParams: $routeParams,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
+            initializeController();
 
             $scope.$digest();
-            expect($scope.error).toBe("Something wen't wrong trying to get this Speakers List");
+            expect($scope.error).toBe("Something went wrong trying to get this Speakers List");
 
         });
 
         it("should display an error if there was a problem trying to get the list of Speakers", function() {
-
-            // Set the speakersListID in the url 
-            var $routeParams = {
-                speakersListID: 1
-            };
 
             // Set up Mock behaviour to support Controler initialization
             var getListResponse = $q.defer();
@@ -77,26 +106,13 @@ describe('The Speakers controller', function() {
             getSpeakersResponse.reject('EpicFail');
             SpeakersListService.getSpeakers.andReturn(getSpeakersResponse.promise);
 
-            // Initialise the controller
-            //  $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('Speakers', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $routeParams: $routeParams,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
+            initializeController();
 
             $scope.$digest();
-            expect($scope.error).toBe("Something wen't wrong trying to get the list of Speakers");
+            expect($scope.error).toBe("Something went wrong trying to get the list of Speakers");
         });
 
         it("should display the Speakers to screen", function() {
-            // Set the speakersListID in the url 
-            var $routeParams = {
-                speakersListID: 1
-            };
 
             // Set up Mock behaviour to support Controler initialization
             var getListResponse = $q.defer();
@@ -106,22 +122,13 @@ describe('The Speakers controller', function() {
             SpeakersListService.getList.andReturn(getListResponse.promise);
 
             var getSpeakersResponse = $q.defer();
-            getSpeakersResponse.resolve('LotsOfSpeakers');
-            SpeakersListService.getSpeakers.andReturn(getSpeakersResponse.promise);
+            getSpeakersResponse.resolve(speakers);
 
-            // Initialise the controller
-            //  $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('Speakers', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $routeParams: $routeParams,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
+            SpeakersListService.getSpeakers.andReturn(getSpeakersResponse.promise);
+            initializeController();
 
             $scope.$digest();
-            expect($scope.speakers).toBe('LotsOfSpeakers');
+            expect($scope.speakers).toBe(speakers);
         });
 
     });
@@ -130,11 +137,6 @@ describe('The Speakers controller', function() {
 
         beforeEach(function() {
 
-            // Set the speakersListID in the url 
-            var $routeParams = {
-                speakersListID: 1
-            };
-
             // Set up Mock behaviour to support Controler initialization
             var getListResponse = $q.defer();
             getListResponse.resolve([{
@@ -143,37 +145,174 @@ describe('The Speakers controller', function() {
             SpeakersListService.getList.andReturn(getListResponse.promise);
 
             var getSpeakersResponse = $q.defer();
-            getSpeakersResponse.resolve('LotsOfSpeakers');
+            getSpeakersResponse.resolve(speakers);
+
             SpeakersListService.getSpeakers.andReturn(getSpeakersResponse.promise);
-
-            // Initialise the controller
-            //  $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('Speakers', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $routeParams: $routeParams,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
-
+            initializeController();
             $scope.$digest();
         });
 
-        describe('speak()', function() {
+        describe('deleteList()', function() {
 
+            it("that deletes the Speakers list and returns to the Speakers Lists page", function() {
+                var deleteListResponse = $q.defer();
+                deleteListResponse.resolve({});
 
-            it("that updates the SpeakersList and displays the update to screen", function() {
-                var speakerHasSpokenResponse = $q.defer();
-                speakerHasSpokenResponse.resolve('LotsOfSpeakers');
+                SpeakersListService.deleteList.andReturn(deleteListResponse.promise);
 
-                SpeakersListService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise);
-
-                $scope.speak();
+                $scope.list = { Name: 'List 1' };
+                $scope.deleteList();
                 $scope.$digest();
 
-                expect($scope.speakers).toBe('LotsOfSpeakers');
-                expect($scope.info).toBe('Speaker has now spoken and has been removed');
+                expect($scope.info).toBe('List 1 deleted');
+                expect($location.path).toHaveBeenCalledWith('/speakersLists');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var deleteListResponse = $q.defer();
+                deleteListResponse.reject('EpicFail');
+
+                SpeakersListService.deleteList.andReturn(deleteListResponse.promise); // Return an error
+
+                $scope.deleteList();
+                $scope.$digest();
+
+                expect($scope.error).toBe("Something went wrong trying to delete this Speakers List");
+            });
+        });
+
+        describe('add()', function() {
+
+            it("that add a Speaker to the Speakers list", function() {
+                var createSpeakerResponse = $q.defer();
+                createSpeakerResponse.resolve('Speaker');
+
+                SpeakersListService.createSpeaker.andReturn(createSpeakerResponse.promise);
+
+                $scope.add('Position');
+                $scope.$digest();
+
+                expect($scope.info).toBe('You have been added to the Speakers List');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var createSpeakerResponse = $q.defer();
+                createSpeakerResponse.reject('EpicFail');
+
+                SpeakersListService.createSpeaker.andReturn(createSpeakerResponse.promise); // Return an error
+
+                $scope.add('Position');
+                $scope.$digest();
+
+                expect($scope.error).toBe("Something went wrong trying to add you to the Speakers List");
+            });
+        });
+
+        describe('openList()', function() {
+
+            it("that opens the Speakers list status", function() {
+                var updateListResponse = $q.defer();
+                updateListResponse.resolve({
+                    Name: 'List 1',
+                    Status: 'Open'
+                });
+
+                SpeakersListService.updateList.andReturn(updateListResponse.promise);
+
+                $scope.openList();
+                $scope.$digest();
+
+                expect($scope.list.Status).toBe('Open');
+                expect($scope.info).toBe('List 1 opened to new Speakers');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var updateListResponse = $q.defer();
+                updateListResponse.reject('EpicFail');
+
+                SpeakersListService.updateList.andReturn(updateListResponse.promise); // Return an error
+
+                $scope.list = { Name: 'List 1' };
+                $scope.openList();
+                $scope.$digest();
+
+                expect($scope.error).toBe("Something went wrong trying to open List 1 to new Speakers");
+            });
+        });
+
+        describe('closeList()', function() {
+
+            it("that closes the Speakers list status", function() {
+                var updateListResponse = $q.defer();
+                updateListResponse.resolve({
+                    Name: 'List 1',
+                    Status: 'Closed'
+                });
+
+                SpeakersListService.updateList.andReturn(updateListResponse.promise);
+
+                $scope.closeList();
+                $scope.$digest();
+
+                expect($scope.list.Status).toBe('Closed');
+                expect($scope.info).toBe('List 1 closed to new Speakers');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var updateListResponse = $q.defer();
+                updateListResponse.reject('EpicFail');
+
+                SpeakersListService.updateList.andReturn(updateListResponse.promise); // Return an error
+
+                $scope.list = { Name: 'List 1' };
+                $scope.closeList();
+                $scope.$digest();
+
+                expect($scope.error).toBe("Something went wrong trying to close List 1 to new Speakers");
+            });
+        });
+
+        describe('removeAllSpeakers()', function() {
+
+            it("that removes all Speakers from the SpeakersList and displays the update to screen", function() {
+                var deleteAllSpeakersResponse = $q.defer();
+                deleteAllSpeakersResponse.resolve([]);
+
+                SpeakersListService.deleteAllSpeakers.andReturn(deleteAllSpeakersResponse.promise);
+
+                $scope.removeAllSpeakers();
+                $scope.$digest();
+
+                expect($scope.speakers.length).toBe(0);
+                expect($scope.info).toBe('Speakers have all been removed');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var deleteAllSpeakersResponse = $q.defer();
+                deleteAllSpeakersResponse.reject('EpicFail');
+
+                SpeakersListService.deleteAllSpeakers.andReturn(deleteAllSpeakersResponse.promise); // Return an error
+
+                $scope.removeAllSpeakers();
+                $scope.$digest();
+
+                expect($scope.error).toBe("Something went wrong trying to remove the Speakers from this Speakers list");
+            });
+        });
+
+        describe('remove()', function() {
+
+            it("that removes a Speaker, and updates the SpeakersList and displays the update to screen", function() {
+                var deleteSpeakerResponse = $q.defer();
+                deleteSpeakerResponse.resolve(speakers);
+
+                SpeakersListService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise);
+
+                $scope.remove(speaker);
+                $scope.$digest();
+
+                expect($scope.speakers).toBe(speakers);
+                expect($scope.info).toBe('Starting Attendee removed');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -185,7 +324,35 @@ describe('The Speakers controller', function() {
                 $scope.speak();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something wen't wrong trying to update the Speakers list");
+                expect($scope.error).toBe("Something went wrong trying to update the Speakers list");
+            });
+        });
+
+        describe('speak()', function() {
+
+            it("that updates the SpeakersList and displays the update to screen", function() {
+                var speakerHasSpokenResponse = $q.defer();
+                speakerHasSpokenResponse.resolve(speakers);
+
+                SpeakersListService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise);
+
+                $scope.speak(speaker);
+                $scope.$digest();
+
+                expect($scope.speakers).toBe(speakers);
+                expect($scope.info).toBe('Starting Attendee has now spoken and has been removed');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var speakerHasSpokenResponse = $q.defer();
+                speakerHasSpokenResponse.reject('EpicFail');
+
+                SpeakersListService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise); // Return an error
+
+                $scope.speak();
+                $scope.$digest();
+
+                expect($scope.error).toBe("Something went wrong trying to update the Speakers list");
             });
         });
 
@@ -193,15 +360,15 @@ describe('The Speakers controller', function() {
 
             it("that updates the SpeakersList and displays the update to screen", function() {
                 var deleteSpeakerResponse = $q.defer();
-                deleteSpeakerResponse.resolve('LotsOfSpeakers');
+                deleteSpeakerResponse.resolve(speakers);
 
                 SpeakersListService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise);
 
-                $scope.remove();
+                $scope.remove(speaker);
                 $scope.$digest();
 
-                expect($scope.speakers).toBe('LotsOfSpeakers');
-                expect($scope.info).toBe('Speaker removed');
+                expect($scope.speakers).toBe(speakers);
+                expect($scope.info).toBe('Starting Attendee removed');
 
             });
 
@@ -214,7 +381,7 @@ describe('The Speakers controller', function() {
                 $scope.remove();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something wen't wrong trying to remove this Speaker");
+                expect($scope.error).toBe("Something went wrong trying to remove this Speaker");
             });
         });
 
@@ -222,14 +389,14 @@ describe('The Speakers controller', function() {
 
             it("that updates the SpeakersList and displays the update to screen", function() {
                 var reorderSpeakersResponse = $q.defer();
-                reorderSpeakersResponse.resolve('LotsOfSpeakers');
+                reorderSpeakersResponse.resolve(speakers);
 
                 SpeakersListService.reorderSpeakers.andReturn(reorderSpeakersResponse.promise);
 
                 $scope.reorderSpeakers();
                 $scope.$digest();
 
-                expect($scope.speakers).toBe('LotsOfSpeakers');
+                expect($scope.speakers).toBe(speakers);
                 expect($scope.info).toBe('Speakers list re-ordered');
 
             });
@@ -243,7 +410,7 @@ describe('The Speakers controller', function() {
                 $scope.reorderSpeakers();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something wen't wrong trying to re-order the Speakers list");
+                expect($scope.error).toBe("Something went wrong trying to re-order the Speakers list");
             });
         });
     });

@@ -93,7 +93,7 @@ describe('The EditEvent controller', function() {
             initializeController();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something wen't wrong trying to get this Event");
+            expect($scope.error).toBe("Something went wrong trying to get this Event");
         });
     });
 
@@ -138,7 +138,7 @@ describe('The EditEvent controller', function() {
             $scope.$digest();
 
             expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something wen't wrong trying to edit your Event. EpicFail");
+            expect($scope.error).toBe("Something went wrong trying to edit your Event. EpicFail");
         });
     });
 
@@ -193,7 +193,7 @@ describe('The EditEvent controller', function() {
             $scope.$digest();
 
             expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something wen't wrong trying to delete your Event. EpicFail");
+            expect($scope.error).toBe("Something went wrong trying to delete your Event. EpicFail");
         });
     });
 

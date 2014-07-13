@@ -28,7 +28,7 @@ angular.module('yieldtome.controllers')
                     $scope.info = 'Your Profile updates just got saved';
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to edit your Profile";
+                $scope.error = "Something went wrong trying to edit your Profile";
             });
         };
 

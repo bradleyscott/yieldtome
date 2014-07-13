@@ -57,7 +57,7 @@ describe('The EditProfile controller', function() {
             $scope.$digest();
 
             expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something wen't wrong trying to edit your Profile");
+            expect($scope.error).toBe("Something went wrong trying to edit your Profile");
         });
     });
 });

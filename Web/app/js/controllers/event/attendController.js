@@ -29,7 +29,7 @@ angular.module('yieldtome.controllers')
                     $location.path('/landing'); // Redirect
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to attend this Event. " + error.Message;
+                $scope.error = "Something went wrong trying to attend this Event. " + error.Message;
             });
         };
 

@@ -119,7 +119,7 @@ describe('The CreateSpeakersList controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something wen't wrong trying to create this Speakers List. EpicFail");
+            expect($scope.error).toBe("Something went wrong trying to create this Speakers List. EpicFail");
         });
     });
 });

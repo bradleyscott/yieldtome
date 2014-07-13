@@ -29,7 +29,7 @@ angular.module('yieldtome.controllers')
                     $location.path('/events'); // Redirect to the Events list page
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to create your Profile. " + error;
+                $scope.error = "Something went wrong trying to create your Profile. " + error;
             });
         };
 
@@ -50,7 +50,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to get your Facebook Profile information";
+                $scope.error = "Something went wrong trying to get your Facebook Profile information";
             });
         })();
 

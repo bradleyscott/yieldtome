@@ -68,6 +68,6 @@ describe('The ViewProfile controller', function() {
 
         $scope.$digest();
 
-        expect($scope.error).toBe("Something wen't wrong trying to get this Profile");
+        expect($scope.error).toBe("Something went wrong trying to get this Profile");
     });
 });

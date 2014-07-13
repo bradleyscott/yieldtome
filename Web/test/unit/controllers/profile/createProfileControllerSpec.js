@@ -81,7 +81,7 @@ describe('The CreateProfile controller', function() {
             $scope.$digest();
 
             expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something wen't wrong trying to get your Facebook Profile information");
+            expect($scope.error).toBe("Something went wrong trying to get your Facebook Profile information");
         });
     });
 
@@ -148,7 +148,7 @@ describe('The CreateProfile controller', function() {
             $scope.$digest();
 
             expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something wen't wrong trying to create your Profile. EpicFail");
+            expect($scope.error).toBe("Something went wrong trying to create your Profile. EpicFail");
         });
     });
 });

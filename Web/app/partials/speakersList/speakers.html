@@ -10,17 +10,6 @@
             </h2>
             <!-- Nav Pills -->
             <ul class="nav nav-pills">
-            <!-- Toggles between the Carousel and View -->
-            <!--                 
-                <li ng-hide="isCarouselVisible">
-                    <a ng-click="toggleCarousel()">
-                        <span class="glyphicon glyphicon-th-large"></span> Tiles</a>
-                </li>
-                <li ng-show="isCarouselVisible">
-                    <a ng-click="toggleCarousel()">
-                        <span class="glyphicon glyphicon-align-justify"></span> List</a>
-                </li>
-                --> 
                 <!-- Speakers list status -->
                 <li ng-show="list.Status == 'Open'"><h4><span class="label label-success">Open</span></h4></li>               
                 <li ng-show="list.Status == 'Closed'"><h4><span class="label label-danger">Closed</span></h4></li>
@@ -52,9 +41,6 @@
                 </li>
             </ul>
             <div class="well" ng-show="speakers.length == 0">There is not yet any Speakers on this Speakers list</div>
-            <!-- Carousel -->
-<!--             <ytm-speaker-carousel ng-show="isCarouselVisible"></ytm-speaker-carousel> -->
-            <!-- List -->
             <ytm-speaker-list ng-hide="isCarouselVisible || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-speaker-list>
             <ytm-editable-speaker-list ng-hide="isCarouselVisible" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-editable-speaker-list>
         </div>

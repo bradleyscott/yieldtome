@@ -42,7 +42,7 @@ angular.module('yieldtome.controllers')
                     $location.path('/landing'); // Redirect to the Event menu page
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to create your Event. " + error;
+                $scope.error = "Something went wrong trying to create your Event. " + error;
             });
         };
 

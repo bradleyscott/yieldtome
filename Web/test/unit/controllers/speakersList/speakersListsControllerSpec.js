@@ -131,7 +131,7 @@ describe('The SpeakersLists controller', function() {
 
             $scope.$digest();
 
-            expect($scope.error).toBe("Something wen't wrong trying to get the list of Speakers Lists");
+            expect($scope.error).toBe("Something went wrong trying to get the list of Speakers Lists");
         });
     });
 });

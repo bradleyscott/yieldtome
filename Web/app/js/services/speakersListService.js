@@ -24,7 +24,7 @@ angular.module('yieldtome.services')
             $log.debug('Request Url: ' + url);
 
             $http.delete(url).success(function(data) {
-                $log.debug('Speakers List deleted successfully. New list has ' + data.length + ' Speakers');
+                $log.debug('Speakers List deleted successfully.');
                 deferred.resolve(data);
             })
             .error(function(status) { // Otherwise, some unknown error occured

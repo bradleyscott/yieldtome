@@ -17,7 +17,6 @@ angular.module('yieldtome.controllers')
         $scope.list; // The Speakers List
         $scope.speakers; // The Speakers for the list
         $scope.speakingSlot; // The Speaker record for this Attendee
-        $scope.isCarouselVisible = false;  // Determines whether the Carousel or List is visible
         
         $scope.$back = function() {
             $window.history.back();
@@ -59,13 +58,13 @@ angular.module('yieldtome.controllers')
             var promise = SpeakersListService.deleteList($scope.list);
 
             promise.then(function(data) {
-                $scope.info = "Speakers List deleted";
+                $scope.info = $scope.list.Name + " deleted";
                 $log.debug('Speakers List deleted after deleteList()');
                 $location.path('/speakersLists');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to delete this Speakers List";
+                $scope.error = "Something went wrong trying to delete this Speakers List";
             });                
         };
 
@@ -81,7 +80,7 @@ angular.module('yieldtome.controllers')
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to add you to the Speakers List";
+                $scope.error = "Something went wrong trying to add you to the Speakers List";
             });                
         };
 
@@ -94,12 +93,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(list) {
                 $scope.list = list;
-                $scope.info = "Speakers List has been opened to new Speakers";
+                $scope.info = list.Name + " opened to new Speakers";
                 $log.debug('$scope.list updated after openList()');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to open the Speakers list to new Speakers";
+                $scope.error = "Something went wrong trying to open " + $scope.list.Name + " to new Speakers";
             });                
         };
 
@@ -112,12 +111,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(list) {
                 $scope.list = list;
-                $scope.info = "Speakers List has been closed to new Speakers";
+                $scope.info = list.Name + " closed to new Speakers";
                 $log.debug('$scope.list updated after closeList()');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to close the Speakers list to new Speakers";
+                $scope.error = "Something went wrong trying to close " + $scope.list.Name + " to new Speakers";
             });                
         };
 
@@ -133,7 +132,7 @@ angular.module('yieldtome.controllers')
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to remove the Speakers from this Speakers list";
+                $scope.error = "Something went wrong trying to remove the Speakers from this Speakers list";
             });                
         };
 
@@ -145,12 +144,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
-                $scope.info = "Speaker removed";
+                $scope.info = speaker.Attendee.Name + " removed";
                 $log.debug('$scope.speakers updated after remove()');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to remove this Speaker";
+                $scope.error = "Something went wrong trying to remove this Speaker";
             });                
         };
 
@@ -166,7 +165,7 @@ angular.module('yieldtome.controllers')
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to re-order the Speakers list";
+                $scope.error = "Something went wrong trying to re-order the Speakers list";
             }); 
         };
 
@@ -177,12 +176,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
-                $scope.info = "Speaker has now spoken and has been removed";
+                $scope.info = speaker.Attendee.Name + " has now spoken and has been removed";
                 $log.debug('$scope.speakers updated after speak()');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to update the Speakers list";
+                $scope.error = "Something went wrong trying to update the Speakers list";
             });                
         };
 
@@ -196,7 +195,7 @@ angular.module('yieldtome.controllers')
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to get the list of Speakers";
+                $scope.error = "Something went wrong trying to get the list of Speakers";
             });                
         };
         
@@ -219,7 +218,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to get this Speakers List";
+                $scope.error = "Something went wrong trying to get this Speakers List";
             });                
 
         })();
@@ -231,7 +230,7 @@ angular.module('yieldtome.controllers')
             // See if this Attendee is a speaker
             $scope.speakingSlot = null;
             angular.forEach($scope.speakers, function(value, key){
-                if(value.Attendee.AttendeeID == $scope.attendee.AttendeeID) {
+                if(value.Attendee ? (value.Attendee.AttendeeID == $scope.attendee.AttendeeID) : false) {
                     $scope.speakingSlot = value;
                 }
             });

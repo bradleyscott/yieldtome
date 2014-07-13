@@ -89,7 +89,7 @@ describe('The Events controller', function() {
 
             $scope.$digest();
 
-            expect($scope.error).toBe("Something wen't wrong trying to get the list of yieldto.me Events");
+            expect($scope.error).toBe("Something went wrong trying to get the list of yieldto.me Events");
         });
     });
 
@@ -299,7 +299,7 @@ describe('The Events controller', function() {
             $scope.selectEvent(selectedEvent);
             $scope.$digest();
 
-            expect($scope.error).toBe("Something wen't wrong trying to get the list of Attendees");
+            expect($scope.error).toBe("Something went wrong trying to get the list of Attendees");
         });
 
         it("it should allow the user to de-select an Event by passing in nothing", function() {

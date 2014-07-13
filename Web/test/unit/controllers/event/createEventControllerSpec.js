@@ -115,7 +115,7 @@ describe('The CreateEvent controller', function() {
             $scope.$digest();
 
             expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something wen't wrong trying to create your Event. EpicFail");
+            expect($scope.error).toBe("Something went wrong trying to create your Event. EpicFail");
         });
     });
 });

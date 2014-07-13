@@ -78,7 +78,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to get the list of Attendees";
+                $scope.error = "Something went wrong trying to get the list of Attendees";
             });
 
         };
@@ -96,7 +96,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to get the list of yieldto.me Events";
+                $scope.error = "Something went wrong trying to get the list of yieldto.me Events";
             });
         })();
     }

@@ -107,7 +107,7 @@ describe('The Attend controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something wen't wrong trying to attend this Event. EpicFail");
+            expect($scope.error).toBe("Something went wrong trying to attend this Event. EpicFail");
         });
     });
 });

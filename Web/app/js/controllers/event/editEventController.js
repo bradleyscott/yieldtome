@@ -59,7 +59,7 @@ angular.module('yieldtome.controllers')
                     $location.path('/events'); // Redirect to events page
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to delete your Event. " + error;
+                $scope.error = "Something went wrong trying to delete your Event. " + error;
             });
         };
 
@@ -76,7 +76,7 @@ angular.module('yieldtome.controllers')
                     $scope.info = 'Your Event updates just got saved';
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to edit your Event. " + error;
+                $scope.error = "Something went wrong trying to edit your Event. " + error;
             });
         };
 
@@ -109,7 +109,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to get this Event";
+                $scope.error = "Something went wrong trying to get this Event";
             });
         })();
 

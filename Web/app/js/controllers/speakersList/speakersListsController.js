@@ -48,7 +48,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something wen't wrong trying to get the list of Speakers Lists";
+                $scope.error = "Something went wrong trying to get the list of Speakers Lists";
             });                
 
         })();

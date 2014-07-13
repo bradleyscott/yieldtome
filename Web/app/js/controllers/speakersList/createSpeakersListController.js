@@ -37,7 +37,7 @@ angular.module('yieldtome.controllers')
                     $location.path('/speakersLists'); // Redirect
                 })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something wen't wrong trying to create this Speakers List. " + error.Message;
+                $scope.error = "Something went wrong trying to create this Speakers List. " + error.Message;
             });
         };
 
