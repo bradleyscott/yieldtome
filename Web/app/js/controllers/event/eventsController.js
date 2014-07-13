@@ -49,38 +49,40 @@ angular.module('yieldtome.controllers')
 
             // Set the seleted Event
             if (selectedEvent) {
-                $log.debug('User selected Event with EventID=' + selectedEvent.EventID);
-                $scope.selectedEvent = selectedEvent;
-            } else {
+                // Get Attendees for the selected Event
+                $log.debug('Retrieving Attendees');
+                var promise = AttendeeService.getAttendees(selectedEvent);
+
+                promise.then(function(attendees) {
+                    // If this profile is already attending, redirect them to the landing page
+                    for (var i = 0; i < attendees.length; i++) {
+                        if (attendees[i].Profile.ProfileID == $scope.profile.ProfileID) {
+
+                            $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
+                            $log.debug('Redirecting to landing page');
+
+                            $scope.info = "You are attending this Event. Logging you in...";
+                            SessionService.set('event', selectedEvent); // Save the selectedEvent to session
+                            SessionService.set('attendee', attendees[i]); // Save the Attendee to session
+                            $location.path('/landing');
+                        }
+                    }
+
+                    // Update the screen 
+                    $log.debug('User selected Event with EventID=' + selectedEvent.EventID);
+                    $scope.selectedEvent = selectedEvent;
+                    $scope.attendees = attendees; // Display attendees to screen
+                })
+                .catch (function(error) {
+                    $log.warn(error);
+                    $scope.error = "Something went wrong trying to get the list of Attendees";
+                });                
+
+           } else {
                 $log.debug('User de-selected Event with EventID=' + $scope.selectedEvent.EventID);
                 $scope.selectedEvent = selectedEvent;
                 return;
             }
-
-            // Get Attendees for the selected Event
-            $log.debug('Retrieving Attendees');
-            var promise = AttendeeService.getAttendees($scope.selectedEvent);
-
-            promise.then(function(attendees) {
-                $scope.attendees = attendees; // Display attendees to screen
-
-                // If this profile is already attending, redirect them to the landing page
-                for (var i = 0; i < $scope.attendees.length; i++) {
-                    if ($scope.attendees[i].Profile.ProfileID == $scope.profile.ProfileID) {
-                        $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
-                        $log.debug('Redirecting to landing page');
-                        $scope.info = "You are attending this Event. Logging you in...";
-                        SessionService.set('event', $scope.selectedEvent); // Save the selectedEvent to session
-                        SessionService.set('attendee', $scope.attendees[i]); // Save the Attendee to session
-                        $location.path('/landing');
-                    }
-                }
-            })
-            .catch (function(error) {
-                $log.warn(error);
-                $scope.error = "Something went wrong trying to get the list of Attendees";
-            });
-
         };
 
         // Get Events from EventService
