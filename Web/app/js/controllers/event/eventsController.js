@@ -60,7 +60,7 @@ angular.module('yieldtome.controllers')
 
                             $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
                             $log.debug('Redirecting to landing page');
-
+                            
                             $scope.info = "You are attending this Event. Logging you in...";
                             SessionService.set('event', selectedEvent); // Save the selectedEvent to session
                             SessionService.set('attendee', attendees[i]); // Save the Attendee to session

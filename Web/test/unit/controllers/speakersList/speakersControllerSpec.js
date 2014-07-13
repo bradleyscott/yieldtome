@@ -2,7 +2,7 @@
 
 describe('The Speakers controller', function() {
 
-    var $controller, $log, $scope, $location, $modal, $q, SessionService, SpeakersListService;
+    var $controller, $log, $scope, $location, $modal, $q, SessionService, SpeakersListService, SpeakersService;
 
     var speaker = {
                 "SpeakerID": 28,
@@ -48,7 +48,8 @@ describe('The Speakers controller', function() {
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
-            SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList', 'getSpeakers', 'speakerHasSpoken', 'deleteSpeaker', 'reorderSpeakers', 'deleteAllSpeakers', 'updateList', 'createSpeaker', 'deleteList']);
+            SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList','updateList', 'deleteList']);
+            SpeakersService = jasmine.createSpyObj('SpeakersService', [ 'getSpeakers', 'speakerHasSpoken', 'deleteSpeaker', 'reorderSpeakers', 'deleteAllSpeakers', 'createSpeaker']);
             $modal = jasmine.createSpyObj('$modal', ['open']);
         });
     });
@@ -73,7 +74,8 @@ describe('The Speakers controller', function() {
             $modal: $modal,
             $routeParams: $routeParams,
             SessionService: SessionService,
-            SpeakersListService: SpeakersListService
+            SpeakersListService: SpeakersListService,
+            SpeakersService: SpeakersService
         });
     }
 
@@ -104,7 +106,7 @@ describe('The Speakers controller', function() {
 
             var getSpeakersResponse = $q.defer();
             getSpeakersResponse.reject('EpicFail');
-            SpeakersListService.getSpeakers.andReturn(getSpeakersResponse.promise);
+            SpeakersService.getSpeakers.andReturn(getSpeakersResponse.promise);
 
             initializeController();
 
@@ -124,7 +126,7 @@ describe('The Speakers controller', function() {
             var getSpeakersResponse = $q.defer();
             getSpeakersResponse.resolve(speakers);
 
-            SpeakersListService.getSpeakers.andReturn(getSpeakersResponse.promise);
+            SpeakersService.getSpeakers.andReturn(getSpeakersResponse.promise);
             initializeController();
 
             $scope.$digest();
@@ -147,7 +149,7 @@ describe('The Speakers controller', function() {
             var getSpeakersResponse = $q.defer();
             getSpeakersResponse.resolve(speakers);
 
-            SpeakersListService.getSpeakers.andReturn(getSpeakersResponse.promise);
+            SpeakersService.getSpeakers.andReturn(getSpeakersResponse.promise);
             initializeController();
             $scope.$digest();
         });
@@ -187,7 +189,7 @@ describe('The Speakers controller', function() {
                 var createSpeakerResponse = $q.defer();
                 createSpeakerResponse.resolve('Speaker');
 
-                SpeakersListService.createSpeaker.andReturn(createSpeakerResponse.promise);
+                SpeakersService.createSpeaker.andReturn(createSpeakerResponse.promise);
 
                 $scope.add('Position');
                 $scope.$digest();
@@ -199,7 +201,7 @@ describe('The Speakers controller', function() {
                 var createSpeakerResponse = $q.defer();
                 createSpeakerResponse.reject('EpicFail');
 
-                SpeakersListService.createSpeaker.andReturn(createSpeakerResponse.promise); // Return an error
+                SpeakersService.createSpeaker.andReturn(createSpeakerResponse.promise); // Return an error
 
                 $scope.add('Position');
                 $scope.$digest();
@@ -278,7 +280,7 @@ describe('The Speakers controller', function() {
                 var deleteAllSpeakersResponse = $q.defer();
                 deleteAllSpeakersResponse.resolve([]);
 
-                SpeakersListService.deleteAllSpeakers.andReturn(deleteAllSpeakersResponse.promise);
+                SpeakersService.deleteAllSpeakers.andReturn(deleteAllSpeakersResponse.promise);
 
                 $scope.removeAllSpeakers();
                 $scope.$digest();
@@ -291,7 +293,7 @@ describe('The Speakers controller', function() {
                 var deleteAllSpeakersResponse = $q.defer();
                 deleteAllSpeakersResponse.reject('EpicFail');
 
-                SpeakersListService.deleteAllSpeakers.andReturn(deleteAllSpeakersResponse.promise); // Return an error
+                SpeakersService.deleteAllSpeakers.andReturn(deleteAllSpeakersResponse.promise); // Return an error
 
                 $scope.removeAllSpeakers();
                 $scope.$digest();
@@ -306,7 +308,7 @@ describe('The Speakers controller', function() {
                 var deleteSpeakerResponse = $q.defer();
                 deleteSpeakerResponse.resolve(speakers);
 
-                SpeakersListService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise);
+                SpeakersService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise);
 
                 $scope.remove(speaker);
                 $scope.$digest();
@@ -319,7 +321,7 @@ describe('The Speakers controller', function() {
                 var speakerHasSpokenResponse = $q.defer();
                 speakerHasSpokenResponse.reject('EpicFail');
 
-                SpeakersListService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise); // Return an error
+                SpeakersService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise); // Return an error
 
                 $scope.speak();
                 $scope.$digest();
@@ -334,7 +336,7 @@ describe('The Speakers controller', function() {
                 var speakerHasSpokenResponse = $q.defer();
                 speakerHasSpokenResponse.resolve(speakers);
 
-                SpeakersListService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise);
+                SpeakersService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise);
 
                 $scope.speak(speaker);
                 $scope.$digest();
@@ -347,7 +349,7 @@ describe('The Speakers controller', function() {
                 var speakerHasSpokenResponse = $q.defer();
                 speakerHasSpokenResponse.reject('EpicFail');
 
-                SpeakersListService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise); // Return an error
+                SpeakersService.speakerHasSpoken.andReturn(speakerHasSpokenResponse.promise); // Return an error
 
                 $scope.speak();
                 $scope.$digest();
@@ -362,7 +364,7 @@ describe('The Speakers controller', function() {
                 var deleteSpeakerResponse = $q.defer();
                 deleteSpeakerResponse.resolve(speakers);
 
-                SpeakersListService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise);
+                SpeakersService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise);
 
                 $scope.remove(speaker);
                 $scope.$digest();
@@ -376,7 +378,7 @@ describe('The Speakers controller', function() {
                 var deleteSpeakerResponse = $q.defer();
                 deleteSpeakerResponse.reject('EpicFail');
 
-                SpeakersListService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise); // Return an error
+                SpeakersService.deleteSpeaker.andReturn(deleteSpeakerResponse.promise); // Return an error
 
                 $scope.remove();
                 $scope.$digest();
@@ -391,7 +393,7 @@ describe('The Speakers controller', function() {
                 var reorderSpeakersResponse = $q.defer();
                 reorderSpeakersResponse.resolve(speakers);
 
-                SpeakersListService.reorderSpeakers.andReturn(reorderSpeakersResponse.promise);
+                SpeakersService.reorderSpeakers.andReturn(reorderSpeakersResponse.promise);
 
                 $scope.reorderSpeakers();
                 $scope.$digest();
@@ -405,7 +407,7 @@ describe('The Speakers controller', function() {
                 var reorderSpeakersResponse = $q.defer();
                 reorderSpeakersResponse.reject('EpicFail');
 
-                SpeakersListService.reorderSpeakers.andReturn(reorderSpeakersResponse.promise); // Return an error
+                SpeakersService.reorderSpeakers.andReturn(reorderSpeakersResponse.promise); // Return an error
 
                 $scope.reorderSpeakers();
                 $scope.$digest();

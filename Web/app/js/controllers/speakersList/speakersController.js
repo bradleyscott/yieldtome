@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Speakers', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'SessionService', 'SpeakersListService',
-    function($scope, $location, $log, $window, $modal, $routeParams, SessionService, SpeakersListService) {
+.controller('Speakers', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'SessionService', 'SpeakersListService', 'SpeakersService',
+    function($scope, $location, $log, $window, $modal, $routeParams, SessionService, SpeakersListService, SpeakersService) {
 
         $log.debug("Speakers controller executing");
 
@@ -72,7 +72,7 @@ angular.module('yieldtome.controllers')
         $scope.add = function(position) {
             $log.debug('SpeakersController.add() executing');
 
-            var promise = SpeakersListService.createSpeaker($scope.list, $scope.attendee, position);
+            var promise = SpeakersService.createSpeaker($scope.list, $scope.attendee, position);
 
             promise.then(function(speaker) {
                 $scope.info = "You have been added to the Speakers List";
@@ -123,7 +123,7 @@ angular.module('yieldtome.controllers')
         // Clears all the Speakers from the Speakers list
         $scope.removeAllSpeakers = function() {
             $log.debug('SpeakersController.removeAllSpeakers() executing');
-            var promise = SpeakersListService.deleteAllSpeakers($scope.list);
+            var promise = SpeakersService.deleteAllSpeakers($scope.list);
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
@@ -140,7 +140,7 @@ angular.module('yieldtome.controllers')
         $scope.remove = function(speaker)
         {
             $log.debug('SpeakersController.remove() executing');
-            var promise = SpeakersListService.deleteSpeaker(speaker);
+            var promise = SpeakersService.deleteSpeaker(speaker);
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
@@ -156,7 +156,7 @@ angular.module('yieldtome.controllers')
         // Update the order of the speakers
         $scope.reorderSpeakers= function() {
             $log.debug('SpeakersController.reorderSpeakers() executing');
-            var promise = SpeakersListService.reorderSpeakers($scope.list, $scope.speakers);
+            var promise = SpeakersService.reorderSpeakers($scope.list, $scope.speakers);
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
@@ -172,7 +172,7 @@ angular.module('yieldtome.controllers')
         // Mark a Speaker as having spoken
         $scope.speak = function(speaker) {
             $log.debug('SpeakersController.speak() executing');
-            var promise = SpeakersListService.speakerHasSpoken(speaker);
+            var promise = SpeakersService.speakerHasSpoken(speaker);
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
@@ -188,7 +188,7 @@ angular.module('yieldtome.controllers')
         // Retrieves the Speakers on the list
         $scope.getSpeakers = function() {
             $log.debug('SpeakersController.getSpeakers() executing');
-            var promise = SpeakersListService.getSpeakers($scope.list);
+            var promise = SpeakersService.getSpeakers($scope.list);
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;

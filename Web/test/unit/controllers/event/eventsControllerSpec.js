@@ -172,7 +172,8 @@ describe('The Events controller', function() {
 
             $scope.$digest();
             $scope.selectEvent(selectedEvent);
-
+            $scope.$digest();
+            
             expect($scope.selectedEvent).toBe(selectedEvent);
         });
 
