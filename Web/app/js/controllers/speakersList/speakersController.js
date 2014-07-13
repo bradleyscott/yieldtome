@@ -230,7 +230,7 @@ angular.module('yieldtome.controllers')
             // See if this Attendee is a speaker
             $scope.speakingSlot = null;
             angular.forEach($scope.speakers, function(value, key){
-                if(value.Attendee ? (value.Attendee.AttendeeID == $scope.attendee.AttendeeID) : false) {
+                if(value.Attendee ? (value.Attendee.AttendeeID == $scope.attendee.AttendeeID) : null) {
                     $scope.speakingSlot = value;
                 }
             });
