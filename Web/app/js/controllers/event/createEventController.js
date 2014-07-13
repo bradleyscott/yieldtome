@@ -39,7 +39,7 @@ angular.module('yieldtome.controllers')
             promise.then(function(event) // It all went well
                 {
                     SessionService.set('event', event); // Saves the Event in session
-                    $location.path('/landing'); // Redirect to the Event menu page
+                    $location.path('/events'); // Redirect to the Event menu page
                 })
             .catch (function(error) { // The service crapped out
                 $scope.error = "Something went wrong trying to create your Event. " + error;

@@ -100,7 +100,7 @@ describe('The CreateEvent controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/landing"); // Check redirection
+            expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection
         });
 
         it("that displays an error if something catastrophic happens", function() {
