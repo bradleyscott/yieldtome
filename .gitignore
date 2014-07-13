@@ -161,6 +161,9 @@ $RECYCLE.BIN/
 bower_components/
 node_modules/
 
+# dist folder
+dist/
+
 # floo related files
 .floo
 FLOOBITS_README.md
