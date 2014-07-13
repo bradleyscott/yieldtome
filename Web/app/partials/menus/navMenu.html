@@ -11,7 +11,7 @@
         <div class="navbar-collapse" collapse="!isNavOpen">
             <ul class="nav navbar-nav">
                 <li>
-                    <a href="#/landing"><b>{{event.Name}}</b></a>
+                    <a href="#/landing"><b>{{ event.Name  | truncate:20 }}</b></a>
                 </li>
                 <li>
                     <a href="#/speakersLists">Speakers</a>
