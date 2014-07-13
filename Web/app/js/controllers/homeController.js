@@ -24,6 +24,7 @@ angular.module('yieldtome.controllers', [])
         $scope.login = function() { // Get an apiToken and try to get a profile
 
             $log.debug('HomeController.login() starting');
+            $scope.info = 'Attempting to log you in...';
             $scope.error = ''; // Clear any saved errors
 
             var tokenPromise = AuthenticationService.getApiToken();
@@ -32,11 +33,13 @@ angular.module('yieldtome.controllers', [])
                     if (token === null) // The user didn't authenticate
                     {
                         $scope.error = "We weren't able to login you in. Did you authorize our Facebook request?";
+                        $scope.info = "";
                         return;
                     }
                 })
             .catch (function(error) {
                 $scope.error = "We weren't able to login you in. Did you authorize our Facebook request?";
+                $scope.info = "";
                 return;
             })
             .then(AuthenticationService.getAuthenticatedProfile)
@@ -53,6 +56,7 @@ angular.module('yieldtome.controllers', [])
             })
             .catch (function(error) {
                 $scope.error = "Something bad happened. We don't understand what";
+                $scope.info = "";
                 return;
             });
         };

@@ -10,7 +10,8 @@ angular.module('yieldtome', [
     'yieldtome.controllers',
     'ui.bootstrap',
     'facebook',
-    'ui.sortable'
+    'ui.sortable',
+    'angular-loading-bar'
     ])
 
 // Configure routes

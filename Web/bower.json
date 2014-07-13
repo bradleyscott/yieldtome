@@ -18,5 +18,8 @@
     "jquery-ui-touch-punch": "*",
     "angular-ui-sortable": "~0.12.8",
     "angular-touch": "~1.2.19"
+  },
+  "devDependencies": {
+    "angular-loading-bar": "~0.4.3"
   }
 }

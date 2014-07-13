@@ -7,6 +7,7 @@
     <title>yieldto.me</title>
     <link rel="stylesheet" href="css/app.css" />
     <link rel="stylesheet" href="css/bootstrap.min.css" />
+    <link rel="stylesheet" href="css/loading-bar.min.css" />
 </head>
 
 <body>
@@ -32,6 +33,7 @@
     <script src="js/angular-facebook.js"></script>
     <script src="js/ui-bootstrap-tpls.min.js"></script>
     <script src="js/sortable.min.js"></script>
+    <script src="js/loading-bar.min.js"></script>
 
     <!-- Load yieldto.me App -->
     <script src="js/yieldtome.min.js"></script>
