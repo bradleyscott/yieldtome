@@ -1,5 +1,5 @@
 {
-  "name": "yieldtome-web",
+  "name": "yieldtome",
   "description": "An Angular-js application allowing users to participate in Model UN conferences",
   "version": "0.0.0",
   "homepage": "https://github.com/bradleyscott/yieldtome",
@@ -17,9 +17,7 @@
     "jquery-ui": "~1.10.4",
     "jquery-ui-touch-punch": "*",
     "angular-ui-sortable": "~0.12.8",
-    "angular-touch": "~1.2.19"
-  },
-  "devDependencies": {
+    "angular-touch": "~1.2.19",
     "angular-loading-bar": "~0.4.3"
   }
 }
