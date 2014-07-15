@@ -71,7 +71,7 @@ namespace yieldtome.API.Controllers
 
             // Return Uri pointing to new object
             HttpResponseMessage response = Request.CreateResponse<Poll>(HttpStatusCode.Created, newList);
-            string uri = Url.Link("Polls", new { id = newList.PollID });
+            string uri = Url.Link("DefaultApi", new { id = newList.PollID });
             response.Headers.Location = new Uri(uri);
 
             return response;
