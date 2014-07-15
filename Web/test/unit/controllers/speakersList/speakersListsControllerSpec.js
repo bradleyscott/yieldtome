@@ -22,27 +22,29 @@ describe('The SpeakersLists controller', function() {
         });
     });
 
+    function initializeController(){
+        // Initialise the controller
+        //  $scope, $location, $log, $window, SessionService, SpeakersListService
+        $controller('SpeakersLists', {
+            $scope: $scope,
+            $location: $location,
+            $log: $log,
+            SessionService: SessionService,
+            SpeakersListService: SpeakersListService
+        });
+    }
+
     describe('when it initiaties', function() {
         it("should display an error to screen if an Event isn't found in session", function() {
             
             SessionService.set('event', undefined);
-
-            // Initialise the controller
-            //  $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('SpeakersLists', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
-
+            initializeController();
             $scope.$digest();
 
             expect($scope.error).toBe("We don't know what Event you're attending");
         });
 
-        it("should get the Events list and display them to screen", function() {
+        it("should get the Speakers lists and displays them to screen", function() {
             
             // Save an Event in session
             SessionService.set('event', 'ValidEvent');
@@ -93,23 +95,13 @@ describe('The SpeakersLists controller', function() {
             }]);
 
             SpeakersListService.getLists.andReturn(getListsResponse.promise);
-
-            // Initialise the controller
-            //  $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('SpeakersLists', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
-
+            initializeController();
             $scope.$digest();
 
             expect($scope.lists.length).toBe(2);
         });
 
-        it("should display an error if there was a huge fail when trying to get the Events list", function() {
+        it("should display an error if there was a huge fail when trying to get the Speakers lists", function() {
 
             // Save an Event in session
             SessionService.set('event', 'ValidEvent');
@@ -119,16 +111,7 @@ describe('The SpeakersLists controller', function() {
             getListsResponse.reject('HugeFail');
             SpeakersListService.getLists.andReturn(getListsResponse.promise);
 
-            // Initialise the controller
-            //  $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('SpeakersLists', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
-
+            initializeController();
             $scope.$digest();
 
             expect($scope.error).toBe("Something went wrong trying to get the list of Speakers Lists");
