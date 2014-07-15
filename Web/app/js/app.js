@@ -65,6 +65,18 @@ angular.module('yieldtome', [
             templateUrl: 'partials/speakersList/speakers.html',
             controller: 'Speakers'
         });
+        $routeProvider.when('/polls', {
+            templateUrl: 'partials/poll/pollList.html',
+            controller: 'Polls'
+        });
+        $routeProvider.when('/createPoll', {
+            templateUrl: 'partials/poll/poll.html',
+            controller: 'CreatePoll'
+        });
+        $routeProvider.when('/editPoll/:pollID', {
+            templateUrl: 'partials/poll/poll.html',
+            controller: 'EditPoll'
+        });
         $routeProvider.otherwise({
             redirectTo: '/'
         });
