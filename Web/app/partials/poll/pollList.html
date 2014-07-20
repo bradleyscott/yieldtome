@@ -35,7 +35,7 @@
                         <small ng-hide="poll.IsPassing">Failing</small>
                     </h4>
                     <p class="list-group-item-text">
-                        <progress ng-show="poll.VotesFor >= 1 && poll.VotesAgainst >= 1" max="poll.VotesFor + poll.VotesAgainst + poll.VotesAbstaining">
+                        <progress max="poll.VotesFor + poll.VotesAgainst + poll.VotesAbstaining" ng-show="poll.VotesFor >= 1 && poll.VotesAgainst >= 1" >
                             <bar value="poll.VotesFor" type="success"><span>{{poll.VotesFor}} for</span></bar>
                             <bar value="poll.VotesAgainst" type="danger"><span>{{poll.VotesAgainst}} against</span></bar>
                         </progress>

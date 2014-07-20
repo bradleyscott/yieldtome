@@ -1,0 +1,62 @@
+<div>
+    <h4>Your Vote</h4>
+    <a class="list-group-item">
+        <div class="media">
+            <img class="media-object pull-left" ng-src="{{myVote.Attendee.Profile.ProfilePictureUri}}">
+            <div class="media-body">
+                <div class="btn-group pull-right" ng-show="poll.Status=='Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+                    <button type="button" ng-click="castVote(attendee, 'For')" ng-hide="myVote.VoteResult=='For'" class="btn btn-default">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button type="button" ng-click="castVote(attendee, 'Against')" ng-hide="myVote.VoteResult=='Against'" class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <button type="button" ng-click="castVote(attendee, 'Abstain')" ng-hide="myVote.VoteResult=='Abstain'" class="btn btn-default">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </div>
+                <h4 class="media-heading">{{myVote.Attendee.Name}}</h4>
+                {{myVote.Attendee.Profile.Name}}
+                <div style="background-color:lightgreen; height:5px" ng-show="myVote.VoteResult == 'For'"></div>
+                <div style="background-color:red; height:5px" ng-show="myVote.VoteResult == 'Against'"></div>
+            </div>
+        </div>
+    </a>
+    <h4>Other Votes</h4>
+    <div class="well" ng-show="votes.length == 1">There are no other Votes on this Poll</div>
+    <div class="btn-group btn-group-justified" ng-show="votes.length > 1" style="margin-bottom:5px">
+        <label class="btn btn-default active" ng-model="voteFilter.for" btn-checkbox>For</label>
+        <label class="btn btn-default active" ng-model="voteFilter.against" btn-checkbox>Against</label>
+        <label class="btn btn-default active" ng-model="voteFilter.abstain" btn-checkbox>Abstain</label>
+    </div>
+    <div class="form-group" ng-show="otherVotes.length > 10">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" ng-model="voteFilter.text" placeholder="Find vote..." />
+        </div>
+    </div>
+    <a class="list-group-item" ng-repeat="vote in otherVotes | filter:filteredVotes">
+        <div class="media">
+            <img class="media-object pull-left" ng-src="{{vote.Attendee.Profile.ProfilePictureUri}}">
+            <div class="media-body">
+                <div class="btn-group pull-right" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+                    <button type="button" ng-click="castVote(vote.Attendee, 'For')" ng-hide="vote.VoteResult=='For'" class="btn btn-default">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>
+                    <button type="button" ng-click="castVote(vote.Attendee, 'Against')" ng-hide="vote.VoteResult=='Against'" class="btn btn-default">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                    <button type="button" ng-click="castVote(vote.Attendee, 'Abstain')" ng-hide="vote.VoteResult=='Abstain'" class="btn btn-default">
+                        <span class="glyphicon glyphicon-minus"></span>
+                    </button>
+                </div>
+                <h4 class="media-heading">{{vote.Attendee.Name}}</h4>
+                {{vote.Attendee.Profile.Name}}
+                <div style="background-color:lightgreen; height:5px" ng-show="vote.VoteResult == 'For'"></div>
+                <div style="background-color:red; height:5px" ng-show="vote.VoteResult == 'Against'"></div>
+            </div>
+        </div>
+    </a>
+</div>
