@@ -30,7 +30,7 @@
     <script src="js/angular-resource.min.js"></script>
     <script src="js/angular-route.min.js"></script>
     <script src="js/angular-touch.min.js"></script>
-    <script src="js/angular-facebook.js"></script>
+    <script src="js/ngFacebook.js"></script>
     <script src="js/ui-bootstrap-tpls.min.js"></script>
     <script src="js/sortable.min.js"></script>
     <script src="js/loading-bar.min.js"></script>
