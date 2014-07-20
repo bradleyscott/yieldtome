@@ -2,12 +2,12 @@
 
 describe('The FacebookService', function() {
 
-    var $q, $scope, Facebook, FacebookService;
+    var $q, $scope, $facebook, FacebookService;
 
     beforeEach(function() {
         module('yieldtome.services', function($provide) {
-            Facebook = jasmine.createSpyObj('Facebook', ['getLoginStatus', 'login', 'api']); // Create Mocks 
-            $provide.value('Facebook', Facebook);
+            $facebook = jasmine.createSpyObj('$facebook', ['getLoginStatus', 'login', 'api']); // Create Mocks 
+            $provide.value('$facebook', $facebook);
         });
 
         inject(function(_$q_, _$rootScope_, _FacebookService_) {
@@ -30,7 +30,7 @@ describe('The FacebookService', function() {
                     accessToken: 'ValidToken'
                 }
             };
-            Facebook.getLoginStatus.andReturn(getLoginStatusResponse);
+            $facebook.getLoginStatus.andReturn(getLoginStatusResponse);
 
             var loginStatusPromise = FacebookService.getFacebookToken();
             
@@ -46,7 +46,7 @@ describe('The FacebookService', function() {
             var getLoginStatusResponse = {
                 status: 'not_authorized'
             };
-            Facebook.getLoginStatus.andReturn(getLoginStatusResponse);
+            $facebook.getLoginStatus.andReturn(getLoginStatusResponse);
 
             var loginStatusPromise = FacebookService.getFacebookToken();
             $scope.$digest();
@@ -63,7 +63,7 @@ describe('The FacebookService', function() {
             var getLoginStatusResponse = {
                 status: 'not_connected' // Any other status
             };
-            Facebook.getLoginStatus.andReturn(getLoginStatusResponse);
+            $facebook.getLoginStatus.andReturn(getLoginStatusResponse);
 
             // Mock a successful login
             var loginResponse = {
@@ -72,7 +72,7 @@ describe('The FacebookService', function() {
                     accessToken: 'ValidToken'
                 }
             };
-            Facebook.login.andReturn(loginResponse);
+            $facebook.login.andReturn(loginResponse);
 
             var loginStatusPromise = FacebookService.getFacebookToken();
             $scope.$digest();
@@ -89,13 +89,13 @@ describe('The FacebookService', function() {
             var getLoginStatusResponse = {
                 status: 'not_connected' // Any other status
             };
-            Facebook.getLoginStatus.andReturn(getLoginStatusResponse);
+            $facebook.getLoginStatus.andReturn(getLoginStatusResponse);
 
             // Mock an unsuccessful login
             var loginResponse = {
                 status: 'not_connected'
             };
-            Facebook.login.andReturn(loginResponse);
+            $facebook.login.andReturn(loginResponse);
 
             var loginStatusPromise = FacebookService.getFacebookToken();
             $scope.$digest();
@@ -122,7 +122,7 @@ describe('The FacebookService', function() {
 
             // Mock a successful Facebook.api /me response
             var facebookApiResponse = 'UserInfo';
-            Facebook.api.andReturn(facebookApiResponse);
+            $facebook.api.andReturn(facebookApiResponse);
 
             // Make the call and do asserts
             var getUserInfoResponse = FacebookService.getUserInfo();

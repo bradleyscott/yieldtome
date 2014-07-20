@@ -9,7 +9,7 @@ angular.module('yieldtome', [
     'yieldtome.directives',
     'yieldtome.controllers',
     'ui.bootstrap',
-    'facebook',
+    'ngFacebook',
     'ui.sortable',
     'angular-loading-bar'
     ])
@@ -77,6 +77,10 @@ angular.module('yieldtome', [
             templateUrl: 'partials/poll/poll.html',
             controller: 'EditPoll'
         });
+        $routeProvider.when('/polls/:pollID', {
+            templateUrl: 'partials/poll/votes.html',
+            controller: 'Votes'
+        });
         $routeProvider.otherwise({
             redirectTo: '/'
         });
@@ -84,11 +88,30 @@ angular.module('yieldtome', [
 ])
 
 // Configure the Facebook provider
-.config(['FacebookProvider',
-    function(FacebookProvider, ConfigService) {
-        FacebookProvider.init('233412823470428');
-    }
-])
+.config(['$facebookProvider', function( $facebookProvider ) {
+  $facebookProvider.setAppId('233412823470428');
+}])
+
+// Load the facebook SDK asynchronously
+.run(['$rootScope', function($rootScope) {
+  (function(){
+     // If we've already installed the SDK, we're done
+     if (document.getElementById('facebook-jssdk')) {return;}
+
+     // Get the first script element, which we'll use to find the parent node
+     var firstScriptElement = document.getElementsByTagName('script')[0];
+
+     // Create a new script element and set its id
+     var facebookJS = document.createElement('script'); 
+     facebookJS.id = 'facebook-jssdk';
+
+     // Set the new script's source to the source of the Facebook JS SDK
+     facebookJS.src = '//connect.facebook.net/en_US/all.js';
+
+     // Insert the Facebook JS SDK into the DOM
+     firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
+   }());
+}])
 
 // Handle unauthenticated responses
 .factory('httpResponseInterceptor', ['$q', '$log', '$location', 'SessionService',
