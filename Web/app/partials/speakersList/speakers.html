@@ -8,12 +8,13 @@
                 </br>
                 <small>{{event.Name}}</small>
             </h2>
-            <div style="background-color:lightgreen; height:5px; margin-bottom:5px" ng-show="list.Status == 'Open'"></div>
-            <div style="background-color:red; height:5px; margin-bottom:5px" ng-show="list.Status == 'Closed'"></div>
             <!-- Nav Pills -->
             <ul class="nav nav-pills">
+                <!-- Status -->
+                <li ng-show="list.Status == 'Open'" ng-click="closeList()"><button type="button" class="btn btn-success">Open</button></li>
+                <li ng-show="list.Status == 'Closed'" ng-click="openList()"><button type="button" class="btn btn-danger">Closed</button></li>
                 <!-- Add myself as a Speaker -->
-                <li class="dropdown" ng-show="list.Status == 'Open' && speakingSlot==null">
+                <li class="dropdown" ng-show="speakingSlot==null && (list.Status == 'Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon-bullhorn"></span> Speak <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
@@ -30,7 +31,7 @@
                 <li class="dropdown" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
                     <a class="dropdown-toggle" data-toggle="dropdown">
                         <span class="glyphicon glyphicon glyphicon-cog"></span> <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
                         <li ng-show="list.Status == 'Open'" ng-click="closeList()"><a>Close to new Speakers</a></li>
                         <li ng-show="list.Status == 'Closed'" ng-click="openList()"><a>Open to new Speakers</a></li>
                         <li><a>Rename this Speakers list</a></li>
