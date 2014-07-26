@@ -89,7 +89,7 @@ describe('The CreateSpeakersList controller', function() {
 
         });
 
-        it("that should redirect to the events page if the profile creation succeeds", function() {
+        it("that should redirect to the events page if the list creation succeeds", function() {
 
             // Set up Mock to return a valid response from SpeakersListService.createSpeakersList()
             var createListResponse = $q.defer();

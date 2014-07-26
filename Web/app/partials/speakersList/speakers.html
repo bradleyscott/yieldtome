@@ -1,49 +1,47 @@
-<div>
-    <ytm-nav-menu></ytm-nav-menu>
-    <div class="container body-content">
-        <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-        <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
-        <div>
-            <h2>{{list.Name}}
-                </br>
-                <small>{{event.Name}}</small>
-            </h2>
-            <!-- Nav Pills -->
-            <ul class="nav nav-pills">
-                <!-- Status -->
-                <li ng-show="list.Status == 'Open'" ng-click="closeList()"><button type="button" class="btn btn-success">Open</button></li>
-                <li ng-show="list.Status == 'Closed'" ng-click="openList()"><button type="button" class="btn btn-danger">Closed</button></li>
-                <!-- Add myself as a Speaker -->
-                <li class="dropdown" ng-show="speakingSlot==null && (list.Status == 'Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon-bullhorn"></span> Speak <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li ng-click="add('For')"><a>Speak For</a></li>
-                        <li ng-click="add('Against')"><a>Speak Against</a></li>
-                        <li ng-click="add('None')"><a>Neutral</a></li>
-                    </ul>
-                </li>
-                <!-- Remove myself as a Speaker -->
-                <li ng-show="speakingSlot" ng-click="remove(speakingSlot)">
-                    <a ng-click=""><span class="glyphicon glyphicon-remove-circle"></span> Remove myself</a>
-                </li>
-                <!-- Speakers list settings drop down -->
-                <li class="dropdown" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
-                    <a class="dropdown-toggle" data-toggle="dropdown">
-                        <span class="glyphicon glyphicon glyphicon-cog"></span> <span class="caret"></span></a>
-                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                        <li ng-show="list.Status == 'Open'" ng-click="closeList()"><a>Close to new Speakers</a></li>
-                        <li ng-show="list.Status == 'Closed'" ng-click="openList()"><a>Open to new Speakers</a></li>
-                        <li><a>Rename this Speakers list</a></li>
-                        <li ng-click="removeAllSpeakers()"><a>Remove all Speakers</a></li>
-                        <li class="divider"></li>
-                        <li ng-click="showDeleteList()"><a>Delete this Speakers list</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <div class="well" ng-show="speakers.length == 0">There is not yet any Speakers on this Speakers list</div>
-            <ytm-speaker-list ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-speaker-list>
-            <ytm-editable-speaker-list ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-editable-speaker-list>
-        </div>
+<ytm-nav-menu></ytm-nav-menu>
+<div class="container body-content">
+    <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
+    <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
+    <div>
+        <h2>{{list.Name}}
+            </br>
+            <small>{{event.Name}}</small>
+        </h2>
+        <!-- Nav Pills -->
+        <ul class="nav nav-pills">
+            <!-- Status -->
+            <li ng-show="list.Status == 'Open'" ng-click="closeList()"><button type="button" class="btn btn-success">Open</button></li>
+            <li ng-show="list.Status == 'Closed'" ng-click="openList()"><button type="button" class="btn btn-danger">Closed</button></li>
+            <!-- Add myself as a Speaker -->
+            <li class="dropdown" ng-show="speakingSlot==null && (list.Status == 'Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-bullhorn"></span> Speak <span class="caret"></span></a>
+                <ul class="dropdown-menu" role="menu">
+                    <li ng-click="add('For')"><a>Speak For</a></li>
+                    <li ng-click="add('Against')"><a>Speak Against</a></li>
+                    <li ng-click="add('None')"><a>Neutral</a></li>
+                </ul>
+            </li>
+            <!-- Remove myself as a Speaker -->
+            <li ng-show="speakingSlot" ng-click="remove(speakingSlot)">
+                <a><span class="glyphicon glyphicon-remove-circle"></span> Remove myself</a>
+            </li>
+            <!-- Speakers list settings drop down -->
+            <li class="dropdown" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+                <a class="dropdown-toggle" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon glyphicon-cog"></span> <span class="caret"></span></a>
+                <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                    <li ng-show="list.Status == 'Open'" ng-click="closeList()"><a>Close to new Speakers</a></li>
+                    <li ng-show="list.Status == 'Closed'" ng-click="openList()"><a>Open to new Speakers</a></li>
+                    <li><a href="#/editSpeakersList/{{list.SpeakersListID}}">Rename this Speakers list</a></li>
+                    <li ng-click="removeAllSpeakers()"><a>Remove all Speakers</a></li>
+                    <li class="divider"></li>
+                    <li ng-click="showDeleteList()"><a>Delete this Speakers list</a></li>
+                </ul>
+            </li>
+        </ul>
+        <div class="well" ng-show="speakers.length == 0">There is not yet any Speakers on this Speakers list</div>
+        <ytm-speaker-list ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-speaker-list>
+        <ytm-editable-speaker-list ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-editable-speaker-list>
     </div>
 </div>

@@ -8,11 +8,12 @@ angular.module('yieldtome.controllers')
         $log.debug("CreateSpeakersList controller executing");
 
         $scope.title = "Create Speakers list";
+        $scope.alternatebutton = 'Cancel';
         $scope.error; // An error message that will be displayed to screen
         $scope.info; // An info message that will be displayed to screen
         $scope.event;
         $scope.profile;
-        $scope.name; // The Speakers list name
+        $scope.list = { Name:"" }; // The Speakers list
 
         $scope.$back = function() {
             $window.history.back();
@@ -24,7 +25,7 @@ angular.module('yieldtome.controllers')
 
             // Create a new SpeakersList object
             var newList = {
-                Name: $scope.name,
+                Name: $scope.list.Name,
                 CreatorID: $scope.profile.ProfileID
             };
 
