@@ -61,6 +61,10 @@ angular.module('yieldtome', [
             templateUrl: 'partials/speakersList/editSpeakersList.html',
             controller: 'CreateSpeakersList'
         });
+        $routeProvider.when('/editSpeakersList/:speakersListID', {
+            templateUrl: 'partials/speakersList/editSpeakersList.html',
+            controller: 'EditSpeakersList'
+        });
         $routeProvider.when('/speakers/:speakersListID', {
             templateUrl: 'partials/speakersList/speakers.html',
             controller: 'Speakers'
