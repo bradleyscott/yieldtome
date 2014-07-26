@@ -23,6 +23,59 @@ angular.module('yieldtome.controllers')
             window.history.back();
         };
 
+        // Opens the Poll to votes
+        $scope.openPoll = function() {
+            $log.debug('VotesController.openPoll() executing');
+
+            $scope.poll.Status = 'Open';
+            var promise = PollService.updatePoll($scope.poll);
+
+            promise.then(function(poll) {
+                $scope.poll = poll;
+                $scope.info = poll.Name + " opened for voting";
+                $log.debug('$scope.poll updated after openPoll()');
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something went wrong trying to open " + $scope.poll.Name + " for voting";
+            });                
+        };
+
+        // Closes the Poll to votes
+        $scope.closePoll = function() {
+            $log.debug('VotesController.closePoll() executing');
+
+            $scope.poll.Status = 'Closed';
+            var promise = PollService.updatePoll($scope.poll);
+
+            promise.then(function(poll) {
+                $scope.poll = poll;
+                $scope.info = poll.Name + " closed to voting";
+                $log.debug('$scope.poll updated after closePoll()');
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something went wrong trying to close " + $scope.poll.Name + " to voting";
+            });                
+        };
+
+        // Clears all Votes on the Poll
+        $scope.clearVotes = function() {
+            $log.debug('VotesController.clearVotes() executing');
+            var promise = VotesService.clearAllVotes($scope.poll);
+
+            promise.then(function(votes) {
+                $scope.votes = votes;
+                $scope.getUpdatedPoll($scope.poll.PollID);
+                $scope.info = "All Votes have been cleared";
+                $log.debug('$scope.votes updated after clearVotes()');
+            })            
+            .catch (function(error) {
+                $log.warn(error);
+                $scope.error = "Something went wrong trying to clear all Votes";
+            });                
+        };
+
         // Casts a Vote
         $scope.castVote = function(attendee, result) {
             $log.debug('VotesController.vote() executing');

@@ -23,7 +23,7 @@ angular.module('yieldtome.controllers')
         // Opens the delete event modal
         $scope.showDelete = function() {
             $scope.deleteConfirm = $modal.open({ 
-                templateUrl: 'partials/event/deletePoll.html',
+                templateUrl: 'partials/poll/deletePoll.html',
                 scope: $scope
             }); 
 
@@ -49,7 +49,7 @@ angular.module('yieldtome.controllers')
             $log.debug('EditPoll.delete() starting');
             $scope.error = '';
 
-            var promise = PollService.deletePoll($scope.event);
+            var promise = PollService.deletePoll($scope.poll);
 
             promise.then(function(data) // It all went well
                 {

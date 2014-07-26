@@ -5,8 +5,26 @@
     <div>
         <h2>{{poll.Name}}
             </br>
+            <div class="pull-right">
+                <div class="btn-group" dropdown is-open="isSettingsOpen">
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="glyphicon glyphicon-cog"></span>
+                        <span class="caret"></span>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                        <li ng-show="poll.Status == 'Open'" ng-click="closePoll()"><a>Close this Poll to voting</a>
+                        </li>
+                        <li ng-show="poll.Status == 'Closed'" ng-click="openPoll()"><a>Open this Poll for voting</a>
+                        </li>
+                        <li><a href="#/editPoll/{{poll.PollID}}">Edit this Poll</a>
+                        </li>
+                        <li ng-click="clearVotes()"><a>Clear all Votes</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
             <small>{{event.Name}}</small>
-        </h2>
+        </h2>            
         <!-- Poll results -->
         <div class="row">
             <div class="col-xs-4" style="text-align:center">
