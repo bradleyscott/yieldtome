@@ -49,6 +49,12 @@ angular.module('yieldtome.directives', [])
             templateUrl: 'partials/speakersList/speakerList.html'
         };
     })
+    .directive('ytmMyVote', function() {
+        return {
+            restrict: 'E',
+            templateUrl: 'partials/poll/myVote.html'
+        };
+    })
     .directive('ytmVoteList', function() {
         return {
             restrict: 'E',

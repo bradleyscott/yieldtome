@@ -1,44 +1,42 @@
-<div>
-    <ytm-nav-menu></ytm-nav-menu>
-    <div class="container body-content">
-        <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-        <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
-        <div>
-            <h2>Polls
-                </br>
-                <small>{{event.Name}}</small>
-            </h2>
-            <div class="list-group">
-                <div class="form-group">
-                    <div class="row">
-                        <div class="col-xs-9">
-                            <div class="input-group">
-                                <span class="input-group-addon">
-                                    <span class="glyphicon glyphicon-search"></span>
-                                </span>
-                                <input type="text" class="form-control" ng-model="query" placeholder="Find a Poll..." />
-                            </div>
-                        </div>
-                        <div class="col-xs-3">
-                            <button type="button" class="btn btn-primary pull-right" ng-click="new()">
-                                <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
-                            </button>
+<ytm-nav-menu></ytm-nav-menu>
+<div class="container body-content">
+    <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
+    <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
+    <div>
+        <h2>Polls
+            </br>
+            <small>{{event.Name}}</small>
+        </h2>
+        <div class="list-group">
+            <div class="form-group">
+                <div class="row">
+                    <div class="col-xs-9">
+                        <div class="input-group">
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-search"></span>
+                            </span>
+                            <input type="text" class="form-control" ng-model="query" placeholder="Find a Poll..." />
                         </div>
                     </div>
+                    <div class="col-xs-3">
+                        <button type="button" class="btn btn-primary pull-right" ng-click="new()">
+                            <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
+                        </button>
+                    </div>
                 </div>
-                <div class="well" ng-show="polls.length == 0">There is not yet any Polls to vote on</div>
-                <a href="#/polls/{{poll.PollID}}" class="list-group-item" ng-repeat="poll in polls | filter:query">
-                    <h4 class="list-group-item-heading">{{poll.Name}}<br>
-                        <small ng-show="poll.IsPassing">Passing</small>
-                        <small ng-hide="poll.IsPassing">Failing</small>
-                    </h4>
-                    <progress max="poll.VotesFor + poll.VotesAgainst + poll.VotesAbstaining">
-                        <bar value="poll.VotesFor" type="success"><span>{{poll.VotesFor}} for</span></bar>
-                        <bar value="poll.VotesAgainst" type="danger"><span>{{poll.VotesAgainst}} against</span></bar>
-                        <bar value="poll.VotesAbstaining"><span>{{poll.VotesAbstaining}} abstain</span></bar>
-                    </progress>
-                </a>
             </div>
+            <div class="well" ng-show="polls.length == 0">There is not yet any Polls to vote on</div>
+            <a href="#/polls/{{poll.PollID}}" class="list-group-item" ng-repeat="poll in polls | filter:query">
+                <h4 class="list-group-item-heading">{{poll.Name}}<br>
+                    <small ng-show="poll.IsPassing">Passing</small>
+                    <small ng-hide="poll.IsPassing">Failing</small>
+                </h4>
+                <progress max="poll.VotesFor + poll.VotesAgainst + poll.VotesAbstaining">
+                    <bar value="poll.VotesFor" type="success"><span>{{poll.VotesFor}} for</span></bar>
+                    <bar value="poll.VotesAgainst" type="danger"><span>{{poll.VotesAgainst}} against</span></bar>
+                    <bar value="poll.VotesAbstaining"><span>{{poll.VotesAbstaining}} abstain</span></bar>
+                </progress>
+            </a>
         </div>
     </div>
 </div>

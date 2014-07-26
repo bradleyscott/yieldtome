@@ -1,30 +1,32 @@
-<div>
-    <ytm-nav-menu></ytm-nav-menu>
-    <div class="container body-content">
-        <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-        <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
-        <div>
-            <h2>{{poll.Name}}
-                </br>
-                <small>{{event.Name}}</small>
-            </h2>
-            <!-- Poll results -->
-            <div class="row">
-                <div class="col-xs-4" style="text-align:center">
-                    <h1>{{poll.VotesFor}}<br><small>For</small></h1>
-                </div>
-                <div class="col-xs-4" style="text-align:center">
-                    <h1>{{poll.VotesAgainst}}<br><small>Against</small></h1>
-                </div>
-                <div class="col-xs-4" style="text-align:center"><h1>{{poll.VotesAbstaining}}<br><small>Abstain</small></h1></div>
+<ytm-nav-menu></ytm-nav-menu>
+<div class="container body-content">
+    <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
+    <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
+    <div>
+        <h2>{{poll.Name}}
+            </br>
+            <small>{{event.Name}}</small>
+        </h2>
+        <!-- Poll results -->
+        <div class="row">
+            <div class="col-xs-4" style="text-align:center">
+                <h1>{{poll.VotesFor}}<br><small>For</small></h1>
             </div>
-            <progress style="text-align:center" ng-hide="poll.VotesAbstaining==votes.length">
-                <bar value="(poll.VotesFor / votes.length)*100" type="success"><span ng-show="poll.IsPassing">Passing</span></bar>
-                <bar value="(poll.VotesAgainst / votes.length)*100" type="danger"><span ng-hide="poll.IsPassing">Failing</span></bar>
-                <bar value="(poll.VotesAbstaining / votes.length)*100"><span ng-hide="poll.IsPassing || poll.VotesAgainst > 0">Failing</span></bar>
-            </progress>
-            <!-- List of votes -->
-            <ytm-vote-list></ytm-vote-list>
+            <div class="col-xs-4" style="text-align:center">
+                <h1>{{poll.VotesAgainst}}<br><small>Against</small></h1>
+            </div>
+            <div class="col-xs-4" style="text-align:center"><h1>{{poll.VotesAbstaining}}<br><small>Abstain</small></h1></div>
         </div>
+        <progress style="text-align:center" ng-hide="poll.VotesAbstaining==votes.length">
+            <bar value="(poll.VotesFor / votes.length)*100" type="success"><span ng-show="poll.IsPassing">Passing</span></bar>
+            <bar value="(poll.VotesAgainst / votes.length)*100" type="danger"><span ng-hide="poll.IsPassing">Failing</span></bar>
+            <bar value="(poll.VotesAbstaining / votes.length)*100"><span ng-hide="poll.IsPassing || poll.VotesAgainst > 0">Failing</span></bar>
+        </progress>
+        <!-- My Vote -->
+        <h4>Your Vote</h4>
+        <ytm-my-vote></ytm-my-vote>
+        <!-- List of votes -->
+        <h4>Other Votes</h4>
+        <ytm-vote-list></ytm-vote-list>
     </div>
 </div>
