@@ -1,49 +1,47 @@
-<div>
-    <ytm-menu></ytm-menu>
-    <div class="container body-content">
-        <h2>{{title}}
-            <br/>
-            <small>{{event.Name}}</small>
-        </h2>
-        <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-        <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
-        <form name="form" role="form" class="css-form form-horizontal" novalidate>
-            <div style="margin-left:15px; margin-right:15px">
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" style="min-width:65px">name</span>
-                        <input name="name" class="form-control" type="text" ng-model="event.Name" required placeholder="Event name" />
-                        <span class="form-control validation" ng-show="form.name.$invalid">Whatcha calling this Event?</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" style="min-width:65px">desc</span>
-                        <textarea name="description" class="form-control" ng-model="event.Description" placeholder="Describe your Event"></textarea>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" style="min-width:65px">start</span>
-                        <input name="startDate" class="form-control" type="date" ng-model="startDateAsString" pattern="dd/MM/YYYY" required />
-                        <span class="form-control validation" ng-show="form.startDate.$error.required">When do we start?</span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="input-group">
-                        <span class="input-group-addon" style="min-width:65px">end</span>
-                        <input name="endDate" class="form-control" type="date" ng-model="endDateAsString" pattern="dd/MM/YYYY" required min="{{startDateAsString}}" />
-                        <span class="form-control validation" ng-show="form.endDate.$error.required">It's gotta end at some point!</span>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="text-right">
-                        <button type="button" ng-click="$back()" class="btn btn-default">{{alternatebutton}}</button>
-                        <button type="button" ng-click="showDelete()" ng-show="isDeleteEnabled" class="btn btn-danger">Delete</button>
-                        <button type="submit" ng-disabled="form.$invalid" ng-click="save()" class="btn btn-primary">Save</button>
-                    </div>
+<ytm-menu></ytm-menu>
+<div class="container body-content">
+    <h2>{{title}}
+        <br/>
+        <small>{{event.Name}}</small>
+    </h2>
+    <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
+    <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
+    <form name="form" role="form" class="css-form form-horizontal" novalidate>
+        <div style="margin-left:15px; margin-right:15px">
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" style="min-width:65px">name</span>
+                    <input name="name" class="form-control" type="text" ng-model="event.Name" required placeholder="Event name" />
+                    <span class="form-control validation" ng-show="form.name.$invalid">Whatcha calling this Event?</span>
                 </div>
             </div>
-        </form>
-    </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" style="min-width:65px">desc</span>
+                    <textarea name="description" class="form-control" ng-model="event.Description" placeholder="Describe your Event"></textarea>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" style="min-width:65px">start</span>
+                    <input name="startDate" class="form-control" type="date" ng-model="startDateAsString" pattern="dd/MM/YYYY" required />
+                    <span class="form-control validation" ng-show="form.startDate.$error.required">When do we start?</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="input-group">
+                    <span class="input-group-addon" style="min-width:65px">end</span>
+                    <input name="endDate" class="form-control" type="date" ng-model="endDateAsString" pattern="dd/MM/YYYY" required min="{{startDateAsString}}" />
+                    <span class="form-control validation" ng-show="form.endDate.$error.required">It's gotta end at some point!</span>
+                </div>
+            </div>
+            <div class="row">
+                <div class="text-right">
+                    <button type="button" ng-click="$back()" class="btn btn-default">{{alternatebutton}}</button>
+                    <button type="button" ng-click="showDelete()" ng-show="isDeleteEnabled" class="btn btn-danger">Delete</button>
+                    <button type="submit" ng-disabled="form.$invalid" ng-click="save()" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </form>
 </div>
