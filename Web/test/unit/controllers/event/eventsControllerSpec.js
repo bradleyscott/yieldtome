@@ -2,7 +2,7 @@
 
 describe('The Events controller', function() {
 
-    var $controller, $log, $scope, $location, $q, SessionService, EventService, AttendeeService;
+    var $controller, $log, $scope, $location, $q, growl, SessionService, EventService, AttendeeService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -19,8 +19,23 @@ describe('The Events controller', function() {
             SessionService = jasmine.createSpyObj('SessionService', ['get', 'set']);
             EventService = jasmine.createSpyObj('EventService', ['getEvents']);
             AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendees']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
+
+    function initializeController() {
+        // Initialise the controller
+        // $scope, $location, $log, growl, SessionService, EventService, AttendeeService
+        $controller('Events', {
+            $scope: $scope,
+            $location: $location,
+            $log: $log,
+            growl: growl,
+            SessionService: SessionService,
+            EventService: EventService,
+            AttendeeService: AttendeeService
+        });
+    }
 
     describe('when it initiaties', function() {
 
@@ -53,17 +68,7 @@ describe('The Events controller', function() {
             );
             EventService.getEvents.andReturn(getEventsResponse.promise);
 
-            // Initialise the controller
-            // $scope, $location, $log, SessionService, EventService, AttendeeService
-            $controller('Events', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                EventService: EventService,
-                AttendeeService: AttendeeService
-            });
-
+            initializeController();
             $scope.$digest();
 
             expect($scope.events.length).toBe(2);
@@ -76,20 +81,11 @@ describe('The Events controller', function() {
             getEventsResponse.reject('HugeFail');
             EventService.getEvents.andReturn(getEventsResponse.promise);
 
-            // Initialise the controller
-            // $scope, $location, $log, SessionService, EventService, AttendeeService
-            $controller('Events', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                EventService: EventService,
-                AttendeeService: AttendeeService
-            });
+            initializeController();
 
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to get the list of yieldto.me Events");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the list of yieldto.me Events");
         });
     });
 
@@ -145,16 +141,7 @@ describe('The Events controller', function() {
                 "IsLinkedInPublic": true
             });
 
-            // Initialise the controller
-            // $scope, $location, $log, SessionService, EventService, AttendeeService
-            $controller('Events', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                EventService: EventService,
-                AttendeeService: AttendeeService
-            });
+            initializeController();
 
         });
 
@@ -282,7 +269,7 @@ describe('The Events controller', function() {
             $scope.selectEvent(selectedEvent);
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/landing") // Check redirection
+            expect($location.path).toHaveBeenCalledWith("/landing"); // Check redirection
         });
 
         it("should display an error if there was a huge fail when trying to get the Attendees", function() {
@@ -300,7 +287,7 @@ describe('The Events controller', function() {
             $scope.selectEvent(selectedEvent);
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to get the list of Attendees");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the list of Attendees");
         });
 
         it("it should allow the user to de-select an Event by passing in nothing", function() {
@@ -375,16 +362,7 @@ describe('The Events controller', function() {
                 "IsLinkedInPublic": true
             });
 
-            // Initialise the controller
-            // $scope, $location, $log, SessionService, EventService, AttendeeService
-            $controller('Events', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                EventService: EventService,
-                AttendeeService: AttendeeService
-            });
+            initializeController();
 
         });
 

@@ -1,7 +1,5 @@
 <ytm-home-menu></ytm-home-menu>
 <div class="container body-content">
-    <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-    <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
     <p></p>
     <p></p>
     <div class="jumbotron" id="benefits">
@@ -9,8 +7,9 @@
         <p class="lead">
             Helps delegates and organisers of Model UNs manage the boring details of debate from their phone, tablet, or computer. Everyone spends less time on the rules and more time on the debate
         </p>
-        <button type="button" class="btn btn-primary btn-lg"  data-loading-text="Logging in..."  ng-click="login()">Get started</button>
+        <button type="button" id="loginButton" class="btn btn-primary btn-lg" ng-click="login()">Get started</button>
     </div>
+    <h1>Features</h1>
     <div class="row" id="features">
         <div class="col-md-3">
             <h2>

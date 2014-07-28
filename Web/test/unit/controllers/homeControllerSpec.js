@@ -2,7 +2,7 @@
 
 describe('The Home controller', function() {
 
-    var $scope, $location, $routeParams, $q, $log, $controller, AuthenticationService;
+    var $scope, $location, $routeParams, $q, $log, growl, $controller, AuthenticationService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -10,30 +10,36 @@ describe('The Home controller', function() {
 
         inject(function($rootScope, _$log_, _$controller_, _$q_) {
             $scope = $rootScope.$new();
-            $q = _$q_;
             $log = _$log_;
             $controller = _$controller_;
+            $q = _$q_;
 
             // Create Mocks 
             AuthenticationService = jasmine.createSpyObj('AuthenticationService', ['getApiToken', 'getAuthenticatedProfile', 'logOut']);
             $location = jasmine.createSpyObj('$location', ['path']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
-        describe('when initialising', function() {
+    function initializeController() {
+        // Initialise the controller
+        // $scope, $location, $log, $routeParams, growl, SessionService, AuthenticationService
+        $controller('Home', {
+            $scope: $scope,
+            $location: $location,
+            $routeParams: $routeParams,
+            growl: growl,
+            $log: $log,
+            AuthenticationService: AuthenticationService
+        });
+    }
+
+    describe('when initialising', function() {
 
         it("should log the user out if the logout routeparam exists", function() {
             $routeParams = { logout: true };
    
-            // Initialise the controller
-            $controller('Home', {
-                $scope: $scope,
-                $location: $location,
-                $routeParams: $routeParams,
-                $log: $log,
-                AuthenticationService: AuthenticationService
-            });
-
+            initializeController();
             expect(AuthenticationService.logOut.calls.length == 1);
         });
     });
@@ -42,15 +48,7 @@ describe('The Home controller', function() {
 
         beforeEach(function(){
             $routeParams = {};
-
-            // Initialise the controller
-            $controller('Home', {
-                $scope: $scope,
-                $location: $location,
-                $routeParams: $routeParams,
-                $log: $log,
-                AuthenticationService: AuthenticationService
-            });
+            initializeController();
         });
 
         it("that should display an error if there was a huge fail when talking to Facebook", function() {
@@ -61,8 +59,7 @@ describe('The Home controller', function() {
             $scope.login(); // Hit the login function
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We weren't able to login you in. Did you authorize our Facebook request?");
         });
 
         it("that should display an error if the user doesn't authenticate with Facebook or grant permissions", function() {
@@ -73,8 +70,7 @@ describe('The Home controller', function() {
             $scope.login(); // Hit the login function
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("We weren't able to login you in. Did you authorize our Facebook request?");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We weren't able to login you in. Did you authorize our Facebook request?");
         });
 
         it('that should redirect to the events page if there is an existing Profile', function() {

@@ -2,7 +2,7 @@
 
 describe('The EditEvent controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $window, $modal, $routeParams, $filter, EventService, SessionService;
+    var $scope, $location, $q, $controller, $log, $window, $modal, $routeParams, $filter, growl, EventService, SessionService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -21,6 +21,7 @@ describe('The EditEvent controller', function() {
             EventService = jasmine.createSpyObj('EventService', ['getEvent', 'editEvent', 'deleteEvent']);
             $location = jasmine.createSpyObj('$location', ['path']);
             $modal = jasmine.createSpyObj('$modal', ['open']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
 
             $window.sessionStorage.profile = JSON.stringify({
                     "ProfileID": 1,
@@ -46,8 +47,7 @@ describe('The EditEvent controller', function() {
 
      function initializeController(){
 
-        // $scope, $location, $log, $window, $modal, $routeParams, $filter, SessionService, EventService
-        // Initialise the controller
+        // $scope, $location, $log, $window, $modal, $routeParams, $filter, growl, SessionService, EventService
         $controller('EditEvent', {
             $scope: $scope,
             $location: $location,
@@ -56,6 +56,7 @@ describe('The EditEvent controller', function() {
             $modal: $modal,
             $routeParams: $routeParams,
             $filter: $filter,
+            growl: growl,
             EventService: EventService,
             SessionService: SessionService
         }); 
@@ -93,7 +94,7 @@ describe('The EditEvent controller', function() {
             initializeController();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to get this Event");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get this Event");
         });
     });
 
@@ -123,7 +124,7 @@ describe('The EditEvent controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.info).toBe('Your Event updates just got saved');
+            expect(growl.addInfoMessage).toHaveBeenCalledWith('Your updates just got saved');
         });
 
         it("that displays an error if something catastrophic happens", function() {
@@ -137,8 +138,7 @@ describe('The EditEvent controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something went wrong trying to edit your Event. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to edit your Event. EpicFail");
         });
     });
 
@@ -154,17 +154,7 @@ describe('The EditEvent controller', function() {
 
             EventService.getEvent.andReturn(getEventResponse.promise); // Return a valid event
 
-            // Initialise the controller
-            $controller('EditEvent', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                $modal: $modal,
-                $routeParams: $routeParams,
-                $filter: $filter,
-                EventService: EventService
-            });
+            initializeController();
         });
     
         it("that should return to the events screen if the delete succeeds", function() {
@@ -192,8 +182,7 @@ describe('The EditEvent controller', function() {
             $scope.delete();
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something went wrong trying to delete your Event. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to delete your Event. EpicFail");
         });
     });
 

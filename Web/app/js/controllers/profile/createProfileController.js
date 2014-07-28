@@ -2,15 +2,13 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('CreateProfile', ['$scope', '$location', '$log', '$window', 'SessionService', 'AuthenticationService', 'FacebookService', 'ProfileService',
-    function($scope, $location, $log, $window, SessionService, AuthenticationService, FacebookService, ProfileService) {
+.controller('CreateProfile', ['$scope', '$location', '$log', '$window', 'growl', 'SessionService', 'AuthenticationService', 'FacebookService', 'ProfileService',
+    function($scope, $location, $log, $window, growl, SessionService, AuthenticationService, FacebookService, ProfileService) {
 
         $log.debug("CreateProfile controller executing");
 
         $scope.title = 'Create Profile';
         $scope.alternatebutton = 'Cancel';
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.profile;
 
         $scope.$back = function() {
@@ -22,14 +20,15 @@ angular.module('yieldtome.controllers')
             $log.debug('CreateProfile.save() starting');
             var promise = ProfileService.createProfile($scope.profile);
 
-            promise.then(function(profile) // It all went well
-                {
-                    AuthenticationService.getAuthenticatedProfile(); // Sets the currently Authenticated profile in the AuthenticateService
-                    SessionService.set('profile', profile); // Saves the profile in session
-                    $location.path('/events'); // Redirect to the Events list page
-                })
+            promise.then(function(profile) { // It all went well
+                AuthenticationService.getAuthenticatedProfile(); // Sets the currently Authenticated profile in the AuthenticateService
+                SessionService.set('profile', profile); // Saves the profile in session
+                growl.addInfoMessage("You have successfully set up a yieldto.me profile");
+                $location.path('/events'); // Redirect to the Events list page
+            })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something went wrong trying to create your Profile. " + error;
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to create your Profile. " + error);
             });
         };
 
@@ -50,7 +49,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get your Facebook Profile information";
+                growl.addErrorMessage("Something went wrong trying to get your Facebook Profile information");
             });
         })();
 

@@ -2,15 +2,13 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('ViewProfile', ['$scope', '$log', '$window', '$routeParams', 'ProfileService',
-    function($scope, $log, $window, $routeParams, ProfileService) {
+.controller('ViewProfile', ['$scope', '$log', '$window', '$routeParams', 'growl', 'ProfileService',
+    function($scope, $log, $window, $routeParams, growl, ProfileService) {
 
         $log.debug("ViewProfile controller executing");
 
         $scope.title = 'View Profile';
         $scope.alternatebutton = 'Back';
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.profile;
         $scope.formDisabled = true;
 
@@ -20,7 +18,6 @@ angular.module('yieldtome.controllers')
 
         // Controller initialization
         (function() {
-
             var profileID = $routeParams.profileID;
             var promise = ProfileService.getProfile(profileID);
 
@@ -29,7 +26,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get this Profile";
+                growl.addErrorMessage("Something went wrong trying to get this Profile");
             });
 
         })();

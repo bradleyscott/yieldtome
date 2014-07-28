@@ -42,7 +42,7 @@ angular.module('yieldtome.services')
             return deferred.promise;
         };
 
-        this.clearAllVotes = function(poll) {
+        this.deleteAllVotes = function(poll) {
             $log.debug('Attempting to clear all the Votes cast on this Poll');
             var deferred = $q.defer();
 
@@ -61,16 +61,16 @@ angular.module('yieldtome.services')
                 $log.debug('Successfully cleared Votes. There are now ' + data.length + ' Votes cast');
                 deferred.resolve(data);
             })
-                .error(function(status) { // Otherwise, some unknown error occured
-                    var error = status.Message;
-                    $log.warn(error);
-                    deferred.reject(error);
-                });
+            .error(function(status) { // Otherwise, some unknown error occured
+                var error = status.Message;
+                $log.warn(error);
+                deferred.reject(error);
+            });
 
             return deferred.promise;
         };
 
-    	this.clearVote = function(vote) {
+    	this.deleteVote = function(vote) {
             $log.debug('Attempting to clear Vote');
             var deferred = $q.defer();
 

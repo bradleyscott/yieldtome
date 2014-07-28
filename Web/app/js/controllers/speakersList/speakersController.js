@@ -4,13 +4,11 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Speakers', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'SessionService', 'SpeakersListService', 'SpeakersService',
-    function($scope, $location, $log, $window, $modal, $routeParams, SessionService, SpeakersListService, SpeakersService) {
+.controller('Speakers', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService',
+    function($scope, $location, $log, $window, $modal, $routeParams, growl, SessionService, SpeakersListService, SpeakersService) {
 
         $log.debug("Speakers controller executing");
 
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.profile; // The authenticated Profile, if it exists
         $scope.event; // Selected Event
         $scope.attendee; // Attendee record for this Profile
@@ -58,13 +56,13 @@ angular.module('yieldtome.controllers')
             var promise = SpeakersListService.deleteList($scope.list);
 
             promise.then(function(data) {
-                $scope.info = $scope.list.Name + " deleted";
                 $log.debug('Speakers List deleted after deleteList()');
+                growl.addInfoMessage($scope.list.Name + " deleted");
                 $location.path('/speakersLists');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to delete this Speakers List";
+                growl.addErrorMessage("Something went wrong trying to delete this Speakers List");
             });                
         };
 
@@ -75,12 +73,12 @@ angular.module('yieldtome.controllers')
             var promise = SpeakersService.createSpeaker($scope.list, $scope.attendee, position);
 
             promise.then(function(speaker) {
-                $scope.info = "You have been added to the Speakers List";
+                growl.addInfoMessage("You have been added to the Speakers List");
                 $scope.getSpeakers();
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to add you to the Speakers List";
+                growl.addErrorMessage("Something went wrong trying to add you to the Speakers List");
             });                
         };
 
@@ -93,12 +91,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(list) {
                 $scope.list = list;
-                $scope.info = list.Name + " opened to new Speakers";
                 $log.debug('$scope.list updated after openList()');
+                growl.addInfoMessage(list.Name + " opened to new Speakers");
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to open " + $scope.list.Name + " to new Speakers";
+                growl.addErrorMessage("Something went wrong trying to open " + $scope.list.Name + " to new Speakers");
             });                
         };
 
@@ -111,12 +109,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(list) {
                 $scope.list = list;
-                $scope.info = list.Name + " closed to new Speakers";
                 $log.debug('$scope.list updated after closeList()');
+                growl.addInfoMessage(list.Name + " closed to new Speakers");
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to close " + $scope.list.Name + " to new Speakers";
+                growl.addErrorMessage("Something went wrong trying to close " + $scope.list.Name + " to new Speakers");
             });                
         };
 
@@ -127,12 +125,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
-                $scope.info = "Speakers have all been removed";
                 $log.debug('$scope.speakers updated after removeAllSpeakers()');
+                growl.addInfoMessage("Speakers have all been removed");
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to remove the Speakers from this Speakers list";
+                growl.addErrorMessage("Something went wrong trying to remove the Speakers from this Speakers list");
             });                
         };
 
@@ -144,12 +142,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
-                $scope.info = speaker.Attendee.Name + " removed";
                 $log.debug('$scope.speakers updated after remove()');
+                growl.addInfoMessage(speaker.Attendee.Name + " removed");
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to remove this Speaker";
+                growl.addErrorMessage("Something went wrong trying to remove this Speaker");
             });                
         };
 
@@ -160,12 +158,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
-                $scope.info = "Speakers list re-ordered";
                 $log.debug('$scope.speakers updated after reorderSpeakers()');
+                growl.addInfoMessage("Speakers list re-ordered");
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to re-order the Speakers list";
+                growl.addErrorMessage("Something went wrong trying to re-order the Speakers list");
             }); 
         };
 
@@ -176,12 +174,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
-                $scope.info = speaker.Attendee.Name + " has now spoken and has been removed";
                 $log.debug('$scope.speakers updated after speak()');
+                growl.addInfoMessage(speaker.Attendee.Name + " has now spoken and has been removed");
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to update the Speakers list";
+                growl.addErrorMessage("Something went wrong trying to update the Speakers list");
             });                
         };
 
@@ -195,7 +193,7 @@ angular.module('yieldtome.controllers')
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get the list of Speakers";
+                growl.addErrorMessage("Something went wrong trying to get the list of Speakers");
             });                
         };
         
@@ -218,7 +216,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get this Speakers List";
+                growl.addErrorMessage("Something went wrong trying to get this Speakers List");
             });                
 
         })();

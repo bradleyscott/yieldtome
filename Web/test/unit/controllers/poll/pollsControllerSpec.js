@@ -2,7 +2,7 @@
 
 describe('The Polls controller', function() {
 
-    var $controller, $log, $scope, $location, $q, SessionService, PollService;
+    var $controller, $log, $scope, $location, $q, growl, SessionService, PollService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -19,16 +19,17 @@ describe('The Polls controller', function() {
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
             PollService = jasmine.createSpyObj('PollService', ['getPolls']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
     function initializeController() {
         // Initialise the controller
-        //  $scope, $location, $log, $window, SessionService, PollService
         $controller('Polls', {
             $scope: $scope,
             $location: $location,
             $log: $log,
+            growl: growl,
             SessionService: SessionService,
             PollService: PollService
         });        
@@ -41,7 +42,7 @@ describe('The Polls controller', function() {
             initializeController();
             $scope.$digest();
 
-            expect($scope.error).toBe("We don't know what Event you're attending");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't know what Event you're attending");
         });
 
         it("should get the Polls and display them to screen", function() {
@@ -97,7 +98,7 @@ describe('The Polls controller', function() {
             initializeController();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to get the list of Polls");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the list of Polls");
         });
     });
 });

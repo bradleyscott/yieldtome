@@ -1,7 +1,5 @@
 <ytm-nav-menu></ytm-nav-menu>
 <div class="container body-content">
-    <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-    <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
     <div>
         <h2>{{list.Name}}
             </br>
@@ -10,8 +8,8 @@
         <!-- Nav Pills -->
         <ul class="nav nav-pills">
             <!-- Status -->
-            <li ng-show="list.Status == 'Open'" ng-click="closeList()"><button type="button" class="btn btn-success">Open</button></li>
-            <li ng-show="list.Status == 'Closed'" ng-click="openList()"><button type="button" class="btn btn-danger">Closed</button></li>
+            <li ng-show="list.Status == 'Open' && (list.Status == 'Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)" ng-click="closeList()"><button type="button" class="btn btn-success">Open</button></li>
+            <li ng-show="list.Status == 'Closed' && (list.Status == 'Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)" ng-click="openList()"><button type="button" class="btn btn-danger">Closed</button></li>
             <!-- Add myself as a Speaker -->
             <li class="dropdown" ng-show="speakingSlot==null && (list.Status == 'Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)">
                 <a class="dropdown-toggle" data-toggle="dropdown">

@@ -11,7 +11,9 @@ angular.module('yieldtome', [
     'ui.bootstrap',
     'ngFacebook',
     'ui.sortable',
-    'angular-loading-bar'
+    'angular-loading-bar',
+    'angular-growl',
+    'ngAnimate'
     ])
 
 // Configure routes
@@ -147,9 +149,12 @@ angular.module('yieldtome', [
     }
 ])
 
-// Register http interceptor
-.config(['$httpProvider',
-    function($httpProvider) {
-        $httpProvider.interceptors.push('httpResponseInterceptor');
+.config(['$httpProvider', 'growlProvider',
+    function($httpProvider, growlProvider) {
+        $httpProvider.interceptors.push('httpResponseInterceptor'); // Register http interceptor
+
+        // Growl settings
+        growlProvider.globalTimeToLive(3000);
+        growlProvider.onlyUniqueMessages(true);
     }
 ]);

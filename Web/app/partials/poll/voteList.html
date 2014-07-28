@@ -12,7 +12,7 @@
         <input type="text" class="form-control" ng-model="voteFilter.text" placeholder="Find vote..." />
     </div>
 </div>
-<a class="list-group-item" ng-repeat="vote in otherVotes | filter:filteredVotes">
+<a class="list-group-item" ng-animate="'animate'" ng-repeat="vote in otherVotes | filter:filteredVotes">
     <div class="media">
         <img class="media-object pull-left" ng-src="{{vote.Attendee.Profile.ProfilePictureUri}}">
         <div class="media-body">

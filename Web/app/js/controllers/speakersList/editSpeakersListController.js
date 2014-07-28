@@ -2,15 +2,13 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('EditSpeakersList', ['$scope', '$location', '$log', '$window', '$routeParams', 'SessionService', 'SpeakersListService',
-    function($scope, $location, $log, $window, $routeParams, SessionService, SpeakersListService) {
+.controller('EditSpeakersList', ['$scope', '$location', '$log', '$window', '$routeParams', 'growl', 'SessionService', 'SpeakersListService',
+    function($scope, $location, $log, $window, $routeParams, growl, SessionService, SpeakersListService) {
 
         $log.debug("EditSpeakersList controller executing");
 
         $scope.title = 'Edit Speakers List';
         $scope.alternatebutton = 'Back';
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.event;
         $scope.profile;
         $scope.list;
@@ -23,16 +21,17 @@ angular.module('yieldtome.controllers')
         $scope.save = function() // Edit Poll
         {
             $log.debug('EditPoll.save() starting');
-            $scope.error = '';
 
             var promise = SpeakersListService.updateList($scope.list);
 
             promise.then(function(list) { // It all went well 
-                $scope.list = list;  
-                $scope.info = 'You successfully renamed this Speakers List';
+                $scope.list = list;
+                growl.addInfoMessage('You successfully renamed ' + list.Name);
+                $location.path('/speakersLists'); // Redirect
             })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something went wrong trying to rename this Speakers List. " + error.Message;
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to rename this Speakers List. " + error);
             });
         };
 
@@ -49,7 +48,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get this Speakers List";
+                growl.addErrorMessage("Something went wrong trying to get this Speakers List");
             });
         })();
 }]);

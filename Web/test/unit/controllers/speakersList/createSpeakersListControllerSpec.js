@@ -2,7 +2,7 @@
 
 describe('The CreateSpeakersList controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $window, SessionService, SpeakersListService;
+    var $scope, $location, $q, $controller, $log, $window, growl, SessionService, SpeakersListService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -19,9 +19,21 @@ describe('The CreateSpeakersList controller', function() {
             // Create Mocks 
             SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['createList']);
             $location = jasmine.createSpyObj('$location', ['path']);
-
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
+
+    function initializeController() {
+        $controller('CreateSpeakersList', {
+            $scope: $scope,
+            $location: $location,
+            $log: $log,
+            $window: $window,
+            growl: growl,
+            SessionService: SessionService,
+            SpeakersListService: SpeakersListService
+        });
+    }
 
     describe('when it initiaties', function() {
 
@@ -30,20 +42,11 @@ describe('The CreateSpeakersList controller', function() {
             SessionService.set('event', undefined);
             SessionService.set('profile', undefined);
 
-            // Initialise the controller
-            // $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('CreateSpeakersList', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
+            initializeController();
 
             $scope.$digest();
 
-            expect($scope.error).toBe("We don't have enough information to have you create a Speakers list");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't have enough information to have you create a Speakers list");
         });
 
         it("should set the profile and event values if they are in session", function() {
@@ -51,16 +54,7 @@ describe('The CreateSpeakersList controller', function() {
             SessionService.set('profile', 'ValidProfile'); // Set authenticatedProfile
             SessionService.set('event', 'ValidEvent'); // Set event
 
-            // Initialise the controller
-            // $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('CreateSpeakersList', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
+            initializeController();
 
             $scope.$digest();
 
@@ -76,17 +70,7 @@ describe('The CreateSpeakersList controller', function() {
             SessionService.set('profile', { ProfileID: 1 }); // Set authenticatedProfile
             SessionService.set('event', { EventID: 1 }); // Set event
 
-            // Initialise the controller
-            // $scope, $location, $log, $window, SessionService, SpeakersListService
-            $controller('CreateSpeakersList', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                $window: $window,
-                SessionService: SessionService,
-                SpeakersListService: SpeakersListService
-            });
-
+            initializeController();
         });
 
         it("that should redirect to the events page if the list creation succeeds", function() {
@@ -111,7 +95,7 @@ describe('The CreateSpeakersList controller', function() {
 
             // Set up Mock to return an error response from SpeakersListService.createSpeakersList()
             var createListResponse = $q.defer();
-            createListResponse.reject({ Message: "EpicFail" });
+            createListResponse.reject("EpicFail");
 
             SpeakersListService.createList.andReturn(createListResponse.promise);
 
@@ -119,7 +103,7 @@ describe('The CreateSpeakersList controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to create this Speakers List. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to create this Speakers List. EpicFail");
         });
     });
 });

@@ -2,7 +2,7 @@
 
 describe('The EditProfile controller', function() {
 
-    var $scope, $location, $q, $controller, $log, ProfileService;
+    var $scope, $location, $q, $controller, $log, growl, ProfileService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -16,6 +16,7 @@ describe('The EditProfile controller', function() {
 
             // Create Mocks 
             ProfileService = jasmine.createSpyObj('ProfileService', ['editProfile']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
@@ -27,6 +28,7 @@ describe('The EditProfile controller', function() {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                growl: growl, 
                 ProfileService: ProfileService
             });
         });
@@ -42,7 +44,7 @@ describe('The EditProfile controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.info).toBe('Your Profile updates just got saved') // Check redirection to eventList
+            expect(growl.addInfoMessage).toHaveBeenCalledWith('Your Profile updates just got saved') // Check redirection to eventList
         });
 
         it("that displays an error if something catastrophic happens", function() {
@@ -56,8 +58,7 @@ describe('The EditProfile controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something went wrong trying to edit your Profile");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to edit your Profile");
         });
     });
 });

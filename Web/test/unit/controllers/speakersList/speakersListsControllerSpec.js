@@ -2,7 +2,7 @@
 
 describe('The SpeakersLists controller', function() {
 
-    var $controller, $log, $scope, $location, $q, SessionService, SpeakersListService;
+    var $controller, $log, $scope, $location, $q, growl, SessionService, SpeakersListService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -19,16 +19,17 @@ describe('The SpeakersLists controller', function() {
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
             SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getLists']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
     function initializeController(){
-        // Initialise the controller
-        //  $scope, $location, $log, $window, SessionService, SpeakersListService
+
         $controller('SpeakersLists', {
             $scope: $scope,
             $location: $location,
             $log: $log,
+            growl: growl,
             SessionService: SessionService,
             SpeakersListService: SpeakersListService
         });
@@ -41,7 +42,7 @@ describe('The SpeakersLists controller', function() {
             initializeController();
             $scope.$digest();
 
-            expect($scope.error).toBe("We don't know what Event you're attending");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't know what Event you're attending");
         });
 
         it("should get the Speakers lists and displays them to screen", function() {
@@ -114,7 +115,7 @@ describe('The SpeakersLists controller', function() {
             initializeController();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to get the list of Speakers Lists");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the list of Speakers Lists");
         });
     });
 });

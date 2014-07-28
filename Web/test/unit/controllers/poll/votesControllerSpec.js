@@ -2,7 +2,7 @@
 
 describe('The Votes controller', function() {
 
-    var $controller, $log, $scope, $location, $q, $routeParams, SessionService, PollService, VotesService;
+    var $controller, $log, $scope, $location, $q, $routeParams, growl, SessionService, PollService, VotesService;
 
     var vote = {
         "VoteID": 1,
@@ -48,8 +48,9 @@ describe('The Votes controller', function() {
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
-            PollService = jasmine.createSpyObj('PollService', ['getPolls', 'getPoll']);
-            VotesService = jasmine.createSpyObj('VotesService', ['getVotes', 'createVote']);
+            PollService = jasmine.createSpyObj('PollService', ['getPolls', 'getPoll', 'updatePoll']);
+            VotesService = jasmine.createSpyObj('VotesService', ['getVotes', 'createVote', 'deleteAllVotes']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
@@ -64,12 +65,12 @@ describe('The Votes controller', function() {
         SessionService.set('event', 'ValidEvent');
         SessionService.set('attendee', { AttendeeID: 1 });
 
-        // $scope, $location, $log, $window, $routeParams, SessionService, PollService, VotesService
         $controller('Votes', {
             $scope: $scope,
             $location: $location,
             $log: $log,
             $routeParams: $routeParams,
+            growl: growl,
             SessionService: SessionService,
             PollService: PollService,
             VotesService: VotesService
@@ -88,7 +89,7 @@ describe('The Votes controller', function() {
             initializeController();
 
             $scope.$digest();
-            expect($scope.error).toBe("Something went wrong trying to get this Poll");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get this Poll");
 
         });
 
@@ -108,7 +109,7 @@ describe('The Votes controller', function() {
             initializeController();
 
             $scope.$digest();
-            expect($scope.error).toBe("Something went wrong trying to get the Votes on this Poll");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the Votes on this Poll");
         });
 
         it("should display the Votes to screen", function() {
@@ -309,7 +310,7 @@ describe('The Votes controller', function() {
                 $scope.castVote(attendee, 'Position');
                 $scope.$digest();
 
-                expect($scope.info).toBe('Attendee has voted Position');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Attendee has voted Position');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -322,7 +323,105 @@ describe('The Votes controller', function() {
                 $scope.castVote(attendee, 'Position');
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to cast a Vote");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to cast a Vote");
+            });
+        });
+
+        describe('openPoll()', function() {
+
+            it("that opens the Poll for voting", function() {
+                var updatePollResponse = $q.defer();
+                updatePollResponse.resolve({
+                    Name: 'Poll 1',
+                    Status: 'Open'
+                });
+
+                PollService.updatePoll.andReturn(updatePollResponse.promise);
+
+                $scope.openPoll();
+                $scope.$digest();
+
+                expect($scope.poll.Status).toBe('Open');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Poll 1 opened for voting');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var updatePollResponse = $q.defer();
+                updatePollResponse.reject('EpicFail');
+
+                PollService.updatePoll.andReturn(updatePollResponse.promise); // Return an error
+
+                $scope.poll = { Name: 'Poll 1' };
+                $scope.openPoll();
+                $scope.$digest();
+
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to open Poll 1 for voting");
+            });
+        });
+
+        describe('closePoll()', function() {
+
+            it("that closes the Poll to voting", function() {
+                var updatePollResponse = $q.defer();
+                updatePollResponse.resolve({
+                    Name: 'Poll 1',
+                    Status: 'Closed'
+                });
+
+                PollService.updatePoll.andReturn(updatePollResponse.promise);
+
+                $scope.closePoll();
+                $scope.$digest();
+
+                expect($scope.poll.Status).toBe('Closed');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Poll 1 closed to voting');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var updatePollResponse = $q.defer();
+                updatePollResponse.reject('EpicFail');
+
+                PollService.updatePoll.andReturn(updatePollResponse.promise); // Return an error
+
+                $scope.poll = { Name: 'Poll 1' };
+                $scope.closePoll();
+                $scope.$digest();
+
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to close Poll 1 to voting");
+            });
+        });
+
+        describe('clearVotes()', function() {
+
+            it("that removes all Votes from the Poll and displays the update to screen", function() {
+                var deleteAllVotesResponse = $q.defer();
+                deleteAllVotesResponse.resolve([]);
+
+                VotesService.deleteAllVotes.andReturn(deleteAllVotesResponse.promise);
+
+                var getVotesResponse = $q.defer();
+                getVotesResponse.resolve([]);
+
+                VotesService.getVotes.andReturn(getVotesResponse.promise);
+                initializeController();
+
+                $scope.clearVotes();
+                $scope.$digest();
+
+                expect($scope.votes.length).toBe(0);
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('All Votes have been cleared');
+            });
+
+            it("that displays an error if something catastrophic happens", function() {
+                var deleteAllVotesResponse = $q.defer();
+                deleteAllVotesResponse.reject('EpicFail');
+
+                VotesService.deleteAllVotes.andReturn(deleteAllVotesResponse.promise); // Return an error
+
+                $scope.clearVotes();
+                $scope.$digest();
+
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to clear all Votes");
             });
         });
     });

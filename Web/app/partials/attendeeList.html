@@ -1,4 +1,4 @@
-<div class="form-group">
+<div class="form-group" ng-show="attendees.count > 10">
     <div class="input-group">
         <span class="input-group-addon">
             <span class="glyphicon glyphicon-search"></span>
@@ -6,7 +6,7 @@
         <input type="text" class="form-control" ng-model="queryAttendees" placeholder="Find people..." />
     </div>
 </div>
-<a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-repeat="attendee in attendees | filter:queryAttendees">
+<a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees | filter:queryAttendees">
     <div class="media">
         <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}">
         <div class="media-body">

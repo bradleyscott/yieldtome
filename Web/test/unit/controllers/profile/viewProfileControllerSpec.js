@@ -2,7 +2,7 @@
 
 describe('The ViewProfile controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $routeParams, ProfileService;
+    var $scope, $location, $q, $controller, $log, $routeParams, growl, ProfileService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -17,9 +17,22 @@ describe('The ViewProfile controller', function() {
 
             // Create Mocks 
             ProfileService = jasmine.createSpyObj('ProfileService', ['getProfile']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
+    function initializeController() {
+        // Initialise the controller
+        $controller('ViewProfile', {
+            $scope: $scope,
+            $location: $location,
+            $log: $log,
+            $routeParams: $routeParams,
+            growl: growl, 
+            ProfileService: ProfileService
+        });
+    }
+    
     it("should get the Profile provided in the url and display it to screen", function() {
 
         // Set the profileID in the url 
@@ -31,16 +44,7 @@ describe('The ViewProfile controller', function() {
 
         ProfileService.getProfile.andReturn(viewProfileResponse.promise); // Return a valid profile
 
-        // $scope, $location, $log, $window, $routeParams, ProfileService
-        // Initialise the controller
-        $controller('ViewProfile', {
-            $scope: $scope,
-            $location: $location,
-            $log: $log,
-            $routeParams: $routeParams,
-            ProfileService: ProfileService
-        });
-
+        initializeController();
         $scope.$digest();
 
         expect($scope.profile).toBe('AwesomeProfile');
@@ -57,17 +61,9 @@ describe('The ViewProfile controller', function() {
 
         ProfileService.getProfile.andReturn(viewProfileResponse.promise); // Return a valid profile
 
-        // Initialise the controller
-        $controller('ViewProfile', {
-            $scope: $scope,
-            $location: $location,
-            $log: $log,
-            $routeParams: $routeParams,
-            ProfileService: ProfileService
-        });
-
+        initializeController();
         $scope.$digest();
 
-        expect($scope.error).toBe("Something went wrong trying to get this Profile");
+        expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get this Profile");
     });
 });

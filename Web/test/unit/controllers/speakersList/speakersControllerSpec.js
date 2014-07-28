@@ -2,7 +2,7 @@
 
 describe('The Speakers controller', function() {
 
-    var $controller, $log, $scope, $location, $modal, $q, SessionService, SpeakersListService, SpeakersService;
+    var $controller, $log, $scope, $location, $modal, $q, growl, SessionService, SpeakersListService, SpeakersService;
 
     var speaker = {
                 "SpeakerID": 28,
@@ -51,6 +51,7 @@ describe('The Speakers controller', function() {
             SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList','updateList', 'deleteList']);
             SpeakersService = jasmine.createSpyObj('SpeakersService', [ 'getSpeakers', 'speakerHasSpoken', 'deleteSpeaker', 'reorderSpeakers', 'deleteAllSpeakers', 'createSpeaker']);
             $modal = jasmine.createSpyObj('$modal', ['open']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
@@ -66,13 +67,13 @@ describe('The Speakers controller', function() {
         SessionService.set('attendee', { AttendeeID: 1 });
 
         // Initialise the controller
-        // $scope, $location, $log, $window, $modal, $routeParams, SessionService, SpeakersListService
         $controller('Speakers', {
             $scope: $scope,
             $location: $location,
             $log: $log,
             $modal: $modal,
             $routeParams: $routeParams,
+            growl: growl,
             SessionService: SessionService,
             SpeakersListService: SpeakersListService,
             SpeakersService: SpeakersService
@@ -91,7 +92,7 @@ describe('The Speakers controller', function() {
             initializeController();
 
             $scope.$digest();
-            expect($scope.error).toBe("Something went wrong trying to get this Speakers List");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get this Speakers List");
 
         });
 
@@ -111,7 +112,7 @@ describe('The Speakers controller', function() {
             initializeController();
 
             $scope.$digest();
-            expect($scope.error).toBe("Something went wrong trying to get the list of Speakers");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the list of Speakers");
         });
 
         it("should display the Speakers to screen", function() {
@@ -166,7 +167,7 @@ describe('The Speakers controller', function() {
                 $scope.deleteList();
                 $scope.$digest();
 
-                expect($scope.info).toBe('List 1 deleted');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('List 1 deleted');
                 expect($location.path).toHaveBeenCalledWith('/speakersLists');
             });
 
@@ -179,7 +180,7 @@ describe('The Speakers controller', function() {
                 $scope.deleteList();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to delete this Speakers List");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to delete this Speakers List");
             });
         });
 
@@ -194,7 +195,7 @@ describe('The Speakers controller', function() {
                 $scope.add('Position');
                 $scope.$digest();
 
-                expect($scope.info).toBe('You have been added to the Speakers List');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('You have been added to the Speakers List');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -206,7 +207,7 @@ describe('The Speakers controller', function() {
                 $scope.add('Position');
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to add you to the Speakers List");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to add you to the Speakers List");
             });
         });
 
@@ -225,7 +226,7 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.list.Status).toBe('Open');
-                expect($scope.info).toBe('List 1 opened to new Speakers');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('List 1 opened to new Speakers');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -238,7 +239,7 @@ describe('The Speakers controller', function() {
                 $scope.openList();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to open List 1 to new Speakers");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to open List 1 to new Speakers");
             });
         });
 
@@ -257,7 +258,7 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.list.Status).toBe('Closed');
-                expect($scope.info).toBe('List 1 closed to new Speakers');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('List 1 closed to new Speakers');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -270,7 +271,7 @@ describe('The Speakers controller', function() {
                 $scope.closeList();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to close List 1 to new Speakers");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to close List 1 to new Speakers");
             });
         });
 
@@ -286,7 +287,7 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.speakers.length).toBe(0);
-                expect($scope.info).toBe('Speakers have all been removed');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Speakers have all been removed');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -298,7 +299,7 @@ describe('The Speakers controller', function() {
                 $scope.removeAllSpeakers();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to remove the Speakers from this Speakers list");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to remove the Speakers from this Speakers list");
             });
         });
 
@@ -314,7 +315,7 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.speakers).toBe(speakers);
-                expect($scope.info).toBe('Starting Attendee removed');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Starting Attendee removed');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -326,7 +327,7 @@ describe('The Speakers controller', function() {
                 $scope.speak();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to update the Speakers list");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to update the Speakers list");
             });
         });
 
@@ -342,7 +343,7 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.speakers).toBe(speakers);
-                expect($scope.info).toBe('Starting Attendee has now spoken and has been removed');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Starting Attendee has now spoken and has been removed');
             });
 
             it("that displays an error if something catastrophic happens", function() {
@@ -354,7 +355,7 @@ describe('The Speakers controller', function() {
                 $scope.speak();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to update the Speakers list");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to update the Speakers list");
             });
         });
 
@@ -370,7 +371,7 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.speakers).toBe(speakers);
-                expect($scope.info).toBe('Starting Attendee removed');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Starting Attendee removed');
 
             });
 
@@ -383,7 +384,7 @@ describe('The Speakers controller', function() {
                 $scope.remove();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to remove this Speaker");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to remove this Speaker");
             });
         });
 
@@ -399,7 +400,7 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.speakers).toBe(speakers);
-                expect($scope.info).toBe('Speakers list re-ordered');
+                expect(growl.addInfoMessage).toHaveBeenCalledWith('Speakers list re-ordered');
 
             });
 
@@ -412,7 +413,7 @@ describe('The Speakers controller', function() {
                 $scope.reorderSpeakers();
                 $scope.$digest();
 
-                expect($scope.error).toBe("Something went wrong trying to re-order the Speakers list");
+                expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to re-order the Speakers list");
             });
         });
     });

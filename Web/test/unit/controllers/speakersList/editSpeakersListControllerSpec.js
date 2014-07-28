@@ -2,7 +2,7 @@
 
 describe('The EditSpeakersList controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $window, $routeParams, SessionService, SpeakersListService;
+    var $scope, $location, $q, $controller, $log, $window, $routeParams, growl, SessionService, SpeakersListService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -19,7 +19,7 @@ describe('The EditSpeakersList controller', function() {
             // Create Mocks 
             SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList', 'updateList']);
             $location = jasmine.createSpyObj('$location', ['path']);
-
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
@@ -30,13 +30,13 @@ describe('The EditSpeakersList controller', function() {
         SessionService.set('event', 'ValidEvent'); // Set event
 
         // Initialise the controller
-        // $scope, $location, $log, $window, $routeParams, SessionService, SpeakersListService
         $controller('EditSpeakersList', {
             $scope: $scope,
             $location: $location,
             $log: $log,
             $window: $window,
             $routeParams: $routeParams,
+            growl: growl,
             SessionService: SessionService,
             SpeakersListService: SpeakersListService
         });
@@ -64,7 +64,7 @@ describe('The EditSpeakersList controller', function() {
             SpeakersListService.getList.andReturn(getListResponse.promise);
             initializeController();
 
-            expect($scope.error).toBe("Something went wrong trying to get this Speakers List");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get this Speakers List");
         });
     });
 
@@ -97,14 +97,14 @@ describe('The EditSpeakersList controller', function() {
             $scope.$digest();
 
             expect($scope.list.Name).toBe('Mock list');
-            expect($scope.info).toBe('You successfully renamed this Speakers List');
+            expect(growl.addInfoMessage).toHaveBeenCalledWith('You successfully renamed Mock list');
         });
 
         it("that displays an error if something catastrophic happens", function() {
 
             // Set up Mock to return an error response from SpeakersListService.createSpeakersList()
             var updateListResponse = $q.defer();
-            updateListResponse.reject({ Message: "EpicFail" });
+            updateListResponse.reject("EpicFail");
 
             SpeakersListService.updateList.andReturn(updateListResponse.promise);
 
@@ -115,7 +115,7 @@ describe('The EditSpeakersList controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to rename this Speakers List. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to rename this Speakers List. EpicFail");
         });
     });
 });

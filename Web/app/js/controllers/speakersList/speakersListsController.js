@@ -4,13 +4,11 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('SpeakersLists', ['$scope', '$location', '$log', '$window', 'SessionService', 'SpeakersListService',
-    function($scope, $location, $log, $window, SessionService, SpeakersListService) {
+.controller('SpeakersLists', ['$scope', '$location', '$log', '$window', 'growl', 'SessionService', 'SpeakersListService',
+    function($scope, $location, $log, $window, growl, SessionService, SpeakersListService) {
 
         $log.debug("Speakers controller executing");
 
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.profile; // The authenticated Profile, if it exists
         $scope.event; // Selected Event
         $scope.attendee; // Attendee record for this Profile
@@ -37,7 +35,7 @@ angular.module('yieldtome.controllers')
             // Display an error if you don't have the right event
             if($scope.event == 'undefined' || $scope.event == undefined)
             { 
-                $scope.error = "We don't know what Event you're attending";
+                growl.addErrorMessage("We don't know what Event you're attending");
                 return; 
             }
             
@@ -48,7 +46,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get the list of Speakers Lists";
+                growl.addErrorMessage("Something went wrong trying to get the list of Speakers Lists");
             });                
 
         })();

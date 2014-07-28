@@ -2,15 +2,13 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('EditPoll', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'SessionService', 'PollService',
-    function($scope, $location, $log, $window, $modal, $routeParams, SessionService, PollService) {
+.controller('EditPoll', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'growl', 'SessionService', 'PollService',
+    function($scope, $location, $log, $window, $modal, $routeParams, growl, SessionService, PollService) {
 
         $log.debug("EditPoll controller executing");
 
         $scope.title = 'Edit Poll';
         $scope.alternatebutton = 'Back';
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.poll;
         $scope.profile;
         $scope.isDeleteEnabled = true; // Enables the Delete button
@@ -47,33 +45,33 @@ angular.module('yieldtome.controllers')
 
         $scope.delete = function() {
             $log.debug('EditPoll.delete() starting');
-            $scope.error = '';
 
             var promise = PollService.deletePoll($scope.poll);
 
-            promise.then(function(data) // It all went well
-                {
-                    $scope.info = 'You just deleted ' + $scope.poll.Name;
-                    $location.path('/polls'); // Redirect to events page
-                })
+            promise.then(function(data) { // It all went well
+                growl.addInfoMessage('You just deleted ' + $scope.poll.Name);
+                $location.path('/polls'); // Redirect to events page
+            })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something went wrong trying to delete your Poll. " + error;
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to delete your Poll. " + error);
             });
         };
 
         $scope.save = function() // Edit Poll
         {
             $log.debug('EditPoll.save() starting');
-            $scope.error = '';
 
             var promise = PollService.updatePoll($scope.poll);
 
             promise.then(function(poll) { // It all went well 
                 $scope.poll = poll;  
-                $scope.info = 'Your Poll updates just got saved';
+                growl.addInfoMessage('Your Poll updates just got saved');
+                $location.path("/polls"); // Redirect
             })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something went wrong trying to edit your Poll. " + error;
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to edit your Poll. " + error);
             });
         };
 
@@ -90,7 +88,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get this Poll";
+                growl.addErrorMessage("Something went wrong trying to get this Poll");
             });
         })();
 

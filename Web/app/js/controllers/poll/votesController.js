@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Votes', ['$scope', '$location', '$log', '$window', '$routeParams', 'SessionService', 'PollService', 'VotesService',
-    function($scope, $location, $log, $window, $routeParams, SessionService, PollService, VotesService) {
+.controller('Votes', ['$scope', '$location', '$log', '$window', '$routeParams', 'growl', 'SessionService', 'PollService', 'VotesService',
+    function($scope, $location, $log, $window, $routeParams, growl, SessionService, PollService, VotesService) {
 
         $log.debug("Polls controller executing");
 
@@ -32,12 +32,12 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(poll) {
                 $scope.poll = poll;
-                $scope.info = poll.Name + " opened for voting";
+                growl.addInfoMessage(poll.Name + " opened for voting");
                 $log.debug('$scope.poll updated after openPoll()');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to open " + $scope.poll.Name + " for voting";
+                growl.addErrorMessage("Something went wrong trying to open " + $scope.poll.Name + " for voting");
             });                
         };
 
@@ -50,29 +50,29 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(poll) {
                 $scope.poll = poll;
-                $scope.info = poll.Name + " closed to voting";
+                growl.addInfoMessage(poll.Name + " closed to voting");
                 $log.debug('$scope.poll updated after closePoll()');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to close " + $scope.poll.Name + " to voting";
+                growl.addErrorMessage("Something went wrong trying to close " + $scope.poll.Name + " to voting");
             });                
         };
 
         // Clears all Votes on the Poll
         $scope.clearVotes = function() {
             $log.debug('VotesController.clearVotes() executing');
-            var promise = VotesService.clearAllVotes($scope.poll);
+            var promise = VotesService.deleteAllVotes($scope.poll);
 
             promise.then(function(votes) {
                 $scope.votes = votes;
                 $scope.getUpdatedPoll($scope.poll.PollID);
-                $scope.info = "All Votes have been cleared";
+                growl.addInfoMessage("All Votes have been cleared");
                 $log.debug('$scope.votes updated after clearVotes()');
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to clear all Votes";
+                growl.addErrorMessage("Something went wrong trying to clear all Votes");
             });                
         };
 
@@ -88,11 +88,11 @@ angular.module('yieldtome.controllers')
                 var message;
                 if(result == 'Abstain') { message = attendee.Name + " has Abstained"; }
                 else { message = attendee.Name + " has voted " + result; }
-                $scope.info = message;
+                growl.addInfoMessage(message);
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to cast a Vote";
+                growl.addErrorMessage("Something went wrong trying to cast a Vote");
             });                
         };
 
@@ -134,7 +134,7 @@ angular.module('yieldtome.controllers')
             })            
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get the Votes on this Poll";
+                growl.addErrorMessage("Something went wrong trying to get the Votes on this Poll");
             });                
         };
 
@@ -149,7 +149,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get this Poll";
+                growl.addErrorMessage("Something went wrong trying to get this Poll");
             });                
         };
 

@@ -2,7 +2,7 @@
 
 describe('The EditPoll controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $window, $modal, $routeParams, $filter, PollService, SessionService;
+    var $scope, $location, $q, $controller, $log, $window, $modal, $routeParams, $filter, growl, PollService, SessionService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -20,13 +20,12 @@ describe('The EditPoll controller', function() {
             PollService = jasmine.createSpyObj('PollService', ['getPoll', 'updatePoll', 'deletePoll']);
             $location = jasmine.createSpyObj('$location', ['path']);
             $modal = jasmine.createSpyObj('$modal', ['open']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
      function initializeController(){
 
-        // $scope, $location, $log, $window, $modal, $routeParams, SessionService, PollService
-        // Initialise the controller
         $controller('EditPoll', {
             $scope: $scope,
             $location: $location,
@@ -34,6 +33,7 @@ describe('The EditPoll controller', function() {
             $window: $window,
             $modal: $modal,
             $routeParams: $routeParams,
+            growl: growl,
             SessionService: SessionService,
             PollService: PollService
         }); 
@@ -70,7 +70,7 @@ describe('The EditPoll controller', function() {
             initializeController();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to get this Poll");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get this Poll");
         });
     });
 
@@ -100,7 +100,7 @@ describe('The EditPoll controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.info).toBe('Your Poll updates just got saved');
+            expect(growl.addInfoMessage).toHaveBeenCalledWith('Your Poll updates just got saved');
         });
 
         it("that displays an error if something catastrophic happens", function() {
@@ -114,7 +114,7 @@ describe('The EditPoll controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to edit your Poll. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to edit your Poll. EpicFail");
         });
     });
 
@@ -157,7 +157,7 @@ describe('The EditPoll controller', function() {
             $scope.delete();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to delete your Poll. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to delete your Poll. EpicFail");
         });
     });
 

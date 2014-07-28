@@ -148,7 +148,7 @@ namespace yieldtome.API.Data.Services
 
             using (var db = new Database())
             {
-                matchingEvents = db.Events.ToList();
+                matchingEvents = db.Events.Where(x => x.DeletedTime == null).ToList(); // Remove deleted Events
 
                 if (theEvent.EventID != 0)
                     matchingEvents = db.Events.Where(x => x.EventID != theEvent.EventID).ToList(); // Filter out this Event

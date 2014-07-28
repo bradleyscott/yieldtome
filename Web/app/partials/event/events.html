@@ -1,7 +1,5 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
-    <alert type="info" ng-show="info" close="info=''">{{info}}</alert>
-    <alert type="danger" ng-show="error" close="error=''"><b>Doh! </b>{{error}}</alert>
     <div ng-hide="selectedEvent">
         <h2>Find an Event</h2>
         <div class="list-group">
@@ -48,11 +46,7 @@
         </p>
         <div ng-show="attendees.length > 0">
             <h3>People already attending</h3>
-            <div class="well well-sm">
-                <div class="list-group">
-                    <ytm-attendee-list attendees="attendees"></ytm-attendee-list>
-                </div>
-            </div>            
+            <ytm-attendee-list attendees="attendees"></ytm-attendee-list>
         </div>
     </div>
 </div>

@@ -2,23 +2,25 @@
 
 describe('The CreateEvent controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $filter, SessionService, EventService;
+    var $scope, $location, $q, $controller, $log, $filter, $window, growl, SessionService, EventService;
 
     beforeEach(function() {
         module('yieldtome.services');
         module('yieldtome.controllers');
 
-        inject(function($rootScope, _$log_, _$controller_, _$q_, _$filter_, _SessionService_) {
+        inject(function($rootScope, _$log_, _$controller_, _$q_, _$filter_, _$window_, _SessionService_) {
             $scope = $rootScope.$new();
             $q = _$q_;
             $controller = _$controller_;
             $log = _$log_;
             $filter = _$filter_;
+            $window = _$window_;
             SessionService = _SessionService_;
 
             // Create Mocks 
             EventService = jasmine.createSpyObj('EventService', ['createEvent']);
             $location = jasmine.createSpyObj('$location', ['path']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
 
             SessionService.set('profile', {
                     "ProfileID": 1,
@@ -41,11 +43,14 @@ describe('The CreateEvent controller', function() {
                 }); // Set authenticatedProfile
 
             // Initialise the controller
+            // $scope, $location, $log, $filter, $window, growl, SessionService, EventService
             $controller('CreateEvent', {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
                 $filter: $filter,
+                $window: $window, 
+                growl: growl, 
                 SessionService: SessionService,
                 EventService: EventService
             });
@@ -114,8 +119,7 @@ describe('The CreateEvent controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something went wrong trying to create your Event. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to create your Event. EpicFail");
         });
     });
 });

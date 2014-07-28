@@ -2,15 +2,13 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('CreateEvent', ['$scope', '$location', '$log', '$filter', '$window', 'SessionService', 'EventService',
-    function($scope, $location, $log, $filter, $window, SessionService, EventService) {
+.controller('CreateEvent', ['$scope', '$location', '$log', '$filter', '$window', 'growl', 'SessionService', 'EventService',
+    function($scope, $location, $log, $filter, $window, growl, SessionService, EventService) {
 
         $log.debug("CreateEvent controller executing");
 
         $scope.title = 'Create Event';
         $scope.alternatebutton = 'Cancel';
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.event;
         $scope.profile;
         $scope.startDateAsString; // Post formatted date for binding
@@ -36,13 +34,14 @@ angular.module('yieldtome.controllers')
             $log.debug('CreateEvent.save() starting');
             var promise = EventService.createEvent($scope.event);
 
-            promise.then(function(event) // It all went well
-                {
-                    SessionService.set('event', event); // Saves the Event in session
-                    $location.path('/events'); // Redirect to the Event menu page
-                })
+            promise.then(function(event) { // It all went well
+                SessionService.set('event', event); // Saves the Event in session
+                growl.addInfoMessage("You successfully created " + event.Name);
+                $location.path('/events'); // Redirect to the Event menu page
+            })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something went wrong trying to create your Event. " + error;
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to create your Event. " + error);
             });
         };
 

@@ -51,7 +51,8 @@ module.exports = function(grunt) {
                     expand: true,
                     nonull: true,
                     src: ['bower_components/bootstrap/dist/css/bootstrap.min.css', 
-                            'bower_components/angular-loading-bar/build/loading-bar.min.css'],
+                            'bower_components/angular-loading-bar/build/loading-bar.min.css',
+                            'bower_components/angular-growl/build/angular-growl.min.css'],
                     dest: 'dist/css',
                     flatten: true
                 }, { // Move js dependencies
@@ -73,7 +74,9 @@ module.exports = function(grunt) {
                         'bower_components/ng-facebook/ngFacebook.js',
                         'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                         'bower_components/angular-ui-sortable/sortable.min.js',
-                        'bower_components/angular-loading-bar/build/loading-bar.min.js'
+                        'bower_components/angular-loading-bar/build/loading-bar.min.js',
+                        'bower_components/angular-animate/angular-animate.min.js',
+                        'bower_components/angular-growl/build/angular-growl.min.js'
                     ],
                     dest: 'dist/js',
                     flatten: true

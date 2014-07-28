@@ -2,7 +2,7 @@
 
 describe('The CreateProfile controller', function() {
 
-    var $scope, $location, $q, $controller, $log, SessionService, AuthenticationService, FacebookService, ProfileService;
+    var $scope, $location, $q, $controller, $log, growl, SessionService, AuthenticationService, FacebookService, ProfileService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -20,9 +20,23 @@ describe('The CreateProfile controller', function() {
             FacebookService = jasmine.createSpyObj('FacebookService', ['getUserInfo']);
             ProfileService = jasmine.createSpyObj('ProfileService', ['createProfile']);
             $location = jasmine.createSpyObj('$location', ['path']);
-
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
+
+    function initializeController() {
+        // Initialise the controller
+        $controller('CreateProfile', {
+            $scope: $scope,
+            $location: $location,
+            $log: $log,
+            growl: growl,
+            SessionService: SessionService,
+            AuthenticationService: AuthenticationService,
+            FacebookService: FacebookService,
+            ProfileService: ProfileService
+        });        
+    }
 
     describe('should get the Authenticated users Facebook profile info', function() {
 
@@ -38,17 +52,7 @@ describe('The CreateProfile controller', function() {
 
             FacebookService.getUserInfo.andReturn(getUserInfoResponse.promise); // Return a valid profile
 
-            // $scope, $location, $log, $window, SessionService, AuthenticationService, FacebookService, ProfileService
-            // Initialise the controller
-            $controller('CreateProfile', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                AuthenticationService: AuthenticationService,
-                FacebookService: FacebookService,
-                ProfileService: ProfileService
-            });
+            initializeController();
 
             $scope.$digest();
 
@@ -67,21 +71,11 @@ describe('The CreateProfile controller', function() {
 
             FacebookService.getUserInfo.andReturn(getUserInfoResponse.promise); // Return a valid profile
 
-            // Initialise the controller
-            $controller('CreateProfile', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                AuthenticationService: AuthenticationService,
-                FacebookService: FacebookService,
-                ProfileService: ProfileService
-            });
+            initializeController();
 
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something went wrong trying to get your Facebook Profile information");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get your Facebook Profile information");
         });
     });
 
@@ -108,21 +102,12 @@ describe('The CreateProfile controller', function() {
 
             ProfileService.createProfile.andReturn(createProfileResponse.promise); // Return a valid profile
 
-            // Initialise the controller
-            $controller('CreateProfile', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,
-                AuthenticationService: AuthenticationService,
-                FacebookService: FacebookService,
-                ProfileService: ProfileService
-            });
+            initializeController();
 
             $scope.save();
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/events") // Check redirection to eventList
+            expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection to eventList
         });
 
         it("that displays an error if something catastrophic happens", function() {
@@ -133,22 +118,12 @@ describe('The CreateProfile controller', function() {
 
             ProfileService.createProfile.andReturn(createProfileResponse.promise); // Return an error
 
-            // Initialise the controller
-            $controller('CreateProfile', {
-                $scope: $scope,
-                $location: $location,
-                $log: $log,
-                SessionService: SessionService,                
-                AuthenticationService: AuthenticationService,
-                FacebookService: FacebookService,
-                ProfileService: ProfileService
-            });
+            initializeController();
 
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).not.toBeNull(); // Check the $scope.error value
-            expect($scope.error).toBe("Something went wrong trying to create your Profile. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to create your Profile. EpicFail");
         });
     });
 });

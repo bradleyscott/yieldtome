@@ -4,13 +4,11 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Events', ['$scope', '$location', '$log', 'SessionService', 'EventService', 'AttendeeService',
-    function($scope, $location, $log, SessionService, EventService, AttendeeService) {
+.controller('Events', ['$scope', '$location', '$log', 'growl', 'SessionService', 'EventService', 'AttendeeService',
+    function($scope, $location, $log, growl, SessionService, EventService, AttendeeService) {
 
         $log.debug("Events controller executing");
 
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.profile; // The authenticated Profile, if it exists
         $scope.events; // List of Events
         $scope.selectedEvent; // The Event the user selected
@@ -44,8 +42,6 @@ angular.module('yieldtome.controllers')
         };
 
         $scope.selectEvent = function(selectedEvent) {
-            $scope.info = ""; // Clear any info messages
-            $scope.error = ""; // Clear any error messages
 
             // Set the seleted Event
             if (selectedEvent) {
@@ -61,7 +57,7 @@ angular.module('yieldtome.controllers')
                             $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
                             $log.debug('Redirecting to landing page');
                             
-                            $scope.info = "You are attending this Event. Logging you in...";
+                            growl.addInfoMessage("You are attending " + selectedEvent.Name + " as " + attendees[i].Name);
                             SessionService.set('event', selectedEvent); // Save the selectedEvent to session
                             SessionService.set('attendee', attendees[i]); // Save the Attendee to session
                             $location.path('/landing');
@@ -75,7 +71,7 @@ angular.module('yieldtome.controllers')
                 })
                 .catch (function(error) {
                     $log.warn(error);
-                    $scope.error = "Something went wrong trying to get the list of Attendees";
+                    growl.addErrorMessage("Something went wrong trying to get the list of Attendees");
                 });                
 
            } else {
@@ -98,7 +94,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get the list of yieldto.me Events";
+                growl.addErrorMessage("Something went wrong trying to get the list of yieldto.me Events");
             });
         })();
     }

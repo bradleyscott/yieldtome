@@ -2,7 +2,7 @@
 
 describe('The CreatePoll controller', function() {
 
-    var $scope, $location, $q, $controller, $log, SessionService, PollService;
+    var $scope, $location, $q, $controller, $log, growl, SessionService, PollService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -18,15 +18,16 @@ describe('The CreatePoll controller', function() {
             // Create Mocks 
             PollService = jasmine.createSpyObj('PollService', ['createPoll']);
             $location = jasmine.createSpyObj('$location', ['path']);
+            growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
     function initializeController() {
-        // Initialise the controller
         $controller('CreatePoll', {
             $scope: $scope,
             $location: $location,
             $log: $log,
+            growl: growl,
             SessionService: SessionService,
             PollService: PollService
         });
@@ -36,7 +37,7 @@ describe('The CreatePoll controller', function() {
         
         it('should display an error if Profile or Event information is not available', function() {
             initializeController();
-            expect($scope.error).toBe("We don't have enough information to have you create a Poll");           
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't have enough information to have you create a Poll");           
         });
 
         it("and set the Poll's creator as the authenticated profile", function() {
@@ -77,14 +78,14 @@ describe('The CreatePoll controller', function() {
 
             // Set up Mock to return an error response
             var createPollResponse = $q.defer();
-            createPollResponse.reject({ Message: 'EpicFail'});
+            createPollResponse.reject('EpicFail');
 
             PollService.createPoll.andReturn(createPollResponse.promise); // Return an error
 
             $scope.save();
             $scope.$digest();
 
-            expect($scope.error).toBe("Something went wrong trying to create this Poll. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to create this Poll. EpicFail");
         });
     });
 });

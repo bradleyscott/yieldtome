@@ -7,15 +7,9 @@ angular.module('yieldtome.controllers')
 
         $log.debug("Landing controller executing");
 
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.event;
         $scope.profile;
         $scope.attendee;
-
-        $scope.$back = function() {
-            $window.history.back();
-        };
 
         // Controller initialization
         (function() {

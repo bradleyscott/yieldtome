@@ -2,15 +2,13 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('EditEvent', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', '$filter', 'SessionService', 'EventService',
-    function($scope, $location, $log, $window, $modal, $routeParams, $filter, SessionService, EventService) {
+.controller('EditEvent', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', '$filter', 'growl', 'SessionService', 'EventService',
+    function($scope, $location, $log, $window, $modal, $routeParams, $filter, growl, SessionService, EventService) {
 
         $log.debug("EditEvent controller executing");
 
         $scope.title = 'Edit Event';
         $scope.alternatebutton = 'Back';
-        $scope.error; // An error message that will be displayed to screen
-        $scope.info; // An info message that will be displayed to screen
         $scope.event;
         $scope.startDateAsString; // Post formatted date for binding
         $scope.endDateAsString; // Post formatted date for binding
@@ -49,34 +47,32 @@ angular.module('yieldtome.controllers')
 
         $scope.delete = function() {
             $log.debug('EditEvent.delete() starting');
-            $scope.error = '';
 
             var promise = EventService.deleteEvent($scope.event);
 
-            promise.then(function(data) // It all went well
-                {
-                    $scope.info = 'You just deleted ' + $scope.event.Name;
-                    $location.path('/events'); // Redirect to events page
-                })
+            promise.then(function(data) { // It all went well
+                growl.addInfoMessage('You just deleted ' + $scope.event.Name);
+                $location.path('/events'); // Redirect to events page
+            })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something went wrong trying to delete your Event. " + error;
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to delete your Event. " + error);
             });
         };
 
         $scope.save = function() // Edit Profile
         {
             $log.debug('EditEvent.save() starting');
-            $scope.error = '';
 
             var promise = EventService.editEvent($scope.event);
 
-            promise.then(function(event) // It all went well
-                {
-                    SessionService.set('event', event); // Saves in session
-                    $scope.info = 'Your Event updates just got saved';
-                })
+            promise.then(function(event) { // It all went well           
+                SessionService.set('event', event); // Saves in session
+                growl.addInfoMessage('Your updates just got saved');
+            })
             .catch (function(error) { // The service crapped out
-                $scope.error = "Something went wrong trying to edit your Event. " + error;
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to edit your Event. " + error);
             });
         };
 
@@ -109,9 +105,8 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) {
                 $log.warn(error);
-                $scope.error = "Something went wrong trying to get this Event";
+                growl.addErrorMessage("Something went wrong trying to get this Event");
             });
         })();
-
     }
 ]);
