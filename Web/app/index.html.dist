@@ -21,7 +21,9 @@
             </p>
         </footer>
     </div>
-
+    <div growl></div>
+    <div id="fb-root"></div>
+    
     <!-- Load dependencies -->
 
     <script src="js/jquery.min.js"></script>
