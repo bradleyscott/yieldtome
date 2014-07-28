@@ -10,26 +10,15 @@
         </div>
         <div class="navbar-collapse" collapse="!isNavOpen">
             <ul class="nav navbar-nav">
-                <li>
-                    <a href="#/landing"><b>{{ event.Name  | truncate:20 }}</b></a>
-                </li>
-                <li>
-                    <a href="#/speakersLists">Speakers</a>
-                </li>
-                <li>
-                    <a href="#/polls">Polls</a>
-                </li>
-                <li>
-                    <a>Note passing</a>
-                </li>
+                <li><a href="#/events">Events</a></li>
+                <li class="active"><a href="#/landing" ><b>{{ event.Name  | truncate:20 }}</b></a></li>
+                <li><a href="#/speakersLists">  Speakers</a></li>
+                <li><a href="#/polls">  Polls</a></li>
+                <li><a> Note passing</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#/editProfile" ng-show="profile">{{profile.Name}}</a>
-                </li>
-                <li>
-                    <a href="#/?logout" ng-show="profile">Logout</a>
-                </li>
+                <li><a href="#/editProfile" ng-show="profile">{{profile.Name}}</a></li>
+                <li><a href="#/?logout" ng-show="profile">Logout</a></li>
             </ul>
         </div>
     </div>
