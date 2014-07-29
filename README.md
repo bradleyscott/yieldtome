@@ -37,7 +37,3 @@ What is the architecture?
  2. **Single Page Web Application**
 
  The SPA uses Angular.js and Bootstrap. It is designed for Tablets in mind first, but is responsive in that the same page layouts will also work with most modern mobile devices
-
- 3. **Prosody XMPP server**
-
- Is used by the RESTful API to enables the note-passing functionality 
