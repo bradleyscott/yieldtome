@@ -47,8 +47,9 @@ angular.module('yieldtome.controllers', [])
             })
             .catch (function(error) {
                 $log.warn(error);
-                growl.addErrorMessage("Something bad happened. We don't understand what");
-                return;
+                if(error != "There is no authenticated API token") { // This is actually a handled exception
+                    growl.addErrorMessage("Something bad happened. We don't understand what");                    
+                }
             });
         };
     }

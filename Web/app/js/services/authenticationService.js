@@ -15,7 +15,7 @@ angular.module('yieldtome.services')
             $log.debug('Attempting to get yieldto.me Profile from authenticated API token');
             var deferred = $q.defer();
 
-            if (_apiToken === null || _apiToken.userName === null) {
+            if (_apiToken == null || _apiToken.userName == null) {
                 var error = 'There is no authenticated API token';
                 $log.warn(error);
                 deferred.reject(error);
@@ -26,16 +26,14 @@ angular.module('yieldtome.services')
             $log.debug('Authenticated FacebookID from token: ' + facebookID);
 
             var profilePromise = ProfileService.getProfileByFacebookID(facebookID);
-            profilePromise.then(function(profile) // Save the profile, even if it is null
-                {
-                    _authenticatedProfile = profile;
-                    deferred.resolve(profile);
-                })
-            .catch (function(error) // Handle unknown errors 
-                {
-                    $log.warn(error);
-                    deferred.reject(error);
-                });
+            profilePromise.then(function(profile) { // Save the profile, even if it is null
+                _authenticatedProfile = profile;
+                deferred.resolve(profile);
+            })
+            .catch (function(error) { // Handle unknown errors 
+                $log.warn(error);
+                deferred.reject(error);
+            });
 
             return deferred.promise;
         };
@@ -53,17 +51,15 @@ angular.module('yieldtome.services')
             var fbPromise = FacebookService.getFacebookToken(); // Get Facebook token
 
             fbPromise.then(this.getApiTokenFromFacebookToken) // Then get yieldtome API token from Facebook token
-            .then(function(token) // Then persist this token
-                {
-                    _apiToken = token; // Save the API token
-                    SessionService.set('token', token.access_token); // Save this token
-                    deferred.resolve(_apiToken); // Return the apiToken, even though it's saved                 
-                })
-            .catch (function(error) // And, handle any problems
-                {
-                    $log.warn(error);
-                    deferred.reject(error);
-                });
+            .then(function(token) { // Then persist this token
+                _apiToken = token; // Save the API token
+                SessionService.set('token', token.access_token); // Save this token
+                deferred.resolve(_apiToken); // Return the apiToken, even though it's saved                 
+            })
+            .catch (function(error) { // And, handle any problems
+                $log.warn(error);
+                deferred.reject(error);
+            });
 
             return deferred.promise;
         };
@@ -85,13 +81,12 @@ angular.module('yieldtome.services')
 
             $http.post(postUrl).success(function(data) {
 
-                if (data == null) // No token granted. e.g. Facebook token failed validation
-                {
+                if (data == null) { // No token granted. e.g. Facebook token failed validation
                     var error = 'No yieldto.me API token was granted. There may have been a problem with the Facebook token provided';
                     $log.warn(error);
                     deferred.rejected(error);
-                } else // A token has in fact been granted
-                {
+                } 
+                else { // A token has in fact been granted
                     $log.debug('yieldto.me token access_token: ' + data.access_token);
                     deferred.resolve(data);
                 }
