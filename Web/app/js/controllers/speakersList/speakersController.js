@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Speakers', ['$scope', '$location', '$log', '$window', '$modal', '$routeParams', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService',
-    function($scope, $location, $log, $window, $modal, $routeParams, growl, SessionService, SpeakersListService, SpeakersService) {
+.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService',
+    function($scope, $location, $log, $window, $routeParams, growl, SessionService, SpeakersListService, SpeakersService) {
 
         $log.debug("Speakers controller executing");
 
@@ -22,48 +22,6 @@ angular.module('yieldtome.controllers')
 
         $scope.toggleCarousel = function() {
             $scope.isCarouselVisible = !$scope.isCarouselVisible;
-        };
-
-        // Opens the delete list event modal
-        $scope.showDeleteList = function() {
-            $scope.deleteConfirm = $modal.open({ 
-                templateUrl: 'partials/speakersList/deleteList.html',
-                scope: $scope
-            }); 
-
-            $scope.deleteConfirm.result.then(function() { // Respond if user clicks delete
-                $scope.deleteList();
-            },
-            function(){ // Respond if user cancels the delete
-                $log.debug('User cancelled SpeakersList delete');
-            });
-        };
-
-        // Is called when the delete button is clicked on the modal
-        $scope.confirmDelete = function() {
-            $scope.deleteConfirm.close();
-        };
-
-        // Is called when the cancel or 'x' buttons are clicked on the modal 
-        $scope.cancelDelete = function() {
-            $scope.deleteConfirm.dismiss();
-        };
-
-        // Delete the Speakers list
-        $scope.deleteList = function()
-        {
-            $log.debug('SpeakersController.deleteList() executing');
-            var promise = SpeakersListService.deleteList($scope.list);
-
-            promise.then(function(data) {
-                $log.debug('Speakers List deleted after deleteList()');
-                growl.addInfoMessage($scope.list.Name + " deleted");
-                $location.path('/speakersLists');
-            })            
-            .catch (function(error) {
-                $log.warn(error);
-                growl.addErrorMessage("Something went wrong trying to delete this Speakers List");
-            });                
         };
 
         // Adds to the Speakers list

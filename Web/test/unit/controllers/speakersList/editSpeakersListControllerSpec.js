@@ -2,7 +2,7 @@
 
 describe('The EditSpeakersList controller', function() {
 
-    var $scope, $location, $q, $controller, $log, $window, $routeParams, growl, SessionService, SpeakersListService;
+    var $scope, $location, $q, $controller, $log, $window, $routeParams, $modal, growl, SessionService, SpeakersListService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -17,8 +17,9 @@ describe('The EditSpeakersList controller', function() {
             SessionService = _SessionService_;
 
             // Create Mocks 
-            SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList', 'updateList']);
+            SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList', 'updateList', 'deleteList']);
             $location = jasmine.createSpyObj('$location', ['path']);
+            $modal = jasmine.createSpyObj('$modal', ['open']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
@@ -36,6 +37,7 @@ describe('The EditSpeakersList controller', function() {
             $log: $log,
             $window: $window,
             $routeParams: $routeParams,
+            $modal: $modal,
             growl: growl,
             SessionService: SessionService,
             SpeakersListService: SpeakersListService
@@ -65,6 +67,43 @@ describe('The EditSpeakersList controller', function() {
             initializeController();
 
             expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get this Speakers List");
+        });
+    });
+
+    describe('has a deleteList() function', function() {
+
+        beforeEach(function(){
+            var getListResponse = $q.defer();
+            getListResponse.resolve('ValidList');
+            SpeakersListService.getList.andReturn(getListResponse.promise);
+ 
+            initializeController();
+        });
+        
+        it("that deletes the Speakers list and returns to the Speakers Lists page", function() {
+            var deleteListResponse = $q.defer();
+            deleteListResponse.resolve({});
+
+            SpeakersListService.deleteList.andReturn(deleteListResponse.promise);
+
+            $scope.list = { Name: 'List 1' };
+            $scope.deleteList();
+            $scope.$digest();
+
+            expect(growl.addInfoMessage).toHaveBeenCalledWith('List 1 deleted');
+            expect($location.path).toHaveBeenCalledWith('/speakersLists');
+        });
+
+        it("that displays an error if something catastrophic happens", function() {
+            var deleteListResponse = $q.defer();
+            deleteListResponse.reject('EpicFail');
+
+            SpeakersListService.deleteList.andReturn(deleteListResponse.promise); // Return an error
+
+            $scope.deleteList();
+            $scope.$digest();
+
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to delete this Speakers List");
         });
     });
 
