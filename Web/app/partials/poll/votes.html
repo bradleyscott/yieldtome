@@ -10,14 +10,10 @@
                         <span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                        <li ng-show="poll.Status == 'Open'" ng-click="closePoll()"><a>Close this Poll to voting</a>
-                        </li>
-                        <li ng-show="poll.Status == 'Closed'" ng-click="openPoll()"><a>Open this Poll for voting</a>
-                        </li>
-                        <li><a href="#/editPoll/{{poll.PollID}}">Edit this Poll</a>
-                        </li>
-                        <li ng-click="clearVotes()"><a>Clear all Votes</a>
-                        </li>
+                        <li ng-show="poll.Status == 'Open'" ng-click="isSettingsOpen=false;closePoll()"><a>Close this Poll to voting</a></li>
+                        <li ng-show="poll.Status == 'Closed'" ng-click="isSettingsOpen=false;openPoll()"><a>Open this Poll for voting</a></li>
+                        <li ng-click="isSettingsOpen=false;clearVotes()"><a>Clear all Votes</a></li>
+                        <li><a href="#/editPoll/{{poll.PollID}}">Edit this Poll</a></li>
                     </ul>
                 </div>
             </div>
