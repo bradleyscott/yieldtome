@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Votes', ['$scope', '$location', '$log', '$window', '$routeParams', 'growl', 'SessionService', 'PollService', 'VotesService',
-    function($scope, $location, $log, $window, $routeParams, growl, SessionService, PollService, VotesService) {
+.controller('Votes', ['$scope', '$location', '$log', '$window', '$routeParams', '$interval', '$q', 'growl', 'SessionService', 'PollService', 'VotesService',
+    function($scope, $location, $log, $window, $routeParams, $interval, $q, growl, SessionService, PollService, VotesService) {
 
         $log.debug("Polls controller executing");
 
@@ -18,6 +18,7 @@ angular.module('yieldtome.controllers')
         $scope.votes; // The list of Votes 
         $scope.myVote; // The Vote this Attendee has cast
         $scope.voteFilter = { text:'', for:true, against:true, abstain:false }; // An object containg variables to filter against 
+        $scope.intervalPromise; // The promise returned by the interval timer
 
         $scope.$back = function() {
             window.history.back();
@@ -146,19 +147,29 @@ angular.module('yieldtome.controllers')
             });                
         };
 
+        // Update this Poll
+        $scope.getThisPollUpdate = function() {
+            $scope.getUpdatedPoll($scope.poll.PollID);
+        };
+
         // Get the Poll record
         $scope.getUpdatedPoll = function(pollID)
         {
+            var deferred = $q.defer();
             var promise = PollService.getPoll(pollID);
 
             promise.then(function(poll) {
                 $scope.poll = poll;
                 $scope.getVotes();
+                deferred.resolve();
             })
             .catch (function(error) {
                 $log.warn(error);
                 growl.addErrorMessage("Something went wrong trying to get this Poll");
-            });                
+                deferred.reject();
+            });     
+
+            return deferred.promise;
         };
 
         // Controller initialize
@@ -170,8 +181,26 @@ angular.module('yieldtome.controllers')
             $scope.event = SessionService.get('event');
             $scope.attendee = SessionService.get('attendee');
 
+            // Get Poll and Votes
             var pollID = $routeParams.pollID;
-            $scope.getUpdatedPoll(pollID);
+            var promise = $scope.getUpdatedPoll(pollID);
+
+            promise.then(function() {
+                if($scope.poll.CreatorID != $scope.profile.ProfileID && $scope.event.CreatorID != $scope.profile.ProfileID) {
+                    $log.debug("User is not the Poll or Event creator. Starting refresh timer");
+                    $scope.intervalPromise = $interval($scope.getThisPollUpdate, 15000);
+                }
+                else { $log.debug("User is Event or Poll creator. Will not refresh Votes"); }                
+            });
+
+            // Destroy the interval promise when this controller is destroyed
+            $scope.$on('$destroy', function() {
+                $log.debug("Destroying getThisPollUpdate interval timer");
+                if (angular.isDefined($scope.intervalPromise)) {
+                    $interval.cancel($scope.intervalPromise);
+                    $scope.intervalPromise = undefined;
+                }
+            });
         })();
     }
 ]);

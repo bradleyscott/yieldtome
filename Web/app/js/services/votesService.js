@@ -105,7 +105,7 @@ angular.module('yieldtome.services')
     	};
 
         this.getVotes = function(poll) {
-            $log.debug('Attempting to get Polls');
+            $log.debug('Attempting to get Votes');
             var deferred = $q.defer();
 
             if (poll == null)
