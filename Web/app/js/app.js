@@ -24,27 +24,27 @@ angular.module('yieldtome', [
             controller: 'Home'
         });
         $routeProvider.when('/createProfile', {
-            templateUrl: 'partials/profile/profile.html',
+            templateUrl: 'partials/profile/editProfile.html',
             controller: 'CreateProfile'
         });
         $routeProvider.when('/editProfile', {
-            templateUrl: 'partials/profile/profile.html',
+            templateUrl: 'partials/profile/editProfile.html',
             controller: 'EditProfile'
         });
         $routeProvider.when('/viewProfile/:profileID', {
-            templateUrl: 'partials/profile/profile.html',
+            templateUrl: 'partials/profile/editProfile.html',
             controller: 'ViewProfile'
         });
         $routeProvider.when('/events', {
-            templateUrl: 'partials/event/events.html',
+            templateUrl: 'partials/event/listEvents.html',
             controller: 'Events'
         });
         $routeProvider.when('/createEvent', {
-            templateUrl: 'partials/event/event.html',
+            templateUrl: 'partials/event/editEvent.html',
             controller: 'CreateEvent'
         });
         $routeProvider.when('/editEvent/:eventID', {
-            templateUrl: 'partials/event/event.html',
+            templateUrl: 'partials/event/editEvent.html',
             controller: 'EditEvent'
         });
         $routeProvider.when('/attend', {
@@ -56,7 +56,7 @@ angular.module('yieldtome', [
             controller: 'Landing'
         });
         $routeProvider.when('/speakersLists', {
-            templateUrl: 'partials/speakersList/speakersLists.html',
+            templateUrl: 'partials/speakersList/listSpeakersLists.html',
             controller: 'SpeakersLists'
         });
         $routeProvider.when('/createSpeakersList', {
@@ -68,23 +68,27 @@ angular.module('yieldtome', [
             controller: 'EditSpeakersList'
         });
         $routeProvider.when('/speakers/:speakersListID', {
-            templateUrl: 'partials/speakersList/speakers.html',
+            templateUrl: 'partials/speakersList/listSpeakers.html',
             controller: 'Speakers'
+        });
+        $routeProvider.when('/addSpeaker/:speakersListID', {
+            templateUrl: 'partials/speakersList/addSpeaker.html',
+            controller: 'AddSpeaker'
         });
         $routeProvider.when('/polls', {
             templateUrl: 'partials/poll/pollList.html',
             controller: 'Polls'
         });
         $routeProvider.when('/createPoll', {
-            templateUrl: 'partials/poll/poll.html',
+            templateUrl: 'partials/poll/editPoll.html',
             controller: 'CreatePoll'
         });
         $routeProvider.when('/editPoll/:pollID', {
-            templateUrl: 'partials/poll/poll.html',
+            templateUrl: 'partials/poll/editPoll.html',
             controller: 'EditPoll'
         });
         $routeProvider.when('/polls/:pollID', {
-            templateUrl: 'partials/poll/votes.html',
+            templateUrl: 'partials/poll/listVotes.html',
             controller: 'Votes'
         });
         $routeProvider.otherwise({

@@ -1,0 +1,30 @@
+<div class="media">
+    <!-- Profile picture -->
+    <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}" ng-click="showProfile({{attendee.Profile.ProfileID}})">
+    <div class="media-body">
+        <!-- Edit button -->
+        <button class="btn btn-default pull-right" ng-hide="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open">
+            <span class="glyphicon glyphicon glyphicon-plus"></span>
+        </button>
+        <button class="btn btn-default pull-right" ng-show="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open">
+            <span class="glyphicon glyphicon glyphicon-minus"></span>
+        </button>
+        <div>
+            <!-- Names -->
+            <h4 class="media-heading">{{attendee.Name}}</h4>
+            {{attendee.Profile.Name}}
+        </div>
+    </div>
+    <!-- Add speaker controls -->
+    <div collapse="!attendee{{attendee.AttendeeID}}Open">
+        <div class="btn-group btn-group-justified" style="margin-top:10px">
+            <label class="btn btn-default" ng-click="add(attendee,'For')">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+            </label>
+            <label class="btn btn-default" ng-click="add(attendee,'Against')">
+                <span class="glyphicon glyphicon-thumbs-down"></span>
+            </label>
+            <label class="btn btn-default" ng-click="add(attendee,'None')">Neutral</label>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,23 @@
+<ytm-nav-menu></ytm-nav-menu>
+<div class="container body-content">
+    <!-- Page heading -->
+    <div>
+        <h2>Add new Speaker
+            </br>
+            <small>{{list.Name}}</small>
+        </h2>
+    </div>
+    <!-- Attendee filter -->
+    <div class="form-group" ng-show="attendees.count > 10">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" ng-model="queryAttendees" placeholder="Find people..." />
+        </div>
+    </div>
+    <!-- Attendee list -->
+    <a class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees | filter:queryAttendees">
+        <ytm-speakers-list-attendee></ytm-speakers-list-attendee>
+    </a>
+</div>

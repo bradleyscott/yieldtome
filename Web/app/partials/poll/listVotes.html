@@ -36,9 +36,30 @@
         </progress>
         <!-- My Vote -->
         <h4>Your Vote</h4>
-        <ytm-my-vote></ytm-my-vote>
+        <a class="list-group-item">
+            <ytm-vote ng-repeat="vote in [myVote]"></ytm-vote>
+        </a>
         <!-- List of votes -->
         <h4>Other Votes</h4>
-        <ytm-vote-list></ytm-vote-list>
+        <div class="well" ng-show="votes.length == 1">There are no other Votes on this Poll</div>
+        <!-- Filter buttons -->
+        <div class="btn-group btn-group-justified" ng-show="votes.length > 1" style="margin-bottom:5px">
+            <label class="btn btn-default active" ng-model="voteFilter.for" btn-checkbox>For</label>
+            <label class="btn btn-default active" ng-model="voteFilter.against" btn-checkbox>Against</label>
+            <label class="btn btn-default active" ng-model="voteFilter.abstain" btn-checkbox>Abstain</label>
+        </div>
+        <!-- Filter criteria -->
+        <div class="form-group" ng-show="otherVotes.length > 10">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="text" class="form-control" ng-model="voteFilter.text" placeholder="Find vote..." />
+            </div>
+        </div>
+        <!-- Vote list -->
+        <a class="list-group-item" ng-animate="'animate'" ng-repeat="vote in otherVotes | filter:filteredVotes">
+            <ytm-vote></ytm-vote>
+        </a>
     </div>
 </div>

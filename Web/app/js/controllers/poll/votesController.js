@@ -23,6 +23,14 @@ angular.module('yieldtome.controllers')
             window.history.back();
         };
 
+        // Redirects to the View Profile page
+        $scope.showProfile = function(profileID) {
+            if(profileID != null && profileID != 0) {
+                $log.debug('Redirecting to View profile ' + profileID);
+                $location.path("/viewProfile/" + profileID);
+            }
+        };
+
         // Opens the Poll to votes
         $scope.openPoll = function() {
             $log.debug('VotesController.openPoll() executing');

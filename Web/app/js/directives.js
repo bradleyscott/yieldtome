@@ -31,33 +31,21 @@ angular.module('yieldtome.directives', [])
             templateUrl: 'partials/attendeeList.html'
         };
     })
-    .directive('ytmSpeakerCarousel', function() {
+    .directive('ytmSpeaker', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/speakersList/speakerCarousel.html'
+            templateUrl: 'partials/speakersList/speaker.html'
         };
     })
-    .directive('ytmEditableSpeakerList', function() {
+    .directive('ytmSpeakersListAttendee', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/speakersList/editableSpeakerList.html'
+            templateUrl: 'partials/speakersList/attendee.html'
         };
     })
-    .directive('ytmSpeakerList', function() {
+    .directive('ytmVote', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/speakersList/speakerList.html'
-        };
-    })
-    .directive('ytmMyVote', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'partials/poll/myVote.html'
-        };
-    })
-    .directive('ytmVoteList', function() {
-        return {
-            restrict: 'E',
-            templateUrl: 'partials/poll/voteList.html'
+            templateUrl: 'partials/poll/vote.html'
         };
     });

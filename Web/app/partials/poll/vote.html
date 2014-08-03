@@ -1,0 +1,30 @@
+<div class="media">
+    <!-- Profile picture -->
+    <img class="media-object pull-left" ng-src="{{vote.Attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(vote.Attendee.Profile.ProfileID)">
+    <div class="media-body">
+        <!-- Edit vote button -->
+        <button class="btn btn-default pull-right" ng-click="vote{{vote.VoteID}}Open=!vote{{vote.VoteID}}Open" ng-show="poll.Status=='Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+            <span class="glyphicon glyphicon glyphicon-pencil"></span>
+        </button>
+        <div>
+            <!-- Names -->
+            <h4 class="media-heading">{{vote.Attendee.Name}}</h4>
+            {{vote.Attendee.Profile.Name}}
+            <!-- Position indicators -->
+            <div style="background-color:lightgreen; height:5px" ng-show="vote.VoteResult == 'For'"></div>
+            <div style="background-color:red; height:5px" ng-show="vote.VoteResult == 'Against'"></div>
+        </div>
+    </div>
+    <!-- Edit vote controls -->
+    <div collapse="!vote{{vote.VoteID}}Open" style="margin-top:5px">
+        <div class="btn-group btn-group-justified">
+            <label class="btn btn-default" ng-click="vote{{vote.VoteID}}Open=false; castVote(vote.Attendee,'For')">
+                <span class="glyphicon glyphicon-thumbs-up"></span>
+            </label>
+            <label class="btn btn-default" ng-click="vote{{vote.VoteID}}Open=false; castVote(vote.Attendee,'Against')">
+                <span class="glyphicon glyphicon-thumbs-down"></span>
+            </label>
+            <label class="btn btn-default" ng-click="vote{{vote.VoteID}}Open=false; castVote(vote.Attendee,'Abstain')">Abstain</label>
+        </div>
+    </div>
+</div>

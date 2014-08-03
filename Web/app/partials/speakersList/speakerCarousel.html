@@ -8,16 +8,6 @@
                     <small>{{speaker.Attendee.Profile.Name}}</small>
                 </h4>
                 <span ng-hide="speaker.Position == 'None'"><p>Speaking {{speaker.Position}}</p></span>
-                <p>
-                    <div class="btn-group">
-                        <button type="button" ng-show="$index == 0" ng-click="speak(speaker)" class="btn btn-default">
-                            <span class="glyphicon glyphicon-comment"></span> Speak
-                        </button>
-                        <button type="button" ng-click="remove(speaker)" class="btn btn-default">
-                            <span class="glyphicon glyphicon-remove"></span> Remove
-                        </button>
-                    </div>
-                </p>
             </div>
         </slide>
     </carousel>

@@ -4,24 +4,30 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService',
-    function($scope, $location, $log, $window, $routeParams, growl, SessionService, SpeakersListService, SpeakersService) {
+.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService', 'AttendeeService',
+    function($scope, $location, $log, $window, $routeParams, growl, SessionService, SpeakersListService, SpeakersService, AttendeeService) {
 
         $log.debug("Speakers controller executing");
 
         $scope.profile; // The authenticated Profile, if it exists
         $scope.event; // Selected Event
+        $scope.attendees; // List of Attendees for this Event
         $scope.attendee; // Attendee record for this Profile
         $scope.list; // The Speakers List
         $scope.speakers; // The Speakers for the list
         $scope.speakingSlot; // The Speaker record for this Attendee
-        
+        $scope.addDialog; // Stores the result from the Add Speaker dailog
+
         $scope.$back = function() {
             $window.history.back();
         };
 
-        $scope.toggleCarousel = function() {
-            $scope.isCarouselVisible = !$scope.isCarouselVisible;
+        // Redirects to the View Profile page
+        $scope.showProfile = function(profileID) {
+            if(profileID != null && profileID != 0) {
+                $log.debug('Redirecting to View profile ' + profileID);
+                $location.path("/viewProfile/" + profileID);
+            }
         };
 
         // Adds to the Speakers list

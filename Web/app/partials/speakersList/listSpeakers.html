@@ -8,9 +8,9 @@
         <!-- Buttons -->
         <div class="btn-toolbar" role="toolbar" style="margin-bottom:5px">
             <!-- Status -->
-            <div class="btn-group">
-               <button type="button" class="btn btn-success" ng-show="list.Status == 'Open' && (event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)" ng-click="closeList()">Open</button>
-                <button type="button" class="btn btn-danger" ng-show="list.Status == 'Closed' && (event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)" ng-click="openList()">Closed</button>
+            <div class="btn-group" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+                <button type="button" class="btn btn-success" ng-show="list.Status == 'Open'" ng-click="closeList()">Open</button>
+                <button type="button" class="btn btn-danger" ng-show="list.Status == 'Closed'" ng-click="openList()">Closed</button>
             </div>
             <!-- Speakers functions -->
             <div class="btn-group">
@@ -29,7 +29,7 @@
                     </div>
                 </div>
                 <!-- Remove myself as a Speaker -->
-                <button type="button" class="btn btn-default" ng-show="speakingSlot" ng-click="remove(speakingSlot)"><span class="glyphicon glyphicon-remove-circle"></span> Remove myself</button>
+                <button type="button" class="btn btn-default" ng-show="speakingSlot" ng-click="remove(speakingSlot)"><span class="glyphicon glyphicon-remove-circle"></span> Remove me</button>
             </div>
             <!-- Speakers list settings drop down -->
             <div class="btn-group">
@@ -40,6 +40,8 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
+                            <li><a href="#/addSpeaker/{{list.SpeakersListID}}">Add another Speaker</a></li>
+                            <li class="divider"></li>
                             <li ng-show="list.Status == 'Open'" ng-click="isSettingsOpen=false;closeList()"><a>Close to new Speakers</a></li>
                             <li ng-show="list.Status == 'Closed'" ng-click="isSettingsOpen=false;openList()"><a>Open to new Speakers</a></li>
                             <li ng-click="isSettingsOpen=false;removeAllSpeakers()"><a>Remove all Speakers</a></li>
@@ -50,7 +52,15 @@
             </div>
         </div>
         <div class="well" ng-show="speakers.length == 0">There is not yet any Speakers on this Speakers list</div>
-        <ytm-speaker-list ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-speaker-list>
-        <ytm-editable-speaker-list ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID"></ytm-editable-speaker-list>
+        <!-- Non editable -->
+        <a class="list-group-item" ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-animate="'animate'" ng-repeat="speaker in speakers">
+            <ytm-speaker></ytm-speaker>
+        </a>
+        <!-- Editable -->
+        <div ui-sortable="speakerReorder" ng-model="speakers" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+            <a class="list-group-item" ng-animate="'animate'" ng-repeat="speaker in speakers">
+                <ytm-speaker></ytm-speaker>
+            </a>
+        </div>
     </div>
 </div>

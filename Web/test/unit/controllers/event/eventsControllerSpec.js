@@ -418,5 +418,22 @@ describe('The Events controller', function() {
                 expect($location.path).toHaveBeenCalledWith("/editEvent/1"); // Check redirection
             });
         });
+
+        describe('which is a Profile picture', function() {
+
+            it("it should rediect to the View Profile page", function() {
+                var profileID = 1;
+                $scope.showProfile(profileID);
+
+                expect($location.path).toHaveBeenCalledWith("/viewProfile/1"); // Check redirection
+            });
+
+            it("it should do nothing if there is an invalid Profile", function() {
+                var profileID;
+                $scope.showProfile(profileID);
+
+                expect($location.path.wasCalled).toEqual(false); // Check redirection
+            });
+        });
     });
 });

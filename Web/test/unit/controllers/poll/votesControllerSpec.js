@@ -391,6 +391,22 @@ describe('The Votes controller', function() {
             });
         });
 
+        describe('showProfile()', function() {
+            it("it should rediect to the View Profile page", function() {
+                var profileID = 1;
+                $scope.showProfile(profileID);
+
+                expect($location.path).toHaveBeenCalledWith("/viewProfile/1"); // Check redirection
+            });
+
+            it("it should do nothing if there is an invalid Profile", function() {
+                var profileID;
+                $scope.showProfile(profileID);
+
+                expect($location.path.wasCalled).toEqual(false); // Check redirection
+            });
+        });
+
         describe('clearVotes()', function() {
 
             it("that removes all Votes from the Poll and displays the update to screen", function() {

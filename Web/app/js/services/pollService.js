@@ -57,7 +57,7 @@ angular.module('yieldtome.services')
             $log.debug('Request Url: ' + url);
 
             $http.put(url, poll).success(function(data) {
-                $log.debug('Updated Poll with PollID: ' + data.pollID);
+                $log.debug('Updated Poll with PollID: ' + data.PollID);
                 deferred.resolve(data);
             }).error(function(status) { // Otherwise, some unknown error occured
                 var error = status.Message;
