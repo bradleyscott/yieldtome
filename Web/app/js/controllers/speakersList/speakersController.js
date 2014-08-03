@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService', 'AttendeeService',
-    function($scope, $location, $log, $window, $routeParams, growl, SessionService, SpeakersListService, SpeakersService, AttendeeService) {
+.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', '$interval', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService', 'AttendeeService',
+    function($scope, $location, $log, $window, $routeParams, $interval, growl, SessionService, SpeakersListService, SpeakersService, AttendeeService) {
 
         $log.debug("Speakers controller executing");
 
@@ -17,6 +17,7 @@ angular.module('yieldtome.controllers')
         $scope.speakers; // The Speakers for the list
         $scope.speakingSlot; // The Speaker record for this Attendee
         $scope.addDialog; // Stores the result from the Add Speaker dailog
+        $scope.intervalPromise; // The promise returned by the interval timer
 
         $scope.$back = function() {
             $window.history.back();
@@ -177,34 +178,48 @@ angular.module('yieldtome.controllers')
             promise.then(function(list) {
                 $scope.list = list;
                 $scope.getSpeakers(); // Get Speakers
+
+                // If this user is NOT the list owner, then getSpeakers() every 10 seconds
+                if($scope.list.CreatorID != $scope.profile.ProfileID && $scope.event.CreatorID != $scope.profile.ProfileID) {
+                    $log.debug("User is not the SpeakersList or Event creator. Starting refresh timer");
+                    $scope.intervalPromise = $interval($scope.getSpeakers, 10000);
+                }
+                else { $log.debug("User is Event or SpeakersList creator. Will not refresh speakers"); }
             })
             .catch (function(error) {
                 $log.warn(error);
                 growl.addErrorMessage("Something went wrong trying to get this Speakers List");
             });                
 
-        })();
-
-        // Watch and log $scope.speakers changes
-        $scope.$watch("speakers", function(speakers) {
-            $log.debug('Speakers changed in scope');
-
-            // See if this Attendee is a speaker
-            $scope.speakingSlot = null;
-            angular.forEach($scope.speakers, function(value, key){
-                if(value.Attendee ? (value.Attendee.AttendeeID == $scope.attendee.AttendeeID) : null) {
-                    $scope.speakingSlot = value;
+            // Destroy the interval promise when this controller is destroyed
+            $scope.$on('$destroy', function() {
+                $log.debug("Destroying getSpeakers interval timer");
+                if (angular.isDefined($scope.intervalPromise)) {
+                    $interval.cancel($scope.intervalPromise);
+                    $scope.intervalPromise = undefined;
                 }
             });
-        });
 
-        // Speakers order is changed through a drag and drop
-        $scope.speakerReorder = {
-            update: function(e, ui) { 
-                $log.debug('Speakers order changed on UI'); 
-                $scope.reorderSpeakers(); 
-            }
-        };
+            // Watch and log $scope.speakers changes
+            $scope.$watch("speakers", function(speakers) {
+                $log.debug('Speakers changed in scope');
 
+                // See if this Attendee is a speaker
+                $scope.speakingSlot = null;
+                angular.forEach($scope.speakers, function(value, key){
+                    if(value.Attendee ? (value.Attendee.AttendeeID == $scope.attendee.AttendeeID) : null) {
+                        $scope.speakingSlot = value;
+                    }
+                });
+            });
+
+            // Speakers order is changed through a drag and drop
+            $scope.speakerReorder = {
+                update: function(e, ui) { 
+                    $log.debug('Speakers order changed on UI'); 
+                    $scope.reorderSpeakers(); 
+                }
+            };
+        })();
     }
 ]);
