@@ -182,7 +182,7 @@ angular.module('yieldtome.controllers')
                 // If this user is NOT the list owner, then getSpeakers() every 10 seconds
                 if($scope.list.CreatorID != $scope.profile.ProfileID && $scope.event.CreatorID != $scope.profile.ProfileID) {
                     $log.debug("User is not the SpeakersList or Event creator. Starting refresh timer");
-                    $scope.intervalPromise = $interval($scope.getSpeakers, 10000);
+                    $scope.intervalPromise = $interval($scope.getSpeakers, 30000);
                 }
                 else { $log.debug("User is Event or SpeakersList creator. Will not refresh speakers"); }
             })
