@@ -91,6 +91,21 @@ namespace yieldtome.API.Controllers
         }
 
         /// <summary>
+        /// Updates Attendee information
+        /// </summary>
+        /// <param name="Attendee">The Attendee to update</param>
+        /// <returns>The updated Attendee</returns>
+        /// <example>PUT Attendees</example>
+        public Attendee PutAttendee(Attendee attendeeToUpdate)
+        {
+            try { attendeeToUpdate = _service.UpdateAttendee(attendeeToUpdate); }
+            catch (ArgumentNullException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+            catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+
+            return attendeeToUpdate;
+        }
+
+        /// <summary>
         /// Deletes an Attendee
         /// </summary>
         /// <param name="id">ID of the Attendee to delete</param>
