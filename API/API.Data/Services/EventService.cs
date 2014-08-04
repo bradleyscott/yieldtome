@@ -124,7 +124,7 @@ namespace yieldtome.API.Data.Services
 
                 if (theEvent.EventID != 0)
                     matchingEvents = db.Events.Where(x => x.EventID != theEvent.EventID).ToList(); // Filter out this Event
-                matchingEvents = matchingEvents.Where(x => x.DeletedTime == null && x.EndDate.CompareTo(DateTime.Now) < 0).ToList(); // Get Events that haven't finished
+                matchingEvents = matchingEvents.Where(x => x.DeletedTime == null && x.EndDate.CompareTo(DateTime.Now) > 0).ToList(); // Get Events that haven't finished
                 matchingEvents = matchingEvents.Where(x => x.Hashtag != null && x.Hashtag != "" && x.Hashtag == theEvent.Hashtag).ToList(); // Events that haven't finished with this Hashtag
             }
 
@@ -203,6 +203,7 @@ namespace yieldtome.API.Data.Services
                 }
 
                 db.SaveChanges();
+                updatedEvent = CreateEventObject(dbEvent);
             }
 
             Logging.LogWriter.Write(String.Format("Updated Event with ID {0}", updatedEvent.EventID));
