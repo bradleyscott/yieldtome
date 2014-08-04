@@ -21,6 +21,7 @@ namespace yieldtome.API.Data.Objects
         public int ProfileID { get; set; }
         [Required]
         public DateTime CreatedTime { get; set; }
+        public DateTime? UpdatedTime { get; set; }
         public DateTime? DeletedTime { get; set; }
 
         public virtual Event Event { get; set; }

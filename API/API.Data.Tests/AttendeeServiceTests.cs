@@ -98,13 +98,58 @@ namespace yieldtome.API.Tests
         [TestMethod]
         public void CreateAttendee_Success()
         {
-            Attendee attendee = _service.CreateAttendee(1, "New Attendee", 1);
+            Attendee attendee = _service.CreateAttendee(2, "New Attendee", 1);
 
             _deletions.Add(attendee.AttendeeID); // Delete this in the tear down
 
             Assert.IsInstanceOfType(attendee, typeof(Attendee));
             Assert.AreEqual("New Attendee", attendee.Name);
             Assert.AreEqual(1, attendee.Profile.ProfileID);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateAttendee_AlreadyAttending()
+        {
+            Attendee attendee = _service.CreateAttendee(1, "New Attendee", 1);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void UpdateAttendee_InvalidAttendeeID()
+        {
+            Attendee updatedAttendee = new Attendee
+            {
+                AttendeeID = -1,
+                Name = "Valid name",
+            };
+            Attendee attendee = _service.UpdateAttendee(updatedAttendee);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void UpdateAttendee_MissingName()
+        {
+            Attendee updatedAttendee = new Attendee
+            {
+                AttendeeID = 1,
+                Name = "",
+            };
+            Attendee attendee = _service.UpdateAttendee(updatedAttendee);
+        }
+
+        [TestMethod]
+        public void UpdateAttendee_Success()
+        {
+            string name = "Attendee " + DateTime.Now.Ticks.ToString();
+            Attendee attendee = new Attendee
+            {
+                AttendeeID = 1,
+                Name = name,
+            };
+            Attendee updatedAttendee = _service.UpdateAttendee(attendee);
+            Assert.IsInstanceOfType(updatedAttendee, typeof(Attendee));
+            Assert.AreEqual(attendee.Name, name);
         }
 
         [TestMethod]
@@ -117,7 +162,7 @@ namespace yieldtome.API.Tests
         [TestMethod]
         public void DeleteAttendee_Success()
         {
-            Attendee attendeeToDelete = _service.CreateAttendee(1, String.Format("Attendee to delete {0}", DateTime.Now.Ticks), 1);
+            Attendee attendeeToDelete = _service.CreateAttendee(2, String.Format("Attendee to delete {0}", DateTime.Now.Ticks), 1);
             _service.DeleteAttendee(attendeeToDelete.AttendeeID);
 
             Attendee deletedAttendee = null;
@@ -137,7 +182,7 @@ namespace yieldtome.API.Tests
         [TestMethod]
         public void DeleteAttendees_Success()
         {
-            Attendee attendeeToDelete = _service.CreateAttendee(1, String.Format("Attendee to delete {0}", DateTime.Now.Ticks), 1);
+            Attendee attendeeToDelete = _service.CreateAttendee(2, String.Format("Attendee to delete {0}", DateTime.Now.Ticks), 1);
             _service.DeleteAttendee(attendeeToDelete.AttendeeID);
 
             Attendee deletedAttendee = null;

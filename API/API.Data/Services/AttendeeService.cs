@@ -110,6 +110,12 @@ namespace yieldtome.API.Data.Services
                 Event theEvent = db.Events.FirstOrDefault(x => x.EventID == eventID);
                 if (theEvent == null) throw new ArgumentException(String.Format("No Event with EventID={0} exists", eventID));
 
+                // Check to see if Attendee is already Attending this Event
+                int existingAttendeeCount = db.Attendees.Where(x => x.ProfileID == profileID 
+                                                                && x.EventID == eventID
+                                                                && x.DeletedTime == null).Count();
+                if (existingAttendeeCount > 0) throw new ArgumentException(String.Format("Profile with ProfileID={0} is already Attending Event with EventID={1}", profileID, eventID));
+
                 dbAttendee = new Attendee()
                 {
                     Name = name,
@@ -124,6 +130,29 @@ namespace yieldtome.API.Data.Services
 
             Logging.LogWriter.Write(String.Format("Created a new Attendee with ID {0}", dbAttendee.AttendeeID));
             return CreateAttendeeObject(dbAttendee);
+        }
+
+        public yieldtome.Objects.Attendee UpdateAttendee(yieldtome.Objects.Attendee updatedAttendee)
+        {
+            Logging.LogWriter.Write(String.Format("Attempting to update Attendee with AttendeeID={0}", updatedAttendee.AttendeeID));
+
+            if (updatedAttendee.Name == "") throw new ArgumentNullException("Name is required", "updatedAttendee.Name");
+
+            Attendee dbAttendee;
+            using (var db = new Database())
+            {
+                dbAttendee = db.Attendees.FirstOrDefault(x => x.AttendeeID == updatedAttendee.AttendeeID);
+                if (dbAttendee == null) throw new ArgumentException(String.Format("No Attendee with AttendeeID={0} exists", updatedAttendee.AttendeeID));
+
+                dbAttendee.Name = updatedAttendee.Name;
+                dbAttendee.UpdatedTime = DateTime.Now;
+                db.SaveChanges();
+
+                updatedAttendee = CreateAttendeeObject(dbAttendee);
+            }
+
+            Logging.LogWriter.Write(String.Format("Updated Attendee with ID {0}", updatedAttendee.AttendeeID));
+            return updatedAttendee;
         }
 
         public void DeleteAttendee(int attendeeID)

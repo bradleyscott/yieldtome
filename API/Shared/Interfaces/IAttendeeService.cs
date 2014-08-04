@@ -13,6 +13,7 @@ namespace yieldtome.Interfaces
         Attendee GetAttendee(int attendeeID);
         Attendee GetAttendee(int profileID, int eventID);
         Attendee CreateAttendee(int eventID, string name, int profileID);
+        Attendee UpdateAttendee(Attendee updatedAttendee);
         void DeleteAttendee(int attendeeID);
         void DeleteAttendees(int eventID);
     }
