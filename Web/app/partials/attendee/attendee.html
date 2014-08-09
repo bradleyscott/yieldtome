@@ -1,0 +1,15 @@
+<div class="media">
+    <!-- Profile picture -->
+    <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(attendee.Profile.ProfileID)">
+    <div class="media-body">
+        <!-- Edit attendee button -->
+        <button class="btn btn-default pull-right" ng-click="editAttendee(attendee.AttendeeID)" ng-show="isCreator || attendee.Profile.ProfileID == profile.ProfileID">
+            <span class="glyphicon glyphicon glyphicon-pencil"></span>
+        </button>
+        <div>
+            <!-- Names -->
+            <h4 class="media-heading">{{attendee.Name}}</h4>
+            {{attendee.Profile.Name}}
+        </div>
+    </div>
+</div>

@@ -1,6 +1,6 @@
 'use strict';
 
-describe('The Attend controller', function() {
+describe('The CreateAttendee controller', function() {
 
     var $scope, $location, $log, $controller, $q, growl, SessionService, AttendeeService;
 
@@ -17,14 +17,14 @@ describe('The Attend controller', function() {
             SessionService = _SessionService_;
 
             // Create Mocks 
-            AttendeeService = jasmine.createSpyObj('AttendeeService', ['attendEvent']);
+            AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendees','attendEvent']);
             $location = jasmine.createSpyObj('$location', ['path']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
 
     function initializeController() {
-        $controller('Attend', {
+        $controller('CreateAttendee', {
             $scope: $scope,
             $location: $location,
             $log: $log,
@@ -40,8 +40,27 @@ describe('The Attend controller', function() {
             SessionService.set('profile', undefined);
             SessionService.set('event', undefined);
 
+            var getAttendeesResponse = $q.defer();
+            getAttendeesResponse.resolve('ValidAttendees');
+            AttendeeService.getAttendees.andReturn(getAttendeesResponse.promise); // Return a valid attendee
+  
             initializeController();
+
             expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't have enough information to have you attend this event");
+        });
+
+        it("should display an error if there was a failure retriving the Attendees", function() {
+            SessionService.set('profile', 'ValidProfile');
+            SessionService.set('event', 'ValidEvent');
+                        
+            var getAttendeesResponse = $q.defer();
+            getAttendeesResponse.reject('EpicFail');
+            AttendeeService.getAttendees.andReturn(getAttendeesResponse.promise); // Return a valid attendee
+
+            initializeController();
+            $scope.$digest();
+
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the list of Attendees");
         });
 
         it("should set the profile and event properties if the correct values are in session", function() {
@@ -49,7 +68,13 @@ describe('The Attend controller', function() {
             SessionService.set('profile', 'ValidProfile');
             SessionService.set('event', 'ValidEvent');
 
+            var getAttendeesResponse = $q.defer();
+            getAttendeesResponse.resolve('ValidAttendees');
+            AttendeeService.getAttendees.andReturn(getAttendeesResponse.promise); // Return a valid attendee
+            
             initializeController();
+            $scope.$digest();
+            
             expect($scope.profile).toBe('ValidProfile');
             expect($scope.event).toBe('ValidEvent');
             expect($scope.error).toBeUndefined();
@@ -63,7 +88,12 @@ describe('The Attend controller', function() {
             SessionService.set('profile', 'ValidProfile');
             SessionService.set('event', 'ValidEvent');
 
+            var getAttendeesResponse = $q.defer();
+            getAttendeesResponse.resolve('ValidAttendees');
+            AttendeeService.getAttendees.andReturn(getAttendeesResponse.promise); // Return a valid attendee
+
             initializeController();
+            $scope.$digest();
         });
 
         it("that should redirect to landing page if successful, and save th Attendee to session", function() {
@@ -79,7 +109,7 @@ describe('The Attend controller', function() {
 
             var attendee = SessionService.get('attendee');
             expect(attendee).toBe('ValidAttendee');
-            expect($location.path).toHaveBeenCalledWith("/landing"); // Check redirection
+            expect($location.path).toHaveBeenCalledWith("/attendees"); // Check redirection
         });
 
         it("that displays an error if something catastrophic happens", function() {

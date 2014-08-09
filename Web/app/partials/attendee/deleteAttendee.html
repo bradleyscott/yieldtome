@@ -1,12 +1,11 @@
 <div class="modal-header">
     <button type="button" class="close" ng-click="cancelDelete()" aria-hidden="true">&times;</button>
-    <h4 class="modal-title">Delete Event</h4>
+    <h4 class="modal-title">Leave delegation</h4>
 </div>
 <div class="modal-body">
-    <p>Once you delete an Event it is gone forever, and no one will be able to access it.</p>
-    Are you sure you want to delete '{{event.Name}}'?
+   	Do you want to leave the '{{attendee.Name}}' delegation?
 </div>
 <div class="modal-footer">
     <button type="button" class="btn btn-default" ng-click="cancelDelete()">Cancel</button>
-    <button type="button" class="btn btn-danger" ng-click="confirmDelete()">Delete</button>
+    <button type="button" class="btn btn-danger" ng-click="confirmDelete()">Leave</button>
 </div>

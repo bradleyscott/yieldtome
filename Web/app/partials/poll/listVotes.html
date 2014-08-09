@@ -1,8 +1,7 @@
-<ytm-nav-menu></ytm-nav-menu>
+<ytm-menu></ytm-menu>
 <div class="container body-content">
     <div>
         <h2>{{poll.Name}}
-            </br>
             <div class="pull-right" ng-show="event.CreatorID == profile.ProfileID || poll.CreatorID == profile.ProfileID">
                 <div class="btn-group" dropdown is-open="isSettingsOpen">
                     <button type="button" class="btn btn-default dropdown-toggle">
@@ -17,7 +16,6 @@
                     </ul>
                 </div>
             </div>
-            <small>{{event.Name}}</small>
         </h2>            
         <!-- Poll results -->
         <div class="row">
@@ -42,14 +40,15 @@
         <!-- List of votes -->
         <h4>Other Votes</h4>
         <div class="well" ng-show="votes.length == 1">There are no other Votes on this Poll</div>
-        <!-- Filter buttons -->
-        <div class="btn-group btn-group-justified" ng-show="votes.length > 1" style="margin-bottom:5px">
-            <label class="btn btn-default active" ng-model="voteFilter.for" btn-checkbox>For</label>
-            <label class="btn btn-default active" ng-model="voteFilter.against" btn-checkbox>Against</label>
-            <label class="btn btn-default active" ng-model="voteFilter.abstain" btn-checkbox>Abstain</label>
-        </div>
         <!-- Filter criteria -->
         <div class="form-group" ng-show="otherVotes.length > 10">
+            <!-- Filter buttons -->
+            <div class="btn-group btn-group-justified" style="margin-bottom:5px">
+                <label class="btn btn-default active" ng-model="voteFilter.for" btn-checkbox>For</label>
+                <label class="btn btn-default active" ng-model="voteFilter.against" btn-checkbox>Against</label>
+                <label class="btn btn-default active" ng-model="voteFilter.abstain" btn-checkbox>Abstain</label>
+            </div>
+            <!-- Attendee search -->
             <div class="input-group">
                 <span class="input-group-addon">
                     <span class="glyphicon glyphicon-search"></span>

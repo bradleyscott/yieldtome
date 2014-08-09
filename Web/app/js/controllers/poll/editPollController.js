@@ -10,6 +10,7 @@ angular.module('yieldtome.controllers')
         $scope.title = 'Edit Poll';
         $scope.alternatebutton = 'Back';
         $scope.poll;
+        $scope.event;
         $scope.profile;
         $scope.isDeleteEnabled = true; // Enables the Delete button
         $scope.deleteConfirm; // Delete confirmation dialog promise
@@ -79,6 +80,8 @@ angular.module('yieldtome.controllers')
         (function() {
             // Allocate the saved Profile to the controller
             $scope.profile = SessionService.get('profile');
+            $scope.event = SessionService.get('event');
+            $scope.attendee = SessionService.get('attendee');
 
             var pollID = $routeParams.pollID;
             var promise = PollService.getPoll(pollID);

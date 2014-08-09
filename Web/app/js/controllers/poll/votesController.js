@@ -17,7 +17,7 @@ angular.module('yieldtome.controllers')
         $scope.poll; // The Poll being displayed
         $scope.votes; // The list of Votes 
         $scope.myVote; // The Vote this Attendee has cast
-        $scope.voteFilter = { text:'', for:true, against:true, abstain:false }; // An object containg variables to filter against 
+        $scope.voteFilter = { text:'', for:true, against:true, abstain:true }; // An object containg variables to filter against 
         $scope.intervalPromise; // The promise returned by the interval timer
 
         $scope.$back = function() {

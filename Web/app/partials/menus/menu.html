@@ -6,16 +6,19 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="#/events">yieldto.me</a>
+            <a class="navbar-brand" ng-hide="event">yieldto.me</a>
+            <a class="navbar-brand" ng-show="event">{{ event.Name  | truncate:20 }}</a>
         </div>
         <div class="navbar-collapse" collapse="!isNavOpen">
+            <ul class="nav navbar-nav" ng-show="attendee">
+                <li><a href="#/attendees">Attendees</a></li>
+                <li><a href="#/speakersLists">Speakers</a></li>
+                <li><a href="#/polls">Polls</a></li>
+            </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li>
-                    <a href="#/editProfile" ng-show="profile">{{profile.Name}}</a>
-                </li>
-                <li>
-                    <a href="#/?logout" ng-show="profile">Logout</a>
-                </li>
+                <li><a href="#/events" ng-show="event">Other Events</a></li>                
+                <li><a href="#/editProfile" ng-show="profile.ProfileID">Your Profile</a></li>
+                <li><a href="#/?logout" ng-show="profile">Logout</a></li>
             </ul>
         </div>
     </div>

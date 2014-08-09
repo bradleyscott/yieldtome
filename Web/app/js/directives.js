@@ -16,19 +16,10 @@ angular.module('yieldtome.directives', [])
             templateUrl: 'partials/menus/menu.html'
         };
     })
-    .directive('ytmNavMenu', function() {
+    .directive('ytmAttendee', function() {
         return {
             restrict: 'E',
-            templateUrl: 'partials/menus/navMenu.html'
-        };
-    })
-    .directive('ytmAttendeeList', function() {
-        return {
-            restrict: 'E',
-            scope: {
-                attendees: '='
-            },
-            templateUrl: 'partials/attendeeList.html'
+            templateUrl: 'partials/attendee/attendee.html'
         };
     })
     .directive('ytmSpeaker', function() {

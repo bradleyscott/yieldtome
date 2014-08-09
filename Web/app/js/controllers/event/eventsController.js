@@ -11,7 +11,7 @@ angular.module('yieldtome.controllers')
 
         $scope.profile; // The authenticated Profile, if it exists
         $scope.events; // List of Events
-        $scope.selectedEvent; // The Event the user selected
+        $scope.event; // The Event the user selected
         $scope.attendees; // Attendees for the selected Event
 
         $scope.$back = function() {
@@ -40,7 +40,7 @@ angular.module('yieldtome.controllers')
 
         $scope.attend = function() {
             $log.debug('User clicked the Attend button');
-            SessionService.set('event', $scope.selectedEvent); // Save the selectedEvent to session
+            SessionService.set('event', $scope.event); // Save the selectedEvent to session
             $location.path('/attend');
         };
 
@@ -68,13 +68,13 @@ angular.module('yieldtome.controllers')
                             growl.addInfoMessage("You are attending " + selectedEvent.Name + " as " + attendees[i].Name);
                             SessionService.set('event', selectedEvent); // Save the selectedEvent to session
                             SessionService.set('attendee', attendees[i]); // Save the Attendee to session
-                            $location.path('/landing');
+                            $location.path('/attendees');
                         }
                     }
 
                     // Update the screen 
                     $log.debug('User selected Event with EventID=' + selectedEvent.EventID);
-                    $scope.selectedEvent = selectedEvent;
+                    $scope.event = selectedEvent;
                     $scope.attendees = attendees; // Display attendees to screen
                 })
                 .catch (function(error) {
@@ -83,8 +83,8 @@ angular.module('yieldtome.controllers')
                 });                
 
            } else {
-                $log.debug('User de-selected Event with EventID=' + $scope.selectedEvent.EventID);
-                $scope.selectedEvent = selectedEvent;
+                $log.debug('User de-selected Event with EventID=' + $scope.event.EventID);
+                $scope.event = selectedEvent;
                 return;
             }
         };

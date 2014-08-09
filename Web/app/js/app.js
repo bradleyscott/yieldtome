@@ -48,12 +48,16 @@ angular.module('yieldtome', [
             controller: 'EditEvent'
         });
         $routeProvider.when('/attend', {
-            templateUrl: 'partials/event/attend.html',
-            controller: 'Attend'
+            templateUrl: 'partials/attendee/editAttendee.html',
+            controller: 'CreateAttendee'
         });
-        $routeProvider.when('/landing', {
-            templateUrl: 'partials/event/landing.html',
-            controller: 'Landing'
+        $routeProvider.when('/attendees', {
+            templateUrl: 'partials/attendee/listAttendees.html',
+            controller: 'Attendees'
+        });
+        $routeProvider.when('/editAttendee/:attendeeID', {
+            templateUrl: 'partials/attendee/editAttendee.html',
+            controller: 'EditAttendee'
         });
         $routeProvider.when('/speakersLists', {
             templateUrl: 'partials/speakersList/listSpeakersLists.html',

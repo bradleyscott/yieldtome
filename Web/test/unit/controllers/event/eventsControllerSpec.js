@@ -161,7 +161,7 @@ describe('The Events controller', function() {
             $scope.selectEvent(selectedEvent);
             $scope.$digest();
             
-            expect($scope.selectedEvent).toBe(selectedEvent);
+            expect($scope.event).toBe(selectedEvent);
         });
 
         it("it should get the Attendees and display the screen", function() {
@@ -269,7 +269,7 @@ describe('The Events controller', function() {
             $scope.selectEvent(selectedEvent);
             $scope.$digest();
 
-            expect($location.path).toHaveBeenCalledWith("/landing"); // Check redirection
+            expect($location.path).toHaveBeenCalledWith("/attendees"); // Check redirection
         });
 
         it("should display an error if there was a huge fail when trying to get the Attendees", function() {
@@ -300,12 +300,12 @@ describe('The Events controller', function() {
             var selectedEvent = {
                 EventID: 1
             };
-            $scope.selectedEvent = selectedEvent;
+            $scope.event = selectedEvent;
 
             $scope.$digest();
             $scope.selectEvent();
 
-            expect($scope.selectedEvent).toBeUndefined();
+            expect($scope.event).toBeUndefined();
         });
     });
 
@@ -389,7 +389,7 @@ describe('The Events controller', function() {
                     "DisplayDate": "20 Apr to 22 Oct 2014"
                 };
 
-                $scope.selectedEvent = event;
+                $scope.event = event;
                 $scope.attend();
 
                 expect($location.path).toHaveBeenCalledWith("/attend"); // Check redirection

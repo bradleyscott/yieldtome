@@ -81,6 +81,7 @@ angular.module('yieldtome.controllers')
         (function() {
             $scope.profile = SessionService.get('profile');
             $scope.event = SessionService.get('event');
+            $scope.attendee = SessionService.get('attendee');
 
             var listID = $routeParams.speakersListID;
             var promise = SpeakersListService.getList(listID);

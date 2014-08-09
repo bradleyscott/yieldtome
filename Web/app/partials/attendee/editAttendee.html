@@ -1,0 +1,28 @@
+<ytm-menu></ytm-menu>
+<div class="container body-content">
+    <h2>{{title}}
+        <br/>
+        <small>{{event.Name}}</small>
+    </h2>
+    <form name="form" role="form" class="css-form form-horizontal" style="margin:15px" novalidate>
+        <div class="form-group">
+            <div class="input-group">
+                <span class="input-group-addon" style="min-width:65px">representing</span>
+                <input name="name" class="form-control" type="text" ng-model="attendee.Name" ng-disabled="formDisabled" required placeholder="Delegation name" />
+                <span class="form-control validation" ng-show="form.name.$invalid && form.$dirty">We need a delegation name</span>
+            </div>
+        </div>
+        <div class="row">
+            <div class="text-right">
+                <button type="button" ng-click="$back()" class="btn btn-default">{{alternatebutton}}</button>
+                <button type="button" ng-click="showDelete()" ng-show="isDeleteEnabled" class="btn btn-danger">Leave</button>
+                <button type="submit" ng-disabled="form.$invalid" ng-hide="formDisabled" ng-click="save()" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </form>
+    <h3>People already attending</h3>
+    <a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-animate="'animate'" ng-show="name.length > 0" ng-repeat="attendee in matches = (attendees | filter:name)">
+        <ytm-attendee>
+    </a>
+    <div class="well" ng-show="matches.length == 0 || name == null || name.length == 0">There is no one else representing a delegation with this name</div>
+</div>

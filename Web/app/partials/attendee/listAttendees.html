@@ -1,0 +1,19 @@
+<ytm-menu></ytm-menu>
+<div class="container body-content">
+    <h2>Attendees</h2>
+    <a class="list-group-item"><ytm-attendee attendee="attendee"></ytm-attendee></a>
+    <!-- Attendee stats -->
+    <h3><span class="label label-primary"> {{attendees.length}}</span> other Attendees</h3>
+    <!-- Attendee search  -->
+    <div class="form-group" ng-show="attendees.length > 10">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" ng-model="query" placeholder="Find people..." />
+        </div>
+    </div>
+    <a class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query">
+        <ytm-attendee></ytm-attendee>
+    </a>
+</div>

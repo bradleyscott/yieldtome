@@ -45,6 +45,7 @@ angular.module('yieldtome.controllers')
 
             $scope.profile = SessionService.get('profile');
             $scope.event = SessionService.get('event');
+            $scope.attendee = SessionService.get('attendee');
 
             if ($scope.profile == "undefined" || $scope.event == "undefined") {
                 growl.addErrorMessage("We don't have enough information to have you create a Speakers list");
