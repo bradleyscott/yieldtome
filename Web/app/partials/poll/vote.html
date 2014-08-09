@@ -3,7 +3,7 @@
     <img class="media-object pull-left" ng-src="{{vote.Attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(vote.Attendee.Profile.ProfileID)">
     <div class="media-body">
         <!-- Edit vote button -->
-        <button class="btn btn-default pull-right" ng-click="vote{{vote.VoteID}}Open=!vote{{vote.VoteID}}Open" ng-show="poll.Status=='Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
+        <button class="btn btn-default pull-right" ng-click="vote{{vote.VoteID}}Open=!vote{{vote.VoteID}}Open" ng-show="(poll.Status=='Open' && vote.Attendee.AttendeeID == attendee.AttendeeID) || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
             <span class="glyphicon glyphicon glyphicon-pencil"></span>
         </button>
         <div>
