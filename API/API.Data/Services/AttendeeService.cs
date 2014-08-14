@@ -161,10 +161,32 @@ namespace yieldtome.API.Data.Services
 
             using (var db = new Database())
             {
+                DateTime deletedTime = DateTime.Now;
+
+                // Attendee records
                 Attendee dbAttendee = db.Attendees.FirstOrDefault(x => x.AttendeeID == attendeeID);
                 if (dbAttendee == null) throw new ArgumentException(String.Format("No Attendee with AttendeeID={0} exists", attendeeID));
 
-                dbAttendee.DeletedTime = DateTime.Now;
+                dbAttendee.DeletedTime = deletedTime;
+
+                // Delete Speaker records
+                List<Speaker> speakers = db.Speakers.Where(x => x.Attendee.AttendeeID == dbAttendee.AttendeeID
+                                                            && x.DeletedTime == null && x.SpokenTime == null)
+                                                            .ToList();
+                foreach (Speaker s in speakers)
+                {
+                    s.DeletedTime = deletedTime;
+                }
+
+                // Delete Vote records
+                List<Vote> votes = db.Votes.Where(x => x.Attendee.AttendeeID == dbAttendee.AttendeeID
+                                                            && x.DeletedTime == null)
+                                                            .ToList();
+                foreach (Vote v in votes)
+                {
+                    v.DeletedTime = deletedTime;
+                }
+
                 db.SaveChanges();
             }
 
@@ -181,9 +203,7 @@ namespace yieldtome.API.Data.Services
                 if (dbEvent == null) throw new ArgumentException(String.Format("No Event with EventID={0} exists", eventID));
 
                 foreach (Attendee a in dbEvent.Attendees)
-                    if (a.DeletedTime == null) a.DeletedTime = DateTime.Now;
-
-                db.SaveChanges();
+                    if (a.DeletedTime == null) { DeleteAttendee(a.AttendeeID); }
             }
 
             Logging.LogWriter.Write(String.Format("Deleted all Attendees attending Event with EventID={0}", eventID));
