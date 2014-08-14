@@ -10,8 +10,11 @@ angular.module('yieldtome.controllers')
         $scope.title = 'Change attendance';
         $scope.alternatebutton = 'Back';
         $scope.event;
+        $scope.attendees; // The Attendee list for this Event
         $scope.profile;
-        $scope.attendee;
+        $scope.attendee; // The user's Attendee context
+        $scope.selectedAttendee; // The Attendee to edit 
+        $scope.isEditingSelf; // Is the user editing their own Attendee context?
         $scope.isDeleteEnabled = true; // Enables the Delete button
 
         $scope.$back = function() {
@@ -47,16 +50,28 @@ angular.module('yieldtome.controllers')
         $scope.deleteAttendee = function()
         {
             $log.debug('EditAttendee.deleteAttendee() executing');
-            var promise = AttendeeService.deleteAttendee($scope.attendee);
+            var promise = AttendeeService.deleteAttendee($scope.selectedAttendee);
 
             promise.then(function(data) {
                 $log.debug('Attendee deleted after deleteAttendee()');
-                growl.addInfoMessage("You are no longer representing " + $scope.attendee.Name);
-                $location.path('/events');
+
+                if($scope.isEditingSelf) { 
+                    SessionService.set('attendee', null); 
+                    growl.addInfoMessage("You are no longer representing " + $scope.selectedAttendee.Name);
+                    $location.path('/events');
+                }
+                else { 
+                    growl.addInfoMessage($scope.selectedAttendee.Profile.Name + ' is no longer representing ' + $scope.selectedAttendee.Name); 
+                    $location.path('/attendees');
+                }
             })            
             .catch (function(error) {
                 $log.warn(error);
-                growl.addErrorMessage("Something went wrong trying to remove yourself from this delegation");
+
+                var message;  
+                if($scope.isEditingSelf) { message = "Something went wrong trying to remove yourself from this delegation. " + error; }
+                else { message = "Something went wrong trying to remove this Attendee from this delegation. " + error; }
+                growl.addErrorMessage(message);
             });                
         };
 
@@ -64,16 +79,49 @@ angular.module('yieldtome.controllers')
         {
             $log.debug('EditAttendee.save() starting');
 
-            var promise = AttendeeService.updateAttendee($scope.attendee);
+            var promise = AttendeeService.updateAttendee($scope.selectedAttendee);
 
-            promise.then(function(attendee) { // It all went well 
-                $scope.attendee = attendee;
-                growl.addInfoMessage('You successfully renamed your delegation to ' + attendee.Name);
+            promise.then(function(updatedAttendee) { // It all went well 
+                $scope.selectedAttendee = updatedAttendee;
+
+                var message;  
+                if($scope.isEditingSelf) { 
+                    SessionService.set('attendee', updatedAttendee);
+                    message = 'You successfully renamed your delegation to ' + updatedAttendee.Name; 
+                }
+                else { message = 'You successfully renamed this delegation to ' + updatedAttendee.Name; }
+                growl.addInfoMessage(message);
+
                 $location.path('/attendees'); // Redirect
             })
             .catch (function(error) { // The service crapped out
                 $log.warn(error);
-                growl.addErrorMessage("Something went wrong trying to rename your delegation. " + error);
+
+                var message;  
+                if($scope.isEditingSelf) { message = "Something went wrong trying to rename your delegation. " + error; }
+                else { message = "Something went wrong trying to rename this delegation. " + error; }
+                growl.addErrorMessage(message);
+            });
+        };
+
+        $scope.getOtherAttendees = function(){
+            $log.debug('Retrieving other Attendees');
+
+            var promise = AttendeeService.getAttendees($scope.event);
+            promise.then(function(attendees) {
+                for (var i = 0; i < attendees.length; i++) {
+                    if (attendees[i].AttendeeID == $scope.attendee.AttendeeID) {
+                        $log.debug('Removing Attendee with AttendeeID: ' + attendees[i].AttendeeID);
+                        var attendeeIndex = attendees.indexOf(attendees[i]);
+                        attendees.splice(attendeeIndex, 1);
+                    }
+                }
+                
+                $scope.attendees = attendees;
+            })
+            .catch (function(error) {
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to get Attendees");
             });
         };
 
@@ -81,12 +129,16 @@ angular.module('yieldtome.controllers')
         (function() {
             $scope.profile = SessionService.get('profile');
             $scope.event = SessionService.get('event');
+            $scope.attendee = SessionService.get('attendee');
 
-            var attendeeID = $routeParams.attendeeID;
-            var promise = AttendeeService.getAttendee(attendeeID);
+            // Get this Attendee
+            $log.debug('Retrieving Attendee record');
+            var selectedAttendeeID = $routeParams.attendeeID;
+            var promise = AttendeeService.getAttendee(selectedAttendeeID);
 
-            promise.then(function(attendee) {
-                $scope.attendee = attendee;
+            promise.then(function(selectedAttendee) {
+                $scope.selectedAttendee = selectedAttendee;
+                $scope.isEditingSelf = $scope.attendee.AttendeeID == selectedAttendee.AttendeeID;
             })
             .catch (function(error) {
                 $log.warn(error);

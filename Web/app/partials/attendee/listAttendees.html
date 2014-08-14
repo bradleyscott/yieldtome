@@ -1,19 +1,23 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
-    <h2>Attendees</h2>
-    <a class="list-group-item"><ytm-attendee attendee="attendee"></ytm-attendee></a>
-    <!-- Attendee stats -->
-    <h3><span class="label label-primary"> {{attendees.length}}</span> other Attendees</h3>
-    <!-- Attendee search  -->
-    <div class="form-group" ng-show="attendees.length > 10">
-        <div class="input-group">
-            <span class="input-group-addon">
-                <span class="glyphicon glyphicon-search"></span>
-            </span>
-            <input type="text" class="form-control" ng-model="query" placeholder="Find people..." />
+    <a class="list-group-item"><ytm-attendee></ytm-attendee></a>
+    <div ng-show="attendees.length > 0">
+        <!-- Attendee stats -->
+        <h2 ng-show="attendees.length == 1"><span class="label label-primary">1</span> other Attendee</h2>
+        <h2 ng-show="attendees.length > 1"><span class="label label-primary"> {{attendees.length}}</span> other Attendees</h2>
+        <!-- Attendee search  -->
+        <div class="form-group" ng-show="attendees.length > 10">
+            <div class="input-group">
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-search"></span>
+                </span>
+                <input type="text" class="form-control" ng-model="query" placeholder="Find people..." />
+            </div>
         </div>
+        <a class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query">
+            <ytm-attendee></ytm-attendee>
+        </a>
     </div>
-    <a class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query">
-        <ytm-attendee></ytm-attendee>
-    </a>
+    <br>
+    <div class="well" ng-show="attendees.length == 0">There are not yet any other Attendees</div>
 </div>

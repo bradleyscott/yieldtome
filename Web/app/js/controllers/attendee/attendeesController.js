@@ -54,9 +54,11 @@ angular.module('yieldtome.controllers')
                     if (attendees[i].AttendeeID == $scope.attendee.AttendeeID) {
                         var attendeeIndex = attendees.indexOf(attendees[i]);
                         attendees.splice(attendeeIndex, 1);
-                        $scope.attendees = attendees;
                     }
                 }
+
+                $scope.attendees = attendees;
+                $log.debug($scope.attendees.length + ' Attendees who are not this user');
             })
             .catch (function(error) {
                 $log.warn(error);

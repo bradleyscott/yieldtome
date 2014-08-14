@@ -49,20 +49,6 @@ describe('The CreateAttendee controller', function() {
             expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't have enough information to have you attend this event");
         });
 
-        it("should display an error if there was a failure retriving the Attendees", function() {
-            SessionService.set('profile', 'ValidProfile');
-            SessionService.set('event', 'ValidEvent');
-                        
-            var getAttendeesResponse = $q.defer();
-            getAttendeesResponse.reject('EpicFail');
-            AttendeeService.getAttendees.andReturn(getAttendeesResponse.promise); // Return a valid attendee
-
-            initializeController();
-            $scope.$digest();
-
-            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to get the list of Attendees");
-        });
-
         it("should set the profile and event properties if the correct values are in session", function() {
             
             SessionService.set('profile', 'ValidProfile');

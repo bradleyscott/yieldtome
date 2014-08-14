@@ -41,6 +41,7 @@ describe('The Attendees controller', function() {
             
             SessionService.set('event', undefined);
             SessionService.set('profile', { ProfileID: 1 });
+            SessionService.set('attendee', { AttendeeID: 1 });
 
             initializeController();
 
@@ -52,6 +53,7 @@ describe('The Attendees controller', function() {
             // Save an Event in session
             SessionService.set('event', 'ValidEvent');
             SessionService.set('profile', { ProfileID: 1 });
+            SessionService.set('attendee', { AttendeeID: 1 });
 
             // Mock getPolls response
             var getAttendeesResponse = $q.defer();
@@ -116,6 +118,7 @@ describe('The Attendees controller', function() {
             // Save an Event in session
             SessionService.set('event', 'ValidEvent');
             SessionService.set('profile', { ProfileID: 1 });
+            SessionService.set('attendee', { AttendeeID: 1 });
 
             // Mock getPolls error
             var getAttendeesResponse = $q.defer();

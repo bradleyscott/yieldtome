@@ -11,8 +11,7 @@ angular.module('yieldtome.controllers')
         $scope.alternatebutton = 'Cancel';
         $scope.event;
         $scope.profile;
-        $scope.attendees;
-        $scope.attendee = { Name: '' }; // The Attendee record, including its Name
+        $scope.selectedAttendee = { Name: '' }; // The Attendee record, including its Name
 
         $scope.$back = function() {
             $window.history.back();
@@ -29,7 +28,7 @@ angular.module('yieldtome.controllers')
         $scope.save = function()
         {
             $log.debug('AttendController.save() starting');
-            var promise = AttendeeService.attendEvent($scope.event, $scope.attendee.Name, $scope.profile);
+            var promise = AttendeeService.attendEvent($scope.event, $scope.selectedAttendee.Name, $scope.profile);
 
             promise.then(function(attendee) { // It all went well
                 SessionService.set('attendee', attendee); // Saves the Attendee record in session
@@ -50,18 +49,6 @@ angular.module('yieldtome.controllers')
             if ($scope.profile == "undefined" || $scope.event == "undefined") {
                 growl.addErrorMessage("We don't have enough information to have you attend this event");
             }
-
-            // Get Attendees for the selected Event
-            $log.debug('Retrieving Attendees');
-            var promise = AttendeeService.getAttendees($scope.event);
-
-            promise.then(function(attendees) {
-                $scope.attendees = attendees; // Display attendees to screen
-            })
-            .catch (function(error) {
-                $log.warn(error);
-                growl.addErrorMessage("Something went wrong trying to get the list of Attendees");
-            }); 
         })();
     }
 ]);
