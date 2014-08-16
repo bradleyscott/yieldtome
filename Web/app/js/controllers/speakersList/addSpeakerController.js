@@ -11,6 +11,7 @@ angular.module('yieldtome.controllers')
 
         $scope.profile; // The authenticated Profile, if it exists
         $scope.event; // Selected Event
+        $scope.attendee; // Attendee record for this Profile
         $scope.attendees; // List of Attendees for this Event
         $scope.list; // The Speakers List
 
@@ -52,6 +53,7 @@ angular.module('yieldtome.controllers')
             // Allocate the saved Profile et al to the controller
             $scope.profile = SessionService.get('profile');
             $scope.event = SessionService.get('event');
+            $scope.attendee = SessionService.get('attendee');
 
             // Get the Speakers List
             var speakersListID = $routeParams.speakersListID;
