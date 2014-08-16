@@ -21,7 +21,7 @@
                 </div>
             </div>
             <div class="well" ng-show="events.length == 0">There are no upcoming yieldto.me events</div>
-            <a href="" ng-click="selectEvent(event)" class="list-group-item" ng-repeat="event in events | filter:query">
+            <a href="" ng-click="selectEvent(event)" class="list-group-item" ng-repeat="event in events | filter:query | orderBy:'StartDate'">
                 <div class="btn-group pull-right" ng-show="event.CreatorID == profile.ProfileID">
                     <button type="button" ng-click="edit(event, $event)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> </button>
                 </div>

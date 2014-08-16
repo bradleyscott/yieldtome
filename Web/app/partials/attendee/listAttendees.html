@@ -18,7 +18,7 @@
                 <input type="text" class="form-control" ng-model="query" placeholder="Find people..." />
             </div>
         </div>
-        <a class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query">
+        <a class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query | orderBy:'Name'">
             <ytm-attendee></ytm-attendee>
         </a>
     </div>
