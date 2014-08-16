@@ -110,7 +110,8 @@ angular.module('yieldtome.controllers')
 
             if($scope.voteFilter.text.length > 0 && // There is a text filter
                 vote.Attendee.Name.indexOf($scope.voteFilter.text) == -1 && // Attendee name doesn't match filter
-                vote.Attendee.Profile.Name.indexOf($scope.voteFilter.text) == -1) { // Profile name doesn't match filter
+                (vote.Attendee.Profile == null || // There is no Profile or
+                vote.Attendee.Profile.Name.indexOf($scope.voteFilter.text) == -1)) { // Profile name doesn't match filter
                 return false;
             }
 
