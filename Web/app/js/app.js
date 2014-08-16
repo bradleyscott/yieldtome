@@ -32,7 +32,7 @@ angular.module('yieldtome', [
             controller: 'EditProfile'
         });
         $routeProvider.when('/viewProfile/:profileID', {
-            templateUrl: 'partials/profile/editProfile.html',
+            templateUrl: 'partials/profile/viewProfile.html',
             controller: 'ViewProfile'
         });
         $routeProvider.when('/events', {
@@ -84,7 +84,7 @@ angular.module('yieldtome', [
             controller: 'AddSpeaker'
         });
         $routeProvider.when('/polls', {
-            templateUrl: 'partials/poll/pollList.html',
+            templateUrl: 'partials/poll/listPolls.html',
             controller: 'Polls'
         });
         $routeProvider.when('/createPoll', {
