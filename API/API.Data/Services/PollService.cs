@@ -67,7 +67,7 @@ namespace yieldtome.API.Data.Services
 
         private PollType GetType(string typeString)
         {
-            if (typeString.ToLower() == "ForMoreThanAgainst")
+            if (typeString.ToLower() == "formorethanagainst")
                 return PollType.ForMoreThanAgainst;
             else return PollType.ForMoreThanAgainstAndAbstain;
         }
