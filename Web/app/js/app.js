@@ -38,7 +38,7 @@ angular.module('yieldtome', [
         $routeProvider.when('/events', {
             templateUrl: 'partials/event/listEvents.html',
             controller: 'Events'
-        });
+    });
         $routeProvider.when('/createEvent', {
             templateUrl: 'partials/event/editEvent.html',
             controller: 'CreateEvent'
@@ -50,6 +50,10 @@ angular.module('yieldtome', [
         $routeProvider.when('/attend', {
             templateUrl: 'partials/attendee/editAttendee.html',
             controller: 'CreateAttendee'
+        });
+        $routeProvider.when('/createAttendee', {
+            templateUrl: 'partials/attendee/editAttendee.html',
+            controller: 'CreateOtherAttendee'
         });
         $routeProvider.when('/attendees', {
             templateUrl: 'partials/attendee/listAttendees.html',

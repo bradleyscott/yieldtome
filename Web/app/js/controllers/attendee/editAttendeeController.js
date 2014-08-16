@@ -60,9 +60,13 @@ angular.module('yieldtome.controllers')
                     growl.addInfoMessage("You are no longer representing " + $scope.selectedAttendee.Name);
                     $location.path('/events');
                 }
-                else { 
+                else if($scope.selectedAttendee.Profile) { 
                     growl.addInfoMessage($scope.selectedAttendee.Profile.Name + ' is no longer representing ' + $scope.selectedAttendee.Name); 
                     $location.path('/attendees');
+                }
+                else { // There is no profile record
+                     growl.addInfoMessage($scope.selectedAttendee.Name + ' is no longer attending ' + $scope.event.Name); 
+                    $location.path('/attendees');                   
                 }
             })            
             .catch (function(error) {

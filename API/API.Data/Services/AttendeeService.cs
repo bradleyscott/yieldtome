@@ -115,11 +115,13 @@ namespace yieldtome.API.Data.Services
                 if (theEvent == null) throw new ArgumentException(String.Format("No Event with EventID={0} exists", eventID));
 
                 // Check to see if Profile is already Attending this Event
-                int existingAttendeeCount = db.Attendees.Where(x => x.ProfileID == profileID 
-                                                                && x.EventID == eventID
-                                                                && x.DeletedTime == null).Count();
-                if (existingAttendeeCount > 0) throw new ArgumentException(String.Format("Profile with ProfileID={0} is already Attending Event with EventID={1}", profileID, eventID));
-
+                if(profileID.HasValue)
+                {
+                    int existingAttendeeCount = db.Attendees.Where(x => x.ProfileID == profileID 
+                                                                    && x.EventID == eventID
+                                                                    && x.DeletedTime == null).Count();
+                    if (existingAttendeeCount > 0) throw new ArgumentException(String.Format("Profile with ProfileID={0} is already Attending Event with EventID={1}", profileID, eventID));
+                }
                 dbAttendee = new Attendee()
                 {
                     Name = name,

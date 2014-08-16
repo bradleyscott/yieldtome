@@ -19,7 +19,7 @@ angular.module('yieldtome.services')
                 deferred.reject(error);
                 return deferred.promise;
             }
-            if (profile == null || profile.ProfileID == null) // Profile is not provided
+            if (profile != null && profile.ProfileID == null) // Profile is provided but a Profile ID is not provided
             {
                 var error = 'A Profile with a ProfileID is required';
                 $log.warn(error);
@@ -35,7 +35,9 @@ angular.module('yieldtome.services')
             }        
 
             // POST Attendees?eventID={eventID}&name={name}&profileID={profileID}
-            var url = ConfigService.apiUrl + 'Attendees?eventID=' + event.EventID + '&name=' + name + '&profileID=' + profile.ProfileID;
+            var url = ConfigService.apiUrl + 'Attendees?eventID=' + event.EventID + '&name=' + name;
+            if(profile) { url = url + '&profileID=' + profile.ProfileID; }
+            
             $log.debug('Request Url: ' + url);
 
             $http.post(url).success(function(attendee) {

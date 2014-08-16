@@ -21,6 +21,11 @@ angular.module('yieldtome.controllers')
             }
         };
 
+        $scope.newAttendee = function() {
+            $log.debug('User clicked the New Attendee button');
+            $location.path('/createAttendee');
+        };
+
         $scope.editAttendee = function(attendeeID) {
             if(attendeeID != null && attendeeID != 0) {
                 $log.debug('Redirecting to Edit Attendee ' + attendeeID);

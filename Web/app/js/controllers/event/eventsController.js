@@ -60,7 +60,7 @@ angular.module('yieldtome.controllers')
                 promise.then(function(attendees) {
                     // If this profile is already attending, redirect them to the landing page
                     for (var i = 0; i < attendees.length; i++) {
-                        if (attendees[i].Profile.ProfileID == $scope.profile.ProfileID) {
+                        if (attendees[i].Profile && attendees[i].Profile.ProfileID == $scope.profile.ProfileID) {
 
                             $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
                             $log.debug('Redirecting to landing page');

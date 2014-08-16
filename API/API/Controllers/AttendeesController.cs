@@ -71,11 +71,23 @@ namespace yieldtome.API.Controllers
         /// Adds a new Attendee to the supplied Event
         /// </summary>
         /// <param name="eventID">ID of the Event to add the Attendee to</param>
-        /// <param name="profileID">ID of the Profile to attach to this Attendee</param>
         /// <param name="name">Name that describes who the Attendee is representing</param>
         /// <returns>The new Attendee</returns>
         /// <example>POST Events/5/Attendees?name=Australia</example>
-        public HttpResponseMessage PostAttendee(int eventID, string name, int profileID)
+        public HttpResponseMessage PostAttendee(int eventID, string name)
+        {
+            return PostAttendee(eventID, name, null);
+        }
+
+        /// <summary>
+        /// Adds a new Attendee to the supplied Event
+        /// </summary>
+        /// <param name="eventID">ID of the Event to add the Attendee to</param>
+        /// <param name="profileID">ID of the Profile to attach to this Attendee</param>
+        /// <param name="name">Name that describes who the Attendee is representing</param>
+        /// <returns>The new Attendee</returns>
+        /// <example>POST Events/5/Attendees?name=Australia&profileID=1</example>
+        public HttpResponseMessage PostAttendee(int eventID, string name, int? profileID)
         {
             Attendee newAttendee;
             try { newAttendee = _service.CreateAttendee(eventID, name, profileID); }
