@@ -29,7 +29,7 @@ namespace yieldtome.API.Data.Services
             };
 
             if (dbAttendee.Profile != null)
-                attendee.Profile = _profileService.GetProfile(dbAttendee.ProfileID);
+                attendee.Profile = _profileService.GetProfile(dbAttendee.ProfileID.Value);
 
             return attendee;
         }
@@ -95,7 +95,7 @@ namespace yieldtome.API.Data.Services
             return attendee;
         }
 
-        public yieldtome.Objects.Attendee CreateAttendee(int eventID, string name, int profileID)
+        public yieldtome.Objects.Attendee CreateAttendee(int eventID, string name, int? profileID)
         {
             Logging.LogWriter.Write("Attempting to create a new Attendee");
 
@@ -104,13 +104,17 @@ namespace yieldtome.API.Data.Services
             Attendee dbAttendee;
             using (var db = new Database())
             {
-                Profile profile = db.Profiles.FirstOrDefault(x => x.ProfileID == profileID);
-                if (profile == null) throw new ArgumentException(String.Format("No Profile with ProfileID={0} exists", profileID));
+                Profile profile = null;
+                if (profileID.HasValue)
+                {
+                    profile = db.Profiles.FirstOrDefault(x => x.ProfileID == profileID);
+                    if (profile == null) throw new ArgumentException(String.Format("No Profile with ProfileID={0} exists", profileID));
+                }
 
                 Event theEvent = db.Events.FirstOrDefault(x => x.EventID == eventID);
                 if (theEvent == null) throw new ArgumentException(String.Format("No Event with EventID={0} exists", eventID));
 
-                // Check to see if Attendee is already Attending this Event
+                // Check to see if Profile is already Attending this Event
                 int existingAttendeeCount = db.Attendees.Where(x => x.ProfileID == profileID 
                                                                 && x.EventID == eventID
                                                                 && x.DeletedTime == null).Count();

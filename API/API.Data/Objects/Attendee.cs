@@ -17,8 +17,7 @@ namespace yieldtome.API.Data.Objects
         public string Name { get; set; }
         [Required]
         public int EventID { get; set; }
-        [Required]
-        public int ProfileID { get; set; }
+        public int? ProfileID { get; set; }
         [Required]
         public DateTime CreatedTime { get; set; }
         public DateTime? UpdatedTime { get; set; }

@@ -108,6 +108,18 @@ namespace yieldtome.API.Tests
         }
 
         [TestMethod]
+        public void CreateAttendee_NoProfile_Success()
+        {
+            Attendee attendee = _service.CreateAttendee(2, "New Attendee", null);
+
+            _deletions.Add(attendee.AttendeeID); // Delete this in the tear down
+
+            Assert.IsInstanceOfType(attendee, typeof(Attendee));
+            Assert.AreEqual("New Attendee", attendee.Name);
+            Assert.AreEqual(null, attendee.Profile);
+        }
+
+        [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
         public void CreateAttendee_AlreadyAttending()
         {
@@ -146,10 +158,12 @@ namespace yieldtome.API.Tests
             {
                 AttendeeID = 1,
                 Name = name,
+                Profile = new Profile { ProfileID = 2 }
             };
             Attendee updatedAttendee = _service.UpdateAttendee(attendee);
             Assert.IsInstanceOfType(updatedAttendee, typeof(Attendee));
             Assert.AreEqual(attendee.Name, name);
+            Assert.AreEqual(attendee.Profile.ProfileID, 2);
         }
 
         [TestMethod]
