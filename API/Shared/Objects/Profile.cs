@@ -23,7 +23,7 @@ namespace yieldtome.Objects
         /// </summary>
         public Uri ProfilePictureUri
         {
-            get { return new Uri("http://graph.facebook.com/" + FacebookID + "/picture"); }
+            get { return new Uri("https://graph.facebook.com/" + FacebookID + "/picture"); }
         }
 
         /// <summary>
