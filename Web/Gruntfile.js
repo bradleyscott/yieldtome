@@ -19,18 +19,18 @@ module.exports = function(grunt) {
             }
         },
         replace: {
-          deploy: {
-            src: ['dist/js/yieldtome.js'],
-            overwrite: true,
-            replacements: [{
-              from: "233412823470428",
-              to: "120213154812744"
-            },
-            {
-              from: "localhost:61353",
-              to: "test-api.yieldto.me"
-            }]
-          }
+			deploy: {
+				src: ['dist/js/yieldtome.js'],
+				overwrite: true,
+				replacements: [{
+				  from: "233412823470428",
+				  to: "120213154812744"
+				},
+				{
+				  from: "http://localhost:61353/",
+				  to: "https://" + grunt.option('site') + "-api.yieldto.me/"
+				}]
+			}   		
         },
         copy: {
             main: {
