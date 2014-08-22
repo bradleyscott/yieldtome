@@ -1,34 +1,81 @@
 <ytm-home-menu></ytm-home-menu>
 <div class="container body-content">
-    <p></p>
-    <p></p>
-    <div class="jumbotron" id="benefits">
-        <h1>yieldto.me</h1>
-        <p class="lead">
+    <div class="hidden-xs" style="height:300px; background-image:url('img/Attendees_header.jpg');">
+    </div>
+    <div class="jumbotron">
+        <p>
             Helps delegates and organisers of Model UNs manage the boring details of debate from their phone, tablet, or computer. Everyone spends less time on the rules and more time on the debate
         </p>
         <button type="button" id="loginButton" class="btn btn-primary btn-lg" ng-click="login()">Get started</button>
     </div>
-    <div class="row" id="features">
+    <!-- Features -->
+    <div class="row" style="margin-top:-20px">
         <div class="col-md-3">
-            <h2>
-                <span class="glyphicon glyphicon-list-alt"></span> Speakers Lists</h2>
-            <p>Create Speakers Lists. Have delegates add themselves to speak on them from their phone, tablet or computer. Shuffle the order and never lose track</p>
+            <h2>Stop! Collaborate and Listen</h2>
+            <div class="thumbnail">
+                <div style="margin-left:5px; margin-top:10px">
+                    <span style="margin-left:5px; color:grey" class="glyphicon glyphicon-user"></span><a href="http://www.facebook.com/yieldtodotme" target="_blank" style="margin-left:10px">fb.com/yieldtodotme</a>
+                </div>
+                <div style="margin-left:5px; margin-top:10px">
+                    <span style="margin-left:5px; color:grey" class="glyphicon glyphicon-comment"></span><a href="http://www.twitter.com/yieldto_me" target="_blank" style="margin-left:10px">@yieldto_me</a>
+                </div>
+                <div style="margin-left:5px; margin-top:10px;">
+                    <span style="margin-left:5px; color:grey" class="glyphicon glyphicon-bullhorn"></span><a href="https://yieldtome.uservoice.com" target="_blank" style="margin-left:10px">Suggest new features</a>
+                </div>
+                <div style="margin-left:5px; margin-top:10px; margin-bottom:10px">
+                    <span style="margin-left:5px; color:grey" class="glyphicon glyphicon-transfer"></span><a href="http://www.github.com/bradleyscott/yieldtome" target="_blank" style="margin-left:10px">Contribute code</a>
+                </div>
+            </div>
         </div>
-        <div class="col-md-3">
-            <h2>
-                <span class="glyphicon glyphicon-ok"></span> Voting</h2>
-            <p>Create a Poll and ask delegates to cast their Vote. See the Votes come in in real time and see whether or not the Poll has passed or failed</p>
-        </div>
-        <div class="col-md-3">
-            <h2>
-                <span class="glyphicon glyphicon-envelope"></span> Note passing</h2>
-            <p>Message other delegates in real-time without needing to exchange your phone, email, or IM details</p>
-        </div>
-        <div class="col-md-3">
-            <h2>
-                <span class="glyphicon glyphicon-user"></span> Profiles</h2>
-            <p>Create your own yieldto.me Profile- share contact details, or, stay behind your delegate persona. Keep in touch with everyone after the conference too</p>
+        <div class="col-md-9">
+            <div class="col-md-4">
+                <h2>Speakers Lists</h2>
+                <div class="thumbnail">
+                    <img src="img/Speakers_Thumbnail.jpg" style="margin-top:5px" class="img-rounded">
+                    <div class="caption">
+                        <p>Create Speakers Lists. Have delegates add themselves to speak on them from their phone, tablet or computer. Shuffle the order and never lose track</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Voting</h2>
+                <div class="thumbnail">
+                    <img src="img/Votes_Thumbnail.jpg" style="margin-top:5px" class="img-rounded">
+                    <div class="caption">
+                        <p>Create a Poll and ask delegates to cast their Vote. See the Votes come in in real time and see whether or not the Poll has passed or failed</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <h2>Profiles</h2>
+                <div class="thumbnail">
+                    <img src="img/Attendees_Thumbnail.jpg" style="margin-top:5px" class="img-rounded">
+                    <div class="caption">
+                        <p>Create your own yieldto.me Profile- share contact details, or, stay behind your delegate persona. Keep in touch with everyone after the conference too</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- FAQs -->
+    <h2>Frequently asked</h2>
+    <accordion>
+        <accordion-group heading="Do all an event's delegates need to sign in to yieldto.me?">
+          No. The event organiser can manually add delegates who aren't using yieldto.me. They can then add them as Speakers on Speakers lists and cast Votes on their behalf- just as you would have done without yieldto.me
+        </accordion-group>
+        <accordion-group heading="Can I use yieldto.me without a Facebook account?">
+          So you don't need to remember yet another username and password we are taking advantage of Facebook's login capabilities. yieldto.me won't have the ability to post on your wall or anything like that. We will just record your Facebook user ID and email address so we can make sure we remember you. 
+          Unfortunately, if you don't have Facebook- you can't use yieldto.me at this stage. But, you can vote to support other login mechanisms on our <a href="https://yieldtome.uservoice.com">feature request site</a>
+        </accordion-group>
+        <accordion-group heading="What is coming up next on your roadmap?">
+          That is partly up to you. We have lots of ideas and you can influence the priority by voting on our <a href="https://yieldtome.uservoice.com">feature request site</a>. Some of the ideas on the list are:
+          <ul>
+            <li>The ability to wink at another delegate, and get a wink back. Good for after-dark lobbying</li>
+            <li>Privacy settings for each element on your profile</li>
+            <li>Keyboard shortcuts - for power users with a keyboard</li>
+            <li>iPhone and Android Apps</li>
+            <li>Help overlays to assist first time users</li>
+          </ul>
+        </accordion-group>
+  </accordion>
 </div>

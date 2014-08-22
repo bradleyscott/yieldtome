@@ -7,8 +7,8 @@
             <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
         </button>
         <!-- Attendee stats -->
-        <h2 ng-show="attendees.length == 1"><span class="label label-primary">1</span> Attendee</h2>
-        <h2 ng-show="attendees.length > 1"><span class="label label-primary"> {{attendees.length}}</span> Attendees</h2>
+        <h2 ng-show="attendees.length == 1"><span class="label label-primary">1</span> Delegate</h2>
+        <h2 ng-show="attendees.length > 1"><span class="label label-primary"> {{attendees.length}}</span> Delegates</h2>
         <!-- Attendee search  -->
         <div class="form-group" ng-show="attendees.length > 10">
             <div class="input-group">
@@ -23,5 +23,5 @@
         </a>
     </div>
     <br>
-    <div class="well" ng-show="attendees.length == 0">There are not yet any other Attendees</div>
+    <div class="well" ng-show="attendees.length == 0">There are not yet any other Delegates</div>
 </div>
