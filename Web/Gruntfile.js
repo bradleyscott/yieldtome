@@ -34,7 +34,13 @@ module.exports = function(grunt) {
         },
         copy: {
             main: {
-                files: [{ // Move css
+                files: [{ // Move img
+                    expand: true,
+                    src: ['app/img/**'],
+                    dest: 'dist/img',
+                    flatten: true,
+                    filter: 'isFile'
+                }, { // Move css
                     expand: true,
                     src: ['app/css/**'],
                     dest: 'dist/css',
