@@ -57,7 +57,7 @@
             </div>
         </div>
         <!-- Vote list -->
-        <a class="list-group-item" ng-animate="'animate'" ng-repeat="vote in otherVotes | filter:filteredVotes">
+        <a class="list-group-item" ng-animate="'animate'" ng-repeat="vote in otherVotes | filter:filteredVotes | orderBy:'Attendee.Name'">
             <ytm-vote></ytm-vote>
         </a>
     </div>
