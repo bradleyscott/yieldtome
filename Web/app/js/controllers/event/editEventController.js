@@ -68,7 +68,8 @@ angular.module('yieldtome.controllers')
 
             promise.then(function(event) { // It all went well           
                 SessionService.set('event', event); // Saves in session
-                growl.addInfoMessage('Your updates just got saved');
+                growl.addInfoMessage('Your Event updates just got saved');
+                $location.path('/events'); // Redirect to events page               
             })
             .catch (function(error) { // The service crapped out
                 $log.warn(error);

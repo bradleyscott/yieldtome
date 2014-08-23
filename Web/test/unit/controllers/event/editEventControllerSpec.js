@@ -124,7 +124,8 @@ describe('The EditEvent controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect(growl.addInfoMessage).toHaveBeenCalledWith('Your updates just got saved');
+            expect(growl.addInfoMessage).toHaveBeenCalledWith('Your Event updates just got saved');
+            expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection to eventList
         });
 
         it("that displays an error if something catastrophic happens", function() {
