@@ -1,5 +1,6 @@
 <div class="media">
     <!-- Profile picture -->
+    <img class="media-object pull-left" ng-src="img/profile.jpg" ng-hide="attendee.Profile" style="width:50px;height:50px" >
     <img class="media-object pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(attendee.Profile.ProfileID)">
     <div class="media-body">
         <!-- Edit attendee button -->

@@ -19,14 +19,18 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li ng-click="add('For')"><a>Speak For</a></li>
-                            <li ng-click="add('Against')"><a>Speak Against</a></li>
-                            <li ng-click="add('None')"><a>Neutral</a></li>
+                            <li ng-click="add('For')"><a>Speak For</a>
+                            </li>
+                            <li ng-click="add('Against')"><a>Speak Against</a>
+                            </li>
+                            <li ng-click="add('None')"><a>Neutral</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
                 <!-- Remove myself as a Speaker -->
-                <button type="button" class="btn btn-default" ng-show="speakingSlot" ng-click="remove(speakingSlot)"><span class="glyphicon glyphicon-remove-circle"></span> Remove me</button>
+                <button type="button" class="btn btn-default" ng-show="speakingSlot" ng-click="remove(speakingSlot)">
+                    <span class="glyphicon glyphicon-remove-circle"></span> Remove me</button>
             </div>
             <!-- Speakers list settings drop down -->
             <div class="btn-group">
@@ -37,27 +41,61 @@
                             <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li><a href="#/addSpeaker/{{list.SpeakersListID}}">Add another Speaker</a></li>
+                            <li><a href="#/addSpeaker/{{list.SpeakersListID}}">Add another Speaker</a>
+                            </li>
                             <li class="divider"></li>
-                            <li ng-show="list.Status == 'Open'" ng-click="isSettingsOpen=false;closeList()"><a>Close to new Speakers</a></li>
-                            <li ng-show="list.Status == 'Closed'" ng-click="isSettingsOpen=false;openList()"><a>Open to new Speakers</a></li>
-                            <li ng-click="isSettingsOpen=false;removeAllSpeakers()"><a>Remove all Speakers</a></li>
-                            <li><a href="#/editSpeakersList/{{list.SpeakersListID}}">Edit this Speakers list</a></li>
+                            <li ng-show="list.Status == 'Open'" ng-click="isSettingsOpen=false;closeList()"><a>Close to new Speakers</a>
+                            </li>
+                            <li ng-show="list.Status == 'Closed'" ng-click="isSettingsOpen=false;openList()"><a>Open to new Speakers</a>
+                            </li>
+                            <li ng-click="isSettingsOpen=false;removeAllSpeakers()"><a>Remove all Speakers</a>
+                            </li>
+                            <li><a href="#/editSpeakersList/{{list.SpeakersListID}}">Edit this Speakers list</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
             </div>
         </div>
         <div class="well" ng-show="speakers.length == 0">There is not yet any Speakers on this Speakers list</div>
-        <!-- Non editable -->
-        <a class="list-group-item" ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-animate="'animate'" ng-repeat="speaker in speakers">
-            <ytm-speaker></ytm-speaker>
-        </a>
-        <!-- Editable -->
-        <div ui-sortable="speakerReorder" ng-model="speakers" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
-            <a class="list-group-item" ng-animate="'animate'" ng-repeat="speaker in speakers">
-                <ytm-speaker></ytm-speaker>
-            </a>
+        <div class="row" ng-show="speakers.length > 0">
+            <div class="col-md-3 hidden-sm hidden-xs">
+                <h3>Next Speaker</h3>
+                <div class="thumbnail">
+                    <div ng-show="speakers[0].Attendee.Profile">
+                        <a href="https://www.facebook.com/{{speakers[0].Attendee.Profile.FacebookID}}" target="_blank">
+                            <img ng-src="{{speakers[0].Attendee.Profile.ProfilePictureUri}}?type=large" class="img-responsive img-rounded" />
+                        </a>
+                    </div>
+                    <div ng-hide="speakers[0].Attendee.Profile">
+                        <img ng-src="img/profile.jpg" class="img-responsive img-rounded" />
+                    </div>
+                    <div class="caption">
+                        <h4 class="media-heading">{{speakers[0].Attendee.Name}}</h4>
+                        {{speakers[0].Attendee.Profile.Name}}
+                        <div class="btn-group btn-group-justified" style="margin-top:5px">
+                            <label class="btn btn-default" ng-click="speak(speakers[0])">
+                                <span class="glyphicon glyphicon-ok"></span> Spoken
+                            </label>
+                            <label class="btn btn-default" ng-click="remove(speakers[0])">
+                                <span class="glyphicon glyphicon-remove"></span> Remove
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <!-- Non editable -->
+                <a class="list-group-item" ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-animate="'animate'" ng-repeat="speaker in speakers" style="margin-top:10px">
+                    <ytm-speaker></ytm-speaker>
+                </a>
+                <!-- Editable -->
+                <div ui-sortable="speakerReorder" ng-model="speakers" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" style="margin-top:10px">
+                    <a class="list-group-item" ng-animate="'animate'" ng-repeat="speaker in speakers">
+                        <ytm-speaker></ytm-speaker>
+                    </a>
+                </div>
+            </div>
         </div>
     </div>
 </div>
