@@ -44,7 +44,7 @@ describe('The EditProfile controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect(growl.addInfoMessage).toHaveBeenCalledWith('Your Profile updates just got saved') // Check redirection to eventList
+            expect(growl.addInfoMessage).toHaveBeenCalledWith('Your Profile updates just got saved'); // Check redirection to eventList
         });
 
         it("that displays an error if something catastrophic happens", function() {

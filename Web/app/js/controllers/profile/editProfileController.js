@@ -23,6 +23,7 @@ angular.module('yieldtome.controllers')
             promise.then(function(profile) { // It all went well
                 SessionService.set('profile', profile); // Saves the profile in session
                 growl.addInfoMessage('Your Profile updates just got saved');
+                $scope.$back(); // Return to previous page
             })
             .catch (function(error) { // The service crapped out
                 $log.warn(error);

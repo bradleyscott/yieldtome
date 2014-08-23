@@ -6,30 +6,38 @@
     </h2>
     <form name="form" role="form" class="css-form form-horizontal" novalidate>
         <div class="col-sm-3 hidden-xs">
-            <a href="https://www.facebook.com/{{profile.FacebookID}}" target="_blank"><img ng-src="{{profile.ProfilePictureUri}}?type=large" class="img-responsive img-circle" /></a>
+            <a href="https://www.facebook.com/{{profile.FacebookID}}" target="_blank"><img ng-src="{{profile.ProfilePictureUri}}?type=large" class="img-responsive img-circle"/></a>
         </div>
         <div class="col-sm-9">
-            <div class="form-group">
+            <div class="form-group"  ng-show="profile.Email && profile.IsEmailPublic">
                 <div class="input-group">
                     <span class="input-group-addon" style="min-width:65px">email</span>
                     <a href="mailto:{{profile.Email}}" target="_blank">
-                        <input name="email" class="form-control" type="email" ng-model="profile.Email" ng-disabled="formDisabled" />
+                        <input name="email" class="form-control" type="email" ng-model="profile.Email" ng-disabled="formDisabled" style="cursor:pointer"/>
                     </a>
                 </div>
             </div>
-            <div class="form-group" ng-show="profile.Phone">
+            <div class="form-group" ng-show="profile.Phone && profile.IsPhonePublic">
                 <div class="input-group">
                     <span class="input-group-addon" style="min-width:65px">phone</span>
                     <a href="tel:{{profile.Phone}}">
-                        <input class="form-control" type="text" ng-model="profile.Phone" ng-disabled="formDisabled"/>
+                        <input class="form-control" type="text" ng-model="profile.Phone" ng-disabled="formDisabled" style="cursor:pointer"/>
                     </a>
                 </div>
             </div>
-            <div class="form-group" ng-show="profile.Twitter">
+            <div class="form-group" ng-show="profile.Twitter && profile.IsTwitterPublic">
                 <div class="input-group">
                     <span class="input-group-addon" style="min-width:65px">twitter</span>
                     <a href="https://www.twitter.com/{{profile.Twitter}}" target="_blank">
-                        <input class="form-control" type="text" ng-model="profile.Twitter" ng-disabled="formDisabled"/>
+                        <input class="form-control" type="text" ng-model="profile.Twitter" ng-disabled="formDisabled" style="cursor:pointer"/>
+                    </a>
+                </div>
+            </div>
+            <div class="form-group" ng-show="profile.LinkedIn && profile.IsLinkedInPublic">
+                <div class="input-group">
+                    <span class="input-group-addon" style="min-width:65px">linkedIn</span>
+                    <a href="https://www.twitter.com/{{profile.LinkedIn}}" target="_blank">
+                        <input class="form-control" type="text" ng-model="profile.LinkedIn" ng-disabled="formDisabled" style="cursor:pointer"/>
                     </a>
                 </div>
             </div>
