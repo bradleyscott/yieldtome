@@ -7,7 +7,7 @@ angular.module('yieldtome.controllers')
 
         $log.debug("EditAttendee controller executing");
 
-        $scope.title = 'Change attendance';
+        $scope.title = 'Change delegation';
         $scope.alternatebutton = 'Back';
         $scope.event;
         $scope.attendees; // The Attendee list for this Event
