@@ -1,14 +1,18 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
-    <a class="list-group-item"><ytm-attendee></ytm-attendee></a>
+    <a class="list-group-item" style="margin-bottom:10px">
+        <ytm-attendee></ytm-attendee>
+    </a>
     <div>
         <!-- Add new Attendee button -->
         <button type="button" class="btn btn-primary pull-right" ng-show="isCreator" ng-click="newAttendee()">
-            <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
+            <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span> Add
         </button>
         <!-- Attendee stats -->
-        <h2 ng-show="attendees.length == 1"><span class="label label-primary">1</span> Delegate</h2>
-        <h2 ng-show="attendees.length > 1"><span class="label label-primary"> {{attendees.length}}</span> Delegates</h2>
+        <h2 ng-show="attendees.length == 1">
+            <span class="label label-primary">1</span> Delegate</h2>
+        <h2 ng-show="attendees.length > 1">
+            <span class="label label-primary">{{attendees.length}}</span> Delegates</h2>
         <!-- Attendee search  -->
         <div class="form-group" ng-show="attendees.length > 10">
             <div class="input-group">
