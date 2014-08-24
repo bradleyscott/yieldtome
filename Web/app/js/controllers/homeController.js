@@ -4,19 +4,10 @@
 
 angular.module('yieldtome.controllers', [])
 
-.controller('Home', ['$scope', '$location', '$log', '$routeParams', 'growl', 'SessionService', 'AuthenticationService',
-    function($scope, $location, $log, $routeParams, growl, SessionService, AuthenticationService) {
+.controller('Home', ['$scope', '$location', '$log', '$routeParams', '$cookieStore', 'growl', 'SessionService', 'AuthenticationService',
+    function($scope, $location, $log, $routeParams, $cookieStore, growl, SessionService, AuthenticationService) {
 
         $log.debug("Home controller executing");
-
-        // Controller initialize
-        (function() {
-
-            if($routeParams.logout == true) {
-                AuthenticationService.logOut(); // Log hte user out  
-                growl.addInfoMessage("You have been logged out");   
-            }         
-        })();
 
         $scope.login = function() { // Get an apiToken and try to get a profile
 
@@ -52,5 +43,20 @@ angular.module('yieldtome.controllers', [])
                 }
             });
         };
+        
+        // Controller initialize
+        (function() {
+
+            if($routeParams.logout == true) {
+                AuthenticationService.logOut(); // Log hte user out  
+                growl.addInfoMessage("You have been logged out");   
+            }         
+
+            var autoLogin = $cookieStore.get('autoLogin');
+            if(autoLogin == true) {
+                $log.debug('autoLogin cookie found. Logging the user in');
+                $scope.login();
+            }
+        })();
     }
 ]);

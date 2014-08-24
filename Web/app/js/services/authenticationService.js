@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.services')
 
-.service('AuthenticationService', ['SessionService', 'FacebookService', 'ConfigService', 'ProfileService', '$http', '$q', '$log', 
-    function(SessionService, FacebookService, ConfigService, ProfileService, $http, $q, $log) {
+.service('AuthenticationService', ['SessionService', 'FacebookService', 'ConfigService', 'ProfileService', '$http', '$q', '$log', '$cookieStore',
+    function(SessionService, FacebookService, ConfigService, ProfileService, $http, $q, $log, $cookieStore) {
 
         var _apiToken, _authenticatedProfile;
         this.apiToken = _apiToken;
@@ -41,6 +41,7 @@ angular.module('yieldtome.services')
         this.logOut = function() {
             $log.debug('Logging user out');
             SessionService.set('token', null);
+            $cookieStore.remove('autoLogin');
         };
 
         this.getApiToken = function() {
@@ -54,6 +55,10 @@ angular.module('yieldtome.services')
             .then(function(token) { // Then persist this token
                 _apiToken = token; // Save the API token
                 SessionService.set('token', token.access_token); // Save this token
+
+                $log.debug('Saving autoLogin cookie');
+                $cookieStore.put('autoLogin', true); // Set an autoLogin cookie
+                
                 deferred.resolve(_apiToken); // Return the apiToken, even though it's saved                 
             })
             .catch (function(error) { // And, handle any problems

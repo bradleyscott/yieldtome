@@ -73,6 +73,8 @@ module.exports = function(grunt) {
                         'bower_components/angular/angular.min.js.map',
                         'bower_components/angular-resource/angular-resource.min.js',
                         'bower_components/angular-resource/angular-resource.min.js.map',
+                        'bower_components/angular-cookies/angular-cookies.min.js',
+                        'bower_components/angular-cookies/angular-cookies.min.js.map',
                         'bower_components/angular-route/angular-route.min.js',
                         'bower_components/angular-route/angular-route.min.js.map',
                         'bower_components/angular-touch/angular-touch.min.js',
@@ -82,6 +84,7 @@ module.exports = function(grunt) {
                         'bower_components/angular-ui-sortable/sortable.min.js',
                         'bower_components/angular-loading-bar/build/loading-bar.min.js',
                         'bower_components/angular-animate/angular-animate.min.js',
+                        'bower_components/angular-animate/angular-animate.min.js.map',
                         'bower_components/angular-growl/build/angular-growl.min.js'
                     ],
                     dest: 'dist/js',

@@ -9,6 +9,7 @@ angular.module('yieldtome', [
     'yieldtome.directives',
     'yieldtome.controllers',
     'ui.bootstrap',
+    'ngCookies',
     'ngFacebook',
     'ui.sortable',
     'angular-loading-bar',
