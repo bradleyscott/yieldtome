@@ -9,6 +9,7 @@
             <a href="https://www.facebook.com/{{profile.FacebookID}}" target="_blank"><img ng-src="{{profile.ProfilePictureUri}}?type=large" class="img-responsive img-rounded"/></a>
         </div>
         <div class="col-sm-9">
+            <div class="well" ng-hide="profile.IsEmailPublic || profile.IsPhonePublic || profile.IsTwitterPublic || profile.IsLinkedInPublic">{{profile.Name}} is not sharing any contact details with you</div>
             <div class="form-group"  ng-show="profile.Email && profile.IsEmailPublic">
                 <div class="input-group">
                     <span class="input-group-addon" style="min-width:65px">email</span>
