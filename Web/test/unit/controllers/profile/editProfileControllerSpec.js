@@ -2,7 +2,7 @@
 
 describe('The EditProfile controller', function() {
 
-    var $scope, $location, $q, $controller, $log, growl, ProfileService;
+    var $scope, $location, $q, $controller, $log, $window, growl, ProfileService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -17,6 +17,9 @@ describe('The EditProfile controller', function() {
             // Create Mocks 
             ProfileService = jasmine.createSpyObj('ProfileService', ['editProfile']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
+            $window = {
+                history: jasmine.createSpyObj('$window.history', ['back'])
+            };
         });
     });
 
@@ -28,6 +31,7 @@ describe('The EditProfile controller', function() {
                 $scope: $scope,
                 $location: $location,
                 $log: $log,
+                $window: $window,
                 growl: growl, 
                 ProfileService: ProfileService
             });

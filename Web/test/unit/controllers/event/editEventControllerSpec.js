@@ -13,8 +13,8 @@ describe('The EditEvent controller', function() {
             $q = _$q_;
             $controller = _$controller_;
             $log = _$log_;
-            $filter = _$filter_;
             $window = _$window_;
+            $filter = _$filter_;
             SessionService = _SessionService_;
 
             // Create Mocks 
@@ -23,7 +23,7 @@ describe('The EditEvent controller', function() {
             $modal = jasmine.createSpyObj('$modal', ['open']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
 
-            $window.sessionStorage.profile = JSON.stringify({
+            SessionService.set('profile', JSON.stringify({
                     "ProfileID": 1,
                     "Name": "Bradley Scott",
                     "ProfilePictureUri": "http://graph.facebook.com/553740394/picture",
@@ -41,7 +41,7 @@ describe('The EditEvent controller', function() {
                     "IsPhonePublic": false,
                     "IsTwitterPublic": false,
                     "IsLinkedInPublic": true
-                }); // Set authenticatedProfile
+                })); // Set authenticatedProfile
         });
     });
 
