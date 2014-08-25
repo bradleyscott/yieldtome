@@ -207,6 +207,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AuthenticateController.cs" />
+    <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="CORSHandler.cs" />
     <Compile Include="SecureAttribute.cs" />
     <Compile Include="Providers\BearerAuthenticationProvider.cs" />

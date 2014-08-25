@@ -64,6 +64,7 @@
     <Compile Include="Interfaces\IAPIKeyService.cs" />
     <Compile Include="Interfaces\IAttendeeService.cs" />
     <Compile Include="Interfaces\IEventService.cs" />
+    <Compile Include="Interfaces\ILikeService.cs" />
     <Compile Include="Interfaces\IPollService.cs" />
     <Compile Include="Interfaces\IProfileService.cs" />
     <Compile Include="Interfaces\IRequestProcessor.cs" />

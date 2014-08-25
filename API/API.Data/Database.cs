@@ -20,6 +20,7 @@ namespace yieldtome.API.Data
         public DbSet<Speaker> Speakers { get; set; }
         public DbSet<Poll> Polls { get; set; }
         public DbSet<Vote> Votes { get; set; }
+        public DbSet<Like> Likes { get; set; }
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

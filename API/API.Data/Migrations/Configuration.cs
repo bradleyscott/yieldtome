@@ -36,6 +36,26 @@ namespace yieldtome.API.Data.Migrations
               }
             );
 
+            context.Profiles.AddOrUpdate(
+              p => p.ProfileID,
+              new Profile
+              {
+                  ProfileID = 2,
+                  Name = "Patricia Amfdbdgbbaaj Warmanstein",
+                  FacebookID = "100006424722110",
+                  Email = "patricia@yieldto.me",
+                  Phone = "555 125-3459",
+                  Twitter = "tweetme",
+                  LinkedIn = "linkedin",
+                  IsFacebookPublic = true,
+                  IsEmailPublic = true,
+                  IsPhonePublic = false,
+                  IsTwitterPublic = false,
+                  IsLinkedInPublic = true,
+                  CreatedTime = DateTime.Now,
+                  UpdatedTime = DateTime.Now
+              }
+            );
             context.Events.AddOrUpdate(
                 e => e.EventID,
                 new Event
@@ -182,6 +202,15 @@ namespace yieldtome.API.Data.Migrations
                     DeletedTime = null
                 });
 
+            context.Likes.AddOrUpdate(
+                l => new { l.LikeID },
+                new Like
+                {
+                    LikeID = 1,
+                    LikerID = 1,
+                    LikedID = 2,
+                    CreatedTime = DateTime.Now
+                });
         }
     }
 }

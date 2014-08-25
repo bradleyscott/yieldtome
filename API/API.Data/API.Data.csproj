@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Objects\Like.cs" />
     <Compile Include="Objects\Poll.cs" />
     <Compile Include="Objects\Speaker.cs" />
     <Compile Include="Objects\Vote.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Objects\Event.cs" />
     <Compile Include="Objects\Profile.cs" />
     <Compile Include="Objects\SpeakersList.cs" />
+    <Compile Include="Services\LikeService.cs" />
     <Compile Include="Services\PollService.cs" />
     <Compile Include="Services\ProfileService.cs">
       <SubType>Code</SubType>
