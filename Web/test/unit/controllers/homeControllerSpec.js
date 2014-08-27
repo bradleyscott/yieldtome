@@ -2,7 +2,7 @@
 
 describe('The Home controller', function() {
 
-    var $scope, $location, $routeParams, $q, $log, growl, $controller, AuthenticationService;
+    var $scope, $location, $routeParams, $q, $log, growl, $controller, $cookieStore, AuthenticationService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -17,7 +17,9 @@ describe('The Home controller', function() {
             // Create Mocks 
             AuthenticationService = jasmine.createSpyObj('AuthenticationService', ['getApiToken', 'getAuthenticatedProfile', 'logOut']);
             $location = jasmine.createSpyObj('$location', ['path']);
+            $cookieStore = jasmine.createSpyObj('$cookieStore', ['get']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
+
         });
     });
 
@@ -28,8 +30,9 @@ describe('The Home controller', function() {
             $scope: $scope,
             $location: $location,
             $routeParams: $routeParams,
-            growl: growl,
             $log: $log,
+            $cookieStore: $cookieStore,
+            growl: growl,
             AuthenticationService: AuthenticationService
         });
     }
