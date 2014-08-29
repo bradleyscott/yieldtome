@@ -10,10 +10,11 @@
         <div>
             <!-- Names -->
             <h4 class="media-heading">{{vote.Attendee.Name}}</h4>
-            {{vote.Attendee.Profile.Name}}
+            {{vote.Attendee.Profile.Name}} 
             <!-- Position indicators -->
             <div style="background-color:lightgreen; height:5px" ng-show="vote.VoteResult == 'For'"></div>
             <div style="background-color:red; height:5px" ng-show="vote.VoteResult == 'Against'"></div>
+            <div style="height:5px" ng-show="vote.VoteResult == 'Abstain'"></div>
         </div>
     </div>
     <!-- Edit vote controls -->

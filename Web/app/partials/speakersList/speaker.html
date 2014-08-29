@@ -10,10 +10,11 @@
         <div>
             <!-- Names -->
             <h4 class="media-heading">{{speaker.Attendee.Name}}</h4>
-            {{speaker.Attendee.Profile.Name}}
+            {{speaker.Attendee.Profile.Name}} 
             <!-- Position -->
             <div style="background-color:lightgreen; height:5px" ng-show="speaker.Position == 'For'"></div>
             <div style="background-color:red; height:5px" ng-show="speaker.Position == 'Against'"></div>
+            <div style="height:5px" ng-show="speaker.Position == 'None'"></div>
         </div>
     </div>
     <!-- Edit speaker controls -->
