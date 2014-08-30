@@ -14,7 +14,9 @@ angular.module('yieldtome', [
     'ui.sortable',
     'angular-loading-bar',
     'angular-growl',
-    'ngAnimate'
+    'ngAnimate',
+    'angulartics', 
+    'angulartics.google.analytics'
     ])
 
 // Configure routes

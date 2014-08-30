@@ -85,7 +85,9 @@ module.exports = function(grunt) {
                         'bower_components/angular-loading-bar/build/loading-bar.min.js',
                         'bower_components/angular-animate/angular-animate.min.js',
                         'bower_components/angular-animate/angular-animate.min.js.map',
-                        'bower_components/angular-growl/build/angular-growl.min.js'
+                        'bower_components/angular-growl/build/angular-growl.min.js',
+                        'bower_components/angulartics/dist/angulartics.min.js',
+                        'bower_components/angulartics/dist/angulartics-ga.min.js'
                     ],
                     dest: 'dist/js',
                     flatten: true

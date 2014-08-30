@@ -48,6 +48,8 @@
     <script src="../bower_components/angular-loading-bar/build/loading-bar.js"></script>
     <script src="../bower_components/angular-animate/angular-animate.js"></script>
     <script src="../bower_components/angular-growl/build/angular-growl.js"></script>
+    <script src="../bower_components/angulartics/dist/angulartics.min.js"></script>
+    <script src="../bower_components/angulartics/dist/angulartics-ga.min.js"></script>
 
     <!-- Load yieldto.me App -->
     <script src="js/app.js"></script>
@@ -100,6 +102,24 @@
 
     <script src="js/filters.js"></script>
     <script src="js/directives.js"></script>
+
+    <!-- Analytics tracking -->
+    <script>
+    (function(i, s, o, g, r, a, m) {
+        i['GoogleAnalyticsObject'] = r;
+        i[r] = i[r] || function() {
+            (i[r].q = i[r].q || []).push(arguments)
+        }, i[r].l = 1 * new Date();
+        a = s.createElement(o),
+        m = s.getElementsByTagName(o)[0];
+        a.async = 1;
+        a.src = g;
+        m.parentNode.insertBefore(a, m)
+    })(window, document, 'script', '//www.google-analytics.com/analytics.js', 'ga');
+
+    ga('create', 'UA-40823396-1', 'auto');
+    </script>
+
 </body>
 
 </html>
