@@ -17,6 +17,7 @@ namespace yieldtome.API.Data.Objects
         public int ProfileID { get; set; }
         [Required]public string Name { get; set; }
         [Required]public string FacebookID { get; set; }
+        // TODO: Add in GoogleID
         public string Email { get; set; }
         public string Phone { get; set; }
         public string Twitter { get; set; }

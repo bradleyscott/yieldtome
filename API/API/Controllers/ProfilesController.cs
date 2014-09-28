@@ -55,6 +55,7 @@ namespace yieldtome.API.Controllers
         /// <param name="id">The FacebookID of the Profile to return</param>
         /// <returns>A Profile</returns>
         /// <example>GET Profiles?facebookID=1</example>
+        // TODO: Change this method to accept a Provider parameter, and a generic Provider ID
         public Profile GetProfile(string facebookID)
         {
             Profile profile;

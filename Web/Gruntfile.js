@@ -79,7 +79,7 @@ module.exports = function(grunt) {
                         'bower_components/angular-route/angular-route.min.js.map',
                         'bower_components/angular-touch/angular-touch.min.js',
                         'bower_components/angular-touch/angular-touch.min.js.map',
-                        'bower_components/ng-facebook/ngFacebook.js',
+                        'bower_components/satellizer/satellizer.min.js',
                         'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
                         'bower_components/angular-ui-sortable/sortable.min.js',
                         'bower_components/angular-loading-bar/build/loading-bar.min.js',

@@ -1,1 +1,0 @@
-// Not adding any more Services tests until it is clear how to resolve promises in a service test

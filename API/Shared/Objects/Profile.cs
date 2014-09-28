@@ -23,6 +23,7 @@ namespace yieldtome.Objects
         /// </summary>
         public Uri ProfilePictureUri
         {
+            // TODO: Make this generic according to the Auth provider
             get { return new Uri("https://graph.facebook.com/" + FacebookID + "/picture"); }
         }
 
@@ -38,6 +39,8 @@ namespace yieldtome.Objects
         {
             get { return new Uri("http://www.facebook.com/" + FacebookID); }
         }
+
+        // TODO: Add in Google ID and Google URL 
 
         /// <summary>
         /// The Email address of this person

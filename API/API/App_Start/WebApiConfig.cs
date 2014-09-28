@@ -10,10 +10,6 @@ namespace yieldtome.API
     {
         public static void Register(HttpConfiguration config)
         {
-            EnableCorsAttribute cors = new EnableCorsAttribute("*", "*", "*");
-            cors.SupportsCredentials = true;
-            config.EnableCors(cors);
-
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{id}",
@@ -59,7 +55,6 @@ namespace yieldtome.API
             // For more information, refer to: http://www.asp.net/web-api
             config.EnableSystemDiagnosticsTracing();
 
-            //config.MessageHandlers.Add(new CORSHandler());
         }
     }
 }

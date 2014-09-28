@@ -7,8 +7,8 @@ using yieldtome.Objects;
 
 namespace yieldtome.Interfaces
 {
-    public interface IRequestProcessor
+    public interface IExternalAuthenticationService
     {
-        string ProcessRequest(string[] request, Profile profileContext, Event eventContext = null);
+        Profile Authenticate(dynamic externalToken);
     }
 }

@@ -2,7 +2,7 @@
 
 describe('The Home controller', function() {
 
-    var $scope, $location, $routeParams, $q, $log, growl, $controller, $cookieStore, AuthenticationService;
+    var $scope, $location, $routeParams, $q, $log, growl, $controller, $cookieStore, $auth, AuthenticationService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -15,49 +15,44 @@ describe('The Home controller', function() {
             $q = _$q_;
 
             // Create Mocks 
-            AuthenticationService = jasmine.createSpyObj('AuthenticationService', ['getApiToken', 'getAuthenticatedProfile', 'logOut']);
+            AuthenticationService = jasmine.createSpyObj('AuthenticationService', ['login']);
             $location = jasmine.createSpyObj('$location', ['path']);
             $cookieStore = jasmine.createSpyObj('$cookieStore', ['get']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
-
+            $auth = jasmine.createSpyObj('$auth', ['authenticate']);
         });
     });
 
     function initializeController() {
         // Initialise the controller
-        // $scope, $location, $log, $routeParams, growl, SessionService, AuthenticationService
         $controller('Home', {
             $scope: $scope,
             $location: $location,
             $routeParams: $routeParams,
             $log: $log,
             $cookieStore: $cookieStore,
+            $auth: $auth,
             growl: growl,
             AuthenticationService: AuthenticationService
         });
     }
-
-    describe('when initialising', function() {
-
-        it("should log the user out if the logout routeparam exists", function() {
-            $routeParams = { logout: true };
-   
-            initializeController();
-            expect(AuthenticationService.logOut.calls.length == 1);
-        });
-    });
 
     describe('has a login function', function() {
 
         beforeEach(function(){
             $routeParams = {};
             initializeController();
+
         });
 
-        it("that should display an error if there was a huge fail when talking to Facebook", function() {
-            var getApiTokenResponse = $q.defer();
-            getApiTokenResponse.reject('HugeFail');
-            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call returns an error
+        it("that should display an error if the user did not grant Facebook permissions", function() {
+            var authenticateResponse = $q.defer();
+            authenticateResponse.reject('EpicFail');
+            $auth.authenticate.andReturn(authenticateResponse.promise);
+
+            var loginResponse = $q.defer();
+            loginResponse.resolve('ValidToken');
+            AuthenticationService.login.andReturn(loginResponse.promise); // Return a valid Token
 
             $scope.login(); // Hit the login function
             $scope.$digest();
@@ -65,45 +60,34 @@ describe('The Home controller', function() {
             expect(growl.addErrorMessage).toHaveBeenCalledWith("We weren't able to login you in. Did you authorize our Facebook request?");
         });
 
-        it("that should display an error if the user doesn't authenticate with Facebook or grant permissions", function() {
-            var getApiTokenResponse = $q.defer();
-            getApiTokenResponse.resolve(null);
-            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Make the getApiToken call return null
+        it("that should display an error if there was a huge fail when trying to retrieve Api tokens, etc", function() {
+            var authenticateResponse = $q.defer();
+            authenticateResponse.resolve({ data: 'ValidToken'});
+            $auth.authenticate.andReturn(authenticateResponse.promise);
+
+            var loginResponse = $q.defer();
+            loginResponse.reject('HugeFail');
+            AuthenticationService.login.andReturn(loginResponse.promise); // Make the getApiToken call returns an error
 
             $scope.login(); // Hit the login function
             $scope.$digest();
 
-            expect(growl.addErrorMessage).toHaveBeenCalledWith("We weren't able to login you in. Did you authorize our Facebook request?");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something bad happened. HugeFail");
         });
 
-        it('that should redirect to the events page if there is an existing Profile', function() {
-            var getApiTokenResponse = $q.defer();
-            getApiTokenResponse.resolve('ValidToken');
-            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Return a valid Token
+        it('that should redirect to the events page', function() {
+            var authenticateResponse = $q.defer();
+            authenticateResponse.resolve({ data: 'ValidToken'});
+            $auth.authenticate.andReturn(authenticateResponse.promise);
 
-            var getAuthenticatedProfileResponse = $q.defer();
-            getAuthenticatedProfileResponse.resolve('ValidProfile');
-            AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a valid Profile
+            var loginResponse = $q.defer();
+            loginResponse.resolve('ValidToken');
+            AuthenticationService.login.andReturn(loginResponse.promise); // Return a valid Token
 
             $scope.login(); // Hit the login function
             $scope.$digest();
 
             expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection to eventList
-        });
-
-        it('that should redirect to the createProfile page if there is no existing Profile', function() {
-            var getApiTokenResponse = $q.defer();
-            getApiTokenResponse.resolve('ValidToken');
-            AuthenticationService.getApiToken.andReturn(getApiTokenResponse.promise); // Return a valid Token
-
-            var getAuthenticatedProfileResponse = $q.defer();
-            getAuthenticatedProfileResponse.resolve(null);
-            AuthenticationService.getAuthenticatedProfile.andReturn(getAuthenticatedProfileResponse.promise); // Return a null Profile
-
-            $scope.login(); // Hit the login function
-            $scope.$digest();
-
-            expect($location.path).toHaveBeenCalledWith("/createProfile"); // Check redirection to createProfile
         });
     });
 });

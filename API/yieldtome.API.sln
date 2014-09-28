@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30110.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{CA3F735D-DEBC-4A1C-85B9-C6F205DDC288}"
 EndProject
@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3359F7
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Authenticate", "API.Authenticate\API.Authenticate.csproj", "{97C97AD5-C323-4232-A2DD-1C1DE9353AD8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Auth", "API.Auth\API.Auth.csproj", "{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -42,10 +42,10 @@ Global
 		{2257EEED-2F06-4CA9-A452-ED3F9967EECA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2257EEED-2F06-4CA9-A452-ED3F9967EECA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2257EEED-2F06-4CA9-A452-ED3F9967EECA}.Release|Any CPU.Build.0 = Release|Any CPU
-		{97C97AD5-C323-4232-A2DD-1C1DE9353AD8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{97C97AD5-C323-4232-A2DD-1C1DE9353AD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{97C97AD5-C323-4232-A2DD-1C1DE9353AD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{97C97AD5-C323-4232-A2DD-1C1DE9353AD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

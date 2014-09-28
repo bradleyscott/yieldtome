@@ -11,7 +11,7 @@ namespace yieldtome.Interfaces
     {
         List<Profile> GetProfiles();
         Profile GetProfile(int profileID);
-        Profile GetProfile(string facebookID);
+        Profile GetProfile(string facebookID); // TODO: Extend to accept Provider
         Profile CreateProfile(Profile newProfile);
         Profile UpdateProfile(Profile updatedProfile);
     }

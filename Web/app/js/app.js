@@ -10,7 +10,7 @@ angular.module('yieldtome', [
     'yieldtome.controllers',
     'ui.bootstrap',
     'ngCookies',
-    'ngFacebook',
+    'satellizer',
     'ui.sortable',
     'angular-loading-bar',
     'angular-growl',
@@ -26,9 +26,13 @@ angular.module('yieldtome', [
             templateUrl: 'partials/home.html',
             controller: 'Home'
         });
-        $routeProvider.when('/createProfile', {
-            templateUrl: 'partials/profile/editProfile.html',
-            controller: 'CreateProfile'
+        $routeProvider.when('/logout', {
+            templateUrl: 'partials/home.html',
+            controller: 'Logout'
+        });
+        $routeProvider.when('/auth/facebook', {
+            templateUrl: 'partials/home.html',
+            controller: 'FacebookAuth'   
         });
         $routeProvider.when('/editProfile', {
             templateUrl: 'partials/profile/editProfile.html',
@@ -41,7 +45,7 @@ angular.module('yieldtome', [
         $routeProvider.when('/events', {
             templateUrl: 'partials/event/listEvents.html',
             controller: 'Events'
-    });
+        });
         $routeProvider.when('/createEvent', {
             templateUrl: 'partials/event/editEvent.html',
             controller: 'CreateEvent'
@@ -108,10 +112,8 @@ angular.module('yieldtome', [
     }
 ])
 
-// Configure the Facebook provider
-.config(['$facebookProvider', function( $facebookProvider ) {
-  $facebookProvider.setAppId('233412823470428');
-}])
+// Configure settings
+.constant('apiUrl','http://localhost:61353/')
 
 // Load the facebook SDK asynchronously
 .run(['$rootScope', function($rootScope) {
@@ -127,7 +129,7 @@ angular.module('yieldtome', [
      facebookJS.id = 'facebook-jssdk';
 
      // Set the new script's source to the source of the Facebook JS SDK
-     facebookJS.src = '//connect.facebook.net/en_US/all.js';
+    facebookJS.src = '//connect.facebook.net/en_US/all.js';
 
      // Insert the Facebook JS SDK into the DOM
      firstScriptElement.parentNode.insertBefore(facebookJS, firstScriptElement);
@@ -164,8 +166,16 @@ angular.module('yieldtome', [
     }
 ])
 
-.config(['$httpProvider', 'growlProvider',
-    function($httpProvider, growlProvider) {
+.config(['$httpProvider', 'growlProvider', '$authProvider', 'apiUrl',
+    function($httpProvider, growlProvider, $authProvider, apiUrl) {
+
+        // Setup AuthPoviders
+        $authProvider.facebook({
+            clientId: '233412823470428',
+            redirectUri: location.href,
+            url: apiUrl + 'Authenticate'
+        });
+
         $httpProvider.interceptors.push('httpResponseInterceptor'); // Register http interceptor
 
         // Growl settings
