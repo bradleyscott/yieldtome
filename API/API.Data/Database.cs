@@ -14,6 +14,7 @@ namespace yieldtome.API.Data
         public Database() : base("Name=Database") { }
 
         public DbSet<Profile> Profiles { get; set;}
+        public DbSet<Login> Logins { get; set; }
         public DbSet<Event> Events { get; set; }
         public DbSet<Attendee> Attendees { get; set; }
         public DbSet<SpeakersList> SpeakersLists { get; set; }

@@ -6,7 +6,7 @@
     </h2>
     <form name="form" role="form" class="css-form form-horizontal" novalidate>
         <div class="col-sm-3 hidden-xs">
-            <img ng-src="{{profile.ProfilePictureUri}}?type=large" class="img-responsive img-rounded" />
+            <img ng-src="{{profile.ProfilePictureUri}}" class="img-responsive img-rounded" style="width:150px;height:150px"/>
         </div>
         <div class="col-sm-9">
             <div class="form-group">
@@ -46,17 +46,6 @@
                     <span class="input-group-addon">
                         <span class="glyphicon glyphicon-globe" ng-show="profile.IsTwitterPublic" ng-click="profile.IsTwitterPublic=false"></span>
                         <span class="glyphicon glyphicon-lock" ng-hide="profile.IsTwitterPublic"  ng-click="profile.IsTwitterPublic=true"></span>
-                    </span>
-                </div>
-            </div>
-            <div class="form-group">
-                <div class="input-group">
-                    <span class="input-group-addon" style="min-width:65px">linkedIn</span>
-                    <!-- TODO: Add in Regex validation for LinkedIn -->
-                    <input class="form-control" type="text" ng-model="profile.LinkedIn" ng-disabled="formDisabled" placeholder="yourLinkedInName" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-globe" ng-show="profile.IsLinkedInPublic" ng-click="profile.IsLinkedInPublic=false"></span>
-                        <span class="glyphicon glyphicon-lock" ng-hide="profile.IsLinkedInPublic"  ng-click="profile.IsLinkedInPublic=true"></span>
                     </span>
                 </div>
             </div>

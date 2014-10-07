@@ -25,19 +25,53 @@ namespace yieldtome.API.Auth
             string accessToken = ValidateFacebookToken(externalToken);
             dynamic fbProfile = GetFacebookProfile(accessToken);
 
-            Profile profile = _profileService.GetProfile(fbProfile.id);
-            if (profile == null) // User does not yet exist. So create the Profile
-            {
-                Logging.LogWriter.Write(String.Format("Creating new Profile for user with FacebookID: {0}", fbProfile.id));
-                profile = new Profile
-                {
-                    Name = fbProfile.name,
-                    FacebookID = fbProfile.id
-                };
-                profile = _profileService.CreateProfile(profile);
-            }
+            // Attempt to get the Profile
+            Profile profile = _profileService.GetProfile("Facebook", fbProfile.id);
+            string email = "";
+            if (fbProfile.GetType().GetProperty("email") != null) { email = fbProfile.email; }
+            if (profile == null && email != "") { profile = GetProfileByEmail(fbProfile, email); }
+            
+            // If User does not yet exist, create the Profile
+            if (profile == null) { profile = CreateProfile(fbProfile, email); }
 
             Logging.LogWriter.Write(String.Format("Successfully authenticated Profile with ProfileID={0}", profile.ProfileID));
+            return profile;
+        }
+
+        private Profile GetProfileByEmail(dynamic fbProfile, string email)
+        {
+            Logging.LogWriter.Write("Attempting to identify user based on email inside Facebook token");
+            Profile profile = _profileService.GetProfiles().FirstOrDefault(x => x.Email == email);
+
+            if (profile != null) // Update the Profile to include the FB contact details
+            {
+                Logging.LogWriter.Write("Successfully identifed user based on email inside Facebook token. Updating contact details");
+                Login contact = new Login
+                {
+                    Name = "Facebook",
+                    Value = fbProfile.id
+                };
+                profile.Logins.Add(contact);
+                _profileService.UpdateProfile(profile);
+            }
+            return profile;
+        }
+
+        private Profile CreateProfile(dynamic fbProfile, string email)
+        {
+            Logging.LogWriter.Write(String.Format("Creating new Profile for user with FacebookID: {0}", fbProfile.id));
+            Profile profile = new Profile();
+            profile.Name = fbProfile.name;
+            profile.Email = email;
+
+            Login contact = new Login
+            {
+                Name = "Facebook",
+                Value = fbProfile.id
+            };
+            profile.Logins.Add(contact);
+
+            profile = _profileService.CreateProfile(profile);
             return profile;
         }
 

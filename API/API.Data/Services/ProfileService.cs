@@ -14,21 +14,28 @@ namespace yieldtome.API.Data.Services
     {
         private yieldtome.Objects.Profile CreateProfileObject(Profile dbProfile)
         {
-            return new yieldtome.Objects.Profile()
+            yieldtome.Objects.Profile profile = new yieldtome.Objects.Profile()
             {
                 ProfileID = dbProfile.ProfileID,
                 Name = dbProfile.Name,
-                FacebookID = dbProfile.FacebookID,
                 Email = dbProfile.Email,
                 Phone = dbProfile.Phone,
-                Twitter = dbProfile.Twitter,
-                LinkedIn = dbProfile.LinkedIn,
-                IsFacebookPublic = dbProfile.IsFacebookPublic,
+                Twitter = dbProfile.Twitter.Replace("@", "").ToLower(), // Strip out the @ char
                 IsEmailPublic = dbProfile.IsEmailPublic,
-                IsPhonePublic = dbProfile.IsPhonePublic,
-                IsTwitterPublic = dbProfile.IsTwitterPublic,
-                IsLinkedInPublic = dbProfile.IsLinkedInPublic
+                IsPhonePublic = dbProfile.IsPhonePublic, 
+                IsTwitterPublic = dbProfile.IsTwitterPublic
             };
+
+            foreach(Login detail in dbProfile.Logins)
+            {
+                profile.Logins.Add(new yieldtome.Objects.Login
+                {
+                    Name = detail.Name,
+                    Value = detail.Value
+                });
+            }
+
+            return profile;
         }
 
         public List<yieldtome.Objects.Profile> GetProfiles()
@@ -36,12 +43,14 @@ namespace yieldtome.API.Data.Services
             Logging.LogWriter.Write("Attempting to retrieve Profiles");
 
             List<Profile> dbProfiles;
+            List<yieldtome.Objects.Profile> profiles;
+
             using (var db = new Database())
             {
                 dbProfiles = db.Profiles.ToList();
+                profiles = dbProfiles.Select(x => CreateProfileObject(x)).ToList();
             }
 
-            List<yieldtome.Objects.Profile> profiles = dbProfiles.Select(x => CreateProfileObject(x)).ToList();
             Logging.LogWriter.Write(String.Format("Retrieved {0} Profiles", profiles.Count));
             return profiles;
         }
@@ -68,25 +77,25 @@ namespace yieldtome.API.Data.Services
             return profile;
         }
 
-        public yieldtome.Objects.Profile GetProfile(string facebookID)
+        public yieldtome.Objects.Profile GetProfile(string provider, string providerID)
         {
-            Logging.LogWriter.Write(String.Format("Attempting to retrieve Profile with FacebookID={0}", facebookID));
+            Logging.LogWriter.Write(String.Format("Attempting to retrieve Profile with ID={0} from {1}", providerID, provider));
 
             yieldtome.Objects.Profile profile;
             using (var db = new Database())
             {
-                Profile dbProfile = db.Profiles.FirstOrDefault(x => x.FacebookID == facebookID);
-
-                if (dbProfile == null)
+                Login dbContact = db.Logins.FirstOrDefault(x => x.Name == provider && x.Value == providerID);
+                if (dbContact == null)
                 {
-                    Logging.LogWriter.Write(String.Format("No Profile with FacebookID={0} exists", facebookID));
+                    Logging.LogWriter.Write(String.Format("No Profile with ID={0} from {1} exists", providerID, provider));
                     return null;
                 }
 
+                Profile dbProfile = db.Profiles.FirstOrDefault(x => x.ProfileID == dbContact.ProfileID);
                 profile = CreateProfileObject(dbProfile);
             }
 
-            Logging.LogWriter.Write(String.Format("Successfully retrieved Profile with FacebookID={0}", facebookID));
+            Logging.LogWriter.Write(String.Format("Successfully retrieved Profile with ID={0} from {1}", providerID, provider));
             return profile;
         }
 
@@ -94,36 +103,38 @@ namespace yieldtome.API.Data.Services
         {
             Logging.LogWriter.Write("Attempting to create a new Profile");
 
-            if (newProfile.FacebookID == "") throw new ArgumentNullException("FacebookID is required");
-            if (newProfile.Name == "") throw new ArgumentNullException("Name is required");
+            if (newProfile.Name == null || newProfile.Name == "") throw new ArgumentException("Name is required");
+            if (newProfile.Email == null || newProfile.Email == "") throw new ArgumentException("Email is required");
+            if (newProfile.Logins.Count == 0) throw new ArgumentException("At least 1 ContactDetail is required");
 
             Profile dbProfile;
             using (var db = new Database())
             {
-                if (db.Profiles.FirstOrDefault(x => x.FacebookID == newProfile.FacebookID) != null)
-                {
-                    string message = "A Profile with this FacebookID already exists";
-                    Logging.LogWriter.Write(message);
-                    throw new ArgumentException(message, "facebookID");
-                }
-
                 dbProfile = new Profile
                 {
-                    FacebookID = newProfile.FacebookID,
                     Name = newProfile.Name,
                     Email = newProfile.Email,
-                    Phone = newProfile.Phone,
-                    Twitter = newProfile.Twitter,
-                    LinkedIn = newProfile.LinkedIn,
-                    IsFacebookPublic = newProfile.IsFacebookPublic,
                     IsEmailPublic = newProfile.IsEmailPublic,
+                    Phone = newProfile.Phone, 
                     IsPhonePublic = newProfile.IsPhonePublic,
                     IsTwitterPublic = newProfile.IsTwitterPublic,
-                    IsLinkedInPublic = newProfile.IsLinkedInPublic,
                     CreatedTime = DateTime.Now
                 };
+                if (newProfile.Twitter != null) dbProfile.Twitter = newProfile.Twitter.Replace("@", "").ToLower(); // Strip out the @ character
 
                 dbProfile = db.Profiles.Add(dbProfile);
+
+                foreach(yieldtome.Objects.Login contact in newProfile.Logins)
+                {
+                    db.Logins.Add(new Login
+                    {
+                        Name = contact.Name,
+                        Value = contact.Value,
+                        ProfileID = dbProfile.ProfileID,
+                        CreatedTime = DateTime.Now
+                    });
+                }
+
                 db.SaveChanges();
             }
 
@@ -136,7 +147,8 @@ namespace yieldtome.API.Data.Services
         {
             Logging.LogWriter.Write(String.Format("Attempting to update Profile with ProfileID={0}", updatedProfile.ProfileID));
 
-            if (updatedProfile.Name == "") throw new ArgumentNullException("updatedProfile.Name", "Name is required");
+            if (updatedProfile.Name == "") throw new ArgumentException("updatedProfile.Name", "Name is required");
+            if (updatedProfile.Email == "") throw new ArgumentException("Email is required");
 
             using (var db = new Database())
             {
@@ -145,15 +157,31 @@ namespace yieldtome.API.Data.Services
 
                 dbProfile.Name = updatedProfile.Name;
                 dbProfile.Email = updatedProfile.Email;
-                dbProfile.Phone = updatedProfile.Phone;
-                dbProfile.Twitter = updatedProfile.Twitter;
-                dbProfile.LinkedIn = updatedProfile.LinkedIn;
-                dbProfile.IsFacebookPublic = updatedProfile.IsFacebookPublic;
                 dbProfile.IsEmailPublic = updatedProfile.IsEmailPublic;
+                dbProfile.Phone = updatedProfile.Phone;
                 dbProfile.IsPhonePublic = updatedProfile.IsPhonePublic;
+                if (updatedProfile.Twitter != null) dbProfile.Twitter = updatedProfile.Twitter.Replace("@", "").ToLower(); // Strip out the @ character
                 dbProfile.IsTwitterPublic = updatedProfile.IsTwitterPublic;
-                dbProfile.IsLinkedInPublic = updatedProfile.IsLinkedInPublic;
                 dbProfile.UpdatedTime = DateTime.Now;
+
+                foreach (yieldtome.Objects.Login login in updatedProfile.Logins)
+                {
+                    Login dbLogin = db.Logins.FirstOrDefault(x => x.Name == login.Name);
+                    if(dbLogin != null) {
+                        dbLogin.Value = login.Value;
+                        dbLogin.UpdatedTime = DateTime.Now;
+                    }
+                    else
+                    {
+                        db.Logins.Add(new Login
+                        {
+                            Name = login.Name,
+                            Value = login.Value,
+                            ProfileID = updatedProfile.ProfileID,
+                            CreatedTime = DateTime.Now
+                        });
+                    }
+                }
 
                 db.SaveChanges();
             }

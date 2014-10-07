@@ -9,7 +9,13 @@ namespace yieldtome.API
     public static class WebApiConfig
     {
         public static void Register(HttpConfiguration config)
-        {
+        {       
+            config.Routes.MapHttpRoute(
+                name: "AuthenticateApi",
+                routeTemplate: "Authenticate/{action}",
+                defaults: new { Controller = "Authenticate" }
+            );
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{id}",

@@ -63,8 +63,8 @@
                 <h3>Next Speaker</h3>
                 <div class="thumbnail">
                     <div ng-show="speakers[0].Attendee.Profile">
-                        <a href="https://www.facebook.com/{{speakers[0].Attendee.Profile.FacebookID}}" target="_blank">
-                            <img ng-src="{{speakers[0].Attendee.Profile.ProfilePictureUri}}?type=large" class="img-responsive img-rounded" />
+                        <a href="{{speakers[0].Attendee.Profile.DefaultContactUri}}" target="_blank">
+                            <img ng-src="{{speakers[0].Attendee.Profile.ProfilePictureUri}}" class="img-responsive img-rounded" />
                         </a>
                     </div>
                     <div ng-hide="speakers[0].Attendee.Profile">

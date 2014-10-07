@@ -30,10 +30,6 @@ angular.module('yieldtome', [
             templateUrl: 'partials/home.html',
             controller: 'Logout'
         });
-        $routeProvider.when('/auth/facebook', {
-            templateUrl: 'partials/home.html',
-            controller: 'FacebookAuth'   
-        });
         $routeProvider.when('/editProfile', {
             templateUrl: 'partials/profile/editProfile.html',
             controller: 'EditProfile'
@@ -173,7 +169,18 @@ angular.module('yieldtome', [
         $authProvider.facebook({
             clientId: '233412823470428',
             redirectUri: location.href,
-            url: apiUrl + 'Authenticate'
+            url: apiUrl + 'Authenticate/Facebook',
+            scope: 'email'
+        });
+
+        $authProvider.twitter({
+            url: apiUrl + 'Authenticate/Twitter'
+        });
+
+        $authProvider.google({
+            url: apiUrl + 'Authenticate/Google',
+            redirectUri: location.origin + location.pathname,
+            clientId: '894006039167-vdfa761e664erda4m0fff2l316btu7h4.apps.googleusercontent.com'
         });
 
         $httpProvider.interceptors.push('httpResponseInterceptor'); // Register http interceptor

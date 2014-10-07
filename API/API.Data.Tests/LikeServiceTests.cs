@@ -44,13 +44,6 @@ namespace yieldtome.API.Tests
         }
 
         [TestMethod]
-        public void DoesLikeExist_Exists()
-        {
-            bool like = _service.DoesLikeExist(1, 2);
-            Assert.IsTrue(like);
-        }
-
-        [TestMethod]
         public void IsLikeRequited_InvalidLikerID()
         {
             bool like = _service.IsLikeRequited(-1, 1);
@@ -61,13 +54,6 @@ namespace yieldtome.API.Tests
         public void IsLikeRequited_InvalidLikedID()
         {
             bool like = _service.IsLikeRequited(1, -1);
-            Assert.IsFalse(like);
-        }
-
-        [TestMethod]
-        public void IsLikeRequited_Unrequited()
-        {
-            bool like = _service.IsLikeRequited(1, 2);
             Assert.IsFalse(like);
         }
 
@@ -93,10 +79,17 @@ namespace yieldtome.API.Tests
         }
 
         [TestMethod]
+        public void DoesLikeExist_Exists()
+        {
+            bool like = _service.DoesLikeExist(2, 1);
+            Assert.IsTrue(like);
+        }
+
+        [TestMethod]
         public void IsLikeRequited_Requited()
         {
             bool like = _service.IsLikeRequited(1, 2);
-            Assert.IsFalse(like);
+            Assert.IsTrue(like);
         }
 
         [TestMethod]

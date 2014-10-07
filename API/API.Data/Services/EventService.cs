@@ -21,7 +21,7 @@ namespace yieldtome.API.Data.Services
                 StartDate = dbEvent.StartDate,
                 EndDate = dbEvent.EndDate,
                 Description = dbEvent.Description,
-                Hashtag = dbEvent.Hashtag,
+                Hashtag = dbEvent.Hashtag.Replace("#", "").ToLower(), // Strip out the # char
                 CreatorID = dbEvent.Creator.ProfileID
             };
         }

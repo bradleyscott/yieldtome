@@ -10,24 +10,43 @@ using System.Threading.Tasks;
 using System.Web.Http;
 using yieldtome.Objects;
 using yieldtome.Interfaces;
+using System.Net;
+using System.Web;
+using Tweetinvi;
+using System.Runtime.Caching;
 
 namespace yieldtome.API.Controllers
 {
-
     public class AuthenticateController : ApiController
     {
         /// <summary>
         /// Exchanges a Facebook Access token with a yieldto.me issued token used to access the API
         /// </summary>
-        /// <param name="token">The Access token granted by Facebook from a FB.login function</param>
+        /// <param name="code">The Access code granted by Facebook</param>
         /// <returns></returns>
-        public async Task<IHttpActionResult> PostLogin(dynamic code)
+        [ActionName("Facebook")]
+        public JObject PostFacebook(dynamic code)
         {
             IExternalAuthenticationService fbAuthService = Extensibility.Container.GetExportedValue<IExternalAuthenticationService>("FacebookAuthenticationService");
             Profile profile = fbAuthService.Authenticate(code);
             JObject accessToken = CreateAccessTokenAndSignIn(profile);
 
-            return Ok(accessToken);
+            return accessToken;
+        }
+
+        /// <summary>
+        /// Exchanges a Google Access token with a yieldto.me issued token used to access the API
+        /// </summary>
+        /// <param name="code">The Access code granted by Google</param>
+        /// <returns></returns>
+        [ActionName("Google")]
+        public JObject PostGoogle(dynamic code)
+        {
+            IExternalAuthenticationService gAuthService = Extensibility.Container.GetExportedValue<IExternalAuthenticationService>("GoogleAuthenticationService");
+            Profile profile = gAuthService.Authenticate(code);
+            JObject accessToken = CreateAccessTokenAndSignIn(profile);
+
+            return accessToken;
         }
 
         private JObject CreateAccessTokenAndSignIn(Profile profile)

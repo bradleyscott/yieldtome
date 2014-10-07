@@ -73,6 +73,7 @@
     <Compile Include="Interfaces\IVoteService.cs" />
     <Compile Include="Logging.cs" />
     <Compile Include="Objects\Attendee.cs" />
+    <Compile Include="Objects\Login.cs" />
     <Compile Include="Objects\Event.cs" />
     <Compile Include="Objects\Message.cs" />
     <Compile Include="Objects\Poll.cs" />

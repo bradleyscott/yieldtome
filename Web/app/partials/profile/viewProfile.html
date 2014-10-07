@@ -2,14 +2,14 @@
 <div class="container body-content">
     <h2>{{title}}
         <br/>
-        <a href="https://www.facebook.com/{{profile.FacebookID}}" target="_blank"><small>{{profile.Name}}</small></a>
+        <a href="{{profile.DefaultContactUri}}" target="_blank"><small>{{profile.Name}}</small></a>
     </h2>
     <form name="form" role="form" class="css-form form-horizontal" novalidate>
         <div class="col-sm-3 hidden-xs">
-            <a href="https://www.facebook.com/{{profile.FacebookID}}" target="_blank"><img ng-src="{{profile.ProfilePictureUri}}?type=large" class="img-responsive img-rounded"/></a>
+            <a href="{{profile.DefaultContactUri}}" target="_blank"><img ng-src="{{profile.ProfilePictureUri}}" class="img-responsive img-rounded"  style="width:150px;height:150px"/></a>
         </div>
         <div class="col-sm-9">
-            <div class="well" ng-hide="profile.IsEmailPublic || profile.IsPhonePublic || profile.IsTwitterPublic || profile.IsLinkedInPublic">{{profile.Name}} is not sharing any contact details with you</div>
+            <div class="well" ng-hide="profile.IsEmailPublic || profile.IsPhonePublic || profile.IsTwitterPublic">{{profile.Name}} is not sharing any contact details with you</div>
             <div class="alert alert-success" role="alert" ng-show="isLikeRequited">{{profile.Name}} likes you too!</div>
             <div class="form-group"  ng-show="profile.Email && profile.IsEmailPublic">
                 <div class="input-group">
@@ -32,14 +32,6 @@
                     <span class="input-group-addon" style="min-width:65px">twitter</span>
                     <a href="https://www.twitter.com/{{profile.Twitter}}" target="_blank">
                         <input class="form-control" type="text" ng-model="profile.Twitter" ng-disabled="formDisabled" style="cursor:pointer"/>
-                    </a>
-                </div>
-            </div>
-            <div class="form-group" ng-show="profile.LinkedIn && profile.IsLinkedInPublic">
-                <div class="input-group">
-                    <span class="input-group-addon" style="min-width:65px">linkedIn</span>
-                    <a href="https://www.twitter.com/{{profile.LinkedIn}}" target="_blank">
-                        <input class="form-control" type="text" ng-model="profile.LinkedIn" ng-disabled="formDisabled" style="cursor:pointer"/>
                     </a>
                 </div>
             </div>

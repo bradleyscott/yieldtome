@@ -21,16 +21,12 @@ namespace yieldtome.API.Data.Migrations
               {
                   ProfileID = 1,
                   Name = "Bradley Scott",
-                  FacebookID = "553740394",
                   Email = "bradley@yieldto.me",
                   Phone = "555 125-3459",
                   Twitter = "tweetme",
-                  LinkedIn = "linkedin",
-                  IsFacebookPublic = true,
                   IsEmailPublic = true,
                   IsPhonePublic = false,
                   IsTwitterPublic = false,
-                  IsLinkedInPublic = true,
                   CreatedTime = DateTime.Now,
                   UpdatedTime = DateTime.Now
               }
@@ -42,20 +38,31 @@ namespace yieldtome.API.Data.Migrations
               {
                   ProfileID = 2,
                   Name = "Patricia Amfdbdgbbaaj Warmanstein",
-                  FacebookID = "100006424722110",
-                  Email = "patricia@yieldto.me",
-                  Phone = "555 125-3459",
-                  Twitter = "tweetme",
-                  LinkedIn = "linkedin",
-                  IsFacebookPublic = true,
-                  IsEmailPublic = true,
-                  IsPhonePublic = false,
-                  IsTwitterPublic = false,
-                  IsLinkedInPublic = true,
+                  Email = "fjhzrrr_warmanstein_1375231430@tfbnw.net",
                   CreatedTime = DateTime.Now,
                   UpdatedTime = DateTime.Now
               }
             );
+
+            context.Logins.AddOrUpdate(
+                c => c.LoginID,
+                new Login
+                {
+                    LoginID = 1,
+                    Name = "Facebook",
+                    Value = "553740394",
+                    ProfileID = 1,
+                    CreatedTime = DateTime.Now
+                },
+                new Login
+                {
+                    LoginID = 5,
+                    Name = "Facebook",
+                    Value = "100006424722110",
+                    ProfileID = 2,
+                    CreatedTime = DateTime.Now
+                });
+
             context.Events.AddOrUpdate(
                 e => e.EventID,
                 new Event

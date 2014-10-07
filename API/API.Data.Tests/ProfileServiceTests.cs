@@ -48,82 +48,68 @@ namespace yieldtome.API.Tests
         }
 
         [TestMethod]
-        public void GetProfileByFacebook_ProfileNotFound()
+        public void GetProfileByProvider_ProfileNotFound()
         {
-            Profile profile = _service.GetProfile("-1");
+            Profile profile = _service.GetProfile("Facebook", "-1");
             Assert.IsNull(profile);
         }
 
         [TestMethod]
         public void GetProfileByFacebook_Success()
         {
-            Profile profile = _service.GetProfile("553740394");
+            Profile profile = _service.GetProfile("Facebook", "553740394");
             Assert.IsNotNull(profile);
             Assert.IsInstanceOfType(profile, typeof(Profile));
-            Assert.AreEqual("553740394", profile.FacebookID);
+
+            Login facebookContact = profile.Logins.FirstOrDefault(x => x.Name == "Facebook");
+            Assert.AreEqual("553740394", facebookContact.Value);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
-        public void CreateProfile_MissingFacebookID()
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreateProfile_MissingContactDetail()
         {
             Profile profile = new Profile
             {
-                FacebookID = "",
                 Name = "Bradley Scott",
-                Email = "bradley@yieldto.me",
-                Phone = "555 125-3459",
-                Twitter = "tweettome",
-                LinkedIn = "linktome",
-                IsFacebookPublic = true,
-                IsEmailPublic = true,
-                IsPhonePublic = false,
-                IsTwitterPublic = false,
-                IsLinkedInPublic = true
+                Email = "bradley@yieldto.me"
             };
 
             profile = _service.CreateProfile(profile);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void CreateProfile_MissingName()
         {
             Profile profile = new Profile { 
-                FacebookID = "553740394",
                 Name = "", 
                 Email = "bradley@yieldto.me",
-                Phone = "555 125-3459",
-                Twitter = "tweettome",
-                LinkedIn = "linktome",
-                IsFacebookPublic = true,
-                IsEmailPublic = true,
-                IsPhonePublic = false, 
-                IsTwitterPublic = false,
-                IsLinkedInPublic = true
+                Logins = new List<Login>()
             };
+            profile.Logins.Add(new Login
+            {
+                Name = "Facebook",
+                Value = "553740394"
+            });
             
             profile = _service.CreateProfile(profile);
         }
 
         [TestMethod]
         [ExpectedException(typeof(ArgumentException))]
-        public void CreateProfile_DuplicateFacebookID()
+        public void CreateProfile_MissingEmail()
         {
             Profile profile = new Profile
             {
-                FacebookID = "553740394",
                 Name = "Bradley Scott",
-                Email = "bradley@yieldto.me",
-                Phone = "555 125-3459",
-                Twitter = "tweettome",
-                LinkedIn = "linktome",
-                IsFacebookPublic = true,
-                IsEmailPublic = true,
-                IsPhonePublic = false,
-                IsTwitterPublic = false,
-                IsLinkedInPublic = true
+                Logins = new List<Login>()
             };
+            profile.Logins.Add(new Login
+            {
+                Name = "Facebook",
+                Value = "553740394"
+            });
 
             profile = _service.CreateProfile(profile);
         }
@@ -136,43 +122,46 @@ namespace yieldtome.API.Tests
 
             Profile profile = new Profile
             {
-                FacebookID = facebookID,
                 Name = name,
-                Email = "bradley@yieldto.me",
-                Phone = "555 125-3459",
-                Twitter = "tweettome",
-                LinkedIn = "linktome",
-                IsFacebookPublic = true,
-                IsEmailPublic = true,
-                IsPhonePublic = false,
-                IsTwitterPublic = false,
-                IsLinkedInPublic = true
+                Email = "newprofile@yieldto.me",
+                Logins = new List<Login>()
             };
+            profile.Logins.Add(new Login
+            {
+                Name = "Facebook",
+                Value = facebookID
+            });
 
             profile = _service.CreateProfile(profile);
 
             Assert.IsInstanceOfType(profile, typeof(Profile));
-            Assert.AreEqual(facebookID, profile.FacebookID);
-            Assert.AreEqual(name, profile.Name);
-            Assert.AreEqual("bradley@yieldto.me", profile.Email);
-            Assert.AreEqual("555 125-3459", profile.Phone);
-            Assert.AreEqual("tweettome", profile.Twitter);
-            Assert.AreEqual("linktome", profile.LinkedIn);
-            Assert.IsTrue(profile.IsFacebookPublic);
-            Assert.IsTrue(profile.IsEmailPublic);
-            Assert.IsFalse(profile.IsPhonePublic);
-            Assert.IsFalse(profile.IsTwitterPublic);
-            Assert.IsTrue(profile.IsLinkedInPublic);
+            Login facebookContact = profile.Logins.FirstOrDefault(x => x.Name == "Facebook");
+            Assert.AreEqual(facebookID, facebookContact.Value);
         }
 
         [TestMethod]
-        [ExpectedException(typeof(ArgumentNullException))]
+        [ExpectedException(typeof(ArgumentException))]
         public void UpdateProfile_MissingName()
         {
             Profile profileToUpdate = new Profile() 
             {
                 ProfileID = 1,
-                Name = "" 
+                Name = "" ,
+                Email = "bradley@yieldto.me"
+            };
+
+            _service.UpdateProfile(profileToUpdate);
+        }
+
+        [TestMethod]
+        [ExpectedException(typeof(ArgumentException))]
+        public void UpdateProfile_MissingEmail()
+        {
+            Profile profileToUpdate = new Profile()
+            {
+                ProfileID = 1,
+                Name = "Bradley Scott",
+                Email = ""
             };
 
             _service.UpdateProfile(profileToUpdate);
@@ -188,29 +177,21 @@ namespace yieldtome.API.Tests
                 ProfileID = 1,
                 Name = "Bradley " + updatedTime,
                 Email = updatedTime + "@yieldto.me",
-                Phone = updatedTime,
-                Twitter = "tweettome" + updatedTime,
-                LinkedIn = "linktome" + updatedTime,
-                IsFacebookPublic = false,
-                IsEmailPublic = false,
-                IsPhonePublic = false,
-                IsTwitterPublic = false,
-                IsLinkedInPublic = true
+                Logins = new List<Login>()
             };
+            profileToUpdate.Logins.Add(new Login
+            {
+                Name = "Facebook",
+                Value = updatedTime
+            });
 
             profileToUpdate = _service.UpdateProfile(profileToUpdate);
 
             Assert.IsInstanceOfType(profileToUpdate, typeof(Profile));
             Assert.AreEqual("Bradley " + updatedTime, profileToUpdate.Name);
             Assert.AreEqual(updatedTime + "@yieldto.me", profileToUpdate.Email);
-            Assert.AreEqual(updatedTime, profileToUpdate.Phone);
-            Assert.AreEqual("tweettome" + updatedTime, profileToUpdate.Twitter);
-            Assert.AreEqual("linktome" + updatedTime, profileToUpdate.LinkedIn);
-            Assert.IsFalse(profileToUpdate.IsFacebookPublic);
-            Assert.IsFalse(profileToUpdate.IsEmailPublic);
-            Assert.IsFalse(profileToUpdate.IsPhonePublic);
-            Assert.IsFalse(profileToUpdate.IsTwitterPublic);
-            Assert.IsTrue(profileToUpdate.IsLinkedInPublic);
+            Login facebookContact = profileToUpdate.Logins.FirstOrDefault(x => x.Name == "Facebook");
+            Assert.AreEqual(updatedTime, facebookContact.Value);
         }
     }
 }

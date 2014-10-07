@@ -63,6 +63,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Migrations\Configuration.cs" />
+    <Compile Include="Objects\Login.cs" />
     <Compile Include="Objects\Like.cs" />
     <Compile Include="Objects\Poll.cs" />
     <Compile Include="Objects\Speaker.cs" />

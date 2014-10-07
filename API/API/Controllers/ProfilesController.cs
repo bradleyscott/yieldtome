@@ -37,7 +37,7 @@ namespace yieldtome.API.Controllers
         /// <summary>
         /// Returns the Profile with the specified ID containing only Publicly shared information
         /// </summary>
-        /// <param name="facebookID">The ID of the Profile to return</param>
+        /// <param name="id">The ID of the Profile to return</param>
         /// <returns>A Profile</returns>
         /// <example>GET Profiles/1/</example>
         public Profile GetProfile(int id)
@@ -50,16 +50,15 @@ namespace yieldtome.API.Controllers
         }
 
         /// <summary>
-        /// Returns the Profile with the specified FacebookID containing only Publicly shared information
+        /// Returns the Profile with the specified providerID from an external identity provider containing only Publicly shared information
         /// </summary>
         /// <param name="id">The FacebookID of the Profile to return</param>
         /// <returns>A Profile</returns>
-        /// <example>GET Profiles?facebookID=1</example>
-        // TODO: Change this method to accept a Provider parameter, and a generic Provider ID
-        public Profile GetProfile(string facebookID)
+        /// <example>GET Profiles?provider=Facebook&providerID=1</example>
+        public Profile GetProfile(string provider, string providerID)
         {
             Profile profile;
-            try { profile = _service.GetProfile(facebookID); }
+            try { profile = _service.GetProfile(provider, providerID); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
 
             return profile;

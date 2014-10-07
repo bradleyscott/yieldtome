@@ -4,16 +4,28 @@
 		"selected_items":
 		[
 			[
+				"auth",
+				"authenticateResponse"
+			],
+			[
+				"_",
+				"_apiUrl_"
+			],
+			[
+				"profl",
+				"profileID"
+			],
+			[
+				"profil",
+				"profileID"
+			],
+			[
 				"Confi",
 				"ConfigService"
 			],
 			[
 				"$router",
 				"$routeParams	AngularJS"
-			],
-			[
-				"_",
-				"_SessionService_"
 			],
 			[
 				"does",
@@ -476,10 +488,60 @@
 	"buffers":
 	[
 		{
-			"file": "app/js/controllers/homeController.js",
+			"file": "app/js/app.js",
 			"settings":
 			{
-				"buffer_size": 2644,
+				"buffer_size": 6777,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 1 file for \"FacebookID\"\n\nUnable to open C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\app\\js\\\n0 matches across 0 files\n\n\nSearching 72 files for \"FacebookID\"\n\nC:\\Users\\Bradley\\Documents\\src\\yieldtome\\Web\\app\\js\\services\\profileService.js:\n   55                  deferred.reject(error);\n   56                  return deferred.promise;\n   57:             } else if (profile.FacebookID == null || profile.Name == null) {\n   58:                 var error = 'Both FacebookID and Name are mandatory fields on a Profile';\n   59                  $log.warn(error);\n   60                  deferred.reject(error);\n\nC:\\Users\\Bradley\\Documents\\src\\yieldtome\\Web\\app\\partials\\profile\\viewProfile.html:\n    3      <h2>{{title}}\n    4          <br/>\n    5:         <a href=\"https://www.facebook.com/{{profile.FacebookID}}\" target=\"_blank\"><small>{{profile.Name}}</small></a>\n    6      </h2>\n    7      <form name=\"form\" role=\"form\" class=\"css-form form-horizontal\" novalidate>\n    8          <div class=\"col-sm-3 hidden-xs\">\n    9:             <a href=\"https://www.facebook.com/{{profile.FacebookID}}\" target=\"_blank\"><img ng-src=\"{{profile.ProfilePictureUri}}?type=large\" class=\"img-responsive img-rounded\"/></a>\n   10          </div>\n   11          <div class=\"col-sm-9\">\n\nC:\\Users\\Bradley\\Documents\\src\\yieldtome\\Web\\app\\partials\\speakersList\\listSpeakers.html:\n   64                  <div class=\"thumbnail\">\n   65                      <div ng-show=\"speakers[0].Attendee.Profile\">\n   66:                         <a href=\"https://www.facebook.com/{{speakers[0].Attendee.Profile.FacebookID}}\" target=\"_blank\">\n   67                              <img ng-src=\"{{speakers[0].Attendee.Profile.ProfilePictureUri}}?type=large\" class=\"img-responsive img-rounded\" />\n   68                          </a>\n\n5 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 1820,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "app/partials/profile/viewProfile.html",
+			"settings":
+			{
+				"buffer_size": 3523,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/services/profileService.js",
+			"settings":
+			{
+				"buffer_size": 2890,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/controllers/profile/editProfileController.js",
+			"settings":
+			{
+				"buffer_size": 1417,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/partials/profile/editProfile.html",
+			"settings":
+			{
+				"buffer_size": 4562,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/partials/home.html",
+			"settings":
+			{
+				"buffer_size": 6421,
 				"line_ending": "Windows"
 			}
 		},
@@ -487,55 +549,7 @@
 			"file": "app/js/services/authenticationService.js",
 			"settings":
 			{
-				"buffer_size": 4311,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/js/services/facebookService.js",
-			"settings":
-			{
-				"buffer_size": 3072,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/js/app.js",
-			"settings":
-			{
-				"buffer_size": 6648,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/js/services/attendeeService.js",
-			"settings":
-			{
-				"buffer_size": 7269,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/js/services/configService.js",
-			"settings":
-			{
-				"buffer_size": 202,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/index.html",
-			"settings":
-			{
-				"buffer_size": 6685,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "app/js/controllers/auth/facebookAuthController.js",
-			"settings":
-			{
-				"buffer_size": 568,
+				"buffer_size": 1970,
 				"line_ending": "Windows"
 			}
 		}
@@ -793,26 +807,86 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services"
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/menus",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/satellizer",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList"
 	],
 	"file_history":
 	[
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/app.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/homeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/directives.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/filters.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/authenticationService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/facebookAuthController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/createAttendeeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/attendeesController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/sessionService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/profileService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/createEventController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/configService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/homeControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/package.json",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower.json",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html.dist",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/Gruntfile.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/app.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/createProfileController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/configService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/eventService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/likeService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/profileService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/pollService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/sessionService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/speakersListsControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/votesService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/authenticationService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersListService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/karma.conf.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/speakersControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/attendeesControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/attendeeService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/viewProfileController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/addSpeakerController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/createSpeakersListController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/editSpeakersListController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersListsController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile/createProfileControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/createAttendeeControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/createOtherAttendeeControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/editAttendeeControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/createEventControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/editEventControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/eventsControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll/createPollControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/facebookServiceSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/attendeesController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/createAttendeeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/createOtherAttendeeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/editAttendeeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/facebookAuthController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/logoutController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/createEventController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/editEventController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/eventsController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/createPollController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/editPollController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/pollsController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/votesController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/attendeeServiceSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/eventServiceSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/profileServiceSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/facebookService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/menus/menu.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/editProfileController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/directives.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/filters.js",
 		"/C/Users/Bradley/Documents/src/registerMe/common/models/event.json",
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/bootstrap/package.json",
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/package.json",
@@ -880,52 +954,7 @@
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/event/event.html",
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/editableSpeakerList.html",
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/menus/navMenu.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/shelljs/make.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/bootstrap/less/navbar.less",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/grunt-contrib-jshint/node_modules/jshint/data/non-ascii-identifier-start.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/speakersList/addSpeakerController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/speakersList/listSpeakersLists.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/poll/pollList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/poll/pollList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/poll/createPollControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/poll/editPollControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/poll/pollsControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/poll/pollsController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/services/pollService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/poll/poll.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/mout/lang/isPlainObject.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/speakersList/editSpeakersListController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/protractor/node_modules/selenium-webdriver/lib/test/data/scrolling_tests/page_with_double_overflow_auto.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/karma/node_modules/http-proxy/examples/http/latent-proxy.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/poll/editPoll.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/mout/queryString/setParam.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/.bin/shjs",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/speakersList/addSpeaker.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/attendee/createOtherAttendeeControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/attendee/createAttendeeControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/attendee/createAttendeeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/attendee/editAttendeeControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/attendee/attendeesControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/speakersList/createSpeakersListController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/speakersList/createSpeakersListControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/insight/node_modules/configstore/node_modules/js-yaml/node_modules/argparse/examples/testformatters.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/update-notifier/node_modules/configstore/node_modules/js-yaml/node_modules/argparse/examples/testformatters.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/inquirer/node_modules/cli-color/node_modules/es5-ext/test/Array/prototype/flatten.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/bower-registry-client/node_modules/request/node_modules/form-data/node_modules/combined-stream/test/integration/test-empty-string.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/karma/node_modules/chokidar/node_modules/recursive-readdir/test/recursive-raddir-test.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/angular-loading-bar/CHANGELOG.md",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/jquery/src/offset.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/test/assets/test-temp-dir/test-exception.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/attendee/editAttendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/services/attendeeServiceSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/speakersList/attendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/attendee/attendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/partials/attendeeList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/lib/argument_parser.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/mout/lang/isNull.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/mout/lang/isDate.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/angular-bootstrap/ui-bootstrap.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/bower/node_modules/mout/string/unescapeUnicode.js"
+		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/shelljs/make.js"
 	],
 	"find":
 	{
@@ -936,6 +965,11 @@
 		"height": 117.0,
 		"where_history":
 		[
+			"C:\\Users\\Bradley\\Documents\\src\\yieldtome\\Web\\app",
+			"C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\app\\js\\",
+			"C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\app\\js\\services\\",
+			"C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\app\\js\\services",
+			"C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\",
 			"C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\test\\unit",
 			"C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\app\\js\\controllers",
 			"C:\\Users\\Bradley\\Documents\\src\\yieldtome_vNow\\Web\\app\\partials",
@@ -950,6 +984,9 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"FacebookID",
+			"ConfigService.apiUrl",
+			"SessionService.set('profile', profile)",
 			"\n-//",
 			"../",
 			"=\"../",
@@ -1029,6 +1066,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"apiUrl",
 			"$scope.event",
 			"expect($location.path).toHaveBeenCalledWith(\"/attendees\");",
 			"$location.path('/attendees');",
@@ -1045,117 +1083,24 @@
 	"groups":
 	[
 		{
-			"selected": 7,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/js/controllers/homeController.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2644,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1218,
-								1218
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 40.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "app/js/services/authenticationService.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 4311,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2326,
-								2326
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "app/js/services/facebookService.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3072,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								774,
-								774
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 172.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
 					"file": "app/js/app.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6648,
+						"buffer_size": 6777,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								6406,
-								6406
+								6441,
+								6441
 							]
 						],
 						"settings":
@@ -1166,87 +1111,90 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2691.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "app/js/services/attendeeService.js",
+					"buffer": 1,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7269,
+						"buffer_size": 1820,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										385,
+										395
+									],
+									[
+										472,
+										482
+									],
+									[
+										806,
+										816
+									],
+									[
+										1086,
+										1096
+									],
+									[
+										1578,
+										1588
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1094,
+								1094
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": -0.0,
-						"translation.y": 293.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "app/js/services/configService.js",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 202,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								166,
-								189
-							]
-						],
-						"settings":
-						{
-							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 2,
+							"result_base_dir": "",
+							"result_file_regex": "^([A-Za-z\\\\/<].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 85.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 6,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
-					"buffer": 6,
-					"file": "app/index.html",
+					"buffer": 2,
+					"file": "app/partials/profile/viewProfile.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6685,
+						"buffer_size": 3523,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								91,
+								91
 							]
 						],
 						"settings":
@@ -1260,36 +1208,162 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 7,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 7,
-					"file": "app/js/controllers/auth/facebookAuthController.js",
+					"buffer": 3,
+					"file": "app/js/services/profileService.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 568,
+						"buffer_size": 2890,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								568,
-								568
+								2614,
+								2614
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage"
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
+						"translation.x": 0.0,
+						"translation.y": 685.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "app/js/controllers/profile/editProfileController.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1417,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								581,
+								581
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "app/partials/profile/editProfile.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4562,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1591,
+								1591
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "app/partials/home.html",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6421,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								614,
+								614
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "app/js/services/authenticationService.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1970,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
 					"type": "text"
 				}
 			]

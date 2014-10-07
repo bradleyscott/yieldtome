@@ -29,7 +29,7 @@ angular.module('yieldtome.services')
                     var error = 'No profile associated with ProfileID: ' + profileID;
                     $log.debug(error);
                     deferred.resolve(null);
-                } else // Otherwise, there is a Profile associated with this Facesbook ID
+                } else // Otherwise, there is a Profile associated with this Profile ID
                 {
                     $log.debug('yieldto.me profile: ' + data.ProfileID);
                     deferred.resolve(data);
@@ -54,8 +54,8 @@ angular.module('yieldtome.services')
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;
-            } else if (profile.FacebookID == null || profile.Name == null) {
-                var error = 'Both FacebookID and Name are mandatory fields on a Profile';
+            } else if (profile.Name == null && profile.Email == null) {
+                var error = 'Both Name and Email are mandatory fields on a Profile';
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;

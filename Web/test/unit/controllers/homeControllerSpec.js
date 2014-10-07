@@ -2,7 +2,7 @@
 
 describe('The Home controller', function() {
 
-    var $scope, $location, $routeParams, $q, $log, growl, $controller, $cookieStore, $auth, AuthenticationService;
+    var $scope, $location, $routeParams, $q, $log, growl, $controller, $cookieStore, $auth, $modal, AuthenticationService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -20,6 +20,8 @@ describe('The Home controller', function() {
             $cookieStore = jasmine.createSpyObj('$cookieStore', ['get']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
             $auth = jasmine.createSpyObj('$auth', ['authenticate']);
+            $modal = jasmine.createSpyObj('$modal', ['open']);
+
         });
     });
 
@@ -32,6 +34,7 @@ describe('The Home controller', function() {
             $log: $log,
             $cookieStore: $cookieStore,
             $auth: $auth,
+            $modal: $modal,
             growl: growl,
             AuthenticationService: AuthenticationService
         });
@@ -57,7 +60,7 @@ describe('The Home controller', function() {
             $scope.login(); // Hit the login function
             $scope.$digest();
 
-            expect(growl.addErrorMessage).toHaveBeenCalledWith("We weren't able to login you in. Did you authorize our Facebook request?");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We weren't able to login you in. Did you authorize yieldto.me's login request?");
         });
 
         it("that should display an error if there was a huge fail when trying to retrieve Api tokens, etc", function() {
