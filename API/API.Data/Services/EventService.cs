@@ -14,16 +14,17 @@ namespace yieldtome.API.Data.Services
     {
         private yieldtome.Objects.Event CreateEventObject(Event dbEvent)
         {
-            return new yieldtome.Objects.Event()
+            yieldtome.Objects.Event theEvent = new yieldtome.Objects.Event()
             {
                 EventID = dbEvent.EventID,
                 Name = dbEvent.Name,
                 StartDate = dbEvent.StartDate,
                 EndDate = dbEvent.EndDate,
                 Description = dbEvent.Description,
-                Hashtag = dbEvent.Hashtag.Replace("#", "").ToLower(), // Strip out the # char
                 CreatorID = dbEvent.Creator.ProfileID
             };
+            if(dbEvent.Hashtag != null) theEvent.Hashtag = dbEvent.Hashtag.Replace("#", "").ToLower(); // Strip out the # char
+            return theEvent;
         }
 
         public List<yieldtome.Objects.Event> GetEvents()

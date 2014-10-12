@@ -1,7 +1,7 @@
 <div class="media">
     <!-- Profile picture -->
     <img class="media-object pull-left" ng-src="img/profile.jpg" ng-hide="{{speaker.Attendee.Profile}}" style="width:50px;height:50px">
-    <img class="media-object pull-left" ng-show="{{speaker.Attendee.Profile}}" ng-src="{{speaker.Attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(speaker.Attendee.Profile.ProfileID)" style="width:50px;height:50px">
+    <img class="media-object pull-left" ng-show="{{speaker.Attendee.Profile}}" style="width:50px;height:50px" ng-src="{{speaker.Attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(speaker.Attendee.Profile.ProfileID)">
     <div class="media-body">
         <!-- Edit Speaker button -->
         <button class="btn btn-default pull-right" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-click="speaker{{speaker.SpeakerID}}Open=!speaker{{speaker.SpeakerID}}Open">

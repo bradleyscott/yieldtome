@@ -85,7 +85,7 @@ body {
 
 .btn-google-plus:hover,
 .btn-google-plus:focus {
-  color: #fff;
+  color: #fff !important;
   background-color: #cb3927;
 }
 
@@ -97,7 +97,7 @@ body {
 
 .btn-facebook:hover,
 .btn-facebook:focus {
-  color: #fff;
+  color: #fff !important;
   background-color: #294786;
 }
 
@@ -109,6 +109,6 @@ body {
 
 .btn-linkedin:hover,
 .btn-linkedin:focus {
-  color: #fff;
+  color: #fff !important;
   background-color: #0069a4;
 }

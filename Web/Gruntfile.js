@@ -19,7 +19,19 @@ module.exports = function(grunt) {
             }
         },
         replace: {
-			deploy: {
+            test: {
+                src: ['dist/js/yieldtome.js'],
+                overwrite: true,
+                replacements: [{
+                  from: "233412823470428",
+                  to: "120213154812744"
+                },
+                {
+                  from: "http://localhost:61353/",
+                  to: "https://test-api.yieldto.me/"
+                }]
+            },
+            beta: { 
 				src: ['dist/js/yieldtome.js'],
 				overwrite: true,
 				replacements: [{
@@ -28,9 +40,9 @@ module.exports = function(grunt) {
 				},
 				{
 				  from: "http://localhost:61353/",
-				  to: "https://" + grunt.option('site') + "-api.yieldto.me/"
+				  to: "https://beta-api.yieldto.me/"
 				}]
-			}   		
+            }
         },
         copy: {
             main: {
@@ -127,6 +139,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-text-replace');
     
-    grunt.registerTask('default', ['concat', 'copy', 'replace', 'uglify']);
+    grunt.registerTask('default', ['concat', 'copy', 'replace:' + grunt.option('site'), 'uglify']);
 
 };

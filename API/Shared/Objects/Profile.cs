@@ -51,11 +51,8 @@ namespace yieldtome.Objects
             {
                 Login defaultLogin = Logins.FirstOrDefault(x => x.Name == "Facebook");
                 if (defaultLogin != null) return new Uri("https://graph.facebook.com/" + defaultLogin.Value + "/picture?type=large");
-
-                if (Twitter != "") return new Uri("https://avatars.io/twitter/" + Twitter + "?size=large");
-                if (Email != "") return new Uri("https://avatars.io/email/" + Email + "?size=large");
-
-                return new Uri("https://avatars.io/gravatar/" + ProfileID + "?size=large");
+                if (Email != "") return new Uri("https://sigil.cupcake.io/" + Email);
+                return new Uri("https://sigil.cupcake.io/" + ProfileID);
             }
         }
 

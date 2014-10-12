@@ -28,7 +28,7 @@ namespace yieldtome.API.Auth
             // Attempt to get the Profile
             Profile profile = _profileService.GetProfile("Facebook", fbProfile.id);
             string email = "";
-            if (fbProfile.GetType().GetProperty("email") != null) { email = fbProfile.email; }
+            if (fbProfile.email != null) { email = fbProfile.email; }
             if (profile == null && email != "") { profile = GetProfileByEmail(fbProfile, email); }
             
             // If User does not yet exist, create the Profile

@@ -1,7 +1,7 @@
 <div class="media">
     <!-- Profile picture -->
     <img class="media-object pull-left" ng-src="img/profile.jpg" ng-hide="vote.Attendee.Profile" style="width:50px;height:50px" >
-    <img class="media-object pull-left" ng-src="{{vote.Attendee.Profile.ProfilePictureUri}}" ng-show="vote.Attendee.Profile" style="width:50px;height:50px" ng-click="showProfile(vote.Attendee.Profile.ProfileID)">
+    <img class="media-object pull-left" ng-src="{{vote.Attendee.Profile.ProfilePictureUri}}" style="width:50px;height:50px" ng-show="vote.Attendee.Profile" ng-click="showProfile(vote.Attendee.Profile.ProfileID)">
     <div class="media-body">
         <!-- Edit vote button -->
         <button class="btn btn-default pull-right" ng-click="vote{{vote.VoteID}}Open=!vote{{vote.VoteID}}Open" ng-show="(poll.Status=='Open' && vote.Attendee.AttendeeID == attendee.AttendeeID) || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">

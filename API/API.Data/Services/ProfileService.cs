@@ -20,11 +20,11 @@ namespace yieldtome.API.Data.Services
                 Name = dbProfile.Name,
                 Email = dbProfile.Email,
                 Phone = dbProfile.Phone,
-                Twitter = dbProfile.Twitter.Replace("@", "").ToLower(), // Strip out the @ char
                 IsEmailPublic = dbProfile.IsEmailPublic,
                 IsPhonePublic = dbProfile.IsPhonePublic, 
                 IsTwitterPublic = dbProfile.IsTwitterPublic
             };
+            if (dbProfile.Twitter != null) { profile.Twitter = dbProfile.Twitter.Replace("@", "").ToLower(); } // Strip out the @ char
 
             foreach(Login detail in dbProfile.Logins)
             {
