@@ -25,7 +25,7 @@ namespace yieldtome.API.Auth
 
         public Profile Authenticate(dynamic externalToken)
         {
-            Logging.LogWriter.Write("Attempting to authenticate user based on Googe token");
+            Logging.LogWriter.Write("Attempting to authenticate user based on Google token");
             
             dynamic gProfile = GetGoogleProfile(externalToken);
             Profile profile = _profileService.GetProfile("Google", gProfile.Id);
