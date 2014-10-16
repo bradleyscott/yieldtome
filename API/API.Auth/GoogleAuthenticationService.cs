@@ -7,7 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using yieldtome.Interfaces;
 using yieldtome.Objects;
-using Facebook;
 using System.ComponentModel.Composition;
 using Google.Apis.Auth.OAuth2.Flows;
 using Google.Apis.Auth.OAuth2.Responses;

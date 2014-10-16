@@ -49,6 +49,17 @@ namespace yieldtome.API.Controllers
             return accessToken;
         }
 
+        /// <summary>
+        /// Exchanges a LinkedIn Access token with a yieldto.me issued token used to access the API
+        /// </summary>
+        /// <param name="code">The Access code granted by LinkedIn</param>
+        /// <returns></returns>
+        [ActionName("LinkedIn")]
+        public JObject PostLinkedIn(dynamic code)
+        {
+            throw new NotImplementedException();
+        }
+
         private JObject CreateAccessTokenAndSignIn(Profile profile)
         {
             var tokenExpiration = TimeSpan.FromDays(1);

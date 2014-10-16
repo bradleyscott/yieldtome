@@ -173,6 +173,12 @@ angular.module('yieldtome', [
             scope: 'email'
         });
 
+	    $authProvider.linkedin({
+            redirectUri: location.origin + location.pathname,
+	    	clientId: '75mz2qe9li1kfj',
+        	url: apiUrl + 'Authenticate/LinkedIn',
+	    });
+
         $authProvider.twitter({
             url: apiUrl + 'Authenticate/Twitter'
         });

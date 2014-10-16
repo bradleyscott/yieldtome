@@ -26,18 +26,8 @@ namespace yieldtome
             catch { }
             foreach(string path in modulePaths) catalog.Catalogs.Add(new DirectoryCatalog(path));
             
-            // Filter which contracts should be loaded
-            List<string> modulesToInclude = new List<string>();
-            try
-            {
-                string filterString = ConfigurationManager.AppSettings["ModulesToInclude"];
-                modulesToInclude = filterString.Split(';').ToList();
-            }
-            catch { }
-            FilteredCatalog filteredCatalog = new FilteredCatalog(catalog, x => modulesToInclude.Contains(x.ToString()) == true);
-
             // Initialise the container with Module assemblies and this assembly
-            Extensibility.Container = new CompositionContainer(filteredCatalog, true);
+            Extensibility.Container = new CompositionContainer(catalog, true);
 
         }
     }
