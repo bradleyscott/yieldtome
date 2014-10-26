@@ -91,6 +91,7 @@ namespace yieldtome.API.Controllers
             try { speakersList = _service.SpeakerHasSpoken(id); }
             catch (ArgumentNullException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return speakersList.AsQueryable();
         }
@@ -106,6 +107,7 @@ namespace yieldtome.API.Controllers
             List<Speaker> speakersList;
             try { speakersList = _service.ReorderSpeakers(speakersListID, updatedSpeakersList); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return speakersList.AsQueryable();
         }
@@ -121,6 +123,7 @@ namespace yieldtome.API.Controllers
             List<Speaker> speakersList;
             try { speakersList = _service.RemoveSpeaker(id); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return speakersList.AsQueryable();
         }
@@ -136,6 +139,7 @@ namespace yieldtome.API.Controllers
             List<Speaker> speakersList;
             try { speakersList = _service.ClearSpeakers(speakersListID); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return speakersList.AsQueryable();
         }

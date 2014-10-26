@@ -150,6 +150,13 @@ namespace yieldtome.API.Data.Services
                 dbAttendee = db.Attendees.FirstOrDefault(x => x.AttendeeID == updatedAttendee.AttendeeID);
                 if (dbAttendee == null) throw new ArgumentException(String.Format("No Attendee with AttendeeID={0} exists", updatedAttendee.AttendeeID));
 
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbAttendee.ProfileID.GetValueOrDefault(), dbAttendee.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to update this Attendee";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
+
                 dbAttendee.Name = updatedAttendee.Name;
                 dbAttendee.UpdatedTime = DateTime.Now;
                 db.SaveChanges();
@@ -172,6 +179,13 @@ namespace yieldtome.API.Data.Services
                 // Attendee records
                 Attendee dbAttendee = db.Attendees.FirstOrDefault(x => x.AttendeeID == attendeeID);
                 if (dbAttendee == null) throw new ArgumentException(String.Format("No Attendee with AttendeeID={0} exists", attendeeID));
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbAttendee.ProfileID.GetValueOrDefault(), dbAttendee.Event.CreatorID))
+                {
+                    string message = "This user is not authorized to delete this Attendee";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
 
                 dbAttendee.DeletedTime = deletedTime;
 
@@ -207,6 +221,13 @@ namespace yieldtome.API.Data.Services
             {
                 Event dbEvent = db.Events.FirstOrDefault(x => x.EventID == eventID);
                 if (dbEvent == null) throw new ArgumentException(String.Format("No Event with EventID={0} exists", eventID));
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbEvent.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to delete all Attendees for this Event";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
 
                 foreach (Attendee a in dbEvent.Attendees)
                     if (a.DeletedTime == null) { DeleteAttendee(a.AttendeeID); }

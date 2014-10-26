@@ -88,6 +88,7 @@ namespace yieldtome.API.Controllers
             try { pollToUpdate = _service.UpdatePoll(pollToUpdate); }
             catch (ArgumentNullException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return pollToUpdate;
         }
@@ -102,6 +103,7 @@ namespace yieldtome.API.Controllers
         {
             try { _service.DeletePoll(id); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

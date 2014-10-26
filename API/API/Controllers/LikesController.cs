@@ -65,6 +65,7 @@ namespace yieldtome.API.Controllers
             bool isRequited;
             try { isRequited = _service.CreateLike(likerID, likedID); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return isRequited;
         }
@@ -78,6 +79,7 @@ namespace yieldtome.API.Controllers
         {
             try { _service.DeleteLike(id); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

@@ -57,6 +57,13 @@ namespace yieldtome.API.Data.Services
         {
             Logging.LogWriter.Write("Attempting to create a new Like");
 
+            if (AuthorizationHelper.IsCallerAllowedToEdit(likerID) == false)
+            {
+                string message = String.Format("This user is not authorized to create a Like on behalf of ProfileID={0}", likerID);
+                Logging.LogWriter.Write(message);
+                throw new UnauthorizedAccessException(message);
+            }
+
             if(DoesLikeExist(likerID, likedID))
             {
                 Logging.LogWriter.Write(String.Format("Profile with ProfileID={0} already likes Profile with ProfileID={1}", likerID, likedID));
@@ -95,6 +102,13 @@ namespace yieldtome.API.Data.Services
             {
                 Like dbLike = db.Likes.FirstOrDefault(x => x.LikeID == likeID);
                 if (dbLike == null) throw new ArgumentException(String.Format("No Like with LikeID={0} exists", likeID));
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbLike.LikerID) == false)
+                {
+                    string message = "This user is not authorized to delete this Like";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
 
                 dbLike.DeletedTime = DateTime.Now;
                 db.SaveChanges();

@@ -140,6 +140,13 @@ namespace yieldtome.API.Data.Services
                 Vote dbVote = db.Votes.FirstOrDefault(x => x.VoteID == voteID);
                 if (dbVote == null) throw new ArgumentException(String.Format("No Vote with VoteID={0} exists", voteID));
 
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbVote.Attendee.ProfileID.GetValueOrDefault(), dbVote.Poll.CreatorID, dbVote.Poll.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to clear this Vote";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
+
                 dbVote.DeletedTime = DateTime.Now;
                 db.SaveChanges();
 
@@ -156,13 +163,19 @@ namespace yieldtome.API.Data.Services
 
             using (var db = new Database())
             {
-
                 // Check existence of Poll
                 Poll dbPoll = db.Polls.FirstOrDefault(x => x.PollID == pollID);
                 if (dbPoll == null)
                 {
                     string message = String.Format("No Poll with PollID={0} exists", pollID);
                     throw new ArgumentException(message, "pollID");
+                }
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbPoll.CreatorID, dbPoll.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to clear all Votes for this Poll";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
                 }
 
                 foreach (Vote v in dbPoll.Votes.Where(x => x.PollID == pollID && x.DeletedTime == null))

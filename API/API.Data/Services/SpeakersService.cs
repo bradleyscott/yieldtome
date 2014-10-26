@@ -129,6 +129,13 @@ namespace yieldtome.API.Data.Services
                 Speaker dbSpeaker = db.Speakers.FirstOrDefault(x => x.SpeakerID == speakerID);
                 if (dbSpeaker == null) throw new ArgumentException(String.Format("No Speaker with SpeakerID={0} exists", speakerID));
 
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbSpeaker.Attendee.ProfileID.GetValueOrDefault(), dbSpeaker.SpeakersList.CreatorID, dbSpeaker.SpeakersList.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to remove this Speaker";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
+
                 dbSpeaker.DeletedTime = DateTime.Now;
                 db.SaveChanges();
 
@@ -152,7 +159,14 @@ namespace yieldtome.API.Data.Services
                     Speaker dbSpeaker = db.Speakers.FirstOrDefault(x => x.SpeakerID == s.SpeakerID);
                     if (dbSpeaker == null) throw new ArgumentException(String.Format("No Speaker with SpeakerID={0} exists", s.SpeakerID));
                     if (dbSpeaker.SpeakersListID != speakersListID) throw new ArgumentException(String.Format("Speaker with SpeakerID={0} does not exist in Speakers List with SpeakersListID={1}", s.SpeakerID, speakersListID));
-                    
+
+                    if (AuthorizationHelper.IsCallerAllowedToEdit(dbSpeaker.SpeakersList.CreatorID, dbSpeaker.Attendee.Event.CreatorID) == false)
+                    {
+                        string message = "This user is not authorized to clear this Vote";
+                        Logging.LogWriter.Write(message);
+                        throw new UnauthorizedAccessException(message);
+                    }
+
                     dbSpeaker.Rank = rank;
                     dbSpeaker.UpdatedTime = DateTime.Now;
 
@@ -174,6 +188,13 @@ namespace yieldtome.API.Data.Services
             {
                 Speaker dbSpeaker = db.Speakers.FirstOrDefault(x => x.SpeakerID == speakerID);
                 if (dbSpeaker == null) throw new ArgumentException(String.Format("No Speaker with SpeakerID={0} exists", speakerID));
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbSpeaker.Attendee.ProfileID.GetValueOrDefault(), dbSpeaker.SpeakersList.CreatorID, dbSpeaker.Attendee.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to clear this Vote";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
 
                 dbSpeaker.SpokenTime = DateTime.Now;
                 db.SaveChanges();

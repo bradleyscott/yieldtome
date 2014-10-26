@@ -91,6 +91,7 @@ namespace yieldtome.API.Controllers
             List<Vote> votes;
             try { votes = _service.ClearVote(id); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return votes.AsQueryable();
         }
@@ -106,6 +107,7 @@ namespace yieldtome.API.Controllers
             List<Vote> votes;
             try { votes = _service.ClearVotes(pollID); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return votes.AsQueryable();
         }

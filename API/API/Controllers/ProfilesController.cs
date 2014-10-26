@@ -52,7 +52,8 @@ namespace yieldtome.API.Controllers
         /// <summary>
         /// Returns the Profile with the specified providerID from an external identity provider containing only Publicly shared information
         /// </summary>
-        /// <param name="id">The FacebookID of the Profile to return</param>
+        /// <param name="provider">The name of the external identity provider. E.g. Facebook, Google</param>
+        /// <param name="providerID">The external provider ID associated with the Profile to return</param>
         /// <returns>A Profile</returns>
         /// <example>GET Profiles?provider=Facebook&providerID=1</example>
         public Profile GetProfile(string provider, string providerID)
@@ -108,6 +109,7 @@ namespace yieldtome.API.Controllers
             try { profileToUpdate = _service.UpdateProfile(profileToUpdate); }
             catch (ArgumentNullException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return profileToUpdate;
         }

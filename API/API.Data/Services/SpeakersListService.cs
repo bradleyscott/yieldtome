@@ -128,16 +128,23 @@ namespace yieldtome.API.Data.Services
 
             using (var db = new Database())
             {
-                SpeakersList dbSpeakersList = db.SpeakersLists.FirstOrDefault(x => x.SpeakersListID == updatedSpeakersList.SpeakersListID);
-                if (dbSpeakersList == null) throw new ArgumentException(String.Format("No Speakers List with SpeakersListID={0} exists", updatedSpeakersList.SpeakersListID));
+                SpeakersList dbList = db.SpeakersLists.FirstOrDefault(x => x.SpeakersListID == updatedSpeakersList.SpeakersListID);
+                if (dbList == null) throw new ArgumentException(String.Format("No Speakers List with SpeakersListID={0} exists", updatedSpeakersList.SpeakersListID));
 
-                List<yieldtome.Objects.SpeakersList> otherLists = GetSpeakersLists(dbSpeakersList.EventID).Where(x => x.SpeakersListID != dbSpeakersList.SpeakersListID).ToList();
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbList.CreatorID, dbList.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to update this SpeakersList";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
+
+                List<yieldtome.Objects.SpeakersList> otherLists = GetSpeakersLists(dbList.EventID).Where(x => x.SpeakersListID != dbList.SpeakersListID).ToList();
                 if(otherLists.Select(x => x.Name).Contains(updatedSpeakersList.Name))
                     throw new ArgumentException(String.Format("A SpeakersList named {0} already exists", updatedSpeakersList.Name), "name");
 
-                dbSpeakersList.Name = updatedSpeakersList.Name;
-                dbSpeakersList.Status = updatedSpeakersList.Status.ToString();
-                dbSpeakersList.UpdatedTime = DateTime.Now;
+                dbList.Name = updatedSpeakersList.Name;
+                dbList.Status = updatedSpeakersList.Status.ToString();
+                dbList.UpdatedTime = DateTime.Now;
 
                 db.SaveChanges();
             }
@@ -154,6 +161,13 @@ namespace yieldtome.API.Data.Services
             {
                 SpeakersList dbList = db.SpeakersLists.FirstOrDefault(x => x.SpeakersListID == speakersListID);
                 if (dbList == null) throw new ArgumentException(String.Format("No Speakers List with SpeakersListID={0} exists", speakersListID));
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbList.CreatorID, dbList.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to delete this SpeakersList";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
 
                 dbList.DeletedTime = DateTime.Now;
                 db.SaveChanges();

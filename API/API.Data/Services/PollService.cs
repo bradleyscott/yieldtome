@@ -171,6 +171,13 @@ namespace yieldtome.API.Data.Services
                 Poll dbPoll = db.Polls.FirstOrDefault(x => x.PollID == updatedPoll.PollID);
                 if (dbPoll == null) throw new ArgumentException(String.Format("No Poll with PollID={0} exists", updatedPoll.PollID));
 
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbPoll.CreatorID, dbPoll.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to update this Poll";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
+
                 List<yieldtome.Objects.Poll> otherLists = GetPolls(dbPoll.EventID).Where(x => x.PollID != dbPoll.PollID).ToList();
                 if (otherLists.Select(x => x.Name).Contains(updatedPoll.Name))
                     throw new ArgumentException(String.Format("A Poll named {0} already exists", updatedPoll.Name), "name");
@@ -194,10 +201,17 @@ namespace yieldtome.API.Data.Services
 
             using (var db = new Database())
             {
-                Poll dbList = db.Polls.FirstOrDefault(x => x.PollID == pollID);
-                if (dbList == null) throw new ArgumentException(String.Format("No Poll with PollID={0} exists", pollID));
+                Poll dbPoll = db.Polls.FirstOrDefault(x => x.PollID == pollID);
+                if (dbPoll == null) throw new ArgumentException(String.Format("No Poll with PollID={0} exists", pollID));
 
-                dbList.DeletedTime = DateTime.Now;
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbPoll.CreatorID, dbPoll.Event.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to delete this Poll";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
+
+                dbPoll.DeletedTime = DateTime.Now;
                 db.SaveChanges();
             }
 

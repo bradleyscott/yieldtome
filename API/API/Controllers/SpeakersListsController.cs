@@ -86,6 +86,7 @@ namespace yieldtome.API.Controllers
             try { listToUpdate = _service.UpdateSpeakersList(listToUpdate); }
             catch (ArgumentNullException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return listToUpdate;
         }
@@ -100,6 +101,7 @@ namespace yieldtome.API.Controllers
         {
             try { _service.DeleteSpeakersList(speakersListID); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.NotFound, ex.Message)); }
+            catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 
             return new HttpResponseMessage(HttpStatusCode.NoContent);
         }

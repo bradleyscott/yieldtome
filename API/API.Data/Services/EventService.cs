@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 using yieldtome.Interfaces;
 using yieldtome.API.Data.Objects;
+using yieldtome.API.Data;
 
 namespace yieldtome.API.Data.Services
 {
@@ -174,6 +175,7 @@ namespace yieldtome.API.Data.Services
         {
             Logging.LogWriter.Write(String.Format("Attempting to update Event with EventID={0}", updatedEvent.EventID));
 
+
             if (updatedEvent.Name == "") throw new ArgumentNullException("Name is required");
             else if (updatedEvent.StartDate.CompareTo(DateTime.MinValue) == 0) throw new ArgumentNullException("StartDate is required");
             else if (updatedEvent.StartDate.CompareTo(updatedEvent.EndDate) > 0) throw new ArgumentException("StartDate must be before EndDate");
@@ -182,6 +184,13 @@ namespace yieldtome.API.Data.Services
             {
                 Event dbEvent = db.Events.FirstOrDefault(x => x.EventID == updatedEvent.EventID);
                 if (dbEvent == null) throw new ArgumentException(String.Format("No Event with EventID={0} exists", updatedEvent.EventID));
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbEvent.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to update this Event";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
 
                 dbEvent.Name = updatedEvent.Name;
                 dbEvent.StartDate = updatedEvent.StartDate;
@@ -219,6 +228,13 @@ namespace yieldtome.API.Data.Services
             {
                 Event dbEvent = db.Events.FirstOrDefault(x => x.EventID == eventID);
                 if (dbEvent == null) throw new ArgumentException(String.Format("No Event with EventID={0} exists", eventID));
+
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbEvent.CreatorID) == false)
+                {
+                    string message = "This user is not authorized to delete this Event";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
 
                 dbEvent.DeletedTime = DateTime.Now;
                 db.SaveChanges();

@@ -155,6 +155,13 @@ namespace yieldtome.API.Data.Services
                 Profile dbProfile = db.Profiles.FirstOrDefault(x => x.ProfileID == updatedProfile.ProfileID);
                 if (dbProfile == null) throw new ArgumentException(String.Format("No Profile with ProfileID={0} exists", updatedProfile.ProfileID));
 
+                if (AuthorizationHelper.IsCallerAllowedToEdit(dbProfile.ProfileID) == false)
+                {
+                    string message = "This user is not authorized to update this Profile";
+                    Logging.LogWriter.Write(message);
+                    throw new UnauthorizedAccessException(message);
+                }
+
                 dbProfile.Name = updatedProfile.Name;
                 dbProfile.Email = updatedProfile.Email;
                 dbProfile.IsEmailPublic = updatedProfile.IsEmailPublic;
