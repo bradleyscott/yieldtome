@@ -68,7 +68,7 @@ angular.module('yieldtome.controllers')
             promise.then(function(poll) { // It all went well 
                 $scope.poll = poll;  
                 growl.addInfoMessage('Your Poll updates just got saved');
-                $location.path("/polls"); // Redirect
+                $scope.$back(); // Redirect
             })
             .catch (function(error) { // The service crapped out
                 $log.warn(error);

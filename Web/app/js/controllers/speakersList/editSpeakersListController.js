@@ -69,7 +69,7 @@ angular.module('yieldtome.controllers')
             promise.then(function(list) { // It all went well 
                 $scope.list = list;
                 growl.addInfoMessage('You successfully renamed ' + list.Name);
-                $location.path('/speakersLists'); // Redirect
+                $scope.$back(); // Redirect
             })
             .catch (function(error) { // The service crapped out
                 $log.warn(error);
