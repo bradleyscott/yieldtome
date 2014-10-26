@@ -491,6 +491,22 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "Gruntfile.js",
+			"settings":
+			{
+				"buffer_size": 5949,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "app/js/app.js",
+			"settings":
+			{
+				"buffer_size": 6917,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"command_palette":
@@ -715,7 +731,7 @@
 				"Floobits - Join Workspace"
 			]
 		],
-		"width": 769.0
+		"width": 758.0
 	},
 	"console":
 	{
@@ -741,16 +757,8 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/css",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/img",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event",
@@ -769,26 +777,71 @@
 	],
 	"file_history":
 	[
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/home.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/package.json",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/fonts/glyphicons-halflings-regular.svg",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/Gruntfile.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/speaker.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/editEventController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/editEventControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/editAttendeeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/jquery/src/effects.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/editEvent.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/editSpeakersListController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/listVotes.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/vote.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/attendee.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/editPollController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/app.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/listAttendees.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/votesController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakers.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/listSpeakers.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakersLists.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/listEvents.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/LICENSE",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/poll/editPoll.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/editPoll.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/attendeesController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/attendeeList.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/attendee.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/pollsController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/poll/vote.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/votesService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll/votesControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/poll/listVotes.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/package.json",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/listPolls.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/attendeeService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/pollService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/protractor/node_modules/selenium-webdriver/lib/test/data/pageWithOnLoad.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/lang/isPlainObject.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersListsController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersListService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/.bin/shjs",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-registry-client/.editorconfig",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/editSpeakersList.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/lang/isDate.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/lang/isEmpty.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/date/isSame.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-json/lib/util/isComponent.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/test/Events/11-script_in_script.json",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/insight/node_modules/request/node_modules/http-signature/node_modules/ctype/README",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/createSpeakersListControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-config/node_modules/mout/src/lang/createObject.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-registry-client/lib/util/createError.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/queryString/setParam.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/logoutController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/homeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/editSpeakersList.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/css/app.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/login.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/home.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/speaker.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/attendee.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile/editProfile.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile/viewProfile.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/app.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/login.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/css/app.css",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/homeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/editEventController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/menus/homeMenu.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/editEventControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/homeControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile/viewProfileControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/editEvent.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/deleteEvent.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/loginController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower.json",
@@ -799,7 +852,6 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile/editProfileControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendeeList.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/directives.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakers.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/viewProfileController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/node_modules/underscore.string/test/test_underscore/speed.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/node_modules/underscore.string/test/test_standalone.html",
@@ -816,25 +868,17 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/profileService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/facebookAuthController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html.dist",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/createProfileController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/configService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/eventService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/likeService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/pollService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/sessionService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/speakersListsControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/votesService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersListService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/speakersControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/attendeesControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/attendeeService.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/addSpeakerController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/createSpeakersListController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/editSpeakersListController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersListsController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile/createProfileControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/createAttendeeControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/createOtherAttendeeControllerSpec.js",
@@ -843,17 +887,11 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/eventsControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll/createPollControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/facebookServiceSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/attendeesController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/createAttendeeController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/createOtherAttendeeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/editAttendeeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/logoutController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/createEventController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/eventsController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/createPollController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/editPollController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/pollsController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/votesController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/attendeeServiceSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/eventServiceSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/profileServiceSpec.js",
@@ -866,37 +904,7 @@
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/bootstrap/bower.json",
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/bootstrap/README.md",
 		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/js/yieldtome.min.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower.json",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/app.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/Gruntfile.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/index.html.dist",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/index.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/css/app.css",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/profile/createProfileControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/profile/createProfileController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/homeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/event/listEvents.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/directives.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/poll/vote.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/speakersList/speaker.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/attendee/attendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/speakersList/attendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/services/likeService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/profile/viewProfileController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/profile/viewProfileControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/menus/homeMenu.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/home.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/index-async.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/attendeeList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/speakersList/speakersControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/partials/profile/viewProfile.html",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/test/unit/controllers/homeControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/services/speakersListService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/services/votesService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/attendee/attendeesController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/app/js/controllers/event/editEventController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/LICENSE",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/node_modules/grunt-contrib-qunit/node_modules/grunt-lib-phantomjs/node_modules/phantomjs/node_modules/kew/test/context.js"
+		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower.json"
 	],
 	"find":
 	{
@@ -926,6 +934,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"isCreator",
 			"FacebookID",
 			"ConfigService.apiUrl",
 			"SessionService.set('profile', profile)",
@@ -1025,8 +1034,77 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "Gruntfile.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 5949,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								900,
+								900
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1979.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 1,
+					"file": "app/js/app.js",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6917,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5986,
+								5986
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": -0.0,
+						"translation.y": 2551.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -1047,11 +1125,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.478125,
 			1.0
 		],
 		"rows":
@@ -1076,6 +1161,70 @@
 		"height": 0.0,
 		"selected_items":
 		[
+			[
+				"app",
+				"app\\js\\app.js"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"editevent",
+				"test\\unit\\controllers\\event\\editEventControllerSpec.js"
+			],
+			[
+				"editeventcon",
+				"app\\js\\controllers\\event\\editEventController.js"
+			],
+			[
+				"listspeakers",
+				"app\\partials\\speakersList\\listSpeakers.html"
+			],
+			[
+				"editpoll",
+				"app\\js\\controllers\\poll\\editPollController.js"
+			],
+			[
+				"votescon",
+				"app\\js\\controllers\\poll\\votesController.js"
+			],
+			[
+				"vote",
+				"app\\partials\\poll\\vote.html"
+			],
+			[
+				"listpol",
+				"app\\partials\\poll\\listPolls.html"
+			],
+			[
+				"polls",
+				"app\\js\\controllers\\poll\\pollsController.js"
+			],
+			[
+				"attendee",
+				"dist\\partials\\attendeeList.html"
+			],
+			[
+				"pollscon",
+				"app\\js\\controllers\\poll\\pollsController.js"
+			],
+			[
+				"speakerslist",
+				"app\\js\\controllers\\speakersList\\speakersListsController.js"
+			],
+			[
+				"speakersc",
+				"app\\js\\controllers\\speakersList\\speakersController.js"
+			],
+			[
+				"votes",
+				"app\\partials\\poll\\listVotes.html"
+			],
+			[
+				"editspeaker",
+				"app\\js\\controllers\\speakersList\\editSpeakersListController.js"
+			],
 			[
 				"likeser",
 				"app\\js\\services\\likeService.js"
@@ -1103,10 +1252,6 @@
 			[
 				"navmenu",
 				"dist\\partials\\menus\\navMenu.html"
-			],
-			[
-				"polls",
-				"app\\partials\\poll\\pollList.html"
 			],
 			[
 				"listspeakerslist",
@@ -1153,16 +1298,8 @@
 				"app\\js\\services\\attendeeService.js"
 			],
 			[
-				"attendee",
-				"app\\js\\controllers\\attendee\\attendeesController.js"
-			],
-			[
 				"eventscon",
 				"app\\js\\controllers\\event\\eventsController.js"
-			],
-			[
-				"app",
-				"app\\js\\app.js"
 			],
 			[
 				"index",
@@ -1179,14 +1316,6 @@
 			[
 				"addsp",
 				"app\\js\\controllers\\speakersList\\addSpeakerController.js"
-			],
-			[
-				"votescon",
-				"app\\js\\controllers\\poll\\votesController.js"
-			],
-			[
-				"votes",
-				"app\\js\\controllers\\poll\\votesController.js"
 			],
 			[
 				"attende",
@@ -1231,14 +1360,14 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
-	"side_bar_visible": true,
+	"side_bar_visible": false,
 	"side_bar_width": 322.0,
 	"status_bar_visible": true,
 	"template_settings":
