@@ -86,9 +86,11 @@
             </div>
             <div class="col-md-9">
                 <!-- Non editable -->
-                <a class="list-group-item" ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-animate="'animate'" ng-repeat="speaker in speakers" style="margin-top:10px">
-                    <ytm-speaker></ytm-speaker>
-                </a>
+                <div style="margin-top:10px">
+                    <a class="list-group-item" ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-animate="'animate'" ng-repeat="speaker in speakers">
+                        <ytm-speaker></ytm-speaker>
+                    </a>
+                </div>
                 <!-- Editable -->
                 <div ui-sortable="speakerReorder" ng-model="speakers" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" style="margin-top:10px">
                     <a class="list-group-item" ng-animate="'animate'" ng-repeat="speaker in speakers">
