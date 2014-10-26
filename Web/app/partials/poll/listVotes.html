@@ -2,7 +2,7 @@
 <div class="container body-content">
     <div>
         <h2>{{poll.Name}}
-            <div class="pull-right" ng-show="event.CreatorID == profile.ProfileID || poll.CreatorID == profile.ProfileID">
+            <div class="pull-right" ng-show="isCreator">
                 <div class="btn-group" dropdown is-open="isSettingsOpen">
                     <button type="button" class="btn btn-default dropdown-toggle">
                         <span class="glyphicon glyphicon-cog"></span>

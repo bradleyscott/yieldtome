@@ -5,13 +5,13 @@ angular.module('yieldtome.controllers')
 .controller('Attendees', ['$scope', '$log', '$location', 'growl', 'SessionService', 'AttendeeService',
     function($scope, $log, $location, growl, SessionService, AttendeeService) {
 
-        $log.debug("Landing controller executing");
+        $log.debug("Attendees controller executing");
 
         $scope.event;
         $scope.profile;
         $scope.attendee;
         $scope.attendees; // List of Attendees for this Event
-        $scope.isCreator = false; // Indicates whether or not the user has edit right to 
+        $scope.isCreator = false; // Indicates whether or not the user has edit right to this Event
 
         // Redirects to the View Profile page
         $scope.showProfile = function(profileID) {

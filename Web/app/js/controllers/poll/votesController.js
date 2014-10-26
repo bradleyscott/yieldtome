@@ -19,6 +19,7 @@ angular.module('yieldtome.controllers')
         $scope.myVote; // The Vote this Attendee has cast
         $scope.voteFilter = { text:'', for:true, against:true, abstain:true }; // An object containg variables to filter against 
         $scope.intervalPromise; // The promise returned by the interval timer
+        $scope.isCreator = false; // Indicates whether or not the user has edit right to this Poll
 
         $scope.$back = function() {
             window.history.back();
@@ -190,8 +191,12 @@ angular.module('yieldtome.controllers')
                 if($scope.poll.CreatorID != $scope.profile.ProfileID && $scope.event.CreatorID != $scope.profile.ProfileID) {
                     $log.debug("User is not the Poll or Event creator. Starting refresh timer");
                     $scope.intervalPromise = $interval($scope.getThisPollUpdate, 15000);
+                    $scope.isCreator = false; // This user does not have edit rights
                 }
-                else { $log.debug("User is Event or Poll creator. Will not refresh Votes"); }                
+                else { 
+                    $log.debug("User is Event or Poll creator. Will not refresh Votes"); 
+                    $scope.isCreator = true; // This user has edit rights
+                }                
             });
 
             // Destroy the interval promise when this controller is destroyed
