@@ -50,7 +50,7 @@ namespace yieldtome.Objects
             get 
             {
                 Login defaultLogin = Logins.FirstOrDefault(x => x.Name == "Facebook");
-                if (defaultLogin != null) return new Uri("https://graph.facebook.com/" + defaultLogin.Value + "/picture?type=large");
+                if (defaultLogin != null) return new Uri("https://graph.facebook.com/" + defaultLogin.Value + "/picture?width=200&height=200");
                 if (Email != "") return new Uri("https://sigil.cupcake.io/" + Email);
                 return new Uri("https://sigil.cupcake.io/" + ProfileID);
             }
