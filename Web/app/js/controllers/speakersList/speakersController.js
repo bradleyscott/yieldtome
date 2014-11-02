@@ -124,7 +124,6 @@ angular.module('yieldtome.controllers')
             promise.then(function(speakers) {
                 $scope.speakers = speakers;
                 $log.debug('$scope.speakers updated after reorderSpeakers()');
-                growl.addInfoMessage("Speakers list re-ordered");
             })            
             .catch (function(error) {
                 $log.warn(error);
