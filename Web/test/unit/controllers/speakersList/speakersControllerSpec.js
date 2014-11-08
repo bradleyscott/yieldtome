@@ -2,7 +2,7 @@
 
 describe('The Speakers controller', function() {
 
-    var $controller, $log, $scope, $location, $q, growl, SessionService, SpeakersListService, SpeakersService;
+    var $controller, $log, $scope, $location, $q, $modal, growl, SessionService, SpeakersListService, SpeakersService;
 
     var speaker = {
                 "SpeakerID": 28,
@@ -48,6 +48,7 @@ describe('The Speakers controller', function() {
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
+            $modal = jasmine.createSpyObj('$modal', ['open']);
             SpeakersListService = jasmine.createSpyObj('SpeakersListService', ['getList','updateList', 'deleteList']);
             SpeakersService = jasmine.createSpyObj('SpeakersService', [ 'getSpeakers', 'speakerHasSpoken', 'deleteSpeaker', 'reorderSpeakers', 'deleteAllSpeakers', 'createSpeaker']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
@@ -71,6 +72,7 @@ describe('The Speakers controller', function() {
             $location: $location,
             $log: $log,
             $routeParams: $routeParams,
+            $modal: $modal,
             growl: growl,
             SessionService: SessionService,
             SpeakersListService: SpeakersListService,
@@ -369,7 +371,6 @@ describe('The Speakers controller', function() {
                 $scope.$digest();
 
                 expect($scope.speakers).toBe(speakers);
-                expect(growl.addInfoMessage).toHaveBeenCalledWith('Speakers list re-ordered');
 
             });
 

@@ -36,6 +36,7 @@ describe('The CreatePoll controller', function() {
     describe('should initialise', function() {
         
         it('should display an error if Profile or Event information is not available', function() {
+            SessionService.set('profile', null);
             initializeController();
             expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't have enough information to have you create a Poll");           
         });

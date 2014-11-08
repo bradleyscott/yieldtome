@@ -9,7 +9,7 @@ angular.module('yieldtome.controllers', [])
 
         $log.debug("Home controller executing");
 
-        // Opens the delete event modal
+        // Opens the login modal
         $scope.showLogin = function() {
             $scope.loginConfirm = $modal.open({ 
                 templateUrl: 'partials/login.html',

@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Votes', ['$scope', '$location', '$log', '$window', '$routeParams', '$interval', '$q', 'growl', 'SessionService', 'PollService', 'VotesService',
-    function($scope, $location, $log, $window, $routeParams, $interval, $q, growl, SessionService, PollService, VotesService) {
+.controller('Votes', ['$scope', '$location', '$log', '$window', '$routeParams', '$interval', '$q', '$modal', 'growl', 'SessionService', 'PollService', 'VotesService',
+    function($scope, $location, $log, $window, $routeParams, $interval, $q, $modal, growl, SessionService, PollService, VotesService) {
 
         $log.debug("Polls controller executing");
 
@@ -31,6 +31,41 @@ angular.module('yieldtome.controllers')
                 $log.debug('Redirecting to View profile ' + profileID);
                 $location.path("/viewProfile/" + profileID);
             }
+        };
+
+        // Opens the settings modal
+        $scope.showSettings = function() {
+            $scope.settingsAction = $modal.open({ 
+                templateUrl: 'partials/poll/settings.html',
+                scope: $scope
+            }); 
+
+            $scope.settingsAction.result.then(function(action) { // Respond if user clicks an action button
+                switch (action) {
+                    case 'open':
+                        $scope.openPoll();
+                        break;
+                    case 'close':
+                        $scope.closePoll();
+                        break;
+                    case 'clear':
+                        $scope.clearVotes();
+                        break;
+                    case 'edit':
+                        $location.path("/editPoll/" + $scope.poll.PollID);
+                        break;
+                }
+            });
+        };
+
+        // Is called when one of the action buttons is clicked on the modal
+        $scope.doAction = function(action) {
+            $scope.settingsAction.close(action);
+        };
+
+        // Is called when the cancel or 'x' buttons are clicked on the modal 
+        $scope.cancelSettings = function() {
+            $scope.settingsAction.dismiss();
         };
 
         // Opens the Poll to votes

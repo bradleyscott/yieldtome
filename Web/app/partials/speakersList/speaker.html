@@ -1,31 +1,28 @@
-<div class="media">
+<div class="row-picture">
     <!-- Profile picture -->
-    <img class="media-object pull-left" ng-src="img/profile.jpg" ng-hide="{{speaker.Attendee.Profile}}" style="width:50px;height:50px">
-    <img class="media-object pull-left" ng-show="{{speaker.Attendee.Profile}}" style="width:50px;height:50px" ng-src="{{speaker.Attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(speaker.Attendee.Profile.ProfileID)">
-    <div class="media-body">
-        <!-- Edit Speaker button -->
-        <button class="btn btn-default pull-right" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-click="speaker{{speaker.SpeakerID}}Open=!speaker{{speaker.SpeakerID}}Open">
-            <span class="glyphicon glyphicon glyphicon-pencil"></span>
-        </button>
-        <div>
-            <!-- Names -->
-            <h4 class="media-heading">{{speaker.Attendee.Name}}</h4>
-            {{speaker.Attendee.Profile.Name}} 
-            <!-- Position -->
-            <div style="background-color:lightgreen; height:5px" ng-show="speaker.Position == 'For'"></div>
-            <div style="background-color:red; height:5px" ng-show="speaker.Position == 'Against'"></div>
-            <div style="height:5px" ng-show="speaker.Position == 'None'"></div>
-        </div>
-    </div>
-    <!-- Edit speaker controls -->
-    <div collapse="!speaker{{speaker.SpeakerID}}Open" style="margin-top:5px">
-        <div class="btn-group btn-group-justified">
-            <label class="btn btn-default" ng-click="speaker{{speaker.SpeakerID}}Open=false; speak(speaker)">
-                <span class="glyphicon glyphicon-ok"></span> Spoken
-            </label>
-            <label class="btn btn-default" ng-click="speaker{{speaker.SpeakerID}}Open=false; remove(speaker)">
-                <span class="glyphicon glyphicon-remove"></span> Remove
-            </label>
-        </div>
+    <img class="circle pull-left" ng-src="img/profile.jpg" ng-hide="{{speaker.Attendee.Profile}}">
+    <img class="circle pull-left" ng-show="{{speaker.Attendee.Profile}}" ng-src="{{speaker.Attendee.Profile.ProfilePictureUri}}" ng-click="showProfile(speaker.Attendee.Profile.ProfileID)">
+</div>
+<div class="row-content">
+    <!-- Edit Speaker button -->
+    <button class="btn btn-default btn-lg mdi-content-create pull-right" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-click="speaker{{speaker.SpeakerID}}Open=!speaker{{speaker.SpeakerID}}Open"></button>
+    <!-- Names -->
+    <h4 class="list-group-item-heading">{{speaker.Attendee.Name}}</h4>
+    <p class="list-group-item-text">{{speaker.Attendee.Profile.Name}}</p>
+    <!-- Position -->
+    <div style="background-color:lightgreen; height:5px" ng-show="speaker.Position == 'For'"></div>
+    <div style="background-color:red; height:5px" ng-show="speaker.Position == 'Against'"></div>
+    <div style="height:5px" ng-show="speaker.Position == 'None'"></div>
+</div>
+<!-- Edit speaker controls -->
+<div collapse="!speaker{{speaker.SpeakerID}}Open" style="margin-top:5px">
+    <div class="btn-group btn-group-justified">
+        <label class="btn btn-default" ng-click="speaker{{speaker.SpeakerID}}Open=false; speak(speaker)">
+            <span class="glyphicon glyphicon-ok"></span> Spoken
+        </label>
+        <label class="btn btn-default" ng-click="speaker{{speaker.SpeakerID}}Open=false; remove(speaker)">
+            <span class="glyphicon glyphicon-remove"></span> Remove
+        </label>
     </div>
 </div>
+<div class="list-group-separator"></div>

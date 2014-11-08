@@ -37,9 +37,8 @@
             </div>
             <div class="row">
                 <div class="text-right">
-                    <button type="button" ng-click="likeProfile()" class="btn btn-default" ng-hide="doesLikeExist"><span class="glyphicon glyphicon-heart"></span> Like</button>
-                    <button type="button" ng-click="$back()" class="btn btn-default">{{alternatebutton}}</button>
-                    <button type="submit" ng-disabled="form.$invalid" ng-hide="formDisabled" ng-click="save()" class="btn btn-primary">Save</button>
+                    <button type="button" ng-click="$back()" class="btn btn-default btn-fab btn-raised mdi-navigation-arrow-back"></button>
+                    <button type="button" ng-click="likeProfile()" class="btn btn-danger btn-fab btn-raised mdi-action-favorite" ng-hide="doesLikeExist"></button>
                 </div>
             </div>
         </div>

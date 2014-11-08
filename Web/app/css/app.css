@@ -1,5 +1,48 @@
 /* app css stylesheet */
- 
+.list-group-item {
+  background-color: transparent;
+}
+.progress {
+  height: 20px;
+}
+#loading-bar .bar {
+    background: white;
+}
+#loading-bar .peg {
+  -moz-box-shadow: white 1px 0 6px 1px;
+  -ms-box-shadow: white 1px 0 6px 1px;
+  -webkit-box-shadow: white 1px 0 6px 1px;
+  box-shadow: white 1px 0 6px 1px;
+}
+#loading-bar-spinner .spinner-icon {
+  width: 25px;
+  height: 25px;
+  border-top-color:  white;
+  border-left-color: white;
+}
+.growl{
+  position:fixed;
+  top:50px;
+  left:10px;
+  float:left;
+  min-width:300px
+}
+.growl-item{
+  background-color:#4285f4;
+}
+.growl-item.ng-enter,
+.growl-item.ng-leave {
+    -webkit-transition:1s linear all;
+    -moz-transition:1s linear all;
+    -o-transition:1s linear all;
+    transition:1s linear all;
+}
+.mdi-content-create, .mdi-content-add, .mdi-content-remove{
+  padding-left:10px;
+  padding-right:10px;
+}
+
+
 /* Menu styles */
  .menu {
     list-style: none;

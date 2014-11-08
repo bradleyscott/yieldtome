@@ -75,21 +75,6 @@ describe('The CreateEvent controller', function() {
         });
     });
 
-    describe('has some watchers for scope changes', function() {
-
-        it("that should watch for changes to startDateAsString and updates event.StartDate", function() {
-            var startDate = $scope.StartDate;
-            $scope.startDateAsString = '2010-01-01'; // Change to a prior date
-            expect($scope.event.StartDate).not.toBe(startDate);
-        });
-
-        it("that should watch for changes to endDateAsString and updates event.EndDate", function() {
-            var endDate = $scope.EndDate;
-            $scope.endDateAsString = '2010-01-01'; // Change to a prior date
-            expect($scope.event.EndDate).not.toBe(endDate);
-        });
-    });
-
     describe('has a save() function', function() {
 
         it("that should redirect to the events page if the profile creation succeeds", function() {

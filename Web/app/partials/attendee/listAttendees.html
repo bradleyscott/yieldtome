@@ -1,30 +1,32 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
-    <a class="list-group-item" style="margin-bottom:10px">
-        <ytm-attendee></ytm-attendee>
-    </a>
+    <div class="list-group" style="margin-top:20px">
+        <div class="list-group-item" style="margin-bottom:10px">
+            <ytm-attendee></ytm-attendee>
+        </div>
+    </div>
+    <!-- Add new Attendee button -->
+    <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-show="isCreator" ng-click="newAttendee()"></button>
+    <!-- Attendee stats -->
     <div>
-        <!-- Add new Attendee button -->
-        <button type="button" class="btn btn-primary pull-right" ng-show="isCreator" ng-click="newAttendee()">
-            <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span> Add
-        </button>
-        <!-- Attendee stats -->
         <h2 ng-show="attendees.length == 1">
             <span class="label label-primary">1</span> Delegate</h2>
         <h2 ng-show="attendees.length > 1">
             <span class="label label-primary">{{attendees.length}}</span> Delegates</h2>
-        <!-- Attendee search  -->
-        <div class="form-group" ng-show="attendees.length > 10">
-            <div class="input-group">
-                <span class="input-group-addon">
-                    <span class="glyphicon glyphicon-search"></span>
-                </span>
-                <input type="text" class="form-control" ng-model="query" placeholder="Find people..." />
-            </div>
+    </div>
+    <!-- Attendee search  -->
+    <div class="form-group" ng-show="attendees.length > 0">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" ng-model="query" placeholder="Find people..." />
         </div>
-        <a class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query | orderBy:'Name'">
+    </div>
+    <div class="list-group">
+        <div class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query | orderBy:'Name'">
             <ytm-attendee></ytm-attendee>
-        </a>
+        </div>
     </div>
     <br>
     <div class="well" ng-show="attendees.length == 0">There are not yet any other Delegates</div>

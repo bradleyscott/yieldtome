@@ -14,24 +14,25 @@
                         </div>
                     </div>
                     <div class="col-xs-3">
-                        <button type="button" class="btn btn-primary pull-right" ng-click="new()">
-                            <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
-                        </button>
+                        <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="new()"></button>
                     </div>
                 </div>
             </div>
             <div class="well" ng-show="lists.length == 0">There is not yet any Speakers lists</div>
-            <a href="#/speakers/{{list.SpeakersListID}}" class="list-group-item" ng-repeat="list in lists | filter:query | orderBy:'Name'">
-                <h4 class="list-group-item-heading">{{list.Name}}</h4>
-                <div style="background-color:lightgreen; height:5px; margin-bottom:5px" ng-show="list.Status == 'Open'"></div>
-                <div style="background-color:red; height:5px; margin-bottom:5px" ng-show="list.Status == 'Closed'"></div>
-                <p class="list-group-item-text">
-                    <div ng-show="list.NumberOfSpeakers > 1">
-                        <span class="badge">{{list.NumberOfSpeakers}}</span> speakers</div>
-                    <div ng-hide="list.NumberOfSpeakers == 0">
-                        <span class="badge">{{list.NextSpeaker.Attendee.Name}}</span> is speaking next</div>
-                </p>
-            </a>
+            <div class="list-group">
+                <a href="#/speakers/{{list.SpeakersListID}}" class="list-group-item" ng-repeat="list in lists | filter:query | orderBy:'Name'">
+                    <h4 class="list-group-item-heading">{{list.Name}}</h4>
+                    <div style="background-color:lightgreen; height:5px; margin-bottom:5px" ng-show="list.Status == 'Open'"></div>
+                    <div style="background-color:red; height:5px; margin-bottom:5px" ng-show="list.Status == 'Closed'"></div>
+                    <p class="list-group-item-text">
+                        <div ng-show="list.NumberOfSpeakers > 1">
+                            <span class="badge">{{list.NumberOfSpeakers}}</span> speakers</div>
+                        <div ng-hide="list.NumberOfSpeakers == 0">
+                            <span class="badge">{{list.NextSpeaker.Attendee.Name}}</span> is speaking next</div>
+                    </p>
+                    <div class="list-group-separator"></div>
+                </a>
+            </div>
         </div>
     </div>
 </div>

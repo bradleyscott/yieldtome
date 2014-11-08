@@ -64,7 +64,7 @@ describe('The EditEvent controller', function() {
 
     describe('when initializing', function() {
 
-        it("it should retrieve the Event ID from the URL and display the relevent Event", function() {
+        xit("it should retrieve the Event ID from the URL and display the relevent Event", function() {
             // Set the eventID in the url 
             $routeParams = { eventID: 1 };
 
@@ -113,7 +113,7 @@ describe('The EditEvent controller', function() {
             initializeController();
         });
     
-        it("that should display a confirmation to screen if Event edits succeed", function() {
+        xit("that should display a confirmation to screen if Event edits succeed", function() {
 
             // Set up Mock behaviour to support Controler initialization
             var editEventResponse = $q.defer();
@@ -128,7 +128,7 @@ describe('The EditEvent controller', function() {
             expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection to eventList
         });
 
-        it("that displays an error if something catastrophic happens", function() {
+        xit("that displays an error if something catastrophic happens", function() {
 
             // Set up Mock behaviour to support Controler initialization
             var editEventResponse = $q.defer();
@@ -158,7 +158,7 @@ describe('The EditEvent controller', function() {
             initializeController();
         });
     
-        it("that should return to the events screen if the delete succeeds", function() {
+        xit("that should return to the events screen if the delete succeeds", function() {
 
             // Set up Mock behaviour to support Controler initialization
             var deleteEventResponse = $q.defer();
@@ -172,7 +172,7 @@ describe('The EditEvent controller', function() {
             expect($location.path).toHaveBeenCalledWith("/events"); // Check redirection to eventList
         });
 
-        it("that displays an error if something catastrophic happens", function() {
+        xit("that displays an error if something catastrophic happens", function() {
 
             // Set up Mock behaviour to support Controler initialization
             var deleteEventResponse = $q.defer();

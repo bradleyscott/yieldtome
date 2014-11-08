@@ -17,7 +17,9 @@
         </div>
     </div>
     <!-- Attendee list -->
-    <a class="list-group-item" ng-animate='animate' ng-repeat="attendee in attendees | filter:queryAttendees | orderBy:'Name'">
-        <ytm-speakers-list-attendee></ytm-speakers-list-attendee>
-    </a>
+    <div class="list-group">
+        <a class="list-group-item" ng-animate='animate' ng-repeat="attendee in attendees | filter:queryAttendees | orderBy:'Name'">
+            <ytm-speakers-list-attendee></ytm-speakers-list-attendee>
+        </a>
+    </div>
 </div>

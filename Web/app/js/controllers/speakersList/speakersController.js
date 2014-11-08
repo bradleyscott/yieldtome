@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', '$interval', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService', 'AttendeeService',
-    function($scope, $location, $log, $window, $routeParams, $interval, growl, SessionService, SpeakersListService, SpeakersService, AttendeeService) {
+.controller('Speakers', ['$scope', '$location', '$log', '$window', '$routeParams', '$interval', '$modal', 'growl', 'SessionService', 'SpeakersListService', 'SpeakersService', 'AttendeeService',
+    function($scope, $location, $log, $window, $routeParams, $interval, $modal, growl, SessionService, SpeakersListService, SpeakersService, AttendeeService) {
 
         $log.debug("Speakers controller executing");
 
@@ -18,6 +18,7 @@ angular.module('yieldtome.controllers')
         $scope.speakingSlot; // The Speaker record for this Attendee
         $scope.addDialog; // Stores the result from the Add Speaker dailog
         $scope.intervalPromise; // The promise returned by the interval timer
+        $scope.isCreator = false; // Indicates whether or not the user has edit right to this SpeakersList
 
         $scope.$back = function() {
             $window.history.back();
@@ -29,6 +30,44 @@ angular.module('yieldtome.controllers')
                 $log.debug('Redirecting to View profile ' + profileID);
                 $location.path("/viewProfile/" + profileID);
             }
+        };
+
+        // Opens the settings modal
+        $scope.showSettings = function() {
+            $scope.settingsAction = $modal.open({ 
+                templateUrl: 'partials/speakersList/settings.html',
+                scope: $scope
+            }); 
+
+            $scope.settingsAction.result.then(function(action) { // Respond if user clicks an action button
+                switch (action) {
+                    case 'add':
+                        $location.path("/addSpeaker/" + $scope.list.SpeakersListID);
+                        break;
+                    case 'open':
+                        $scope.openList();
+                        break;
+                    case 'close':
+                        $scope.closeList();
+                        break;
+                    case 'clear':
+                        $scope.removeAllSpeakers();
+                        break;
+                    case 'edit':
+                        $location.path("/editSpeakersList/" + $scope.list.SpeakersListID);
+                        break;
+                }
+            });
+        };
+
+        // Is called when one of the action buttons is clicked on the modal
+        $scope.doAction = function(action) {
+            $scope.settingsAction.close(action);
+        };
+
+        // Is called when the cancel or 'x' buttons are clicked on the modal 
+        $scope.cancelSettings = function() {
+            $scope.settingsAction.dismiss();
         };
 
         // Adds to the Speakers list
@@ -183,7 +222,10 @@ angular.module('yieldtome.controllers')
                     $log.debug("User is not the SpeakersList or Event creator. Starting refresh timer");
                     $scope.intervalPromise = $interval($scope.getSpeakers, 30000);
                 }
-                else { $log.debug("User is Event or SpeakersList creator. Will not refresh speakers"); }
+                else { 
+                    $log.debug("User is Event or SpeakersList creator. Will not refresh speakers"); 
+                    $scope.isCreator = true; // This user has edit rights
+                }
             })
             .catch (function(error) {
                 $log.warn(error);

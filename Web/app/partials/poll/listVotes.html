@@ -1,42 +1,47 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
+    <button type="button" style="margin-top:10px" class="btn btn-primary btn-fab btn-raised mdi-action-settings pull-right" ng-click="showSettings()" ng-show="isCreator"></button>
     <div>
-        <h2>{{poll.Name}}
-            <div class="pull-right" ng-show="isCreator">
-                <div class="btn-group" dropdown is-open="isSettingsOpen">
-                    <button type="button" class="btn btn-default dropdown-toggle">
-                        <span class="glyphicon glyphicon-cog"></span>
-                        <span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                        <li ng-show="poll.Status == 'Open'" ng-click="isSettingsOpen=false;closePoll()"><a>Close this Poll to voting</a></li>
-                        <li ng-show="poll.Status == 'Closed'" ng-click="isSettingsOpen=false;openPoll()"><a>Open this Poll for voting</a></li>
-                        <li ng-click="isSettingsOpen=false;clearVotes()"><a>Clear all Votes</a></li>
-                        <li><a href="#/editPoll/{{poll.PollID}}">Edit this Poll</a></li>
-                    </ul>
-                </div>
-            </div>
-        </h2>            
+        <h2>{{poll.Name}}</h2>
         <!-- Poll results -->
         <div class="row">
             <div class="col-xs-4" style="text-align:center">
-                <h1>{{poll.VotesFor}}<br><small>For</small></h1>
+                <h1>{{poll.VotesFor}}
+                    <br>
+                    <small>For</small>
+                </h1>
             </div>
             <div class="col-xs-4" style="text-align:center">
-                <h1>{{poll.VotesAgainst}}<br><small>Against</small></h1>
+                <h1>{{poll.VotesAgainst}}
+                    <br>
+                    <small>Against</small>
+                </h1>
             </div>
-            <div class="col-xs-4" style="text-align:center"><h1>{{poll.VotesAbstaining}}<br><small>Abstain</small></h1></div>
+            <div class="col-xs-4" style="text-align:center">
+                <h1>{{poll.VotesAbstaining}}
+                    <br>
+                    <small>Abstain</small>
+                </h1>
+            </div>
         </div>
         <progress style="text-align:center" ng-hide="poll.VotesAbstaining==votes.length">
-            <bar value="(poll.VotesFor / votes.length)*100" type="success"><span ng-show="poll.IsPassing">Passing</span></bar>
-            <bar value="(poll.VotesAgainst / votes.length)*100" type="danger"><span ng-hide="poll.IsPassing">Failing</span></bar>
-            <bar value="(poll.VotesAbstaining / votes.length)*100"><span ng-hide="poll.IsPassing || poll.VotesAgainst > 0">Failing</span></bar>
+            <bar value="(poll.VotesFor / votes.length)*100" type="success">
+                <span ng-show="poll.IsPassing">Passing</span>
+            </bar>
+            <bar value="(poll.VotesAgainst / votes.length)*100" type="danger">
+                <span ng-hide="poll.IsPassing">Failing</span>
+            </bar>
+            <bar value="(poll.VotesAbstaining / votes.length)*100">
+                <span ng-hide="poll.IsPassing || poll.VotesAgainst > 0">Failing</span>
+            </bar>
         </progress>
         <!-- My Vote -->
         <h4>Your Vote</h4>
-        <a class="list-group-item">
-            <ytm-vote ng-repeat="vote in [myVote]"></ytm-vote>
-        </a>
+        <div class="list-group">
+            <a class="list-group-item">
+                <ytm-vote ng-repeat="vote in [myVote]"></ytm-vote>
+            </a>
+        </div>
         <!-- List of votes -->
         <h4>Other Votes</h4>
         <div class="well" ng-show="votes.length == 1">There are no other Votes on this Poll</div>
@@ -44,7 +49,8 @@
         <div class="form-group" ng-show="otherVotes.length > 10">
             <!-- Filter buttons -->
             <div class="btn-group btn-group-justified" style="margin-bottom:5px">
-                <label class="btn btn-default active" ng-model="voteFilter.for" btn-checkbox>For</label>
+                <label class="btn btn-default active" ng-model="voteFilter.for" btn-checkbox>For
+                </label>
                 <label class="btn btn-default active" ng-model="voteFilter.against" btn-checkbox>Against</label>
                 <label class="btn btn-default active" ng-model="voteFilter.abstain" btn-checkbox>Abstain</label>
             </div>
@@ -57,8 +63,10 @@
             </div>
         </div>
         <!-- Vote list -->
-        <a class="list-group-item" ng-animate="'animate'" ng-repeat="vote in otherVotes | filter:filteredVotes | orderBy:'Attendee.Name'">
-            <ytm-vote></ytm-vote>
-        </a>
+        <div class="list-group">
+            <a class="list-group-item" ng-animate="'animate'" ng-repeat="vote in otherVotes | filter:filteredVotes | orderBy:'Attendee.Name'">
+                <ytm-vote></ytm-vote>
+            </a>
+        </div>
     </div>
 </div>

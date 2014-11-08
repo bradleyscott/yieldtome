@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"d",
+				"dd4b39"
+			],
+			[
+				"SpeakersList",
+				"speakersListID"
+			],
+			[
+				"settings",
+				"settingsAction"
+			],
+			[
 				"fac",
 				"facebookAppID"
 			],
@@ -268,10 +280,6 @@
 				"listID"
 			],
 			[
-				"SpeakersList",
-				"SpeakersListID"
-			],
-			[
 				"Speke",
 				"SpeakersList"
 			],
@@ -492,18 +500,18 @@
 	"buffers":
 	[
 		{
-			"file": "Gruntfile.js",
+			"file": "app/partials/home.html",
 			"settings":
 			{
-				"buffer_size": 5949,
+				"buffer_size": 6808,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "app/js/app.js",
+			"file": "Gruntfile.js",
 			"settings":
 			{
-				"buffer_size": 6917,
+				"buffer_size": 6421,
 				"line_ending": "Windows"
 			}
 		}
@@ -757,8 +765,10 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event",
@@ -766,145 +776,138 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList"
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test"
 	],
 	"file_history":
 	[
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/fonts/glyphicons-halflings-regular.svg",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/css/app.css",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/Gruntfile.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/editEventController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/editEventControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/editAttendeeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/jquery/src/effects.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html.dist",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/listEvents.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/menus/menu.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakers.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/votesController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap/less/list-group.less",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/object/fillIn.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/log4js/lib/appenders/logLevelFilter.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/login.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/editEvent.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/editSpeakersListController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/css/angular-growl.min.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular/angular.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/app.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/listVotes.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/vote.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/editPollController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/app.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/listAttendees.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/votesController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakers.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/listSpeakers.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakersLists.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/listEvents.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/LICENSE",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/poll/editPoll.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/editPoll.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/attendeesController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/attendeeList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/attendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/pollsController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/poll/vote.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/votesService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll/votesControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/poll/listVotes.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/package.json",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/listPolls.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/attendeeService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/pollService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/protractor/node_modules/selenium-webdriver/lib/test/data/pageWithOnLoad.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/lang/isPlainObject.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersListsController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersListService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/.bin/shjs",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-registry-client/.editorconfig",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/editSpeakersList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/lang/isDate.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/lang/isEmpty.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/date/isSame.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-json/lib/util/isComponent.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/test/Events/11-script_in_script.json",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/insight/node_modules/request/node_modules/http-signature/node_modules/ctype/README",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/createSpeakersListControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-config/node_modules/mout/src/lang/createObject.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-registry-client/lib/util/createError.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/queryString/setParam.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/logoutController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/homeController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/editSpeakersList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/css/app.css",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/login.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/home.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/speaker.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/js/angular-growl.min.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular-growl/build/angular-growl.min.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular-growl/build/angular-growl.min.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular-growl/build/angular-growl.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular/angular-csp.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular-loading-bar/build/loading-bar.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap-material-design/dist/css/material-wfont.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/css/material-wfont.min.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap-material-design/sass/material-wfont.scss",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap-material-design/less/material-wfont.less",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/fonts/Material-Design-Icons.svg",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap-material-design/less/material.less",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-uglify/node_modules/uglify-js/lib/mozilla-ast.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/jquery/src/ajax/load.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/log4js/examples/loggly-appender.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll/votesControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/attendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile/editProfile.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile/viewProfile.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/menus/homeMenu.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/homeControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile/viewProfileControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/deleteEvent.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/loginController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower.json",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/karma.conf.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/protractor-conf.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/editProfileController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/deleteAttendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile/editProfileControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendeeList.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/directives.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/viewProfileController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/node_modules/underscore.string/test/test_underscore/speed.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/node_modules/underscore.string/test/test_standalone.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/zlib-browserify/node_modules/tape/example/too_many.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/lib/js-yaml/type/map.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/connect/node_modules/formidable/test/legacy/system/test-multi-video-upload.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/protractor/node_modules/selenium-webdriver/lib/test/data/screen/screen_y_too_long.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/yieldtome.sublime-project",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/node_modules/underscore.string/test/speed.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-registry-client/node_modules/bower-config/node_modules/mout/queryString/setParam.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/zlib-browserify/node_modules/tape/node_modules/deep-equal/package.json",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/test/source-map/test-binary-search.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/authenticationService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/profileService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/auth/facebookAuthController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html.dist",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/createProfileController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/configService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/eventService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/settings.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/attendee.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/eventsController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/likeService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/sessionService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/speakersListsControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/log4js/test/smtpAppender-test.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/array/lastIndexOf.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/socket.io/node_modules/socket.io-client/node_modules/xmlhttprequest/tests/test-events.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/protractor/node_modules/selenium-webdriver/lib/test/data/clickEventPage.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/connect/node_modules/formidable/test/legacy/system/test-multi-video-upload.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/minimatch/test/extglob-ending-with-state-char.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/http-server/node_modules/ecstatic/node_modules/ent/entities.json",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/eventService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower.json",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/speakersControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/attendeesControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/yieldtome.sublime-project",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/protractor/node_modules/selenium-webdriver/lib/test/data/scrolling_tests/page_with_y_overflow_auto.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/http-server/test/fixtures/root/canYouSeeMe",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/node_modules/underscore.string/Rakefile",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/inquirer/node_modules/rx/src/core/anonymousobservable.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/nopt/examples/my-program.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/lib/action/version.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/mout/date/startOf.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakersLists.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/listPolls.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/poll/editPoll.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/createPollController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/createEventControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular-loading-bar/CHANGELOG.md",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/directives.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap-material-design/fonts/Material-Design-Icons.svg",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/test/source-map/test-source-node.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/node_modules/argparse/examples/testformatters.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/js-yaml/lib/js-yaml/type/map.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/http-proxy/test/core/simple/test-http-many-keep-alive-connections.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt/node_modules/findup-sync/node_modules/glob/test/globstar-match.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/karma/node_modules/http-proxy/node_modules/utile/test/function-args-test.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/test/test-zlib-close-after-write.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/bower-registry-client/node_modules/request/tests/test-agentOptions.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/angular-material/themes/yellow-theme.css",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/poll/editPoll.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/editPollController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/editAttendeeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/pollsController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/package.json",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/addSpeaker.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/speakersListsController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/addSpeaker.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/addSpeakerController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/createSpeakersListController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/profile/createProfileControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/listSpeakersLists.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/editSpeakersList.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/editSpeakersList.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/speakersList/speakersListsControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersListService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/speaker.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/speakerCarousel.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/speakersList/speakerCarousel.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/speakersService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/attendeeList.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/attendee/attendee.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/chalk/node_modules/.bin/strip-ansi",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/attendeesControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/attendeesController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/attendeeService.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/attendee/listAttendees.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/editAttendeeControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/createAttendeeControllerSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/createOtherAttendeeControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/attendee/editAttendeeControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/createEventControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/eventsControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll/createPollControllerSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/facebookServiceSpec.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/createAttendeeController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/attendee/createOtherAttendeeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/node_modules/request/node_modules/form-data/node_modules/combined-stream/node_modules/delayed-stream/test/integration/test-handle-source-errors.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/.bin/shjs",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/createEventController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/eventsController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/poll/createPollController.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/attendeeServiceSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/eventServiceSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/services/profileServiceSpec.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/services/facebookService.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/menus/menu.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/filters.js",
-		"/C/Users/Bradley/Documents/src/registerMe/common/models/event.json",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/bootstrap/package.json",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/package.json",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/bootstrap/bower.json",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower_components/bootstrap/README.md",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/dist/js/yieldtome.min.js",
-		"/C/Users/Bradley/Documents/src/yieldtome_vNow/Web/bower.json"
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/node_modules/bower/lib/util/createError.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/event/editEventControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/settings.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/karma.conf.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/test/unit/controllers/poll/createPollControllerSpec.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/homeController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/deleteAttendee.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/speakersList/editSpeakersListController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/dist/partials/event/editEvent.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/event/editEventController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/jquery/src/effects.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile/editProfile.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/viewProfileController.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile/viewProfile.html",
+		"/C/Users/Bradley/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/editAttendee.html",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap-material-design/dist/test.html"
 	],
 	"find":
 	{
@@ -934,6 +937,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"md-button",
 			"isCreator",
 			"FacebookID",
 			"ConfigService.apiUrl",
@@ -1039,30 +1043,30 @@
 			[
 				{
 					"buffer": 0,
-					"file": "Gruntfile.js",
+					"file": "app/partials/home.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5949,
+						"buffer_size": 6808,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								900,
-								900
+								1025,
+								1025
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1979.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1076,19 +1080,19 @@
 			[
 				{
 					"buffer": 1,
-					"file": "app/js/app.js",
+					"file": "Gruntfile.js",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6917,
+						"buffer_size": 6421,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5986,
-								5986
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1098,8 +1102,8 @@
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
-						"translation.x": -0.0,
-						"translation.y": 2551.0,
+						"translation.x": 0.0,
+						"translation.y": 627.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1136,7 +1140,7 @@
 		"cols":
 		[
 			0.0,
-			0.478125,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1162,12 +1166,232 @@
 		"selected_items":
 		[
 			[
+				"grunt",
+				"Gruntfile.js"
+			],
+			[
+				"home",
+				"app\\partials\\home.html"
+			],
+			[
+				"menu",
+				"app\\partials\\menus\\menu.html"
+			],
+			[
+				"llistevent",
+				"app\\partials\\event\\listEvents.html"
+			],
+			[
+				"angular-growl",
+				"dist\\css\\angular-growl.min.css"
+			],
+			[
+				"votescon",
+				"app\\js\\controllers\\poll\\votesController.js"
+			],
+			[
+				"listspeakers",
+				"app\\partials\\speakersList\\listSpeakers.html"
+			],
+			[
+				"angular-grow",
+				"dist\\css\\angular-growl.min.css"
+			],
+			[
+				"loading-bar",
+				"bower_components\\angular-loading-bar\\build\\loading-bar.css"
+			],
+			[
+				"app.css",
+				"app\\css\\app.css"
+			],
+			[
+				"material-wfont",
+				"bower_components\\bootstrap-material-design\\dist\\css\\material-wfont.css"
+			],
+			[
+				"material-wfon",
+				"bower_components\\bootstrap-material-design\\sass\\material-wfont.scss"
+			],
+			[
+				"loading-ar",
+				"bower_components\\angular-loading-bar\\build\\loading-bar.css"
+			],
+			[
+				"index.html.dis",
+				"app\\index.html.dist"
+			],
+			[
+				"index",
+				"app\\index.html"
+			],
+			[
+				"votescontro",
+				"test\\unit\\controllers\\poll\\votesControllerSpec.js"
+			],
+			[
+				"vote",
+				"app\\partials\\poll\\vote.html"
+			],
+			[
+				"votescont",
+				"app\\js\\controllers\\poll\\votesController.js"
+			],
+			[
+				"attendee",
+				"app\\partials\\attendee\\attendee.html"
+			],
+			[
+				"listevent",
+				"app\\partials\\event\\listEvents.html"
+			],
+			[
+				"speakerscon",
+				"app\\js\\controllers\\speakersList\\speakersController.js"
+			],
+			[
+				"",
+				"bower.json"
+			],
+			[
+				"listspeake",
+				"app\\partials\\speakersList\\listSpeakers.html"
+			],
+			[
+				"listvotes",
+				"app\\partials\\poll\\listVotes.html"
+			],
+			[
+				"speaker",
+				"app\\partials\\speakersList\\speaker.html"
+			],
+			[
+				"app.ccs",
+				"app\\css\\app.css"
+			],
+			[
+				"creatpollc",
+				"app\\js\\controllers\\poll\\createPollController.js"
+			],
+			[
+				"directi",
+				"app\\js\\directives.js"
+			],
+			[
+				"index.",
+				"app\\index.html"
+			],
+			[
 				"app",
 				"app\\js\\app.js"
 			],
 			[
-				"grunt",
-				"Gruntfile.js"
+				"editpoll",
+				"app\\partials\\poll\\editPoll.html"
+			],
+			[
+				"listspeakerslist",
+				"app\\partials\\speakersList\\listSpeakersLists.html"
+			],
+			[
+				"polllist",
+				"app\\partials\\poll\\listPolls.html"
+			],
+			[
+				"listspeakerslists",
+				"app\\partials\\speakersList\\listSpeakersLists.html"
+			],
+			[
+				"attendees",
+				"app\\partials\\attendee\\listAttendees.html"
+			],
+			[
+				"speakerslist",
+				"app\\partials\\speakersList\\listSpeakersLists.html"
+			],
+			[
+				"addspea",
+				"app\\partials\\speakersList\\addSpeaker.html"
+			],
+			[
+				"speakers",
+				"app\\partials\\speakersList\\listSpeakers.html"
+			],
+			[
+				"speakerlist",
+				"app\\partials\\speakersList\\listSpeakersLists.html"
+			],
+			[
+				"addsp",
+				"app\\partials\\speakersList\\addSpeaker.html"
+			],
+			[
+				"listspeaker",
+				"app\\partials\\speakersList\\listSpeakers.html"
+			],
+			[
+				"speaker.html",
+				"app\\partials\\speakersList\\speaker.html"
+			],
+			[
+				"listspae",
+				"app\\partials\\speakersList\\listSpeakers.html"
+			],
+			[
+				"speakersc",
+				"app\\js\\controllers\\speakersList\\speakersController.js"
+			],
+			[
+				"createeve",
+				"test\\unit\\controllers\\event\\createEventControllerSpec.js"
+			],
+			[
+				"createpoll",
+				"app\\js\\controllers\\poll\\createPollController.js"
+			],
+			[
+				"editeven",
+				"test\\unit\\controllers\\event\\editEventControllerSpec.js"
+			],
+			[
+				"speakersslist",
+				"app\\js\\controllers\\speakersList\\speakersListsController.js"
+			],
+			[
+				"editeve",
+				"app\\partials\\event\\editEvent.html"
+			],
+			[
+				"editspea",
+				"app\\partials\\speakersList\\editSpeakersList.html"
+			],
+			[
+				"lista",
+				"app\\partials\\attendee\\listAttendees.html"
+			],
+			[
+				"bower",
+				"bower.json"
+			],
+			[
+				"login",
+				"app\\partials\\login.html"
+			],
+			[
+				"app.",
+				"app\\js\\app.js"
+			],
+			[
+				"b",
+				"bower.json"
+			],
+			[
+				"home.h",
+				"app\\partials\\home.html"
+			],
+			[
+				"angula",
+				"bower_components\\angular\\angular.js"
 			],
 			[
 				"editevent",
@@ -1178,22 +1402,6 @@
 				"app\\js\\controllers\\event\\editEventController.js"
 			],
 			[
-				"listspeakers",
-				"app\\partials\\speakersList\\listSpeakers.html"
-			],
-			[
-				"editpoll",
-				"app\\js\\controllers\\poll\\editPollController.js"
-			],
-			[
-				"votescon",
-				"app\\js\\controllers\\poll\\votesController.js"
-			],
-			[
-				"vote",
-				"app\\partials\\poll\\vote.html"
-			],
-			[
 				"listpol",
 				"app\\partials\\poll\\listPolls.html"
 			],
@@ -1202,20 +1410,8 @@
 				"app\\js\\controllers\\poll\\pollsController.js"
 			],
 			[
-				"attendee",
-				"dist\\partials\\attendeeList.html"
-			],
-			[
 				"pollscon",
 				"app\\js\\controllers\\poll\\pollsController.js"
-			],
-			[
-				"speakerslist",
-				"app\\js\\controllers\\speakersList\\speakersListsController.js"
-			],
-			[
-				"speakersc",
-				"app\\js\\controllers\\speakersList\\speakersController.js"
 			],
 			[
 				"votes",
@@ -1230,52 +1426,24 @@
 				"app\\js\\services\\likeService.js"
 			],
 			[
-				"votescont",
-				"app\\js\\controllers\\poll\\votesController.js"
-			],
-			[
 				"eventlist",
 				"app\\partials\\event\\listEvents.html"
-			],
-			[
-				"listvotes",
-				"app\\partials\\poll\\listVotes.html"
 			],
 			[
 				"votelist",
 				"dist\\partials\\poll\\voteList.html"
 			],
 			[
-				"menu",
-				"app\\partials\\menus\\menu.html"
-			],
-			[
 				"navmenu",
 				"dist\\partials\\menus\\navMenu.html"
-			],
-			[
-				"listspeakerslist",
-				"app\\partials\\speakersList\\listSpeakersLists.html"
 			],
 			[
 				"liste",
 				"app\\partials\\event\\listEvents.html"
 			],
 			[
-				"lista",
-				"app\\partials\\attendee\\listAttendees.html"
-			],
-			[
 				"addspeaker",
 				"app\\partials\\speakersList\\addSpeaker.html"
-			],
-			[
-				"addspea",
-				"app\\js\\controllers\\speakersList\\addSpeakerController.js"
-			],
-			[
-				"speakers",
-				"app\\js\\controllers\\speakersList\\speakersController.js"
 			],
 			[
 				"add",
@@ -1302,20 +1470,8 @@
 				"app\\js\\controllers\\event\\eventsController.js"
 			],
 			[
-				"index",
-				"app\\index.html"
-			],
-			[
 				"createatte",
 				"app\\js\\controllers\\attendee\\createAttendeeController.js"
-			],
-			[
-				"attendees",
-				"app\\js\\services\\attendeeService.js"
-			],
-			[
-				"addsp",
-				"app\\js\\controllers\\speakersList\\addSpeakerController.js"
 			],
 			[
 				"attende",
@@ -1336,10 +1492,6 @@
 			[
 				"speakers.js",
 				"app\\js\\controllers\\speakersList\\speakersController.js"
-			],
-			[
-				"",
-				"app\\js\\controllers\\homeController.js"
 			]
 		],
 		"width": 0.0

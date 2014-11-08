@@ -2,61 +2,6 @@
 <div class="container body-content">
     <div>
         <h2>{{list.Name}}</h2>
-        <!-- Buttons -->
-        <div class="btn-toolbar" role="toolbar" style="margin-bottom:5px">
-            <!-- Status -->
-            <div class="btn-group" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
-                <button type="button" class="btn btn-success" ng-show="list.Status == 'Open'" ng-click="closeList()">Open</button>
-                <button type="button" class="btn btn-danger" ng-show="list.Status == 'Closed'" ng-click="openList()">Closed</button>
-            </div>
-            <!-- Speakers functions -->
-            <div class="btn-group">
-                <!-- Add myself as a Speaker -->
-                <div ng-show="speakingSlot==null && (list.Status == 'Open' || event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID)">
-                    <div class="btn-group" dropdown is-open="isSpeakMenuOpen">
-                        <button type="button" class="btn btn-default dropdown-toggle">
-                            <span class="glyphicon glyphicon-bullhorn"></span> Speak
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li ng-click="add('For')"><a>Speak For</a>
-                            </li>
-                            <li ng-click="add('Against')"><a>Speak Against</a>
-                            </li>
-                            <li ng-click="add('None')"><a>Neutral</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-                <!-- Remove myself as a Speaker -->
-                <button type="button" class="btn btn-default" ng-show="speakingSlot" ng-click="remove(speakingSlot)">
-                    <span class="glyphicon glyphicon-remove-circle"></span> Remove me</button>
-            </div>
-            <!-- Speakers list settings drop down -->
-            <div class="btn-group">
-                <div ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID">
-                    <div class="btn-group" dropdown is-open="isSettingsOpen">
-                        <button type="button" class="btn btn-default dropdown-toggle">
-                            <span class="glyphicon glyphicon-cog"></span>
-                            <span class="caret"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right" role="menu">
-                            <li><a href="#/addSpeaker/{{list.SpeakersListID}}">Add another Speaker</a>
-                            </li>
-                            <li class="divider"></li>
-                            <li ng-show="list.Status == 'Open'" ng-click="isSettingsOpen=false;closeList()"><a>Close to new Speakers</a>
-                            </li>
-                            <li ng-show="list.Status == 'Closed'" ng-click="isSettingsOpen=false;openList()"><a>Open to new Speakers</a>
-                            </li>
-                            <li ng-click="isSettingsOpen=false;removeAllSpeakers()"><a>Remove all Speakers</a>
-                            </li>
-                            <li><a href="#/editSpeakersList/{{list.SpeakersListID}}">Edit this Speakers list</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
         <div class="well" ng-show="speakers.length == 0">There is not yet any Speakers on this Speakers list</div>
         <div class="row" ng-show="speakers.length > 0">
             <!-- Next speaker -->
@@ -87,14 +32,39 @@
             </div>
             <!-- Speakers list -->
             <div class="col-md-9">
+                <button type="button" class="btn btn-primary btn-fab btn-raised mdi-action-settings pull-right" ng-click="showSettings()" ng-show="isCreator"></button>
+                <!-- Speakers functions -->
+                <div class="btn-group">
+                    <!-- Add myself as a Speaker -->
+                    <div ng-show="speakingSlot==null && (list.Status == 'Open' || isCreator)">
+                        <div class="btn-group" dropdown is-open="isSpeakMenuOpen">
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="glyphicon glyphicon-bullhorn"></span> Speak
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li ng-click="add('For')"><a>Speak For</a>
+                                </li>
+                                <li ng-click="add('Against')"><a>Speak Against</a>
+                                </li>
+                                <li ng-click="add('None')"><a>Neutral</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Remove myself as a Speaker -->
+                    <button class="btn btn-default" ng-show="speakingSlot" ng-click="remove(speakingSlot)">
+                        <span class="glyphicon glyphicon-remove"></span> Remove me
+                    </button>
+                </div>
                 <!-- Non editable -->
-                <div style="margin-top:10px">
-                    <a class="list-group-item" ng-hide="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-animate="'animate'" ng-repeat="speaker in speakers">
+                <div class="list-group" style="margin-top:10px">
+                    <a class="list-group-item" ng-hide="isCreator" ng-animate="'animate'" ng-repeat="speaker in speakers">
                         <ytm-speaker></ytm-speaker>
                     </a>
                 </div>
                 <!-- Editable -->
-                <div ui-sortable="speakerReorder" ng-model="speakers" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" style="margin-top:10px">
+                <div class="list-group" ui-sortable="speakerReorder" ng-model="speakers" ng-show="isCreator" style="margin-top:10px">
                     <a class="list-group-item" ng-animate="'animate'" ng-repeat="speaker in speakers">
                         <ytm-speaker></ytm-speaker>
                     </a>

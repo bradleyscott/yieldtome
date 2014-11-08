@@ -2,7 +2,7 @@
 
 describe('The Votes controller', function() {
 
-    var $controller, $log, $scope, $location, $q, $routeParams, growl, SessionService, PollService, VotesService;
+    var $controller, $log, $scope, $location, $q, $routeParams, $modal, growl, SessionService, PollService, VotesService;
 
     var vote = {
         "VoteID": 1,
@@ -48,6 +48,7 @@ describe('The Votes controller', function() {
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
+            $modal = jasmine.createSpyObj('$modal', ['open']);
             PollService = jasmine.createSpyObj('PollService', ['getPolls', 'getPoll', 'updatePoll']);
             VotesService = jasmine.createSpyObj('VotesService', ['getVotes', 'createVote', 'deleteAllVotes']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
@@ -70,6 +71,7 @@ describe('The Votes controller', function() {
             $location: $location,
             $log: $log,
             $routeParams: $routeParams,
+            $modal: $modal,
             growl: growl,
             SessionService: SessionService,
             PollService: PollService,

@@ -1,7 +1,7 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
     <div ng-hide="event">
-        <h2>Find an Event</h2>
+        <h2>Upcoming Model UNs</h2>
         <div class="list-group">
             <div class="form-group">
                 <div class="row">
@@ -10,27 +10,24 @@
                             <span class="input-group-addon">
                                 <span class="glyphicon glyphicon-search"></span>
                             </span>
-                            <input type="text" class="form-control" ng-model="query" placeholder="Find an Event..." />
+                            <input type="text" class="form-control" ng-model="query" placeholder="Find a Model UN..." />
                         </div>
                     </div>
                     <div class="col-xs-3">
-                        <button type="button" class="btn btn-primary pull-right" ng-click="new()">
-                            <span class="glyphicon glyphicon-plus" style="margin-right:5px"></span>New
-                        </button>
+                        <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="new()"></button>
                     </div>
                 </div>
             </div>
-            <div class="well" ng-show="events.length == 0">There are no upcoming yieldto.me events</div>
+            <div class="well" ng-show="events.length == 0">There are no upcoming yieldto.me Model UNs. Please create one!</div>
             <a href="" ng-click="selectEvent(event)" class="list-group-item" ng-repeat="event in events | filter:query | orderBy:'StartDate'">
-                <div class="btn-group pull-right" ng-show="event.CreatorID == profile.ProfileID">
-                    <button type="button" ng-click="edit(event, $event)" class="btn btn-default"><span class="glyphicon glyphicon-pencil"></span> </button>
-                </div>
+                <button type="button" ng-show="event.CreatorID == profile.ProfileID" ng-click="edit(event, $event)" class="btn btn-default btn-lg mdi-content-create pull-right"></button>
                 <h4 class="list-group-item-heading">{{event.Name}}</h4>
                 <p class="list-group-item-text">
                     <div><b>{{event.DateDescription}}</b>
                     </div>
                     <div ng-show="event.Description">{{ event.Description | truncate:120 }}</div>
                 </p>
+                <div class="list-group-separator"></div>
             </a>
         </div>
     </div>
@@ -41,8 +38,8 @@
         </h2>
         <p ng-show="event.Description">{{event.Description}}</p>
         <p>
-            <button type="button" ng-click="attend()" class="btn btn-primary btn-lg">Attending</button>
-            <button type="button" ng-click="selectEvent()" class="btn btn-default btn-lg">Not this one</button>
+            <button type="button" ng-click="selectEvent()" class="btn btn-default btn-lg mdi-navigation-arrow-back"></button>
+            <button type="button" ng-click="attend()" class="btn btn-primary">Attend</button>
         </p>
         <div ng-show="attendees.length > 0">
             <h3>People already attending</h3>
@@ -54,9 +51,11 @@
                     <input type="text" class="form-control" ng-model="queryAttendees" placeholder="Find people..." />
                 </div>
             </div>
-            <a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees | filter:queryAttendees">
-                <ytm-attendee>
-            </a>
+            <div class="list-group">
+                <a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees | filter:queryAttendees">
+                    <ytm-attendee>
+                </a>
+                </ytm-attendee>
+            </div>
         </div>
     </div>
-</div>

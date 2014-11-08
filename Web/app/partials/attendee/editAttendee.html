@@ -14,10 +14,10 @@
         </div>
         <div class="row">
             <div class="text-right">
-                <button type="button" ng-click="$back()" class="btn btn-default">{{alternatebutton}}</button>
-                <button type="button" ng-click="showDelete()" ng-show="isDeleteEnabled && isEditingSelf" class="btn btn-danger">Leave</button>
-                <button type="button" ng-click="showDelete()" ng-show="isDeleteEnabled && isEditingSelf==false" class="btn btn-danger">Remove</button>
-                <button type="submit" ng-disabled="form.$invalid" ng-hide="formDisabled" ng-click="save()" class="btn btn-primary">Save</button>
+                <button type="button" ng-click="$back()" class="btn btn-default btn-fab btn-raised mdi-navigation-arrow-back"></button>
+                <button type="button" ng-click="showDelete()" ng-show="isDeleteEnabled && isEditingSelf" class="btn btn-danger btn-fab btn-raised mdi-content-clear"></button>
+                <button type="button" ng-click="showDelete()" ng-show="isDeleteEnabled && isEditingSelf==false" class="btn btn-danger btn-fab btn-raised mdi-content-clear"></button>
+                <button type="submit" ng-disabled="form.$invalid" ng-hide="formDisabled" ng-click="save()" class="btn btn-primary  btn-fab btn-raised mdi-content-save"></button>
             </div>
         </div>
     </form>

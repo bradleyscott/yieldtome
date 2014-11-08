@@ -70,7 +70,9 @@ module.exports = function(grunt) {
                     nonull: true,
                     src: ['bower_components/bootstrap/dist/css/bootstrap.min.css', 
                             'bower_components/angular-loading-bar/build/loading-bar.min.css',
-                            'bower_components/angular-growl/build/angular-growl.min.css'],
+                            'bower_components/angular-growl/build/angular-growl.min.css',
+                            'bower_components/bootstrap-material-design/dist/css/ripples.min.css',
+                            'bower_components/bootstrap-material-design/dist/css/material-wfont.min.css'],
                     dest: 'dist/css',
                     flatten: true
                 }, { // Move js dependencies
@@ -99,14 +101,17 @@ module.exports = function(grunt) {
                         'bower_components/angular-animate/angular-animate.min.js.map',
                         'bower_components/angular-growl/build/angular-growl.min.js',
                         'bower_components/angulartics/dist/angulartics.min.js',
-                        'bower_components/angulartics/dist/angulartics-ga.min.js'
+                        'bower_components/angulartics/dist/angulartics-ga.min.js',
+                        'bower_components/bootstrap-material-design/dist/js/ripples.min.js',
+                        'bower_components/bootstrap-material-design/dist/js/material.min.js'
                     ],
                     dest: 'dist/js',
                     flatten: true
                 }, { // Move font dependencies
                     expand: true,
                     nonull: true,
-                    src: ['bower_components/bootstrap/dist/fonts/**'],
+                    src: ['bower_components/bootstrap/dist/fonts/**',
+                    'bower_components/bootstrap-material-design/dist/fonts/**'],
                     dest: 'dist/fonts',
                     flatten: true
                 }, { // Move index.html

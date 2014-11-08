@@ -10,8 +10,8 @@ angular.module('yieldtome.controllers')
         $scope.title = 'Edit Event';
         $scope.alternatebutton = 'Back';
         $scope.event;
-        $scope.startDateAsString; // Post formatted date for binding
-        $scope.endDateAsString; // Post formatted date for binding
+        $scope.startDate; // Post formatted date for binding
+        $scope.endDate; // Post formatted date for binding
         $scope.profile;
         $scope.isDeleteEnabled = true; // Enables the Delete button
         $scope.deleteConfirm; // Delete confirmation dialog promise
@@ -89,18 +89,18 @@ angular.module('yieldtome.controllers')
                 $scope.event = event;
 
                 // Set UI binding properties
-                $scope.startDateAsString = $filter('date')(event.StartDate, 'yyyy-MM-dd');
-                $scope.endDateAsString = $filter('date')(event.EndDate, 'yyyy-MM-dd');
+                $scope.startDate = new Date(event.StartDate);
+                $scope.endDate = new Date(event.EndDate);
 
                 // Watch UI bound elements to bind to model
-                $scope.$watch("startDateAsString", function(value) {
+                $scope.$watch("startDate", function(value) {
                     $log.debug('Start Date value changed to: ' + value);
-                    $scope.event.StartDate = new Date(value);
+                    $scope.event.StartDate = value;
                 });
 
-                $scope.$watch("endDateAsString", function(value) {
+                $scope.$watch("endDate", function(value) {
                     $log.debug('End Date value changed to: ' + value);
-                    $scope.event.EndDate = new Date(value);
+                    $scope.event.EndDate = value;
                 });
 
             })

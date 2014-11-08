@@ -4,12 +4,14 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yieldto.me - Helps with the boring details of Model UN debate</title>
-    <meta name="description" content="Helps delegates and organisers with the boring details of Model UNs from their phone, tablet, or computer. Everyone spends less time on the rules and more time on the debate">
-    <link rel="stylesheet" href="css/app.css" />
+    <title>yieldto.me - Make your Model UN better</title>
+    <meta name="description" content="With yieldto.me delegates can add themeslves to Speakers Lists and Vote using their phone, tablet or PC. Everyone spends less time on the rules and more time on the debate">
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/loading-bar.min.css" />
     <link rel="stylesheet" href="css/angular-growl.min.css" />
+    <link rel="stylesheet" href="css/ripples.min.css" />
+    <link rel="stylesheet" href="css/material-wfont.min.css" />
+    <link rel="stylesheet" href="css/app.css" />
 </head>
 
 <body>
@@ -26,7 +28,7 @@
                     <span style="margin-left:5px" class="glyphicon glyphicon-bullhorn"></span> suggest</a>
                 <a href="http://www.github.com/bradleyscott/yieldtome" target="_blank" style="margin-left:5px; color:grey">
                     <span style="margin-left:5px" class="glyphicon glyphicon-transfer"></span> code</a>
-                <span class="pull-right hidden-xs">Copyright &copy; 2014 - Debate Systems Ltd</span>
+                <span class="pull-right hidden-xs">yieldto.me is free and open source</span>
             </p>
         </footer>
     </div>
@@ -51,6 +53,8 @@
     <script src="js/angular-growl.min.js"></script>
     <script src="js/angulartics.min.js"></script>
     <script src="js/angulartics-ga.min.js"></script>
+    <script src="js/ripples.min.js"></script>
+    <script src="js/material.min.js"></script>
 
     <!-- Load yieldto.me App -->
     <script src="js/yieldtome.min.js"></script>

@@ -12,7 +12,7 @@ angular.module('yieldtome.controllers')
         $scope.event;
         $scope.profile;
         $scope.poll = { Name: 'New Poll', MajorityRequired:50 }; // The Poll to be created
-        $scope.ignoreAbstain = true; // Infers the Poll type
+        $scope.ignoreAbstain = "true"; // Infers the Poll type
 
         $scope.$back = function() {
             $window.history.back();
@@ -23,7 +23,8 @@ angular.module('yieldtome.controllers')
             $log.debug('CreatePoll.save() starting');
 
             // Save Poll
-            var promise = PollService.createPoll($scope.event, $scope.poll, !$scope.ignoreAbstain);
+            var ignoreAbstain = $scope.ignoreAbstain == "true";
+            var promise = PollService.createPoll($scope.event, $scope.poll, !ignoreAbstain);
 
             promise.then(function(poll) { // It all went well
                 growl.addInfoMessage('You have created  ' + poll.Name); 
@@ -42,11 +43,12 @@ angular.module('yieldtome.controllers')
             $scope.event = SessionService.get('event');
             $scope.attendee = SessionService.get('attendee');
 
-            if ($scope.profile == "undefined" || $scope.event == "undefined") {
+            if ($scope.profile == null || $scope.event == null) {
                 growl.addErrorMessage("We don't have enough information to have you create a Poll");
+                return;
             }
-
-            $scope.poll.CreatorID = $scope.profile.ProfileID; // Set the Poll creator
+        
+            $scope.poll.CreatorID = $scope.profile.ProfileID; // Set the Poll creator              
         })();
 
     }
