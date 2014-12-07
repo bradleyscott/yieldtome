@@ -22,10 +22,9 @@
 }
 .growl{
   position:fixed;
-  top:50px;
+  top:70px;
   left:10px;
   float:left;
-  min-width:300px
 }
 .growl-item{
   background-color:#4285f4;
@@ -41,7 +40,6 @@
   padding-left:10px;
   padding-right:10px;
 }
-
 
 /* Menu styles */
  .menu {
