@@ -20,6 +20,7 @@ module.exports = function(config) {
             'bower_components/angular-resource/angular-resource.js',
             'bower_components/satellizer/satellizer.js',
             'bower_components/angular-bootstrap/ui-bootstrap-tpls.js',
+            'bower_components/underscore/underscore-min.js',
             'app/js/controllers/homeController.js',
             'app/js/services/configService.js',
             'app/js/**/*.js',

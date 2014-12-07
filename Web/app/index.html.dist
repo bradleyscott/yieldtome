@@ -55,6 +55,7 @@
     <script src="js/angulartics-ga.min.js"></script>
     <script src="js/ripples.min.js"></script>
     <script src="js/material.min.js"></script>
+    <script src="js/underscore-min.js"></script>
 
     <!-- Load yieldto.me App -->
     <script src="js/yieldtome.min.js"></script>

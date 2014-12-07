@@ -103,7 +103,8 @@ module.exports = function(grunt) {
                         'bower_components/angulartics/dist/angulartics.min.js',
                         'bower_components/angulartics/dist/angulartics-ga.min.js',
                         'bower_components/bootstrap-material-design/dist/js/ripples.min.js',
-                        'bower_components/bootstrap-material-design/dist/js/material.min.js'
+                        'bower_components/bootstrap-material-design/dist/js/material.min.js',
+                        'bower_components/underscore/underscore-min.js'
                     ],
                     dest: 'dist/js',
                     flatten: true
