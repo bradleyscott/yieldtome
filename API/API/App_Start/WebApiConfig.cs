@@ -17,6 +17,12 @@ namespace yieldtome.API
             );
 
             config.Routes.MapHttpRoute(
+                name: "PingApi",
+                routeTemplate: "Ping/{action}",
+                defaults: new { Controller = "Ping", action = "NoAuth" }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
