@@ -4,8 +4,8 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>yieldto.me - Make your Model UN better</title>
-    <meta name="description" content="With yieldto.me delegates can add themeslves to Speakers Lists and Vote using their phone, tablet or PC. Everyone spends less time on the rules and more time on the debate">
+    <title>yieldto.me - helps delegates and the chair link up at Model UNs</title>
+    <meta name="description" content="yieldto.me helps delegates and the chair link up at Model UNs. Delegates can use their phone, tablet or PC to- Send each other messages, Exchange secret 'Likes', Safely share contact details, Add themselves to Speakers lists and Vote on polls and motions">
     <link rel="stylesheet" href="css/bootstrap.min.css" />
     <link rel="stylesheet" href="css/loading-bar.min.css" />
     <link rel="stylesheet" href="css/angular-growl.min.css" />
