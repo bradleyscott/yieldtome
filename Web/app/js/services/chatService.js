@@ -12,7 +12,7 @@ angular.module('yieldtome.services')
             if(!io.socket.alreadyListeningToDirectMessages) {
 	            io.socket.on("directmessage", function(message) {
 
-	                if (message.data.recipientID == attendeeID && message.verb == 'created') {
+	                if (message.data.recipientID == SessionService.get('attendee').AttendeeID && message.verb == 'created') {
 	                    $log.debug('Received new message for me. Invoking callback function');
 	                    callback(message.data); // Invoke callback
 	                } else {
@@ -27,6 +27,10 @@ angular.module('yieldtome.services')
 	            });
 
 	            io.socket.alreadyListeningToDirectMessages = true;
+            }
+            else 
+            {
+                $log.debug('Already subscribed to DirectMessages');
             }
         };
 
