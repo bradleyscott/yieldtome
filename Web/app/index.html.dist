@@ -16,7 +16,7 @@
 
 <body>
     <div ng-view></div>
-    <div class="container body-content">
+    <div class="container body-content" id="footer">
         <hr />
         <footer>
             <p>
@@ -51,6 +51,7 @@
     <script src="js/loading-bar.min.js"></script>
     <script src="js/angular-animate.min.js"></script>
     <script src="js/angular-growl.min.js"></script>
+    <script src="js/angular-sanitize.min.js"></script>
     <script src="js/angulartics.min.js"></script>
     <script src="js/angulartics-ga.min.js"></script>
     <script src="js/ripples.min.js"></script>
