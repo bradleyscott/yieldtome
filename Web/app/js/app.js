@@ -14,9 +14,12 @@ angular.module('yieldtome', [
     'ui.sortable',
     'angular-loading-bar',
     'angular-growl',
+    'ngSanitize',
     'ngAnimate',
     'angulartics', 
-    'angulartics.google.analytics'
+    'luegg.directives', // Scroll glue
+    'angulartics.google.analytics',
+    'angularMoment'
     ])
 
 // Configure routes
@@ -65,6 +68,10 @@ angular.module('yieldtome', [
         $routeProvider.when('/editAttendee/:attendeeID', {
             templateUrl: 'partials/attendee/editAttendee.html',
             controller: 'EditAttendee'
+        });
+        $routeProvider.when('/attendees/:attendeeID/chat', {
+            templateUrl: 'partials/chat/directMessages.html',
+            controller: 'DirectMessage'
         });
         $routeProvider.when('/speakersLists', {
             templateUrl: 'partials/speakersList/listSpeakersLists.html',
@@ -173,16 +180,6 @@ angular.module('yieldtome', [
             scope: 'email'
         });
 
-	    $authProvider.linkedin({
-            redirectUri: location.origin + location.pathname,
-	    	clientId: '75mz2qe9li1kfj',
-        	url: apiUrl + 'Authenticate/LinkedIn',
-	    });
-
-        $authProvider.twitter({
-            url: apiUrl + 'Authenticate/Twitter'
-        });
-
         $authProvider.google({
             url: apiUrl + 'Authenticate/Google',
             redirectUri: location.origin + location.pathname,
@@ -190,9 +187,11 @@ angular.module('yieldtome', [
         });
 
         $httpProvider.interceptors.push('httpResponseInterceptor'); // Register http interceptor
-
+        $httpProvider.defaults.withCredentials = true;
+        
         // Growl settings
         growlProvider.globalTimeToLive(3000);
         growlProvider.onlyUniqueMessages(true);
+        growlProvider.globalEnableHtml(true);
     }
 ]);

@@ -22,7 +22,7 @@
   },
   "scripts": {
     "postinstall": "bower install",
-    "start": "http-server -p 8000 -c-1",
+    "start": "http-server -p 8000 -c-0",
     "test": "karma start test/karma.conf.js",
     "update-webdriver": "webdriver-manager update",
     "protractor": "protractor test/protractor-conf.js",

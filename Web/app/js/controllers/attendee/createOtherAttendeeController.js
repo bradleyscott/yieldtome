@@ -7,7 +7,7 @@ angular.module('yieldtome.controllers')
 
         $log.debug("CreateOtherAttendee controller executing");
 
-        $scope.title = 'Create Attendee';
+        $scope.title = 'Add Delegation';
         $scope.alternatebutton = 'Cancel';
         $scope.event;
         $scope.profile;
@@ -36,7 +36,7 @@ angular.module('yieldtome.controllers')
             })
             .catch (function(error) { // The service crapped out
                 $log.warn(error);
-                growl.addErrorMessage("Something went wrong trying to create this Attendee. " + error);
+                growl.addErrorMessage("Something went wrong trying to add this delegation. " + error);
             });
         };
 
@@ -46,7 +46,7 @@ angular.module('yieldtome.controllers')
             $scope.event = SessionService.get('event');
 
             if ($scope.event == "undefined") {
-                growl.addErrorMessage("We don't have enough information to allow you to create attendees");
+                growl.addErrorMessage("We don't have enough information to allow you to add delegations");
             }
         })();
     }

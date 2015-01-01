@@ -15,7 +15,7 @@ angular.module('yieldtome.controllers')
         $scope.polls; // All the Polls for the Event
 
         $scope.$back = function() {
-            window.history.back();
+            $window.history.back();
         };
 
         $scope.new = function() {

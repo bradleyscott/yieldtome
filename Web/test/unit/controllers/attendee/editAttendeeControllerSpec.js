@@ -71,7 +71,7 @@ describe('The EditAttendee controller', function() {
             expect($scope.isEditingSelf).toBe(true);
         });
 
-        it("should set the isEditingSelf to false value if user is editingsomeone else's profile", function(){
+        it("should set the isEditingSelf to false value if user is editing someone else's profile", function(){
             var getAttendeeResponse = $q.defer();
             getAttendeeResponse.resolve({ AttendeeID: 0 });
             AttendeeService.getAttendee.andReturn(getAttendeeResponse.promise);

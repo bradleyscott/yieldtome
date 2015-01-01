@@ -22,7 +22,7 @@ angular.module('yieldtome.controllers')
         $scope.isCreator = false; // Indicates whether or not the user has edit right to this Poll
 
         $scope.$back = function() {
-            window.history.back();
+            $window.history.back();
         };
 
         // Redirects to the View Profile page

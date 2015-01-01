@@ -2,7 +2,7 @@
 
 describe('The Attendees controller', function() {
 
-    var $controller, $log, $scope, $location, $q, growl, SessionService, AttendeeService;
+    var $controller, $log, $scope, $location, $q, growl, SessionService, AttendeeService, ChatService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -19,6 +19,7 @@ describe('The Attendees controller', function() {
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
             AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendees']);
+            ChatService = jasmine.createSpyObj('ChatService', ['subscribeToMessages', 'getMesages', 'sendMessage']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
     });
@@ -32,7 +33,8 @@ describe('The Attendees controller', function() {
             $location: $location,
             growl: growl,
             SessionService: SessionService,
-            AttendeeService: AttendeeService
+            AttendeeService: AttendeeService,
+            ChatService: ChatService
         });        
     }
 

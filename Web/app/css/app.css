@@ -36,7 +36,7 @@
     -o-transition:1s linear all;
     transition:1s linear all;
 }
-.mdi-content-create, .mdi-content-add, .mdi-content-remove{
+.mdi-content-create, .mdi-content-add, .mdi-content-remove, .mdi-communication-chat{
   padding-left:10px;
   padding-right:10px;
 }

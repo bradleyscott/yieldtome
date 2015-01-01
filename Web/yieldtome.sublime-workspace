@@ -500,19 +500,29 @@
 	"buffers":
 	[
 		{
-			"file": "app/partials/home.html",
+			"file": "app/index.html",
 			"settings":
 			{
-				"buffer_size": 6808,
+				"buffer_size": 9252,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "Gruntfile.js",
+			"file": "app/partials/home.html",
 			"settings":
 			{
-				"buffer_size": 6421,
+				"buffer_size": 6809,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Package Control Messages\n========================\n\nSublimeLinter:\n-------------\n\n  ************************\n  * Good news, everyone! *\n  ************************\n  \n  We have had great support recently and are truly \n  thankful to everyone who has wished Aparajita a \n  fond farewell. We expect he will continue to \n  contribute in the future and appreciate the \n  amazing stewardship he has shown to the project.\n  \n  Please join us in welcoming Blake (@skj3gg) as \n  the new project administrator for the SublimeLinter \n  organization. We know the project will continue \n  for a long time to come with this new change in \n  leadership. Our number one priority will always be\n  to help developers craft better code.\n  \n  As a final note, all donations will continue to go\n  to Aparajita until November 14, 2014, so please\n  consider thanking him for his services before that\n  time.\n  \n",
+			"settings":
+			{
+				"buffer_size": 887,
+				"line_ending": "Windows",
+				"name": "Package Control Messages",
+				"scratch": true
 			}
 		}
 	],
@@ -780,10 +790,11 @@
 	],
 	"file_history":
 	[
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html.dist",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/Gruntfile.js",
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/home.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/css/app.css",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/Gruntfile.js",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/index.html.dist",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/event/listEvents.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/menus/menu.html",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/speakersList/listSpeakers.html",
@@ -906,8 +917,7 @@
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/js/controllers/profile/viewProfileController.js",
 		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/profile/viewProfile.html",
 		"/C/Users/Bradley/AppData/Roaming/Sublime Text 3/Packages/HTML-CSS-JS Prettify/HTMLPrettify.sublime-settings",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/editAttendee.html",
-		"/C/Users/Bradley/Documents/src/yieldtome/Web/bower_components/bootstrap-material-design/dist/test.html"
+		"/C/Users/Bradley/Documents/src/yieldtome/Web/app/partials/attendee/editAttendee.html"
 	],
 	"find":
 	{
@@ -1038,24 +1048,24 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "app/partials/home.html",
+					"file": "app/index.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6808,
+						"buffer_size": 9252,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1025,
-								1025
+								7720,
+								7720
 							]
 						],
 						"settings":
@@ -1066,44 +1076,67 @@
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 1458.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
+				},
 				{
 					"buffer": 1,
-					"file": "Gruntfile.js",
+					"file": "app/partials/home.html",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6421,
+						"buffer_size": 6809,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								5798,
+								5798
 							]
 						],
 						"settings":
 						{
 							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
-							"syntax": "Packages/JavaScript/JavaScript.tmLanguage",
+							"syntax": "Packages/HTML/HTML.tmLanguage",
 							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 627.0,
+						"translation.y": 709.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 887,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								887,
+								887
+							]
+						],
+						"settings":
+						{
+							"color_scheme": "Packages/User/Color Highlighter/themes/Monokai (SL).tmTheme",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"word_wrap": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -1129,18 +1162,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -1166,12 +1192,20 @@
 		"selected_items":
 		[
 			[
-				"grunt",
-				"Gruntfile.js"
-			],
-			[
 				"home",
 				"app\\partials\\home.html"
+			],
+			[
+				"index.dist",
+				"app\\index.html.dist"
+			],
+			[
+				"index",
+				"app\\index.html"
+			],
+			[
+				"grunt",
+				"Gruntfile.js"
 			],
 			[
 				"menu",
@@ -1220,10 +1254,6 @@
 			[
 				"index.html.dis",
 				"app\\index.html.dist"
-			],
-			[
-				"index",
-				"app\\index.html"
 			],
 			[
 				"votescontro",
@@ -1512,7 +1542,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

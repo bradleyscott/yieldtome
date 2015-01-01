@@ -4,6 +4,8 @@
     <img class="circle pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}"  ng-show="attendee.Profile" ng-click="showProfile(attendee.Profile.ProfileID)">
 </div>
 <div class="row-content">
+    <!-- Chat button -->
+    <button class="btn btn-default btn-lg mdi-communication-chat pull-right" ng-click="showChat(attendee.AttendeeID)" ng-show="attendee.Profile && attendee.Profile.ProfileID != profile.ProfileID"></button>
     <!-- Edit attendee button -->
     <button class="btn btn-default btn-lg mdi-content-create pull-right" ng-click="editAttendee(attendee.AttendeeID)" ng-show="isCreator || attendee.Profile.ProfileID == profile.ProfileID"></button>
     <!-- Names -->

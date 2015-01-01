@@ -45,7 +45,7 @@ describe('The CreateOtherAttendee controller', function() {
   
             initializeController();
 
-            expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't have enough information to allow you to create attendees");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("We don't have enough information to allow you to add delegations");
         });
 
         it("should set the profile and event properties if the correct values are in session", function() {
@@ -106,7 +106,7 @@ describe('The CreateOtherAttendee controller', function() {
             $scope.save();
             $scope.$digest();
 
-            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to create this Attendee. EpicFail");
+            expect(growl.addErrorMessage).toHaveBeenCalledWith("Something went wrong trying to add this delegation. EpicFail");
         });
     });
 });

@@ -1,0 +1,66 @@
+<ytm-menu></ytm-menu>
+<div class="container body-content">
+    <div class="list-group" style="margin-top:20px">
+        <div class="list-group-item" style="margin-bottom:10px">
+            <div class="row-picture">
+                <!-- Profile picture -->
+                <img class="circle pull-left" ng-src="img/profile.jpg" ng-hide="attendee.Profile">
+                <img class="circle pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}" ng-show="attendee.Profile" ng-click="showProfile(attendee.Profile.ProfileID)">
+            </div>
+            <div class="row-content">
+                <!-- Names -->
+                <h4 class="list-group-item-heading">{{attendee.Name}}</h4>
+                <p class="list-group-item-text">{{attendee.Profile.Name}}</p>
+            </div>
+        </div>
+    </div>
+    <!-- No messages -->
+    <div class="well" ng-show="messages.length == 0">You have not yet exchanged any messages with {{attendee.Name}}</div>
+    <!-- Search messages  -->
+    <div class="form-group" ng-show="messages.length > 50">
+        <div class="input-group">
+            <span class="input-group-addon">
+                <span class="glyphicon glyphicon-search"></span>
+            </span>
+            <input type="text" class="form-control" ng-model="query" placeholder="Search messages..." />
+        </div>
+    </div>
+    <!-- Message list -->
+    <div class="list-group" style="margin-bottom:60px; height:50vh; overflow-y:scroll;" scroll-glue ng-hide="messages.length==0">
+        <div ng-animate="'animate'" ng-repeat="message in messages  | filter:query">
+            <!-- Right align messages from other Attendee-->
+            <div class="list-group-item" ng-show="message.senderID != sender.AttendeeID">
+                <div class="pull-right" style="margin-left:10px">
+                    <!-- Profile picture -->
+                    <img class="circle" style="height:40px" ng-src="img/profile.jpg" ng-hide="attendee.Profile">
+                    <img class="circle" style="height:40px" ng-src="{{attendee.Profile.ProfilePictureUri}}" ng-show="attendee.Profile" ng-click="showProfile(attendee.Profile.ProfileID)">
+                </div>
+                <div class="well pull-right" style="padding:10px; max-width:60%">
+                    <div>{{message.message}}</div>
+                    <span am-time-ago="message.createdAt" style="font-size:x-small"></span>
+                </div>
+
+            </div>
+            <!-- Left align messages from this Attendee-->
+            <div class="list-group-item" ng-show="message.senderID == sender.AttendeeID">
+                <div class="pull-left" style="margin-right:10px">
+                    <!-- Profile picture -->
+                    <img class="circle" style="height:40px" ng-src="{{sender.Profile.ProfilePictureUri}}">
+                </div>
+                <div class="well pull-left" style="padding:10px; max-width:60%">
+                    <div>{{message.message}}</div>
+                    <span am-time-ago="message.createdAt" style="font-size:x-small"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Send Message footer-->
+    <div style="position:absolute; bottom:0px; height:60px; max-width:1140px; background-color:#EEEEEE;">
+        <div class="input-group" style="margin-top:10px">
+            <textarea type="text" class="form-control" ng-model="messageToSend" ng-keyPress="checkForEnter($event)" placeholder="Message to {{attendee.Name}}" autofocus></textarea>
+            <span class="input-group-btn">
+                <button class="btn btn-default btn-lg mdi-content-send" type="button" ng-click="sendMessage()"></button>
+            </span>
+        </div>
+    </div>
+</div>

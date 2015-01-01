@@ -7,7 +7,7 @@ angular.module('yieldtome.services')
 
         this.set = function(key, value)
         {
-            $log.debug('Saving to session- ' + key + ':' + value);
+            $log.debug('Saving to session- ' + key + ':' + JSON.stringify(value));
             $window.sessionStorage[key] = JSON.stringify(value);
         };
 

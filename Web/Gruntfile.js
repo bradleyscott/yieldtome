@@ -20,9 +20,13 @@ module.exports = function(grunt) {
         },
         replace: {
             test: {
-                src: ['dist/js/yieldtome.js'],
+                src: ['dist/js/yieldtome.js','dist/index.html'],
                 overwrite: true,
                 replacements: [{
+                  from: "localhost:1337",
+                  to: "chat-api.yieldto.me:1337"
+                },
+                {
                   from: "233412823470428",
                   to: "120213154812744"
                 },
@@ -32,9 +36,13 @@ module.exports = function(grunt) {
                 }]
             },
             beta: { 
-				src: ['dist/js/yieldtome.js'],
+				src: ['dist/js/yieldtome.js', 'dist/index.html'],
 				overwrite: true,
 				replacements: [{
+                  from: "localhost:1337",
+                  to: "chat-api.yieldto.me:1338"
+                },
+                {
 				  from: "233412823470428",
 				  to: "120213154812744"
 				},
@@ -104,8 +112,13 @@ module.exports = function(grunt) {
                         'bower_components/angulartics/dist/angulartics-ga.min.js',
                         'bower_components/bootstrap-material-design/dist/js/ripples.min.js',
                         'bower_components/bootstrap-material-design/dist/js/material.min.js',
-                        'bower_components/underscore/underscore-min.js'
-                    ],
+                        'bower_components/underscore/underscore-min.js',
+                        'bower_components/underscore/underscore-min.map',
+                        'bower_components/angularjs-scroll-glue/src/scrollglue.js',
+                        'bower_components/moment/min/moment.min.js',
+                        'bower_components/angular-moment/angular-moment.min.js',
+                        'bower_components/angular-moment/angular-moment.min.js.map'
+                   ],
                     dest: 'dist/js',
                     flatten: true
                 }, { // Move font dependencies

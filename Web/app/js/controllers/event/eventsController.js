@@ -4,8 +4,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Events', ['$scope', '$location', '$log', 'growl', 'SessionService', 'EventService', 'AttendeeService',
-    function($scope, $location, $log, growl, SessionService, EventService, AttendeeService) {
+.controller('Events', ['$scope', '$location', '$window', '$log', 'growl', 'SessionService', 'EventService', 'AttendeeService',
+    function($scope, $location, $window, $log, growl, SessionService, EventService, AttendeeService) {
 
         $log.debug("Events controller executing");
 
@@ -15,7 +15,7 @@ angular.module('yieldtome.controllers')
         $scope.attendees; // Attendees for the selected Event
 
         $scope.$back = function() {
-            window.history.back();
+            $window.history.back();
         };
 
         // Redirects to the View Profile page

@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Attendees', ['$scope', '$log', '$location', 'growl', 'SessionService', 'AttendeeService',
-    function($scope, $log, $location, growl, SessionService, AttendeeService) {
+.controller('Attendees', ['$scope', '$log', '$location', 'growl', 'SessionService', 'AttendeeService', 'ChatService',
+    function($scope, $log, $location, growl, SessionService, AttendeeService, ChatService) {
 
         $log.debug("Attendees controller executing");
 
@@ -18,6 +18,14 @@ angular.module('yieldtome.controllers')
             if(profileID != null && profileID != 0) {
                 $log.debug('Redirecting to View profile ' + profileID);
                 $location.path("/viewProfile/" + profileID);
+            }
+        };
+
+        // Redirects to the Chat page
+        $scope.showChat = function(attendeeID) {
+            if(attendeeID != null && attendeeID != 0) {
+                $log.debug('Redirecting to Chat with AttendeeID ' + attendeeID);
+                $location.path("/attendees/" + attendeeID + '/chat');
             }
         };
 
@@ -65,7 +73,15 @@ angular.module('yieldtome.controllers')
             .catch (function(error) {
                 $log.warn(error);
                 growl.addErrorMessage("Something went wrong trying to get the list of Attendees");
-            });                
+            });      
+
+            // Subscribe to incoming messages
+            ChatService.subscribeToMessages($scope.attendee.AttendeeID, function(message){
+                AttendeeService.getAttendee(message.senderID).then(function(sender) {
+                    var htmlAlert = "<a href='#/attendees/" + sender.AttendeeID + "/chat'><strong>Message from " + sender.Name + "</strong><br>" + message.message + "</a>"
+                    growl.addInfoMessage(htmlAlert, {ttl: -1});
+                });
+            });
         })();
 
     }
