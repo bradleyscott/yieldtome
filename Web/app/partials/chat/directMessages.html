@@ -1,6 +1,8 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
     <div class="list-group" style="margin-top:20px">
+        <!-- Send message button -->
+        <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="showSend()"></button>
         <div class="list-group-item" style="margin-bottom:10px">
             <div class="row-picture">
                 <!-- Profile picture -->
@@ -26,7 +28,7 @@
         </div>
     </div>
     <!-- Message list -->
-    <div class="list-group" style="margin-bottom:60px; height:50vh; overflow-y:scroll;" scroll-glue ng-hide="messages.length==0">
+    <div class="list-group" style="margin-bottom:60px; height:60vh; overflow-y:scroll;" scroll-glue ng-hide="messages.length==0">
         <div ng-animate="'animate'" ng-repeat="message in messages  | filter:query">
             <!-- Right align messages from other Attendee-->
             <div class="list-group-item" ng-show="message.senderID != sender.AttendeeID">
@@ -52,15 +54,6 @@
                     <span am-time-ago="message.createdAt" style="font-size:x-small"></span>
                 </div>
             </div>
-        </div>
-    </div>
-    <!-- Send Message footer-->
-    <div style="position:absolute; bottom:0px; height:60px; max-width:1140px; background-color:#EEEEEE;">
-        <div class="input-group" style="margin-top:10px">
-            <textarea type="text" class="form-control" ng-model="messageToSend" ng-keyPress="checkForEnter($event)" placeholder="Message to {{attendee.Name}}" autofocus></textarea>
-            <span class="input-group-btn">
-                <button class="btn btn-default btn-lg mdi-content-send" type="button" ng-click="sendMessage()"></button>
-            </span>
         </div>
     </div>
 </div>

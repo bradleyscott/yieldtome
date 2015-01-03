@@ -2,7 +2,7 @@
 
 describe('The DirectMessage controller', function() {
 
-    var $controller, $log, $scope, $location, $routeParams, $q, growl, SessionService, AttendeeService, ChatService;
+    var $controller, $log, $scope, $location, $routeParams, $q, $modal, growl, SessionService, AttendeeService, ChatService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -18,6 +18,7 @@ describe('The DirectMessage controller', function() {
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
+            $modal = jasmine.createSpyObj('$modal', ['open']);
             AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendee']);
             ChatService = jasmine.createSpyObj('ChatService', ['subscribeToMessages', 'getMessages', 'sendMessage']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
@@ -37,6 +38,7 @@ describe('The DirectMessage controller', function() {
             $location: $location,
             $log: $log,
             $routeParams: $routeParams,
+            $modal: $modal,
             growl: growl,
             SessionService: SessionService,
             AttendeeService: AttendeeService,
@@ -111,8 +113,7 @@ describe('The DirectMessage controller', function() {
          });
 
         it("that should not do anything if there is no message to send", function(){
-            $scope.messageToSend = "";
-            $scope.sendMessage();
+            $scope.sendMessage("");
 
             expect(ChatService.sendMessage).not.toHaveBeenCalled();
         });
@@ -122,8 +123,7 @@ describe('The DirectMessage controller', function() {
             sendMessageResponse.reject('EpicFail');
             ChatService.sendMessage.andReturn(sendMessageResponse.promise);
 
-            $scope.messageToSend = "Test message";
-            $scope.sendMessage();
+            $scope.sendMessage("Test message");
             $scope.$digest();
 
             expect(growl.addErrorMessage).toHaveBeenCalled();
@@ -139,8 +139,7 @@ describe('The DirectMessage controller', function() {
             getMessagesResponse.resolve(messages);
             ChatService.getMessages.andReturn(getMessagesResponse.promise);
 
-            $scope.messageToSend = "Test message";
-            $scope.sendMessage();
+            $scope.sendMessage("Test message");
             $scope.$digest();
             
             expect($scope.messages.length).toBe(2);

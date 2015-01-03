@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('DirectMessage', ['$scope', '$location', '$log', '$routeParams', 'growl', 'SessionService', 'ChatService', 'AttendeeService',
-    function($scope, $location, $log, $routeParams, growl, SessionService, ChatService, AttendeeService) {
+.controller('DirectMessage', ['$scope', '$location', '$log', '$routeParams', '$modal', 'growl', 'SessionService', 'ChatService', 'AttendeeService',
+    function($scope, $location, $log, $routeParams, $modal, growl, SessionService, ChatService, AttendeeService) {
 
         $log.debug("DirectMessage controller executing");
 
@@ -12,7 +12,6 @@ angular.module('yieldtome.controllers')
         $scope.sender; // This user's Attendee context
         $scope.attendee; // The Attendee to receive DirectMessages 
         $scope.messages; 
-        $scope.messageToSend = "";
 
         $scope.$back = function() {
             $window.history.back();
@@ -27,21 +26,37 @@ angular.module('yieldtome.controllers')
         };
 
         $scope.checkForEnter = function(e) {
-            if (e.keyCode == 13){ $scope.sendMessage(); }
+            if (e.keyCode == 13){ 
+                var message = e.target.value;
+
+                if(message.length != 0) {
+                    $scope.sendMessage(message);
+                    $scope.sendConfirm.close();   
+                };       
+            }; 
         };
 
-        $scope.sendMessage = function() {
+        // Opens the send message modal
+        $scope.showSend = function() {
+            $scope.sendConfirm = $modal.open({ 
+                templateUrl: 'partials/chat/sendMessage.html',
+                scope: $scope
+            }); 
+        };
+
+        // Is called when the cancel or 'x' buttons are clicked on the modal 
+        $scope.cancelSend = function() {
+            $scope.sendConfirm.dismiss();
+        };
+
+        $scope.sendMessage = function(messageToSend) {
             $log.debug('DirectMessage.sendMessage() starting');
 
-            if($scope.messageToSend.length == 0) {
-                $log.debug('No message to send');
-                return;
-            };
+            if(messageToSend == null || messageToSend.length == 0) { return; }
 
-            ChatService.sendMessage($scope.sender.AttendeeID, $scope.attendee.AttendeeID, $scope.messageToSend)
+            ChatService.sendMessage($scope.sender.AttendeeID, $scope.attendee.AttendeeID, messageToSend)
             .then(function(message) { // It all went well 
                 $scope.updateMessages($scope.sender.AttendeeID, $scope.attendee.AttendeeID);
-                $scope.messageToSend = "";
             })
             .catch (function(error) { // The service crapped out
                 $log.warn(error);
@@ -55,7 +70,7 @@ angular.module('yieldtome.controllers')
 
             ChatService.getMessages(senderID, recipientID)
             .then(function(messages) {
-             $scope.messages = messages;
+                $scope.messages = messages;
             })
             .catch (function(error) {
                 $log.warn(error);
