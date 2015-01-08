@@ -2,11 +2,9 @@
 <div class="container body-content">
     <div>
         <h2>{{list.Name}}</h2>
-        <button type="button" class="btn btn-primary btn-fab btn-raised mdi-action-settings pull-right" ng-click="showSettings()" ng-show="isCreator"></button>
-        <div class="well" ng-show="speakers.length == 0">There are not any Speakers on this Speakers list</div>
-        <div class="row" ng-show="speakers.length > 0">
+        <div class="row">
             <!-- Next speaker -->
-            <div class="col-md-3 hidden-sm hidden-xs">
+            <div class="col-md-3 hidden-sm hidden-xs" ng-show="speakers.length > 0">
                 <h3>Next Speaker</h3>
                 <div class="thumbnail">
                     <div ng-show="speakers[0].Attendee.Profile">
@@ -33,6 +31,7 @@
             </div>
             <!-- Speakers list -->
             <div class="col-md-9">
+                <button type="button" class="btn btn-primary btn-fab btn-raised mdi-action-settings pull-right" ng-click="showSettings()" ng-show="isCreator"></button>
                 <!-- Speakers functions -->
                 <div class="btn-group">
                     <!-- Add myself as a Speaker -->
@@ -71,5 +70,6 @@
                 </div>
             </div>
         </div>
+        <div class="well" ng-show="speakers.length == 0">There are not any Speakers on this Speakers list</div>
     </div>
 </div>
