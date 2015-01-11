@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('DirectMessage', ['$scope', '$location', '$log', '$routeParams', '$modal', 'growl', 'SessionService', 'ChatService', 'AttendeeService',
-    function($scope, $location, $log, $routeParams, $modal, growl, SessionService, ChatService, AttendeeService) {
+.controller('DirectMessage', ['$scope', '$location', '$log', '$routeParams', '$modal', '$interval', 'growl', 'SessionService', 'ChatService', 'AttendeeService',
+    function($scope, $location, $log, $routeParams, $modal, $interval, growl, SessionService, ChatService, AttendeeService) {
 
         $log.debug("DirectMessage controller executing");
 
@@ -65,10 +65,10 @@ angular.module('yieldtome.controllers')
             });
         };
 
-        $scope.updateMessages = function(senderID, recipientID){
+        $scope.updateMessages = function(){
             $log.debug('DirectMessage.updateMessages() starting');
 
-            ChatService.getMessages(senderID, recipientID)
+            ChatService.getMessages($scope.sender.AttendeeID, $scope.attendee.AttendeeID)
             .then(function(messages) {
                 $scope.messages = messages.reverse();
             })
@@ -94,11 +94,21 @@ angular.module('yieldtome.controllers')
             AttendeeService.getAttendee(recipientID)
             .then(function(recipient) {
                 $scope.attendee = recipient;
-                $scope.updateMessages($scope.sender.AttendeeID, $scope.attendee.AttendeeID);
+                $scope.updateMessages();
+                $scope.intervalPromise = $interval($scope.updateMessages, 15000);
             })
             .catch (function(error) {
                 $log.warn(error);
                 growl.addErrorMessage("Something went wrong trying to get this Attendee");
+            });
+
+            // Destroy the interval promise when this controller is destroyed
+            $scope.$on('$destroy', function() {
+                $log.debug("Destroying updateMessages interval timer");
+                if (angular.isDefined($scope.intervalPromise)) {
+                    $interval.cancel($scope.intervalPromise);
+                    $scope.intervalPromise = undefined;
+                }
             });
         })();
     }
