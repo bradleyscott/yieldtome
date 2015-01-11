@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>yieldto.me - helps delegates and the chair link up at Model UNs</title>
     <meta name="description" content="yieldto.me helps delegates and the chair link up at Model UNs. Delegates can use their phone, tablet or PC to- Send each other messages, Exchange secret 'Likes', Safely share contact details, Add themselves to Speakers lists and Vote on polls and motions">
     <link rel="stylesheet" href="../bower_components/bootstrap/dist/css/bootstrap.css" />
@@ -56,12 +56,12 @@
     <script src="../bower_components/bootstrap-material-design/dist/js/ripples.min.js"></script>
     <script src="../bower_components/bootstrap-material-design/dist/js/material.min.js"></script>
     <script src="../bower_components/underscore/underscore-min.js"></script>
-    <script src="../bower_components/angularjs-scroll-glue/src/scrollglue.js"></script>
     <script src="../bower_components/moment/moment.js"></script>
     <script src="../bower_components/angular-moment/angular-moment.js"></script>
 
     <!-- Load WebSocket libraries and config -->
-    <script src="http://localhost:1337/js/dependencies/sails.io.js"></script>
+    <script src="../bower_components/socket.io-client/socket.io.js"></script>
+    <script src="../bower_components/sails.io.js/sails.io.js"></script>
     <script type="text/javascript">io.sails.url ='http://localhost:1337';</script>
 
     <!-- Load yieldto.me App -->

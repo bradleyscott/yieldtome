@@ -70,7 +70,7 @@ angular.module('yieldtome.controllers')
 
             ChatService.getMessages(senderID, recipientID)
             .then(function(messages) {
-                $scope.messages = messages;
+                $scope.messages = messages.reverse();
             })
             .catch (function(error) {
                 $log.warn(error);

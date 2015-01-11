@@ -78,7 +78,8 @@ angular.module('yieldtome.controllers')
             // Subscribe to incoming messages
             ChatService.subscribeToMessages($scope.attendee.AttendeeID, function(message){
                 AttendeeService.getAttendee(message.senderID).then(function(sender) {
-                    var htmlAlert = "<a href='#/attendees/" + sender.AttendeeID + "/chat'><strong>Message from " + sender.Name + "</strong><br>" + message.message + "</a>"
+                    // Popup Alert
+                    var htmlAlert = "<a href='#/attendees/" + sender.AttendeeID + "/chat?" + message.id + "'><strong>Message from " + sender.Name + "</strong><br>" + message.message + "</a>"
                     growl.addInfoMessage(htmlAlert, {ttl: -1});
                 });
             });

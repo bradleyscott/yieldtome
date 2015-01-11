@@ -9,7 +9,11 @@ angular.module('yieldtome.services')
 
             $log.debug('Trying to create subscription for DirectMessages for AttendeeID: ' + attendeeID);
 
-            if(!io.socket.alreadyListeningToDirectMessages) {
+            if(io.socket.alreadyListeningToDirectMessages == attendeeID) {                
+                $log.debug('Already subscribed to DirectMessages');
+            }
+            else
+            {
 	            io.socket.on("directmessage", function(message) {
 
 	                if (message.data.recipientID == SessionService.get('attendee').AttendeeID && message.verb == 'created') {
@@ -26,12 +30,8 @@ angular.module('yieldtome.services')
 	                $log.debug("Whoa. There has been " + data.length + " yieldto.me DirectMessages sent");
 	            });
 
-	            io.socket.alreadyListeningToDirectMessages = true;
-            }
-            else 
-            {
-                $log.debug('Already subscribed to DirectMessages');
-            }
+	            io.socket.alreadyListeningToDirectMessages = attendeeID;
+            };
         };
 
         this.getMessages = function(senderID, recipientID) {

@@ -28,8 +28,8 @@
         </div>
     </div>
     <!-- Message list -->
-    <div class="list-group" style="margin-bottom:60px; height:60vh; overflow-y:scroll;" scroll-glue ng-hide="messages.length==0">
-        <div ng-animate="'animate'" ng-repeat="message in messages  | filter:query">
+    <div class="list-group" ng-hide="messages.length==0">
+        <div ng-animate="'animate'" ng-repeat="message in messages | filter:query">
             <!-- Right align messages from other Attendee-->
             <div class="list-group-item" ng-show="message.senderID != sender.AttendeeID">
                 <div class="pull-right" style="margin-left:10px">
@@ -37,9 +37,9 @@
                     <img class="circle" style="height:40px" ng-src="img/profile.jpg" ng-hide="attendee.Profile">
                     <img class="circle" style="height:40px" ng-src="{{attendee.Profile.ProfilePictureUri}}" ng-show="attendee.Profile" ng-click="showProfile(attendee.Profile.ProfileID)">
                 </div>
-                <div class="well pull-right" style="padding:10px; max-width:60%">
+                <div class="well pull-right" style="padding:10px; max-width:60%" ng-click="showMessage{{message.id}}Time=!showMessage{{message.id}}Time">
                     <div>{{message.message}}</div>
-                    <span am-time-ago="message.createdAt" style="font-size:x-small"></span>
+                    <span am-time-ago="message.createdAt" style="font-size:x-small" ng-show="showMessage{{message.id}}Time"></span>
                 </div>
 
             </div>
@@ -49,9 +49,9 @@
                     <!-- Profile picture -->
                     <img class="circle" style="height:40px" ng-src="{{sender.Profile.ProfilePictureUri}}">
                 </div>
-                <div class="well pull-left" style="padding:10px; max-width:60%">
+                <div class="well pull-left" style="padding:10px; max-width:60%" ng-click="showMessage{{message.id}}Time=!showMessage{{message.id}}Time">
                     <div>{{message.message}}</div>
-                    <span am-time-ago="message.createdAt" style="font-size:x-small"></span>
+                    <span am-time-ago="message.createdAt" style="font-size:x-small" ng-show="showMessage{{message.id}}Time"></span>
                 </div>
             </div>
         </div>

@@ -116,10 +116,11 @@ module.exports = function(grunt) {
                         'bower_components/bootstrap-material-design/dist/js/material.min.js',
                         'bower_components/underscore/underscore-min.js',
                         'bower_components/underscore/underscore-min.map',
-                        'bower_components/angularjs-scroll-glue/src/scrollglue.js',
                         'bower_components/moment/min/moment.min.js',
                         'bower_components/angular-moment/angular-moment.min.js',
                         'bower_components/angular-moment/angular-moment.min.js.map'
+                        'bower_components/socket.io-client/socket.io.js',
+                        'bower_components/sails.io.js/sails.io.js',
                    ],
                     dest: 'dist/js',
                     flatten: true

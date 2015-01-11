@@ -17,7 +17,6 @@ angular.module('yieldtome', [
     'ngSanitize',
     'ngAnimate',
     'angulartics', 
-    'luegg.directives', // Scroll glue
     'angulartics.google.analytics',
     'angularMoment'
     ])
