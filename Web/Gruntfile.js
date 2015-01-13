@@ -39,8 +39,8 @@ module.exports = function(grunt) {
 				src: ['dist/js/yieldtome.js', 'dist/index.html'],
 				overwrite: true,
 				replacements: [{
-                  from: "localhost:1337",
-                  to: "chat-api.yieldto.me:1338"
+                  from: "http://localhost:1337",
+                  to: "https://chat-api.yieldto.me:1338"
                 },
                 {
 				  from: "233412823470428",
