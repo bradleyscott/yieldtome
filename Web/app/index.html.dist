@@ -60,6 +60,7 @@
     <script src="js/scrollglue.js"></script>
     <script src="js/moment.min.js"></script>
     <script src="js/angular-moment.min.js"></script>
+    <script src="js/angular-notification.min.js"></script>
 
     <!-- Load WebSocket libraries and config -->
     <script src="js/socket.io.js"></script>

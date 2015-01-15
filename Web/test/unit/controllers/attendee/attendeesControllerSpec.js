@@ -2,7 +2,7 @@
 
 describe('The Attendees controller', function() {
 
-    var $controller, $log, $scope, $location, $q, growl, SessionService, AttendeeService, ChatService;
+    var $controller, $log, $scope, $location, $q, growl, Notification, SessionService, AttendeeService, ChatService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -18,6 +18,7 @@ describe('The Attendees controller', function() {
 
             // Create Mocks 
             $location = jasmine.createSpyObj('$location', ['path']);
+            Notification = jasmine.createSpyObj('Notification', ['new']);
             AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendees']);
             ChatService = jasmine.createSpyObj('ChatService', ['subscribeToMessages', 'getMesages', 'sendMessage']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
@@ -32,6 +33,7 @@ describe('The Attendees controller', function() {
             $log: $log,
             $location: $location,
             growl: growl,
+            Notification: Notification,
             SessionService: SessionService,
             AttendeeService: AttendeeService,
             ChatService: ChatService

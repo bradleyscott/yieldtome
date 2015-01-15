@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('Attendees', ['$scope', '$log', '$location', 'growl', 'SessionService', 'AttendeeService', 'ChatService',
-    function($scope, $log, $location, growl, SessionService, AttendeeService, ChatService) {
+.controller('Attendees', ['$scope', '$log', '$location', 'growl', 'Notification', 'SessionService', 'AttendeeService', 'ChatService',
+    function($scope, $log, $location, growl, Notification, SessionService, AttendeeService, ChatService) {
 
         $log.debug("Attendees controller executing");
 
@@ -15,7 +15,7 @@ angular.module('yieldtome.controllers')
 
         // Redirects to the View Profile page
         $scope.showProfile = function(profileID) {
-            if(profileID != null && profileID != 0) {
+            if (profileID != null && profileID != 0) {
                 $log.debug('Redirecting to View profile ' + profileID);
                 $location.path("/viewProfile/" + profileID);
             }
@@ -23,7 +23,7 @@ angular.module('yieldtome.controllers')
 
         // Redirects to the Chat page
         $scope.showChat = function(attendeeID) {
-            if(attendeeID != null && attendeeID != 0) {
+            if (attendeeID != null && attendeeID != 0) {
                 $log.debug('Redirecting to Chat with AttendeeID ' + attendeeID);
                 $location.path("/attendees/" + attendeeID + '/chat');
             }
@@ -35,7 +35,7 @@ angular.module('yieldtome.controllers')
         };
 
         $scope.editAttendee = function(attendeeID) {
-            if(attendeeID != null && attendeeID != 0) {
+            if (attendeeID != null && attendeeID != 0) {
                 $log.debug('Redirecting to Edit Attendee ' + attendeeID);
                 $location.path("/editAttendee/" + attendeeID);
             }
@@ -48,14 +48,13 @@ angular.module('yieldtome.controllers')
             $scope.attendee = SessionService.get('attendee');
 
             // Display an error if you don't have the right event
-            if($scope.event == 'undefined' || $scope.event == undefined)
-            { 
+            if ($scope.event == 'undefined' || $scope.event == undefined) {
                 growl.addErrorMessage("We don't know what Event you're attending");
-                return; 
+                return;
             }
 
             // Set the creator flag
-            if($scope.event.CreatorID == $scope.profile.ProfileID) {
+            if ($scope.event.CreatorID == $scope.profile.ProfileID) {
                 $scope.isCreator = true;
             }
 
@@ -63,24 +62,39 @@ angular.module('yieldtome.controllers')
             var attendeesPromise = AttendeeService.getAttendees($scope.event);
 
             attendeesPromise.then(function(attendees) {
-                var myAttendee = _.findWhere(attendees, { AttendeeID: $scope.attendee.AttendeeID });
-                var attendeeIndex = attendees.indexOf(myAttendee);
-                attendees.splice(attendeeIndex, 1);
-                
-                $scope.attendees = attendees;
-                $log.debug($scope.attendees.length + ' Attendees who are not this user');
-            })
-            .catch (function(error) {
-                $log.warn(error);
-                growl.addErrorMessage("Something went wrong trying to get the list of Attendees");
-            });      
+                    var myAttendee = _.findWhere(attendees, {
+                        AttendeeID: $scope.attendee.AttendeeID
+                    });
+                    var attendeeIndex = attendees.indexOf(myAttendee);
+                    attendees.splice(attendeeIndex, 1);
+
+                    $scope.attendees = attendees;
+                    $log.debug($scope.attendees.length + ' Attendees who are not this user');
+                })
+                .catch(function(error) {
+                    $log.warn(error);
+                    growl.addErrorMesksage("Something went wrong trying to get the list of Attendees");
+                });
 
             // Subscribe to incoming messages
-            ChatService.subscribeToMessages($scope.attendee.AttendeeID, function(message){
+            ChatService.subscribeToMessages($scope.attendee.AttendeeID, function(message) {
                 AttendeeService.getAttendee(message.senderID).then(function(sender) {
-                    // Popup Alert
-                    var htmlAlert = "<a href='#/attendees/" + sender.AttendeeID + "/chat?" + message.id + "'><strong>Message from " + sender.Name + "</strong><br>" + message.message + "</a>"
-                    growl.addInfoMessage(htmlAlert, {ttl: -1});
+
+                    var title = "Message from " + sender.Name;
+
+                    if (!("Notification" in window)) { // Does browser support Notifications
+                        // Popup Alert in-app
+                        var htmlAlert = "<a href='#/attendees/" + sender.AttendeeID + "/chat?" + message.id + "'><strong>" + title + "</strong><br>" + message.message + "</a>"
+                        growl.addInfoMessage(htmlAlert, {
+                            ttl: -1
+                        });
+                    } else { // Popup native notification
+                        new Notification(title, {
+                            body: message.message,
+                            icon: 'img/Attendees_Thumbnail.jpg',
+                            delay: 10000, // in ms
+                        });
+                    }
                 });
             });
         })();

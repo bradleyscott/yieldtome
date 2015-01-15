@@ -18,7 +18,8 @@ angular.module('yieldtome', [
     'ngAnimate',
     'angulartics', 
     'angulartics.google.analytics',
-    'angularMoment'
+    'angularMoment',
+    'notification'
     ])
 
 // Configure routes

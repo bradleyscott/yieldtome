@@ -120,7 +120,9 @@ module.exports = function(grunt) {
                         'bower_components/angular-moment/angular-moment.min.js',
                         'bower_components/angular-moment/angular-moment.min.js.map',
                         'bower_components/socket.io-client/socket.io.js',
-                        'bower_components/sails.io.js/sails.io.js'
+                        'bower_components/sails.io.js/sails.io.js',
+                        'bower_components/angular-notification/angular-notification.min.js',
+                        'bower_components/angular-notification/angular-notification.min.map'
                    ],
                     dest: 'dist/js',
                     flatten: true
