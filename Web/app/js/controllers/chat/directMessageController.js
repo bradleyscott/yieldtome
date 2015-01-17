@@ -2,8 +2,8 @@
 
 angular.module('yieldtome.controllers')
 
-.controller('DirectMessage', ['$scope', '$location', '$log', '$routeParams', '$modal', '$interval', 'growl', 'SessionService', 'ChatService', 'AttendeeService',
-    function($scope, $location, $log, $routeParams, $modal, $interval, growl, SessionService, ChatService, AttendeeService) {
+.controller('DirectMessage', ['$scope', '$location', '$log', '$routeParams', '$modal', '$interval', 'growl', 'SessionService', 'ChatService', 'AttendeeService', 'LikeService',
+    function($scope, $location, $log, $routeParams, $modal, $interval, growl, SessionService, ChatService, AttendeeService, LikeService) {
 
         $log.debug("DirectMessage controller executing");
 
@@ -12,6 +12,73 @@ angular.module('yieldtome.controllers')
         $scope.sender; // This user's Attendee context
         $scope.attendee; // The Attendee to receive DirectMessages 
         $scope.messages; 
+        $scope.doesLikeExist = false;
+        $scope.isLikeRequited = false;
+
+        // Opens the Like modal
+        $scope.showLike = function() {
+            $scope.likeConfirm = $modal.open({ 
+                templateUrl: 'partials/chat/likeAttendee.html',
+                scope: $scope
+            }); 
+
+            $scope.likeConfirm.result.then(function() { // Respond if user clicks like
+                $scope.likeAttendee();
+            },
+            function(){ // Respond if user cancels
+                $log.debug('User cancelled Like');
+            });
+        };
+
+        // Is called when the delete button is clicked on the modal
+        $scope.confirmLike = function() {
+            $scope.likeConfirm.close();
+        };
+
+        // Is called when the cancel or 'x' buttons are clicked on the modal 
+        $scope.cancelLike = function() {
+            $scope.likeConfirm.dismiss();
+        };
+
+        $scope.likeAttendee = function(){
+            $log.debug('DirectMessage.likeAttendee() starting');
+
+            var promise = LikeService.createLike($scope.sender, $scope.attendee);
+            promise.then(function(data){
+                $scope.doesLikeExist = true;
+                $scope.isLikeRequited = data;
+                growl.addInfoMessage('You just liked ' + $scope.attendee.Name);  
+            })
+            .catch (function(error) { // The service crapped out
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to like " + $scope.attendee.Name + ". " + error);
+            });
+        };
+
+        $scope.refreshLikes = function() {
+            $log.debug('DirectMessage.refreshLikes() starting');
+
+            // Update doesLikeExist
+            LikeService.doesLikeExist($scope.sender, $scope.attendee)
+            .then(function(data) { // It all went well
+                $scope.doesLikeExist = data;
+
+                if(data) { // Find out if the like is requited
+                    var requitedPromise = LikeService.isLikeRequited($scope.sender, $scope.attendee);
+                    requitedPromise.then(function(data) {
+                        $scope.isLikeRequited = data;
+                    })
+                    .catch(function(error) {
+                        $log.warn(error);
+                        growl.addErrorMessage("Something went wrong trying to determine if " + $scope.attendee.Name + " likes you. " + error);
+                    });
+                }
+            })
+            .catch (function(error) { // The service crapped out
+                $log.warn(error);
+                growl.addErrorMessage("Something went wrong trying to determine if " + $scope.attendee.Name + " likes you. " + error);
+            });
+        };
 
         $scope.$back = function() {
             $window.history.back();
@@ -32,8 +99,8 @@ angular.module('yieldtome.controllers')
                 if(message.length != 0) {
                     $scope.sendMessage(message);
                     $scope.sendConfirm.close();   
-                };       
-            }; 
+                }       
+            }
         };
 
         // Opens the send message modal
@@ -84,9 +151,6 @@ angular.module('yieldtome.controllers')
             $scope.event = SessionService.get('event');
             $scope.sender = SessionService.get('attendee');
 
-            // Ugly hack to hide footer
-            angular.element("#footer").remove();
-
             // Get recipient Attendee
             $log.debug('Retrieving Recipient Attendee record');
             var recipientID = $routeParams.attendeeID;
@@ -96,6 +160,7 @@ angular.module('yieldtome.controllers')
                 $scope.attendee = recipient;
                 $scope.updateMessages();
                 $scope.intervalPromise = $interval($scope.updateMessages, 15000);
+                $scope.refreshLikes();
             })
             .catch (function(error) {
                 $log.warn(error);

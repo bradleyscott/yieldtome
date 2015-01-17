@@ -7,12 +7,8 @@
     </div>
     <!-- Add new Attendee button -->
     <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-show="isCreator" ng-click="newAttendee()"></button>
-    <!-- Attendee stats -->
     <div>
-        <h2 ng-show="attendees.length == 1">
-            <span class="label label-primary">1</span> Delegate</h2>
-        <h2 ng-show="attendees.length > 1">
-            <span class="label label-primary">{{attendees.length}}</span> Delegates</h2>
+        <h1>Chat</h1>
     </div>
     <!-- Attendee search  -->
     <div class="form-group" ng-show="attendees.length > 0">

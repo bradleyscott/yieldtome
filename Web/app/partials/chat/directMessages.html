@@ -3,6 +3,7 @@
     <div class="list-group" style="margin-top:20px">
         <!-- Send message button -->
         <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="showSend()"></button>
+        <button type="button" style="margin-right:10px" ng-click="showLike()" class="btn btn-danger btn-fab btn-raised mdi-action-favorite pull-right" ng-hide="doesLikeExist"></button>
         <div class="list-group-item" style="margin-bottom:10px">
             <div class="row-picture">
                 <!-- Profile picture -->

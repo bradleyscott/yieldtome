@@ -9,8 +9,8 @@ namespace yieldtome.Interfaces
     public interface ILikeService
     {
         bool DoesLikeExist(int likerID, int likedID); 
-        bool IsLikeRequited(int profileID1, int profileID2);
-        bool CreateLike(int likerID, int likedID);
+        bool IsLikeRequited(int attendeeID1, int attendeeID2);
+        bool CreateLike(int likerID, int likedID, string authHeader);
         void DeleteLike(int likeID);
     }
 }

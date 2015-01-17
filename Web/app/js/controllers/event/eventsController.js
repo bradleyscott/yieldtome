@@ -65,7 +65,6 @@ angular.module('yieldtome.controllers')
                             $log.debug('ProfileID ' + $scope.profile.ProfileID + ' is attending Event ' + selectedEvent.EventID);
                             $log.debug('Redirecting to landing page');
                             
-                            growl.addInfoMessage("You are attending " + selectedEvent.Name + " as " + attendees[i].Name);
                             SessionService.set('event', selectedEvent); // Save the selectedEvent to session
                             SessionService.set('attendee', attendees[i]); // Save the Attendee to session
                             $location.path('/attendees');

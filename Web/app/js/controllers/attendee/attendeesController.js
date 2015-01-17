@@ -73,7 +73,7 @@ angular.module('yieldtome.controllers')
                 })
                 .catch(function(error) {
                     $log.warn(error);
-                    growl.addErrorMesksage("Something went wrong trying to get the list of Attendees");
+                    growl.addErrorMessage("Something went wrong trying to get the list of Attendees");
                 });
 
             // Subscribe to incoming messages
@@ -84,7 +84,7 @@ angular.module('yieldtome.controllers')
 
                     if (!("Notification" in window)) { // Does browser support Notifications
                         // Popup Alert in-app
-                        var htmlAlert = "<a href='#/attendees/" + sender.AttendeeID + "/chat?" + message.id + "'><strong>" + title + "</strong><br>" + message.message + "</a>"
+                        var htmlAlert = "<a href='#/attendees/" + sender.AttendeeID + "/chat?" + message.id + "'><strong>" + title + "</strong><br>" + message.message + "</a>";
                         growl.addInfoMessage(htmlAlert, {
                             ttl: -1
                         });

@@ -9,20 +9,20 @@ angular.module('yieldtome.services')
             $log.debug('Attempting to determine if Like is requited');
             var deferred = $q.defer();
 
-            if (liker == null || liker.ProfileID == null) {
-                var error = 'An Liker Profile object with a ProfileID is needed';
+            if (liker == null || liker.AttendeeID == null) {
+                var error = 'An Liker Attendee object with an AttendeeID is needed';
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;
-            } else if (liked == null || liked.ProfileID == null) {
-                var error = 'A Liked Profile object with a ProfileID is needed';
+            } else if (liked == null || liked.AttendeeID == null) {
+                var error = 'A Liked Attendee object with a AttendeeID is needed';
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;
             }
 
             // PUT Likes?likerID=1&likedID=5
-            var url = ConfigService.apiUrl + 'Likes?likerID=' + liker.ProfileID + '&likedID=' + liked.ProfileID;
+            var url = ConfigService.apiUrl + 'Likes?likerID=' + liker.AttendeeID + '&likedID=' + liked.AttendeeID;
             $log.debug('Request Url: ' + url);
 
             $http.put(url).success(function(data) {
@@ -42,20 +42,20 @@ angular.module('yieldtome.services')
             $log.debug('Attempting to retrieve a Like');
             var deferred = $q.defer();
 
-            if (liker == null || liker.ProfileID == null) {
-                var error = 'An Liker Profile object with a ProfileID is needed';
+            if (liker == null || liker.AttendeeID == null) {
+                var error = 'An Liker Attendee object with an AttendeeID is needed';
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;
-            } else if (liked == null || liked.ProfileID == null) {
-                var error = 'A Liked Profile object with a ProfileID is needed';
+            } else if (liked == null || liked.AttendeeID == null) {
+                var error = 'A Liked Attendee object with a AttendeeID is needed';
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;
             }
 
             // GET Likes?likerID=1&likedID=5
-            var url = ConfigService.apiUrl + 'Likes?likerID=' + liker.ProfileID + '&likedID=' + liked.ProfileID;
+            var url = ConfigService.apiUrl + 'Likes?likerID=' + liker.AttendeeID + '&likedID=' + liked.AttendeeID;
             $log.debug('Request Url: ' + url);
 
             $http.get(url).success(function(data) {
@@ -75,20 +75,20 @@ angular.module('yieldtome.services')
             $log.debug('Attempting to create a new Like');
             var deferred = $q.defer();
 
-            if (liker == null || liker.ProfileID == null) {
-                var error = 'An Liker Profile object with a ProfileID is needed';
+             if (liker == null || liker.AttendeeID == null) {
+                var error = 'An Liker Attendee object with an AttendeeID is needed';
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;
-            } else if (liked == null || liked.ProfileID == null) {
-                var error = 'A Liked Profile object with a ProfileID is needed';
+            } else if (liked == null || liked.AttendeeID == null) {
+                var error = 'A Liked Attendee object with a AttendeeID is needed';
                 $log.warn(error);
                 deferred.reject(error);
                 return deferred.promise;
             }
 
             // POST Likes?likerID=1&likedID=5
-            var url = ConfigService.apiUrl + 'Likes?likerID=' + liker.ProfileID + '&likedID=' + liked.ProfileID;
+            var url = ConfigService.apiUrl + 'Likes?likerID=' + liker.AttendeeID + '&likedID=' + liked.AttendeeID;
             $log.debug('Request Url: ' + url);
 
             $http.post(url).success(function(data) {

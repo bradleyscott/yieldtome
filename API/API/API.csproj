@@ -337,6 +337,7 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
     <Compile Include="Controllers\AuthenticateController.cs" />
+    <Compile Include="Controllers\ChatController.cs" />
     <Compile Include="Controllers\LikesController.cs" />
     <Compile Include="Controllers\PostmanController.cs" />
     <Compile Include="Models\PostmanCollection.cs" />

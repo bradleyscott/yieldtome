@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <button type="button" class="close" ng-click="cancelLike()" aria-hidden="true">&times;</button>
+    <h4 class="modal-title">Like {{attendee.Name}}?</h4>
+</div>
+<div class="modal-body">
+    <p>{{attendee.Name}} will not be informed that you like them unless they also like you. If they do, you will each get a chat message</p>
+    Are you sure you want to like {{attendee.Name}}?
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-default" ng-click="cancelLike()">Cancel</button>
+    <button type="button" class="btn btn-danger" ng-click="confirmLike()">Like</button>
+</div>

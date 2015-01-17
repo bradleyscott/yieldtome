@@ -12,6 +12,12 @@ namespace yieldtome.API.Data.Services
     [Export(typeof(ILikeService))]
     public class LikeService : ILikeService
     {
+        [Import]
+        IAttendeeService _attendeeService;
+
+        [Import]
+        IChatService _chatService;
+
         public bool DoesLikeExist(int likerID, int likedID)
         {
             Logging.LogWriter.Write("Attempting to retrieve Like");
@@ -28,56 +34,61 @@ namespace yieldtome.API.Data.Services
                 return true;
             }
 
-            Logging.LogWriter.Write(String.Format("Profile with ProfileID={0} has not liked Profile with ProfileID={1}", likerID, likedID));
+            Logging.LogWriter.Write(String.Format("Attendee with AttendeeID={0} has not liked Attendee with AttendeeID={1}", likerID, likedID));
             return false;
         }
 
-        public bool IsLikeRequited(int profileID1, int profileID2)
+        public bool IsLikeRequited(int attendeeID1, int attendeeID2)
         {
-            Logging.LogWriter.Write(String.Format("Attempting to determine if Profiles with IDs {0} and {1} have requited likes", profileID1, profileID2));
+            Logging.LogWriter.Write(String.Format("Attempting to determine if Attendees with IDs {0} and {1} have requited likes", attendeeID1, attendeeID2));
 
             Like dbLike1, dbLike2;
             using (var db = new Database())
             {
-                dbLike1 = db.Likes.FirstOrDefault(x => x.LikerID == profileID1 && x.LikedID == profileID2 && x.DeletedTime == null);
-                dbLike2 = db.Likes.FirstOrDefault(x => x.LikerID == profileID2 && x.LikedID == profileID1 && x.DeletedTime == null);
+                dbLike1 = db.Likes.FirstOrDefault(x => x.LikerID == attendeeID1 && x.LikedID == attendeeID2 && x.DeletedTime == null);
+                dbLike2 = db.Likes.FirstOrDefault(x => x.LikerID == attendeeID2 && x.LikedID == attendeeID1 && x.DeletedTime == null);
             }
 
             if (dbLike1 != null && dbLike2 != null)
             {
-                Logging.LogWriter.Write(String.Format("Profiles with IDs {0} and {1} have requited likes", profileID1, profileID2));
+                Logging.LogWriter.Write(String.Format("Attendees with IDs {0} and {1} have requited likes", attendeeID1, attendeeID2));
                 return true;
             }
 
-            Logging.LogWriter.Write(String.Format("Profiles with IDs {0} and {1} do not have requited likes", profileID1, profileID2));
+            Logging.LogWriter.Write(String.Format("Attendees with IDs {0} and {1} do not have requited likes", attendeeID1, attendeeID2));
             return false;
         }
 
-        public bool CreateLike(int likerID, int likedID)
+        public bool CreateLike(int likerID, int likedID, string authHeader)
         {
             Logging.LogWriter.Write("Attempting to create a new Like");
 
-            if (AuthorizationHelper.IsCallerAllowedToEdit(likerID) == false)
+            yieldtome.Objects.Attendee liker = _attendeeService.GetAttendee(likerID);
+            if (liker == null)
             {
-                string message = String.Format("This user is not authorized to create a Like on behalf of ProfileID={0}", likerID);
+                string message = String.Format("No Attendee with AttendeeID={0} exists", likerID);
+                Logging.LogWriter.Write(message);
+                throw new ArgumentException(message);
+            }
+
+            if (liker.Profile == null || AuthorizationHelper.IsCallerAllowedToEdit(liker.Profile.ProfileID) == false)
+            {
+                string message = String.Format("This user is not authorized to create a Like on behalf of AttendeeID={0}", likerID);
                 Logging.LogWriter.Write(message);
                 throw new UnauthorizedAccessException(message);
             }
 
             if(DoesLikeExist(likerID, likedID))
             {
-                Logging.LogWriter.Write(String.Format("Profile with ProfileID={0} already likes Profile with ProfileID={1}", likerID, likedID));
+                Logging.LogWriter.Write(String.Format("Attendee with AttendeeID={0} already likes Attendee with AttendeeID={1}", likerID, likedID));
                 return IsLikeRequited(likerID, likedID);
             }
 
             Like dbLike;
             using (var db = new Database())
             {
-                Profile dbLiker = db.Profiles.FirstOrDefault(x => x.ProfileID == likerID);
-                if (dbLiker == null) throw new ArgumentException(String.Format("No Profile with ProfileID={0} exists", likerID));
-
-                Profile dbLiked = db.Profiles.FirstOrDefault(x => x.ProfileID == likedID);
-                if (dbLiked == null) throw new ArgumentException(String.Format("No Profile with ProfileID={0} exists", likedID));
+                Attendee dbLiked = db.Attendees.FirstOrDefault(x => x.AttendeeID == likedID);
+                if (dbLiked == null) throw new ArgumentException(String.Format("No Attendee with AttendeeID={0} exists", likedID));
 
                 dbLike = new Like
                 {
@@ -91,7 +102,14 @@ namespace yieldtome.API.Data.Services
             }
 
             Logging.LogWriter.Write(String.Format("Created a new Like with ID {0}", dbLike.LikeID));
-            return IsLikeRequited(likerID, likedID);        
+            bool isLikeRequited = IsLikeRequited(likerID, likedID);  
+      
+            if(isLikeRequited) // Send Chat messages letting each of the Attendees know they like each other
+            {
+                _chatService.SendMessage(likerID, likedID, "yieldto.me has figured out we both like each other ;)", authHeader);
+                _chatService.SendMessage(likedID, likerID, "yieldto.me has figured out we both like each other ;)", authHeader);
+            }
+            return isLikeRequited;
         }
 
         public void DeleteLike(int likeID)
@@ -103,9 +121,10 @@ namespace yieldtome.API.Data.Services
                 Like dbLike = db.Likes.FirstOrDefault(x => x.LikeID == likeID);
                 if (dbLike == null) throw new ArgumentException(String.Format("No Like with LikeID={0} exists", likeID));
 
-                if (AuthorizationHelper.IsCallerAllowedToEdit(dbLike.LikerID) == false)
+                yieldtome.Objects.Attendee liker = _attendeeService.GetAttendee(dbLike.LikerID);
+                if (liker == null || liker.Profile == null || AuthorizationHelper.IsCallerAllowedToEdit(liker.Profile.ProfileID) == false)
                 {
-                    string message = "This user is not authorized to delete this Like";
+                    string message = String.Format("This user is not authorized to delete a Like belonging of AttendeeID={0}", dbLike.LikerID);
                     Logging.LogWriter.Write(message);
                     throw new UnauthorizedAccessException(message);
                 }

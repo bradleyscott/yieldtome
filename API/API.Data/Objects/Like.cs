@@ -22,8 +22,8 @@ namespace yieldtome.API.Data.Objects
         public DateTime? DeletedTime { get; set; }
 
         [ForeignKey("LikerID")]
-        public virtual Profile Liker { get; set; }
+        public virtual Attendee Liker { get; set; }
         [ForeignKey("LikedID")]
-        public virtual Profile Liked { get; set; }
+        public virtual Attendee Liked { get; set; }
     }
 }

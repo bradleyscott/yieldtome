@@ -2,7 +2,7 @@
 
 describe('The DirectMessage controller', function() {
 
-    var $controller, $log, $scope, $location, $routeParams, $q, $modal, growl, SessionService, AttendeeService, ChatService;
+    var $controller, $log, $scope, $location, $routeParams, $q, $modal, growl, SessionService, LikeService, AttendeeService, ChatService;
 
     beforeEach(function() {
         module('yieldtome.services');
@@ -20,6 +20,7 @@ describe('The DirectMessage controller', function() {
             $location = jasmine.createSpyObj('$location', ['path']);
             $modal = jasmine.createSpyObj('$modal', ['open']);
             AttendeeService = jasmine.createSpyObj('AttendeeService', ['getAttendee']);
+            LikeService = jasmine.createSpyObj('LikeService', ['doesLikeExist', 'isLikeRequited', 'createLike']);
             ChatService = jasmine.createSpyObj('ChatService', ['subscribeToMessages', 'getMessages', 'sendMessage']);
             growl = jasmine.createSpyObj('growl', ['addInfoMessage', 'addErrorMessage']);
         });
@@ -41,6 +42,7 @@ describe('The DirectMessage controller', function() {
             $modal: $modal,
             growl: growl,
             SessionService: SessionService,
+            LikeService: LikeService,
             AttendeeService: AttendeeService,
             ChatService: ChatService
         });        
@@ -52,7 +54,16 @@ describe('The DirectMessage controller', function() {
             var getAttendeeResponse = $q.defer();
             getAttendeeResponse.reject('EpicFail');
 
-            AttendeeService.getAttendee.andReturn(getAttendeeResponse.promise);
+            AttendeeService.getAttendee.andReturn(getAttendeeResponse.promise);            
+
+            var doesLikeExistResponse = $q.defer();
+            doesLikeExistResponse.resolve(true);
+            LikeService.doesLikeExist.andReturn(doesLikeExistResponse.promise);
+
+            var isLikeRequitedResponse = $q.defer();
+            isLikeRequitedResponse.resolve(true);
+            LikeService.isLikeRequited.andReturn(isLikeRequitedResponse.promise);
+
             initializeController();
 
             $scope.$digest();
@@ -70,6 +81,14 @@ describe('The DirectMessage controller', function() {
             getMessagesResponse.reject('EpicFail');
             ChatService.getMessages.andReturn(getMessagesResponse.promise);
 
+            var doesLikeExistResponse = $q.defer();
+            doesLikeExistResponse.resolve(true);
+            LikeService.doesLikeExist.andReturn(doesLikeExistResponse.promise);
+
+            var isLikeRequitedResponse = $q.defer();
+            isLikeRequitedResponse.resolve(true);
+            LikeService.isLikeRequited.andReturn(isLikeRequitedResponse.promise);
+
             initializeController();
             $scope.$digest();
 
@@ -85,14 +104,51 @@ describe('The DirectMessage controller', function() {
             var getMessagesResponse = $q.defer();
             var messages = [ { "senderID": 23, "recipientID": 44, "message": "Oh, noe, all my messages are gone", "createdAt": "2014-12-31T01:00:17.401Z", "updatedAt": "2014-12-31T01:00:17.401Z", "id": "54a34aa1d29633b80c056e4a" } ];
             getMessagesResponse.resolve(messages);
-
             ChatService.getMessages.andReturn(getMessagesResponse.promise);
+
+            var doesLikeExistResponse = $q.defer();
+            doesLikeExistResponse.resolve(true);
+            LikeService.doesLikeExist.andReturn(doesLikeExistResponse.promise);
+
+            var isLikeRequitedResponse = $q.defer();
+            isLikeRequitedResponse.resolve(true);
+            LikeService.isLikeRequited.andReturn(isLikeRequitedResponse.promise);
 
             initializeController();
             $scope.$digest();
 
             expect($scope.messages.length).toBe(1);
-        });        
+            expect(LikeService.doesLikeExist).toHaveBeenCalled();
+            expect(LikeService.isLikeRequited).toHaveBeenCalled();
+
+        });  
+
+
+        it("should set doesLikeExist if the Like exists", function() {
+
+            var getAttendeeResponse = $q.defer();
+            getAttendeeResponse.resolve({ AttendeeID: 1 });
+            AttendeeService.getAttendee.andReturn(getAttendeeResponse.promise);
+
+            var getMessagesResponse = $q.defer();
+            var messages = [ { "senderID": 23, "recipientID": 44, "message": "Oh, noe, all my messages are gone", "createdAt": "2014-12-31T01:00:17.401Z", "updatedAt": "2014-12-31T01:00:17.401Z", "id": "54a34aa1d29633b80c056e4a" } ];
+            getMessagesResponse.resolve(messages);
+            ChatService.getMessages.andReturn(getMessagesResponse.promise);
+
+            var doesLikeExistResponse = $q.defer();
+            doesLikeExistResponse.resolve(true);
+            LikeService.doesLikeExist.andReturn(doesLikeExistResponse.promise);
+
+            var isLikeRequitedResponse = $q.defer();
+            isLikeRequitedResponse.resolve(true);
+            LikeService.isLikeRequited.andReturn(isLikeRequitedResponse.promise);
+
+            initializeController();
+            $scope.$digest();
+
+            expect($scope.doesLikeExist).toBe(true);
+            expect($scope.isLikeRequited).toBe(true);
+        });      
     });
 
     describe('should have a sendMessage() function', function() {
@@ -105,8 +161,15 @@ describe('The DirectMessage controller', function() {
             var getMessagesResponse = $q.defer();
             var messages = [ { "senderID": 23, "recipientID": 44, "message": "Oh, noe, all my messages are gone", "createdAt": "2014-12-31T01:00:17.401Z", "updatedAt": "2014-12-31T01:00:17.401Z", "id": "54a34aa1d29633b80c056e4a" } ];
             getMessagesResponse.resolve(messages);
-
             ChatService.getMessages.andReturn(getMessagesResponse.promise);
+
+            var doesLikeExistResponse = $q.defer();
+            doesLikeExistResponse.resolve(true);
+            LikeService.doesLikeExist.andReturn(doesLikeExistResponse.promise);
+
+            var isLikeRequitedResponse = $q.defer();
+            isLikeRequitedResponse.resolve(true);
+            LikeService.isLikeRequited.andReturn(isLikeRequitedResponse.promise);
 
             initializeController();
             $scope.$digest();
@@ -143,6 +206,43 @@ describe('The DirectMessage controller', function() {
             $scope.$digest();
             
             expect($scope.messages.length).toBe(2);
+        });
+    });
+
+    describe('has a likeAttendee function', function() {
+
+        beforeEach(function() {
+            var getAttendeeResponse = $q.defer();
+            getAttendeeResponse.resolve({ AttendeeID: 1 });
+            AttendeeService.getAttendee.andReturn(getAttendeeResponse.promise);
+
+            var getMessagesResponse = $q.defer();
+            var messages = [ { "senderID": 23, "recipientID": 44, "message": "Oh, noe, all my messages are gone", "createdAt": "2014-12-31T01:00:17.401Z", "updatedAt": "2014-12-31T01:00:17.401Z", "id": "54a34aa1d29633b80c056e4a" } ];
+            getMessagesResponse.resolve(messages);
+            ChatService.getMessages.andReturn(getMessagesResponse.promise);
+
+            var doesLikeExistResponse = $q.defer();
+            doesLikeExistResponse.resolve(true);
+            LikeService.doesLikeExist.andReturn(doesLikeExistResponse.promise);
+
+            var isLikeRequitedResponse = $q.defer();
+            isLikeRequitedResponse.resolve(true);
+            LikeService.isLikeRequited.andReturn(isLikeRequitedResponse.promise);
+
+            initializeController();
+            $scope.$digest();
+        });
+
+
+        it("should display an error to screen if something catastrophic happens", function() {
+
+            var createLikeResponse = $q.defer();
+            createLikeResponse.reject('EpicFail');
+            LikeService.createLike.andReturn(createLikeResponse.promise);
+
+            $scope.likeAttendee();
+            $scope.$digest();
+            expect(growl.addErrorMessage).toHaveBeenCalled();
         });
     });
 });

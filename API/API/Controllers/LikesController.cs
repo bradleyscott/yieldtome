@@ -23,10 +23,10 @@ namespace yieldtome.API.Controllers
         }
 
         /// <summary>
-        /// Indicates whether or not the Liker Profile likes the Liked Profile
+        /// Indicates whether or not the Liker Attendee likes the Liked Attendee
         /// </summary>
-        /// <param name="likerID">The ProfileID of the Profile liking</param>
-        /// <param name="likedID">The ProfileID of the Profile being liked</param>
+        /// <param name="likerID">The AttendeeID of the Attendee liking</param>
+        /// <param name="likedID">The AttendeeID of the Attendee being liked</param>
         /// <returns></returns>
         [HttpGet]
         public bool DoesLikeExist(int likerID, int likedID)
@@ -39,10 +39,10 @@ namespace yieldtome.API.Controllers
         }
         
         /// <summary>
-        /// Indicates whether or not 2 Profiles have requited Likes
+        /// Indicates whether or not 2 Attendees have requited Likes
         /// </summary>
-        /// <param name="likerID">The first ProfileID</param>
-        /// <param name="likedID">The second ProfileID</param>
+        /// <param name="likerID">The first AttendeeID</param>
+        /// <param name="likedID">The second AttendeeID</param>
         /// <returns></returns>
         [HttpPut]
         public bool IsLikeRequited(int likerID, int likedID)
@@ -57,13 +57,13 @@ namespace yieldtome.API.Controllers
         /// <summary>
         /// Creates a Like between the Liker and the Liked and determines if this is requited
         /// </summary>
-        /// <param name="likerID">The ProfileID of the Profile liking</param>
-        /// <param name="likedID">The ProfileID of the Profile being liked</param>
+        /// <param name="likerID">The AttendeeID of the Attendee liking</param>
+        /// <param name="likedID">The AttendeeID of the Attendee being liked</param>
         /// <returns></returns>
         public bool PostLike(int likerID, int likedID)
         {
             bool isRequited;
-            try { isRequited = _service.CreateLike(likerID, likedID); }
+            try { isRequited = _service.CreateLike(likerID, likedID, Request.Headers.Authorization.ToString()); }
             catch (ArgumentException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.BadRequest, ex.Message)); }
             catch (UnauthorizedAccessException ex) { throw new HttpResponseException(Request.CreateErrorResponse(HttpStatusCode.Unauthorized, ex.Message)); }
 

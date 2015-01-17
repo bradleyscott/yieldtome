@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API", "API\API.csproj", "{CA3F735D-DEBC-4A1C-85B9-C6F205DDC288}"
 EndProject
@@ -19,6 +19,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{3359F7
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Auth", "API.Auth\API.Auth.csproj", "{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "API.Chat", "API.Chat\API.Chat.csproj", "{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -68,6 +70,14 @@ Global
 		{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}.Release|Any CPU.Build.0 = Release|Any CPU
 		{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}.Test|Any CPU.ActiveCfg = Test|Any CPU
 		{03DEBD1B-85F7-4BDA-B11B-BC4C4F029EFB}.Test|Any CPU.Build.0 = Test|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Beta|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Beta|Any CPU.Build.0 = Release|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Test|Any CPU.ActiveCfg = Release|Any CPU
+		{5A0D6E47-A056-457E-A7C3-FA5B95A4704E}.Test|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
