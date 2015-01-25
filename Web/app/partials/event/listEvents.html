@@ -14,13 +14,13 @@
                         </div>
                     </div>
                     <div class="col-xs-3">
-                        <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="new()"></button>
+                        <button type="button" id="createButton" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="new()"></button>
                     </div>
                 </div>
             </div>
             <div class="well" ng-show="events.length == 0">There are no upcoming yieldto.me Model UNs. Please create one!</div>
             <a href="" ng-click="selectEvent(event)" class="list-group-item" ng-repeat="event in events | filter:query | orderBy:'StartDate'">
-                <button type="button" ng-show="event.CreatorID == profile.ProfileID" ng-click="edit(event, $event)" class="btn btn-default btn-lg mdi-content-create pull-right"></button>
+                <button id="editButton" type="button" ng-show="event.CreatorID == profile.ProfileID" ng-click="edit(event, $event)" class="btn btn-default btn-lg mdi-content-create pull-right"></button>
                 <h4 class="list-group-item-heading">{{event.Name}}</h4>
                 <p class="list-group-item-text">
                     <div><b>{{event.DateDescription}}</b>
@@ -38,7 +38,7 @@
         </h2>
         <p ng-show="event.Description">{{event.Description}}</p>
         <p>
-            <button type="button" ng-click="selectEvent()" class="btn btn-default btn-lg mdi-navigation-arrow-back"></button>
+            <button id="clearEventButton" type="button" ng-click="selectEvent()" class="btn btn-default btn-lg mdi-navigation-arrow-back"></button>
             <button type="button" ng-click="attend()" class="btn btn-primary">Attend</button>
         </p>
         <div ng-show="attendees.length > 0">

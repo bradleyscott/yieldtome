@@ -1,19 +1,33 @@
 exports.config = {
-  allScriptsTimeout: 11000,
 
-  specs: [
-    'e2e/*.js'
-  ],
+    allScriptsTimeout: 11000,
 
-  capabilities: {
-    'browserName': 'chrome'
-  },
+    specs: [
+        'e2e/loginScenarios.js',
+        'e2e/event/listEventScenarios.js',
+        //'e2e/event/editEventScenarios.js',
+        //'e2e/event/createEventScenarios.js',
+        'e2e/event/deleteEventScenarios.js',
+    ],
 
-  baseUrl: 'http://localhost:8000/app/',
+    capabilities: {
+        'browserName': 'chrome',
+        'chromeOptions': {
+            'args': ["user-data-dir=C:\\Chrome-Profile"]
+        }
+    },
 
-  framework: 'jasmine',
+    suites: {
+        login: 'e2e/loginScenarios.js',
+        events: 'e2e/event/*.js'
+    },
 
-  jasmineNodeOpts: {
-    defaultTimeoutInterval: 30000
-  }
+    baseUrl: 'http://localhost:8000/app/',
+
+    framework: 'jasmine',
+
+    jasmineNodeOpts: {
+        defaultTimeoutInterval: 30000,
+        showColors: true
+    },
 };
