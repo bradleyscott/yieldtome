@@ -11,6 +11,7 @@ var ListEventsPage = function() {
     this.selectedEventDates = element(by.binding('event.DisplayDate'));
     this.selectedEventAttendees = element.all(by.repeater('attendee in attendees'));
     this.selectedEventAttendeesFilter = element(by.model('queryAttendees'));
+    this.attendEventButton = element(by.id('attendButton'));
     this.clearEventButton = element(by.id('clearEventButton'));
 
     this.open = function() {
@@ -42,6 +43,11 @@ var ListEventsPage = function() {
 
     this.createEvent = function() {
         this.createButton.click();
+    };
+
+    this.attendEvent = function(index){
+        this.getEvent(index).click();
+        this.attendEventButton.click();
     };
 
     this.clearEventFilter = function() {

@@ -10,7 +10,7 @@ describe('The Home page', function() {
     });
 
     it('should allow the user to logout once Authenticated', function() {
-        page.logoutButton.click();
+        page.logout();
         expect(browser.getLocationAbsUrl()).toMatch("/");
     });
 

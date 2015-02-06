@@ -2,7 +2,7 @@ var HomePage = function() {
 
     this.loginButton = element(by.id('loginButton'));
     this.loginMenu = element(by.id('loginMenu'));
-    this.logoutButton = element(by.id('logoutButton'));
+    this.logoutMenu = element(by.id('logoutMenu'));
     this.loginWithFacebookButton = element(by.id('facebookButton'));
     this.loginWithGoogleButton = element(by.id('googleButton'));
 
@@ -20,8 +20,8 @@ var HomePage = function() {
         this.loginWithGoogleButton.click();
     };
 
-    this.logOut = function(){
-    	this.logoutButton.click();
+    this.logout = function(){
+    	this.logoutMenu.click();
     };
 };
 

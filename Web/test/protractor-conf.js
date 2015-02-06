@@ -4,10 +4,13 @@ exports.config = {
 
     specs: [
         'e2e/loginScenarios.js',
-        'e2e/event/listEventScenarios.js',
+        //'e2e/event/listEventScenarios.js',
         //'e2e/event/editEventScenarios.js',
         //'e2e/event/createEventScenarios.js',
-        'e2e/event/deleteEventScenarios.js',
+        //'e2e/attendee/createAttendeeScenarios.js',        
+        //'e2e/event/deleteEventScenarios.js',
+        'e2e/profile/editProfileScenarios.js',
+
     ],
 
     capabilities: {
@@ -15,11 +18,6 @@ exports.config = {
         'chromeOptions': {
             'args': ["user-data-dir=C:\\Chrome-Profile"]
         }
-    },
-
-    suites: {
-        login: 'e2e/loginScenarios.js',
-        events: 'e2e/event/*.js'
     },
 
     baseUrl: 'http://localhost:8000/app/',
