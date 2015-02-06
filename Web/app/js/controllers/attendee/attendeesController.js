@@ -34,7 +34,14 @@ angular.module('yieldtome.controllers')
             $location.path('/createAttendee');
         };
 
-        $scope.editAttendee = function(attendeeID) {
+        $scope.editAttendee = function(attendeeID, $event) {
+            // Prevent bubbling to showItem.
+            // On recent browsers, only $event.stopPropagation() is needed
+            if ($event.stopPropagation) $event.stopPropagation();
+            if ($event.preventDefault) $event.preventDefault();
+            $event.cancelBubble = true;
+            $event.returnValue = false;
+
             if (attendeeID != null && attendeeID != 0) {
                 $log.debug('Redirecting to Edit Attendee ' + attendeeID);
                 $location.path("/editAttendee/" + attendeeID);

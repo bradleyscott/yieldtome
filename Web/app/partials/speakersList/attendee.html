@@ -5,8 +5,8 @@
 </div>
 <div class="row-content">
     <!-- Edit button -->
-    <button class="btn btn-default btn-lg mdi-content-add pull-right" ng-hide="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open"></button>
-    <button class="btn btn-default btn-lg mdi-content-remove pull-right" ng-show="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open"></button>
+    <button class="btn btn-default btn-lg mdi-content-add pull-right context-button" ng-hide="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open"></button>
+    <button class="btn btn-default btn-lg mdi-content-remove pull-right context-button" ng-show="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open"></button>
     <!-- Names -->
     <h4 class="list-group-item-heading">{{attendee.Name}}</h4>
     <p class="list-group-item-text">{{attendee.Profile.Name}}</p>

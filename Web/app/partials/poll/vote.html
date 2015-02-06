@@ -5,7 +5,7 @@
 </div>
 <div class="row-content">
     <!-- Edit vote button -->
-    <button class="btn btn-default btn-lg mdi-content-create pull-right" ng-click="vote{{vote.VoteID}}Open=!vote{{vote.VoteID}}Open" ng-show="(poll.Status=='Open' && vote.Attendee.AttendeeID == attendee.AttendeeID) || isCreator"></button>
+    <button class="btn btn-default btn-lg mdi-content-create pull-right context-button" ng-click="vote{{vote.VoteID}}Open=!vote{{vote.VoteID}}Open" ng-show="(poll.Status=='Open' && vote.Attendee.AttendeeID == attendee.AttendeeID) || isCreator"></button>
     <!-- Names -->
     <h4 class="list-group-item-heading">{{vote.Attendee.Name}}</h4>
     <p class="list-group-item-text">{{vote.Attendee.Profile.Name}}</p>

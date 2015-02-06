@@ -20,7 +20,7 @@
             </div>
             <div class="well" ng-show="events.length == 0">There are no upcoming yieldto.me Model UNs. Please create one!</div>
             <a href="" ng-click="selectEvent(event)" class="list-group-item" ng-repeat="event in events | filter:query | orderBy:'StartDate'">
-                <button id="editButton" type="button" ng-show="event.CreatorID == profile.ProfileID" ng-click="edit(event, $event)" class="btn btn-default btn-lg mdi-content-create pull-right"></button>
+                <button id="editButton" type="button" ng-show="event.CreatorID == profile.ProfileID" ng-click="edit(event, $event)" class="btn btn-default btn-lg mdi-content-create pull-right context-button"></button>
                 <h4 class="list-group-item-heading">{{event.Name}}</h4>
                 <p class="list-group-item-text">
                     <div><b>{{event.DateDescription}}</b>
@@ -39,7 +39,7 @@
         <p ng-show="event.Description">{{event.Description}}</p>
         <p>
             <button id="clearEventButton" type="button" ng-click="selectEvent()" class="btn btn-default btn-lg mdi-navigation-arrow-back"></button>
-            <button type="button" ng-click="attend()" class="btn btn-primary">Attend</button>
+            <button type="button" id="attendButton" ng-click="attend()" class="btn btn-primary">Attend</button>
         </p>
         <div ng-show="attendees.length > 0">
             <h3>People already attending</h3>

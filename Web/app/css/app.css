@@ -1,4 +1,8 @@
 /* app css stylesheet */
+.context-button {
+  color:grey;
+}
+
 .list-group-item {
   background-color: transparent;
 }

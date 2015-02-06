@@ -5,7 +5,7 @@
 </div>
 <div class="row-content">
     <!-- Edit Speaker button -->
-    <button class="btn btn-default btn-lg mdi-content-create pull-right" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-click="speaker{{speaker.SpeakerID}}Open=!speaker{{speaker.SpeakerID}}Open"></button>
+    <button class="btn btn-default btn-lg mdi-content-create pull-right context-button" ng-show="event.CreatorID == profile.ProfileID || list.CreatorID == profile.ProfileID" ng-click="speaker{{speaker.SpeakerID}}Open=!speaker{{speaker.SpeakerID}}Open"></button>
     <!-- Names -->
     <h4 class="list-group-item-heading">{{speaker.Attendee.Name}}</h4>
     <p class="list-group-item-text">{{speaker.Attendee.Profile.Name}}</p>

@@ -7,11 +7,9 @@
     </div>
     <!-- Add new Attendee button -->
     <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-show="isCreator" ng-click="newAttendee()"></button>
-    <div>
-        <h1>Chat</h1>
-    </div>
     <!-- Attendee search  -->
     <div class="form-group" ng-show="attendees.length > 0">
+        <h1>Delegates</h1>
         <div class="input-group">
             <span class="input-group-addon">
                 <span class="glyphicon glyphicon-search"></span>
@@ -20,9 +18,9 @@
         </div>
     </div>
     <div class="list-group">
-        <div class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query | orderBy:'Name'">
+        <a href="" class="list-group-item" ng-click="showChat(attendee.AttendeeID)" ng-animate="'animate'" ng-repeat="attendee in attendees  | filter:query | orderBy:'Name'">
             <ytm-attendee></ytm-attendee>
-        </div>
+        </a>
     </div>
     <br>
     <div class="well" ng-show="attendees.length == 0">There are not yet any other Delegates</div>
