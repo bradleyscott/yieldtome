@@ -1,12 +1,12 @@
 <ytm-menu></ytm-menu>
 <div class="container body-content">
     <div class="list-group" style="margin-top:20px">
-        <div class="list-group-item" style="margin-bottom:10px">
+        <div id="thisAttendee" class="list-group-item" style="margin-bottom:10px">
             <ytm-attendee></ytm-attendee>
         </div>
     </div>
     <!-- Add new Attendee button -->
-    <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-show="isCreator" ng-click="newAttendee()"></button>
+    <button type="button" id="createButton" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-show="isCreator" ng-click="newAttendee()"></button>
     <!-- Attendee search  -->
     <div class="form-group" ng-show="attendees.length > 0">
         <h1>Delegates</h1>

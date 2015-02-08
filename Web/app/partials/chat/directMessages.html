@@ -2,8 +2,8 @@
 <div class="container body-content">
     <div class="list-group" style="margin-top:20px">
         <!-- Send message and Like button -->
-        <button type="button" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="showSend()"></button>
-        <button type="button" style="margin-right:10px" ng-click="showLike()" class="btn btn-danger btn-fab btn-raised mdi-action-favorite pull-right" ng-hide="doesLikeExist"></button>
+        <button type="button" id="showSendButton" class="btn btn-primary btn-fab btn-raised mdi-content-add pull-right" ng-click="showSend()"></button>
+        <button type="button" id="showLikeButton" style="margin-right:10px" ng-click="showLike()" class="btn btn-danger btn-fab btn-raised mdi-action-favorite pull-right" ng-hide="doesLikeExist"></button>
         <!-- Receiver attendee info -->
         <div class="list-group-item" style="margin-bottom:10px">
             <div class="row-picture">
