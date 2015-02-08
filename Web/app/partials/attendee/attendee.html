@@ -1,7 +1,7 @@
 <div class="row-picture">
     <!-- Profile picture -->
     <img class="circle pull-left" ng-src="img/profile.jpg" ng-hide="attendee.Profile" >
-    <img class="circle pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}"  ng-show="attendee.Profile" ng-click="showProfile(attendee.Profile.ProfileID)">
+    <img class="circle pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}"  ng-show="attendee.Profile" ng-click="showProfile(attendee.Profile.ProfileID, $event)">
 </div>
 <div class="row-content">
     <!-- Edit attendee button -->

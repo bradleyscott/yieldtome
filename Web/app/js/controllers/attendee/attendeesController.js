@@ -14,7 +14,14 @@ angular.module('yieldtome.controllers')
         $scope.isCreator = false; // Indicates whether or not the user has edit right to this Event
 
         // Redirects to the View Profile page
-        $scope.showProfile = function(profileID) {
+        $scope.showProfile = function(profileID, $event) {
+            // Prevent bubbling to showItem.
+            // On recent browsers, only $event.stopPropagation() is needed
+            if ($event.stopPropagation) $event.stopPropagation();
+            if ($event.preventDefault) $event.preventDefault();
+            $event.cancelBubble = true;
+            $event.returnValue = false;
+
             if (profileID != null && profileID != 0) {
                 $log.debug('Redirecting to View profile ' + profileID);
                 $location.path("/viewProfile/" + profileID);
