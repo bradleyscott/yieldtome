@@ -8,7 +8,6 @@ angular.module('yieldtome.controllers')
         $log.debug("EditPoll controller executing");
 
         $scope.title = 'Edit Poll';
-        $scope.alternatebutton = 'Back';
         $scope.poll;
         $scope.event;
         $scope.profile;

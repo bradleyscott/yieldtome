@@ -8,7 +8,6 @@ angular.module('yieldtome.controllers')
         $log.debug("CreatePoll controller executing");
 
         $scope.title = 'Create Poll';
-        $scope.alternatebutton = 'Cancel';
         $scope.event;
         $scope.profile;
         $scope.poll = { Name: 'New Poll', MajorityRequired:50 }; // The Poll to be created
