@@ -3,10 +3,7 @@
     <img class="circle pull-left" ng-src="img/profile.jpg" ng-hide="attendee.Profile">
     <img class="circle pull-left" ng-src="{{attendee.Profile.ProfilePictureUri}}" ng-show="attendee.Profile" ng-click="showProfile({{attendee.Profile.ProfileID}})">
 </div>
-<div class="row-content">
-    <!-- Edit button -->
-    <button class="btn btn-default btn-lg mdi-content-add pull-right context-button" ng-hide="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open"></button>
-    <button class="btn btn-default btn-lg mdi-content-remove pull-right context-button" ng-show="attendee{{attendee.AttendeeID}}Open" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open"></button>
+<div class="row-content" ng-click="attendee{{attendee.AttendeeID}}Open=!attendee{{attendee.AttendeeID}}Open">
     <!-- Names -->
     <h4 class="list-group-item-heading">{{attendee.Name}}</h4>
     <p class="list-group-item-text">{{attendee.Profile.Name}}</p>
