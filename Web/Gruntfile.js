@@ -80,7 +80,10 @@ module.exports = function(grunt) {
                             'bower_components/angular-loading-bar/build/loading-bar.min.css',
                             'bower_components/angular-growl/build/angular-growl.min.css',
                             'bower_components/bootstrap-material-design/dist/css/ripples.min.css',
-                            'bower_components/bootstrap-material-design/dist/css/material-wfont.min.css'],
+                            'bower_components/bootstrap-material-design/dist/css/ripples.min.css.map',
+                            'bower_components/bootstrap-material-design/dist/css/material-wfont.min.css',
+                            'bower_components/bootstrap-material-design/dist/css/material-wfont.min.css.map'
+                            ],
                     dest: 'dist/css',
                     flatten: true
                 }, { // Move js dependencies
@@ -113,7 +116,9 @@ module.exports = function(grunt) {
                         'bower_components/angulartics/dist/angulartics.min.js',
                         'bower_components/angulartics/dist/angulartics-ga.min.js',
                         'bower_components/bootstrap-material-design/dist/js/ripples.min.js',
+                        'bower_components/bootstrap-material-design/dist/js/ripples.min.js.map',
                         'bower_components/bootstrap-material-design/dist/js/material.min.js',
+                        'bower_components/bootstrap-material-design/dist/js/material.min.js.map',
                         'bower_components/underscore/underscore-min.js',
                         'bower_components/underscore/underscore-min.map',
                         'bower_components/moment/min/moment.min.js',
