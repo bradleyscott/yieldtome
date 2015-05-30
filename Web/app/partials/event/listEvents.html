@@ -39,7 +39,7 @@
         <p ng-show="event.Description">{{event.Description}}</p>
         <p>
             <button id="clearEventButton" type="button" ng-click="selectEvent()" class="btn btn-default btn-lg mdi-navigation-arrow-back"></button>
-            <button type="button" id="attendButton" ng-click="attend()" class="btn btn-primary">Attend</button>
+            <button type="button" id="attendButton" ng-click="attend()" class="btn btn-primary">Join</button>
         </p>
         <div ng-show="attendees.length > 0">
             <h3>People already attending</h3>
@@ -52,9 +52,9 @@
                 </div>
             </div>
             <div class="list-group">
-                <a href="#/viewProfile/{{attendee.Profile.ProfileID}}" class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees | filter:queryAttendees">
+                <div class="list-group-item" ng-animate="'animate'" ng-repeat="attendee in attendees | filter:queryAttendees">
                     <ytm-attendee></ytm-attendee>
-                </a>
+                </div>
             </div>
         </div>
     </div>

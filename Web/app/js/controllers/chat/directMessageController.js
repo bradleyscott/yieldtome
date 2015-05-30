@@ -17,6 +17,12 @@ angular.module('yieldtome.controllers')
 
         // Opens the Like modal
         $scope.showLike = function() {
+
+            if($scope.doesLikeExist) {
+                growl.addInfoMessage('You have previously liked ' + $scope.attendee.Name);  
+                return;
+            }
+
             $scope.likeConfirm = $modal.open({ 
                 templateUrl: 'partials/chat/likeAttendee.html',
                 scope: $scope
