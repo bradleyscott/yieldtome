@@ -1,13 +1,23 @@
-<template name="yieldtome-home-main">
+<template name="ytm_home_main">
     <div class="container">
         <div class="row center">
             <h5 class="header col s12 light">Running a model UN event just got a lot easier</h5>
             <p class="light">yieldto.me is a free set of online tools that help you run your model UN event. You and your delegates can use any phone, tablet or PC to chat, vote and organise a speakers list</p>
         </div>
         <div class="row center">
+            {{#if Meteor.userId}}
             <a href="" class="btn waves-effect waves-light blue ytm-main-btn">Run an event</a>
-            <a href="" class="btn waves-effect waves-light blue ytm-main-btn">Join an event</a>
-             {{> atForm}}
+            <a href="" class="btn waves-effect waves-light blue ytm-main-btn">Join an event</a> {{else}}
+            <a class="btn dropdown-button waves-effect waves-light blue" data-activates="login-dropdown">Get started</a>
+            <!-- Dropdown Structure -->
+            <ul id="login-dropdown" class="dropdown-content">
+            	Login with:
+                <li class="divider"></li>
+                <li><a id="google" class="blue-text">Google</a></li>
+                <li><a id="facebook" class="blue-text">Facebook</a></li>
+                <li><a id="twitter" class="blue-text">Twitter</a></li>
+            </ul>
+            {{/if}}
         </div>
     </div>
     <div class="parallax-container">
