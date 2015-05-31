@@ -1,0 +1,27 @@
+<template name="yieldtome-template">
+    <div class="navbar-fixed">
+        <nav class="white" role="navigation">
+            <div class="nav-wrapper container">
+                <a id="logo-container" href="#" class="brand-logo">yieldto.me</a> 
+                {{>yield "nav"}} 
+                {{>yield "mobile-nav"}}
+            </div>
+        </nav>
+    </div>
+    <div>
+        {{>yield "main"}}
+    </div>
+    <footer class="page-footer white">
+        <div class="footer-copyright white">
+            <div class="container black-text">yieldto.me is free and open source</div>
+        </div>
+    </footer>
+    <!-- Initialise Materialize -->
+    <script type="text/javascript" charset="utf-8" async defer>
+    $(document).ready(function() {
+        $(".button-collapse").sideNav();
+        $('.parallax').parallax();
+        $(".dropdown-button").dropdown();
+    });
+    </script>
+</template>
