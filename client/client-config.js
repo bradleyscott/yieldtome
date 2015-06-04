@@ -5,6 +5,6 @@ Accounts.ui.config({
         twitter: ['read'],
     },
     requestOfflineToken: {
-        google: true
+        google: false
     },
 });

@@ -2,9 +2,14 @@
     <div class="navbar-fixed">
         <nav class="white" role="navigation">
             <div class="nav-wrapper container">
-                <a id="logo-container" href="#" class="brand-logo">yieldto.me</a> 
-                {{>yield "nav"}} 
-                {{>yield "mobile-nav"}}
+                <a id="logo-container" href="#" class="brand-logo">yieldto.me</a>
+                <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="mdi-navigation-menu"></i></a>
+                <ul class="right hide-on-med-and-down">
+                    {{>yield "nav"}}
+                </ul>
+                <ul class="side-nav" id="mobile-nav">
+                    {{>yield "mobile-nav"}}
+                </ul>
             </div>
         </nav>
     </div>
